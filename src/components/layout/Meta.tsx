@@ -4,6 +4,7 @@ const Meta = () => {
   return (
     <Head>
       <title>vote! | spoker</title>
+      <link rel="icon" href="/chip.svg" />
     </Head>
   );
 };

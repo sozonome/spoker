@@ -1,0 +1,13 @@
+{
+  "conventionalCommits.scopes": [
+    "hall",
+    "room",
+    "auth",
+    "layout",
+    "ui",
+    "pages",
+    "storybook",
+    "functions",
+    "types"
+  ]
+}

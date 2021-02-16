@@ -4,9 +4,8 @@ const customTheme = extendTheme({
   ...theme,
   fonts: {
     ...theme.fonts,
-    /** Example */
-    // body: "Work Sans, sans-serif",
-    // heading: "Markazi Text, serif",
+    heading: "Jost, sans-serif",
+    body: "Jost, sans-serif",
   },
   colors: {
     ...theme.colors,
@@ -17,6 +16,16 @@ const customTheme = extendTheme({
     //   500: "#00838e",
     //   300: "#4fb3be",
     // },
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        borderRadius: 12,
+      },
+      defaultProps: {
+        size: "lg",
+      },
+    },
   },
 });
 
