@@ -1,5 +1,5 @@
 {
-  "name": "nextchakra-starter",
+  "name": "spoker",
   "version": "0.1.0",
   "private": true,
   "author": "sozonome",
@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
+    "@fontsource/jost": "^4.2.1",
+    "firebase": "^8.2.7",
     "framer-motion": "^2.9.4",
     "next": "^10.0.2",
     "next-pwa": "^3.1.4",
@@ -25,6 +27,7 @@
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.46",
     "prettier": "^2.0.5",
+    "standard-version": "^9.1.0",
     "typescript": "^3.9.7"
   }
 }

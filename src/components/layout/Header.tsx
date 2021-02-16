@@ -1,14 +1,16 @@
-import { Flex, Heading, Box } from "@chakra-ui/react";
+import { Flex, Heading, Box, Link as ChakraLink } from "@chakra-ui/react";
+import Link from "next/link";
 
-import AccessibleLink from "../AccessibleLink";
 import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   return (
     <Flex as="header" width="full" align="center">
-      <AccessibleLink href="/">
-        <Heading as="h1">nextchakra-starter</Heading>
-      </AccessibleLink>
+      <Link href="/" passHref>
+        <ChakraLink>
+          <Heading as="h1">spoker</Heading>
+        </ChakraLink>
+      </Link>
 
       <Box marginLeft="auto">
         <ThemeToggle />

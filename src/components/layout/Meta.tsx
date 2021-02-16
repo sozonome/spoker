@@ -3,7 +3,7 @@ import Head from "next/head";
 const Meta = () => {
   return (
     <Head>
-      <title>Project Name</title>
+      <title>vote! | spoker</title>
     </Head>
   );
 };
