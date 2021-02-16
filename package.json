@@ -15,12 +15,14 @@
     "@emotion/styled": "^11.0.0",
     "@fontsource/jost": "^4.2.1",
     "firebase": "^8.2.7",
+    "formik": "^2.2.6",
     "framer-motion": "^2.9.4",
     "next": "^10.0.2",
     "next-pwa": "^3.1.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^3.11.0"
+    "react-icons": "^3.11.0",
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^1.0.3",
