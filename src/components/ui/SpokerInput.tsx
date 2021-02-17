@@ -10,13 +10,14 @@ type SpokerInputProps = {
   label?: FormControlProps["label"];
 } & InputProps;
 
+export const contraInputStyle: Partial<InputProps> = {
+  borderColor: "black",
+  borderRadius: 12,
+  borderWidth: 2,
+  size: "lg",
+};
+
 const SpokerInput = ({ label, ...inputProps }: SpokerInputProps) => {
-  const contraInputStyle: Partial<InputProps> = {
-    borderColor: "black",
-    borderRadius: 12,
-    borderWidth: 2,
-    size: "lg",
-  };
 
   return (
     <FormControl>

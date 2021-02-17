@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
+    "@fontsource/inter": "^4.2.1",
     "@fontsource/jost": "^4.2.1",
     "firebase": "^8.2.7",
     "formik": "^2.2.6",

@@ -8,18 +8,25 @@ import {
   FormLabel,
   Grid,
   Heading,
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement,
   Switch,
 } from "@chakra-ui/react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import SpokerButton from "components/ui/SpokerButton";
-import SpokerInput from "components/ui/SpokerInput";
+import SpokerInput, { contraInputStyle } from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { useFormik } from "formik";
+import { useState } from "react";
 
 type CreateRoomFormType = {
   name: string;
   id: string;
   isPrivate: boolean;
+  password: string;
 };
 
 const CreateRoom = () => {
@@ -28,13 +35,18 @@ const CreateRoom = () => {
       name: "",
       id: "",
       isPrivate: false,
+      password: "",
     },
     onSubmit: (formValues: CreateRoomFormType) => {
       console.log(formValues);
     },
   });
 
-  const { name, id, isPrivate } = values;
+  const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
+
+  const { name, id, isPrivate, password } = values;
+
+  const { size: _, ...contraInputStyleCompact } = contraInputStyle;
 
   return (
     <SpokerWrapperGrid gap={8}>
@@ -63,6 +75,30 @@ const CreateRoom = () => {
             onChange={handleChange}
           />
           <FormLabel>private</FormLabel>
+          <InputGroup size="md">
+            <Input
+              disabled={!isPrivate}
+              onChange={handleChange}
+              name="password"
+              value={password}
+              type={isPasswordShown ? "text" : "password"}
+              placeholder="room password"
+              size="md"
+              {...contraInputStyleCompact}
+            />
+            <InputRightElement
+              children={
+                <IconButton
+                  size="sm"
+                  aria-label="show-password"
+                  icon={
+                    isPasswordShown ? <AiFillEye /> : <AiFillEyeInvisible />
+                  }
+                  onClick={() => setIsPasswordShown(!isPasswordShown)}
+                />
+              }
+            />
+          </InputGroup>
         </FormControl>
       </Grid>
 

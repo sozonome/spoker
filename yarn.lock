@@ -2391,6 +2391,11 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.4.1.tgz#600f2275ff54739ad5ac0102f1467b8963cd5f71"
   integrity sha512-0yPjzuzGMkW1GkrC8yWsiN7vt1OzkMIi9HgxRmKREZl2wnNPOKo/yScTjXf/O57HM8dltqxPF6jlNLFVtc2qdw==
 
+"@fontsource/inter@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.2.1.tgz#f91177509d4616488c92a137cd77f197ab366078"
+  integrity sha512-zIE1066du7y3LLL4V3Ot4BgwE3XC3MbmTBJYG7alAuXUuPGVr/2Mmt+BG9rp4ucF5An+iwZ1HcdS8CQnapMcRw==
+
 "@fontsource/jost@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@fontsource/jost/-/jost-4.2.1.tgz#bd4fa71c72c8791a40bc934fb873f258c61bb666"
