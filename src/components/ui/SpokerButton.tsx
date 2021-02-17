@@ -1,15 +1,10 @@
 import { Button, ButtonProps, useColorModeValue } from "@chakra-ui/react";
 
-type SpokerButtonProps = { isContraStyle?: boolean } & ButtonProps;
+type SpokerButtonProps = ButtonProps;
 
-
-const SpokerButton = ({
-  isContraStyle = false,
-  children,
-  ...props
-}: SpokerButtonProps) => {
+const SpokerButton = ({ children, ...props }: SpokerButtonProps) => {
   const borderColor = useColorModeValue("#18191F", "#FFFFFF");
-  
+
   const contraButtonStyle: Partial<ButtonProps> = {
     borderRadius: 16,
     border: `2px solid ${borderColor}`,
@@ -18,7 +13,7 @@ const SpokerButton = ({
   };
 
   return (
-    <Button {...props} {...(isContraStyle ? contraButtonStyle : null)}>
+    <Button {...props} {...contraButtonStyle}>
       {children}
     </Button>
   );

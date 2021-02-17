@@ -7,6 +7,7 @@ import Layout from "components/layout";
 
 import customTheme from "styles/customTheme";
 import "styles/globals.css";
+import AuthWrapper from "components/auth/AuthWrapper";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -17,9 +18,11 @@ const MyApp = ({ Component, pageProps }) => {
           content="minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AuthWrapper>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthWrapper>
     </ChakraProvider>
   );
 };

@@ -1,4 +1,4 @@
-import { Grid, Heading } from "@chakra-ui/react";
+import { Button, Grid, Heading } from "@chakra-ui/react";
 import SpokerButton from "components/ui/SpokerButton";
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
@@ -19,14 +19,14 @@ const JoinRoom = () => {
         />
       </Grid>
 
-      <SpokerButton
+      <Button
         alignSelf="flex-end"
         backgroundColor="black"
         _hover={{ backgroundColor: "orange.400" }}
         onClick={() => router.push("/room")}
       >
         Let Me in!
-      </SpokerButton>
+      </Button>
     </SpokerWrapperGrid>
   );
 };

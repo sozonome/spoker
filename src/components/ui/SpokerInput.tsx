@@ -18,7 +18,6 @@ export const contraInputStyle: Partial<InputProps> = {
 };
 
 const SpokerInput = ({ label, ...inputProps }: SpokerInputProps) => {
-
   return (
     <FormControl>
       {label && <FormLabel>{label}</FormLabel>}

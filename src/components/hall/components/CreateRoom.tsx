@@ -4,6 +4,7 @@
  */
 
 import {
+  Button,
   FormControl,
   FormLabel,
   Grid,
@@ -81,7 +82,7 @@ const CreateRoom = () => {
               onChange={handleChange}
               name="password"
               value={password}
-              type={isPasswordShown ? "text" : "password"}
+              type={isPrivate && isPasswordShown ? "text" : "password"}
               placeholder="room password"
               size="md"
               {...contraInputStyleCompact}
@@ -91,8 +92,13 @@ const CreateRoom = () => {
                 <IconButton
                   size="sm"
                   aria-label="show-password"
+                  disabled={!isPrivate}
                   icon={
-                    isPasswordShown ? <AiFillEye /> : <AiFillEyeInvisible />
+                    isPrivate && isPasswordShown ? (
+                      <AiFillEye />
+                    ) : (
+                      <AiFillEyeInvisible />
+                    )
                   }
                   onClick={() => setIsPasswordShown(!isPasswordShown)}
                 />
@@ -102,9 +108,9 @@ const CreateRoom = () => {
         </FormControl>
       </Grid>
 
-      <SpokerButton colorScheme="green" onClick={() => handleSubmit()}>
+      <Button colorScheme="green" onClick={() => handleSubmit()}>
         Let's Have Some Fun!
-      </SpokerButton>
+      </Button>
     </SpokerWrapperGrid>
   );
 };
