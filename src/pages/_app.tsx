@@ -8,6 +8,8 @@ import Layout from "components/layout";
 import customTheme from "styles/customTheme";
 import "styles/globals.css";
 import AuthWrapper from "components/auth/AuthWrapper";
+import RouteWrapper from "components/layout/RouteWrapper";
+import { AuthProvider } from "components/auth/AuthProvider";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -18,11 +20,15 @@ const MyApp = ({ Component, pageProps }) => {
           content="minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
       </Head>
-      <AuthWrapper>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </AuthWrapper>
+      <AuthProvider>
+        <AuthWrapper>
+          <RouteWrapper>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </RouteWrapper>
+        </AuthWrapper>
+      </AuthProvider>
     </ChakraProvider>
   );
 };

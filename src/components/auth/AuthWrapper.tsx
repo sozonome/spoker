@@ -6,7 +6,10 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { ReactNode, useEffect, useState } from "react";
+import { PUBLIC_ROUTES } from "components/layout/RouteWrapper";
+import { useRouter } from "next/router";
+import { ReactNode, useContext, useEffect, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 
 import Login from "./Login";
 import Register from "./Register";
@@ -18,15 +21,23 @@ type AuthWrapperProps = {
 const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isRegistered, setIsRegistered] = useState<boolean>(true);
+  const { currentUser } = useContext(AuthContext);
 
-  const loggedIn = false;
+  const router = useRouter();
+  const { pathname } = router;
+  const isPublicRoute = PUBLIC_ROUTES.indexOf(pathname) >= 0;
+
+  const needAuth = currentUser === null && !isPublicRoute;
 
   useEffect(() => {
-    onOpen();
-  }, []);
+    if (needAuth) {
+      onOpen();
+    } else {
+      onClose();
+    }
+  }, [currentUser, pathname]);
 
   const borderColor = useColorModeValue("#18191F", "#FFFFFF");
-
   const contraBoxStyle: Partial<ModalContentProps> = {
     paddingY: 2,
     borderRadius: 16,
@@ -41,22 +52,24 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     <>
       {children}
 
-      <Modal
-        isOpen={isOpen}
-        onClose={undefined}
-        motionPreset="slideInBottom"
-        isCentered
-      >
-        <ModalOverlay />
+      {needAuth && (
+        <Modal
+          isOpen={isOpen}
+          onClose={undefined}
+          motionPreset="slideInBottom"
+          isCentered
+        >
+          <ModalOverlay />
 
-        <ModalContent {...contraBoxStyle} marginX={8}>
-          {isRegistered ? (
-            <Login {...{ handleSwitchToRegister }} />
-          ) : (
-            <Register {...{ handleSwitchToLogin }} />
-          )}
-        </ModalContent>
-      </Modal>
+          <ModalContent {...contraBoxStyle} marginX={8}>
+            {isRegistered ? (
+              <Login {...{ handleSwitchToRegister }} />
+            ) : (
+              <Register {...{ handleSwitchToLogin }} />
+            )}
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };
