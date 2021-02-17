@@ -1,13 +1,15 @@
 {
   "name": "spoker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "author": "sozonome",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prettify": "prettier --write src/"
+    "prettify": "prettier --write src/",
+    "release": "standard-version",
+    "push-release": "git push --follow-tags origin main"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.0.0",
