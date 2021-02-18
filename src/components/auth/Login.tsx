@@ -5,10 +5,18 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  useToast,
 } from "@chakra-ui/react";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 import SpokerInput from "components/ui/SpokerInput";
-import { useFormik } from "formik";
+
+import {
+  loginUserWithEmailAndPassword,
+  loginWithGoogle,
+} from "functions/firebase";
 
 type LoginFormType = {
   email: string;
@@ -20,15 +28,44 @@ type LoginProps = {
 };
 
 const Login = ({ handleSwitchToRegister }: LoginProps) => {
-  const { values, handleChange, handleSubmit } = useFormik<LoginFormType>({
+  const { values, dirty, handleChange, handleSubmit } = useFormik<
+    LoginFormType
+  >({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: () => {},
+    onSubmit: (formValues: LoginFormType) => {
+      setIsLoading(true);
+      loginUserWithEmailAndPassword(formValues.email, formValues.password)
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          toast({
+            description: err.message,
+            position: "top",
+            status: "error",
+            isClosable: true,
+          });
+          setIsLoading(false);
+        });
+    },
   });
-
   const { email, password } = values;
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle().catch((err) => {
+      toast({
+        description: err.message,
+        status: "error",
+        position: "top",
+        isClosable: true,
+      });
+    });
+  };
 
   return (
     <>
@@ -53,6 +90,14 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
             onChange={handleChange}
             placeholder="Your password"
           />
+
+          <Button
+            leftIcon={<FcGoogle />}
+            colorScheme="gray"
+            onClick={handleLoginWithGoogle}
+          >
+            Login with Google
+          </Button>
         </Grid>
       </ModalBody>
 
@@ -64,7 +109,14 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
         >
           Register
         </Button>
-        <Button colorScheme="blue">Sign In</Button>
+        <Button
+          onClick={() => handleSubmit()}
+          disabled={!dirty}
+          isLoading={isLoading}
+          colorScheme="blue"
+        >
+          Sign In
+        </Button>
       </ModalFooter>
     </>
   );

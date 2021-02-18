@@ -1,3 +1,4 @@
+import firebase from "firebase/app";
 import { fbase } from "./config";
 
 export const registerUserWithEmailAndPassword = async (
@@ -88,4 +89,18 @@ export const requestPasswordReset = async (email: string) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const loginWithGoogle = async () => {
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+  fbase
+    .auth()
+    .signInWithPopup(googleProvider)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      throw err;
+    });
 };

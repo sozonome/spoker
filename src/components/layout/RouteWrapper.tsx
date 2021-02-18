@@ -5,7 +5,7 @@ import { ReactNode, useContext, useEffect, useState } from "react";
 import { AuthContext } from "components/auth/AuthProvider";
 import FullScreenLoading from "./FullScreenLoading";
 
-export const PUBLIC_ROUTES = ["/auth"];
+export const PUBLIC_ROUTES = ["/auth", "/intro", "/privacypolicy"];
 
 type RouteWrapperProps = {
   children: ReactNode;

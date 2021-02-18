@@ -4,12 +4,10 @@ import "@fontsource/jost/latin.css";
 import "@fontsource/inter/latin.css";
 
 import Layout from "components/layout";
+import { AuthProvider } from "components/auth/AuthProvider";
 
 import customTheme from "styles/customTheme";
 import "styles/globals.css";
-import AuthWrapper from "components/auth/AuthWrapper";
-import RouteWrapper from "components/layout/RouteWrapper";
-import { AuthProvider } from "components/auth/AuthProvider";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -21,13 +19,9 @@ const MyApp = ({ Component, pageProps }) => {
         />
       </Head>
       <AuthProvider>
-        <AuthWrapper>
-          <RouteWrapper>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </RouteWrapper>
-        </AuthWrapper>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </AuthProvider>
     </ChakraProvider>
   );

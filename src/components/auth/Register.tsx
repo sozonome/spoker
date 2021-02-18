@@ -5,10 +5,18 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  useToast,
 } from "@chakra-ui/react";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 import SpokerInput from "components/ui/SpokerInput";
-import { useFormik } from "formik";
+
+import {
+  loginWithGoogle,
+  registerUserWithEmailAndPassword,
+} from "functions/firebase";
 
 type RegisterFormType = {
   name: string;
@@ -21,16 +29,63 @@ type RegisterProps = {
 };
 
 const Register = ({ handleSwitchToLogin }: RegisterProps) => {
-  const { values, handleChange, handleSubmit } = useFormik<RegisterFormType>({
+  const { values, dirty, handleChange, handleSubmit } = useFormik<
+    RegisterFormType
+  >({
     initialValues: {
       name: "",
       email: "",
       password: "",
     },
-    onSubmit: () => {},
+    onSubmit: async (formValues: RegisterFormType) => {
+      setIsLoading(true);
+      await registerUserWithEmailAndPassword(
+        formValues.email,
+        formValues.password,
+        formValues.name
+      )
+        .then((user) => {
+          setIsLoading(false);
+          toast({
+            title: "Registration Successful",
+            position: "top",
+            status: "success",
+            isClosable: true,
+          });
+          toast({
+            title: `A verification email is sent to ${user.email}`,
+            description:
+              "Before you can use any features, please verify your email first.",
+            position: "top",
+            status: "warning",
+            isClosable: true,
+          });
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          toast({
+            description: err.message,
+            position: "top",
+            status: "error",
+            isClosable: true,
+          });
+        });
+    },
   });
-
   const { name, email, password } = values;
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleRegisterWithGoogle = () => {
+    loginWithGoogle().catch((err) => {
+      toast({
+        description: err.message,
+        status: "error",
+        position: "top",
+        isClosable: true,
+      });
+    });
+  };
 
   return (
     <>
@@ -62,6 +117,14 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
             placeholder="Your secret phrase"
             type="password"
           />
+
+          <Button
+            leftIcon={<FcGoogle />}
+            colorScheme="gray"
+            onClick={handleRegisterWithGoogle}
+          >
+            Register with Google
+          </Button>
         </Grid>
       </ModalBody>
 
@@ -73,7 +136,14 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
         >
           Sign In
         </Button>
-        <Button colorScheme="teal">Register</Button>
+        <Button
+          onClick={() => handleSubmit()}
+          disabled={!dirty}
+          isLoading={isLoading}
+          colorScheme="teal"
+        >
+          Register
+        </Button>
       </ModalFooter>
     </>
   );

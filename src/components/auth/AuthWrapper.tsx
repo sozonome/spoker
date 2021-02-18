@@ -6,10 +6,11 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { PUBLIC_ROUTES } from "components/layout/RouteWrapper";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState } from "react";
+
 import { AuthContext } from "./AuthProvider";
+import { PUBLIC_ROUTES } from "components/layout/RouteWrapper";
 
 import Login from "./Login";
 import Register from "./Register";
@@ -27,15 +28,21 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const { pathname } = router;
   const isPublicRoute = PUBLIC_ROUTES.indexOf(pathname) >= 0;
 
-  const needAuth = currentUser === null && !isPublicRoute;
+  const isUnauthorized = currentUser === null && !isPublicRoute;
 
   useEffect(() => {
-    if (needAuth) {
+    if (isUnauthorized) {
       onOpen();
     } else {
       onClose();
     }
   }, [currentUser, pathname]);
+
+  useEffect(() => {
+    if (!isUnauthorized) {
+      setIsRegistered(true);
+    }
+  }, [isUnauthorized]);
 
   const borderColor = useColorModeValue("#18191F", "#FFFFFF");
   const contraBoxStyle: Partial<ModalContentProps> = {
@@ -50,9 +57,9 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
 
   return (
     <>
-      {children}
+      {!isUnauthorized && children}
 
-      {needAuth && (
+      {isUnauthorized && (
         <Modal
           isOpen={isOpen}
           onClose={undefined}

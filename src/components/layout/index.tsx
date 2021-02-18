@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Meta from "./Meta";
+import RouteWrapper from "./RouteWrapper";
+import AuthWrapper from "components/auth/AuthWrapper";
 
 type LayoutProps = {
   children: ReactNode;
@@ -18,9 +20,13 @@ const Layout = ({ children }: LayoutProps) => {
 
       <Box margin="8">
         <Header />
-        <Box as="main" marginY={22}>
-          {loggedIn && children}
-        </Box>
+        <RouteWrapper>
+          <AuthWrapper>
+            <Box as="main" marginY={22}>
+              {children}
+            </Box>
+          </AuthWrapper>
+        </RouteWrapper>
         <Footer />
       </Box>
     </Box>
