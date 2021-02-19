@@ -1,4 +1,4 @@
-import { Button, Grid, Heading, Text } from "@chakra-ui/react";
+import { Button, Container, Grid, Heading, Text } from "@chakra-ui/react";
 import SomeInfo from "components/hall/components/SomeInfo";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
@@ -8,7 +8,7 @@ const Intro = () => {
   const router = useRouter();
 
   return (
-    <Grid gap={8}>
+    <Container paddingX={0} display="grid" gridGap={8}>
       <SpokerWrapperGrid textAlign="center" gap={8}>
         <Heading>Estimate with your team</Heading>
 
@@ -21,7 +21,7 @@ const Intro = () => {
         </Button>
       </SpokerWrapperGrid>
       <SomeInfo />
-    </Grid>
+    </Container>
   );
 };
 

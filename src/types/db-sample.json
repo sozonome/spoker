@@ -1,0 +1,40 @@
+{
+  "rooms": {
+    "room-id-1": {
+      "room": {
+        "name": "Hello World",
+        "isPrivate": false,
+        "password": ""
+      },
+      "task": {
+        "name": "Home Page",
+        "description": "Handle current page"
+      },
+      "participants": {
+        "uid-001": {
+          "name": "User 01",
+          "point": 5
+        },
+        "uid-002": {
+          "name": "User 02",
+          "point": 3
+        },
+        "uid-003": {
+          "name": "User 03",
+          "point": 2
+        }
+      },
+      "observants": {
+        "uid-004": {
+          "name": "User 04"
+        },
+        "uid-005": {
+          "name": "User 05"
+        },
+        "uid-006": {
+          "name": "User 06"
+        }
+      }
+    }
+  }
+}
