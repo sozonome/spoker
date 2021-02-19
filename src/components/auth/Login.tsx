@@ -96,7 +96,7 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
             colorScheme="gray"
             onClick={handleLoginWithGoogle}
           >
-            Login with Google
+            Sign In with Google
           </Button>
         </Grid>
       </ModalBody>

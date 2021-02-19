@@ -1,5 +1,6 @@
 import {
   Box,
+  Grid,
   Heading,
   Link,
   ListItem,
@@ -12,8 +13,9 @@ import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 const SomeInfo = () => {
   return (
     <SpokerWrapperGrid gap={4}>
-      <Box>
+      <Grid gap={2}>
         <Heading size="md">Why in the world do I bother to make this?</Heading>
+
         <UnorderedList>
           <ListItem>
             <Link href="https://spoker.agus.dev" isExternal>
@@ -26,7 +28,8 @@ const SomeInfo = () => {
             </Link>
           </ListItem>
         </UnorderedList>
-        <Text>
+
+        <Text fontSize="sm">
           Icons made by{" "}
           <Link href="https://www.freepik.com" title="Freepik" isExternal>
             Freepik
@@ -36,7 +39,7 @@ const SomeInfo = () => {
             www.flaticon.com
           </Link>
         </Text>
-      </Box>
+      </Grid>
 
       {/* <Box>
           <Heading size="md">Which stacks are used?</Heading>

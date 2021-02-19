@@ -123,7 +123,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
             colorScheme="gray"
             onClick={handleRegisterWithGoogle}
           >
-            Register with Google
+            Sign Up with Google
           </Button>
         </Grid>
       </ModalBody>
@@ -142,7 +142,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
           isLoading={isLoading}
           colorScheme="teal"
         >
-          Register
+          Sign Up
         </Button>
       </ModalFooter>
     </>
