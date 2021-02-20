@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/sozonome/spoker/compare/v0.1.2...v0.1.3) (2021-02-20)
+
+
+### Features
+
+* **auth:** :sparkles: add login with Github ([d7eba1e](https://github.com/sozonome/spoker/commit/d7eba1e986abb0711e5315eb9a6fdd7ac8c544ae))
+* **room:** :lipstick: add room and join container ([aa37949](https://github.com/sozonome/spoker/commit/aa3794990eeaf9831763b609299baf44b55f0c29))
+
 ### [0.1.2](https://github.com/sozonome/spoker/compare/v0.1.1...v0.1.2) (2021-02-18)
 
 
