@@ -91,16 +91,37 @@ export const requestPasswordReset = async (email: string) => {
   }
 };
 
-export const loginWithGoogle = async () => {
+export const loginWithGoogle = async (toast: any) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   fbase
     .auth()
     .signInWithPopup(googleProvider)
-    .then((res) => {
-      return res;
-    })
+    .then((res) => res)
     .catch((err) => {
-      throw err;
+      toast({
+        description: err.message,
+        status: "error",
+        position: "top",
+        isClosable: true,
+        duration: 15000,
+      });
+    });
+};
+
+export const loginWithGithub = async (toast: any) => {
+  const githubProvider = new firebase.auth.GithubAuthProvider();
+
+  fbase
+    .auth()
+    .signInWithPopup(githubProvider)
+    .catch((err) => {
+      toast({
+        description: err.message,
+        status: "error",
+        position: "top",
+        isClosable: true,
+        duration: 15000,
+      });
     });
 };

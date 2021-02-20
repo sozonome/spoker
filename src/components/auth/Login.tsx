@@ -9,14 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 
 import SpokerInput from "components/ui/SpokerInput";
+import SignInProviders from "./SignInProviders";
 
-import {
-  loginUserWithEmailAndPassword,
-  loginWithGoogle,
-} from "functions/firebase";
+import { loginUserWithEmailAndPassword } from "functions/firebase";
 
 type LoginFormType = {
   email: string;
@@ -56,17 +53,6 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleLoginWithGoogle = () => {
-    loginWithGoogle().catch((err) => {
-      toast({
-        description: err.message,
-        status: "error",
-        position: "top",
-        isClosable: true,
-      });
-    });
-  };
-
   return (
     <>
       <ModalHeader>
@@ -91,13 +77,7 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
             placeholder="Your password"
           />
 
-          <Button
-            leftIcon={<FcGoogle />}
-            colorScheme="gray"
-            onClick={handleLoginWithGoogle}
-          >
-            Sign In with Google
-          </Button>
+          <SignInProviders />
         </Grid>
       </ModalBody>
 
