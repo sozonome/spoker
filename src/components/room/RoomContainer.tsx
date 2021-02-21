@@ -1,45 +1,44 @@
 import {
-  Box,
   Divider,
   Flex,
   Grid,
   Heading,
-  HStack,
   Text,
   useRadioGroup,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 
-const DUMMY_PARTICIPANTS = [
-  {
-    name: "Nathan",
-    point: 5,
-  },
-  {
-    name: "Wang",
-    point: 3,
-  },
-  {
-    name: "Fay",
-    point: 2,
-  },
-];
+import { AuthContext } from "components/auth/AuthProvider";
+import { pointOptions } from "types/room";
+import { DUMMY_PARTICIPANTS } from "constants/dummy_data/participants";
 
 const RoomContainer = () => {
   const [busy, setBusy] = useState<boolean>(false);
 
-  const voteOptions = [0, 0.5, 1, 2, 3, 5, 8, 13, 21];
+  const { currentUser } = useContext(AuthContext);
+  const [showVote, setShowVote] = useState<boolean>(false);
+  const [point, setPoint] = useState<number>();
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "vote",
-    defaultValue: 1,
-    value: 1,
-    onChange: console.log,
+    value: String(point),
+    onChange: (value) => {
+      setPoint(Number(value));
+    },
   });
   const voteOptionGroup = getRootProps();
+
+  const participants = [
+    {
+      name: currentUser.displayName,
+      uid: currentUser.uid,
+      point,
+    },
+    ...DUMMY_PARTICIPANTS,
+  ];
 
   return (
     <Grid gap={8}>
@@ -60,8 +59,8 @@ const RoomContainer = () => {
         <SpokerWrapperGrid gap={4}>
           <Heading color="teal.600">Vote!</Heading>
 
-          <Flex wrap="wrap" gridGap={2} {...voteOptionGroup}>
-            {voteOptions.map((voteOption) => {
+          <Flex maxHeight={180} wrap="wrap" gridGap={2} {...voteOptionGroup}>
+            {pointOptions.map((voteOption) => {
               const radio = getRadioProps({ value: voteOption });
 
               return (
@@ -77,15 +76,17 @@ const RoomContainer = () => {
           <Heading>Current Votes</Heading>
 
           <Grid gap={2}>
-            {DUMMY_PARTICIPANTS.map((participant, participantIndex) => (
+            {participants.map((participant, participantIndex) => (
               <>
                 <Grid templateColumns="2fr 1fr">
                   <Heading size="sm">{participant.name}</Heading>
-                  <Text>{participant.point}</Text>
+                  <Text>
+                    {showVote || participant.uid === currentUser.uid
+                      ? participant.point
+                      : "🙊"}
+                  </Text>
                 </Grid>
-                {participantIndex !== DUMMY_PARTICIPANTS.length - 1 && (
-                  <Divider />
-                )}
+                {participantIndex !== participants.length - 1 && <Divider />}
               </>
             ))}
           </Grid>

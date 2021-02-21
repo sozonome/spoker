@@ -9,7 +9,7 @@ const JoinRoom = () => {
 
   return (
     <SpokerWrapperGrid gap={8} backgroundColor="orange.500" color="white">
-      <Heading size="lg">Or Join Party</Heading>
+      <Heading size="lg">or Join the Party!</Heading>
 
       <Grid gap={4}>
         <SpokerInput

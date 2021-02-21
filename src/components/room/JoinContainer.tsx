@@ -7,9 +7,12 @@ import {
   useRadioGroup,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
+
+import { roleOptions, RoleType } from "types/room";
 
 const DUMMY_ROOM_NAME = "Hello World";
 
@@ -19,14 +22,17 @@ const JoinContainer = () => {
     query: { id },
   } = router;
 
-  const roleOptions = ["observer", "participant"];
+  const [role, setRole] = useState<RoleType>("participant");
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "role",
-    defaultValue: "participant",
-    onChange: console.log,
+    defaultValue: role,
+    onChange: (value) => setRole(value as RoleType),
   });
-
   const group = getRootProps();
+
+  const handleJoin = () => {
+    console.log({ role, id });
+  };
 
   return (
     <Container paddingX={0}>
@@ -51,7 +57,9 @@ const JoinContainer = () => {
           </HStack>
         </Grid>
 
-        <Button colorScheme="blue">Let's Go!</Button>
+        <Button colorScheme="blue" onClick={handleJoin}>
+          Let's Go!
+        </Button>
       </SpokerWrapperGrid>
     </Container>
   );
