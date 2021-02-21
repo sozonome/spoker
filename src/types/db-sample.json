@@ -10,6 +10,9 @@
         "name": "Home Page",
         "description": "Handle current page"
       },
+      "config": {
+        "isFreezeAfterVote": false
+      },
       "participants": {
         "uid-001": {
           "name": "User 01",
@@ -48,6 +51,9 @@
       "task": {
         "name": "Home Page",
         "description": "Handle current page"
+      },
+      "config": {
+        "isFreezeAfterVote": true
       },
       "participants": {
         "uid-001": {

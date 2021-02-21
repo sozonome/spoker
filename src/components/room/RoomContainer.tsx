@@ -1,12 +1,20 @@
 import {
+  Box,
+  Button,
+  Checkbox,
   Divider,
   Flex,
   Grid,
   Heading,
+  ListItem,
+  OrderedList,
+  Spacer,
   Text,
   useRadioGroup,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
+import { BiShareAlt, BiLink } from "react-icons/bi";
 
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
@@ -15,13 +23,20 @@ import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { AuthContext } from "components/auth/AuthProvider";
 import { pointOptions } from "types/room";
 import { DUMMY_PARTICIPANTS } from "constants/dummy_data/participants";
+import { useRouter } from "next/router";
 
 const RoomContainer = () => {
-  const [busy, setBusy] = useState<boolean>(false);
-
   const { currentUser } = useContext(AuthContext);
+  const [busy, setBusy] = useState<boolean>(false);
   const [showVote, setShowVote] = useState<boolean>(false);
   const [point, setPoint] = useState<number>();
+  const [isFreezeAfterVote, setIsFreezeAfterVote] = useState<boolean>(true);
+
+  const router = useRouter();
+  const {
+    query: { id },
+  } = router;
+  const toast = useToast();
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "vote",
     value: String(point),
@@ -40,6 +55,19 @@ const RoomContainer = () => {
     ...DUMMY_PARTICIPANTS,
   ];
 
+  const handleCopyRoomLink = () => {
+    navigator.clipboard.writeText(
+      `${location.protocol}://${location.host}/join/${id}`
+    );
+
+    toast({
+      title: "Room Link Copied!",
+      status: "success",
+      isClosable: true,
+      position: "top-right",
+    });
+  };
+
   return (
     <Grid gap={8}>
       <SpokerWrapperGrid gap={4}>
@@ -56,24 +84,68 @@ const RoomContainer = () => {
       </SpokerWrapperGrid>
 
       <Grid templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]} gap={4}>
-        <SpokerWrapperGrid gap={4}>
-          <Heading color="teal.600">Vote!</Heading>
+        <Grid gap={4}>
+          <SpokerWrapperGrid gap={4}>
+            <Heading color="teal.600">Vote!</Heading>
 
-          <Flex maxHeight={180} wrap="wrap" gridGap={2} {...voteOptionGroup}>
-            {pointOptions.map((voteOption) => {
-              const radio = getRadioProps({ value: voteOption });
+            <Flex wrap="wrap" gridGap={2} {...voteOptionGroup}>
+              {pointOptions.map((voteOption) => {
+                const radio = getRadioProps({ value: voteOption });
 
-              return (
-                <SpokerRadioBox key={voteOption} {...radio}>
-                  {voteOption}
-                </SpokerRadioBox>
-              );
-            })}
-          </Flex>
-        </SpokerWrapperGrid>
+                return (
+                  <SpokerRadioBox key={voteOption} {...radio}>
+                    {voteOption}
+                  </SpokerRadioBox>
+                );
+              })}
+            </Flex>
+            <Spacer />
+          </SpokerWrapperGrid>
 
-        <SpokerWrapperGrid gap={4}>
+          <SpokerWrapperGrid gap={4}>
+            <Heading>Controller</Heading>
+
+            <Flex gridGap={2} wrap="wrap">
+              <Button colorScheme="red">Clear</Button>
+              <Button colorScheme="orange">Rejoin</Button>
+            </Flex>
+
+            <Box>
+              <Button
+                leftIcon={<BiShareAlt />}
+                rightIcon={<BiLink />}
+                colorScheme="blue"
+                onClick={handleCopyRoomLink}
+              >
+                Copy Invite Link
+              </Button>
+            </Box>
+
+            <Flex wrap="wrap" gridGap={2}>
+              <Heading size="sm">Current Users: </Heading>
+              <OrderedList spacing={1}>
+                {participants.map((participant) => (
+                  <ListItem>{participant.name}</ListItem>
+                ))}
+              </OrderedList>
+            </Flex>
+          </SpokerWrapperGrid>
+        </Grid>
+
+        <SpokerWrapperGrid display="inline-block" gap={4}>
           <Heading>Current Votes</Heading>
+
+          <Checkbox
+            checked={isFreezeAfterVote}
+            onChange={(e) => {
+              // replace this with firebase function
+              setIsFreezeAfterVote(Boolean(e.target.value));
+            }}
+            colorScheme="teal"
+            marginY={4}
+          >
+            freeze after vote
+          </Checkbox>
 
           <Grid gap={2}>
             {participants.map((participant, participantIndex) => (
@@ -90,6 +162,8 @@ const RoomContainer = () => {
               </>
             ))}
           </Grid>
+
+          <Spacer />
         </SpokerWrapperGrid>
       </Grid>
     </Grid>

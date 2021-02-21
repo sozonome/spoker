@@ -3,16 +3,19 @@ export interface DBSample {
 }
 
 export interface Rooms {
-  [roomId: string]: RoomID;
+  [roomId: string]: RoomInstance;
 }
 
-export interface RoomID {
+export interface RoomInstance {
   room: RoomConfig;
   task: Task;
   participants: {
     [participantUid: string]: Participant;
   };
   observants: { [observantUid: string]: Observant };
+  config: {
+    isFreezeAfterVote: boolean;
+  };
 }
 
 export interface Observant {
@@ -21,13 +24,13 @@ export interface Observant {
 
 export interface Participant {
   name: string;
-  point: number;
+  point?: number;
 }
 
 export interface RoomConfig {
   name: string;
   isPrivate: boolean;
-  password: string;
+  password?: string;
 }
 
 export interface Task {
