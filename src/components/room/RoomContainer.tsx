@@ -141,7 +141,7 @@ const RoomContainer = () => {
           <Heading>Current Votes</Heading>
 
           <Checkbox
-            checked={isFreezeAfterVote}
+            isChecked={isFreezeAfterVote}
             onChange={(e) => {
               // replace this with firebase function
               setIsFreezeAfterVote(Boolean(e.target.value));
