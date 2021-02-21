@@ -14,7 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { BiShareAlt, BiLink } from "react-icons/bi";
 
 import SpokerInput from "components/ui/SpokerInput";
@@ -129,8 +129,8 @@ const RoomContainer = () => {
             <Flex wrap="wrap" gridGap={2}>
               <Heading size="sm">Current Users: </Heading>
               <OrderedList spacing={1}>
-                {participants.map((participant) => (
-                  <ListItem>{participant.name}</ListItem>
+                {participants.map((participant, participantIndex) => (
+                  <ListItem key={participantIndex}>{participant.name}</ListItem>
                 ))}
               </OrderedList>
             </Flex>
@@ -144,7 +144,7 @@ const RoomContainer = () => {
             isChecked={isFreezeAfterVote}
             onChange={(e) => {
               // replace this with firebase function
-              setIsFreezeAfterVote(Boolean(e.target.value));
+              setIsFreezeAfterVote(!isFreezeAfterVote);
             }}
             colorScheme="teal"
             marginY={4}
@@ -154,7 +154,7 @@ const RoomContainer = () => {
 
           <Grid gap={2}>
             {participants.map((participant, participantIndex) => (
-              <>
+              <Fragment key={participantIndex}>
                 <Grid templateColumns="2fr 1fr">
                   <Heading size="sm">{participant.name}</Heading>
                   <Text>
@@ -164,7 +164,7 @@ const RoomContainer = () => {
                   </Text>
                 </Grid>
                 {participantIndex !== participants.length - 1 && <Divider />}
-              </>
+              </Fragment>
             ))}
           </Grid>
 
