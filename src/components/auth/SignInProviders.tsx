@@ -25,7 +25,11 @@ const SignInProviders = () => {
     <Grid gap={2} textAlign="center">
       <Text>Sign In with:</Text>
 
-      <Button leftIcon={<FcGoogle />} onClick={handleLoginWithGoogle}>
+      <Button
+        leftIcon={<FcGoogle />}
+        onClick={handleLoginWithGoogle}
+        _hover={{ bgGradient: "linear(to-r, blue.100, cyan.100)" }}
+      >
         Google
       </Button>
       {/* <Button leftIcon={<FaGithub />} onClick={handleLoginWithGithub}>

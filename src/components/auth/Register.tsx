@@ -26,9 +26,12 @@ type RegisterProps = {
 };
 
 const Register = ({ handleSwitchToLogin }: RegisterProps) => {
-  const { values, dirty, handleChange, handleSubmit } = useFormik<
-    RegisterFormType
-  >({
+  const {
+    values,
+    dirty,
+    handleChange,
+    handleSubmit,
+  } = useFormik<RegisterFormType>({
     initialValues: {
       name: "",
       email: "",
@@ -76,7 +79,9 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
   return (
     <>
       <ModalHeader>
-        <Heading>Register</Heading>
+        <Heading bgGradient="linear(to-br, teal.200, green.400)" bgClip="text">
+          Register
+        </Heading>
       </ModalHeader>
 
       <ModalBody>
@@ -108,7 +113,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
         </Grid>
       </ModalBody>
 
-      <ModalFooter>
+      <ModalFooter gridGap={2}>
         <Button
           variant="ghost"
           fontWeight="normal"
