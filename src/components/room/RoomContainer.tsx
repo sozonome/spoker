@@ -13,6 +13,7 @@ import {
   useRadioGroup,
   useToast,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { BiShareAlt, BiLink } from "react-icons/bi";
 
@@ -23,7 +24,7 @@ import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { AuthContext } from "components/auth/AuthProvider";
 import { pointOptions } from "types/room";
 import { DUMMY_PARTICIPANTS } from "constants/dummy_data/participants";
-import { useRouter } from "next/router";
+import Head from "next/head";
 
 const RoomContainer = () => {
   const { currentUser } = useContext(AuthContext);
@@ -70,6 +71,10 @@ const RoomContainer = () => {
 
   return (
     <Grid gap={8}>
+      <Head>
+        <title>Room Name | spoker</title>
+      </Head>
+
       <SpokerWrapperGrid gap={4}>
         <Heading size="lg">Room Name</Heading>
 
