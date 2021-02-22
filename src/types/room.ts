@@ -1,6 +1,6 @@
 export enum RoleEnums {
-  "observant",
-  "participant",
+  "observants",
+  "participants",
 }
 
 export type RoleType = keyof typeof RoleEnums;

@@ -5,12 +5,16 @@ import {
   Heading,
   HStack,
   useRadioGroup,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
+import SpokerLoading from "components/ui/SpokerLoading";
+
+import { findRoom, joinRoom } from "functions/firebase/room";
 
 import { roleOptions, RoleType } from "types/room";
 
@@ -18,11 +22,14 @@ const DUMMY_ROOM_NAME = "Hello World";
 
 const JoinContainer = () => {
   const router = useRouter();
+  const toast = useToast();
   const {
     query: { id },
   } = router;
-
-  const [role, setRole] = useState<RoleType>("participant");
+  const [role, setRole] = useState<RoleType>("participants");
+  const [busy, setBusy] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [roomName, setRoomName] = useState<string>("");
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "role",
     defaultValue: role,
@@ -30,16 +37,44 @@ const JoinContainer = () => {
   });
   const group = getRootProps();
 
-  const handleJoin = () => {
-    console.log({ role, id });
+  const getRoomData = async () => {
+    const roomData = await findRoom(id as string);
+    if (roomData) {
+      setRoomName(roomData.room.name);
+      setBusy(false);
+    } else {
+      toast({
+        title: "Room Not Exist",
+        status: "error",
+        position: "top",
+      });
+      router.push(`/`);
+    }
   };
+
+  const handleJoin = async () => {
+    setIsLoading(true);
+    await joinRoom(id as string, role).then(() => {
+      router.push(`/room/${id}`);
+    });
+  };
+
+  useEffect(() => {
+    if (id) {
+      getRoomData();
+    }
+  }, [id]);
+
+  if (busy) {
+    return <SpokerLoading />;
+  }
 
   return (
     <Container paddingX={0}>
       <SpokerWrapperGrid gap={8}>
         <Heading>Welcome 🎉</Heading>
 
-        <Heading size="md">{DUMMY_ROOM_NAME}</Heading>
+        <Heading size="md">{roomName}</Heading>
 
         <Grid gap={2}>
           <Heading size="sm">Pick your role:</Heading>
@@ -57,7 +92,7 @@ const JoinContainer = () => {
           </HStack>
         </Grid>
 
-        <Button colorScheme="blue" onClick={handleJoin}>
+        <Button isLoading={isLoading} colorScheme="blue" onClick={handleJoin}>
           Let's Go!
         </Button>
       </SpokerWrapperGrid>

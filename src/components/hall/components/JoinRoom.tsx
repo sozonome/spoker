@@ -1,8 +1,8 @@
 import { Button, Grid, Heading } from "@chakra-ui/react";
-import SpokerButton from "components/ui/SpokerButton";
+import { useRouter } from "next/router";
+
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { useRouter } from "next/router";
 
 const JoinRoom = () => {
   const router = useRouter();

@@ -1,8 +1,3 @@
-/**
- * @todo
- * [ ] add room id validation
- */
-
 import {
   Button,
   FormControl,
@@ -14,39 +9,59 @@ import {
   InputGroup,
   InputRightElement,
   Switch,
+  toast,
+  useToast,
 } from "@chakra-ui/react";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-import SpokerButton from "components/ui/SpokerButton";
-import SpokerInput, { contraInputStyle } from "components/ui/SpokerInput";
-import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 
-type CreateRoomFormType = {
-  name: string;
-  id: string;
-  isPrivate: boolean;
-  password: string;
-};
+import SpokerInput, { contraInputStyle } from "components/ui/SpokerInput";
+import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
+
+import { createRoom } from "functions/firebase/room";
+
+import { CreateRoomFormSchema, CreateRoomFormType } from "../types";
 
 const CreateRoom = () => {
-  const { values, handleChange, handleSubmit } = useFormik<CreateRoomFormType>({
+  const toast = useToast();
+  const router = useRouter();
+  const {
+    values,
+    errors,
+    dirty,
+    handleChange,
+    handleSubmit,
+  } = useFormik<CreateRoomFormType>({
     initialValues: {
       name: "",
       id: "",
       isPrivate: false,
       password: "",
     },
-    onSubmit: (formValues: CreateRoomFormType) => {
-      console.log(formValues);
+    validationSchema: CreateRoomFormSchema,
+    onSubmit: async (formValues: CreateRoomFormType) => {
+      setIsLoading(true);
+      await createRoom(formValues).then((res) => {
+        setIsLoading(false);
+        if (res !== true && res.message) {
+          toast({
+            position: "top-right",
+            title: "Create Room Fail",
+            description: res.message,
+            status: "error",
+            isClosable: true,
+          });
+        } else {
+          router.push(`/join/${formValues.id}`);
+        }
+      });
     },
   });
-
-  const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
-
   const { name, id, isPrivate, password } = values;
-
+  const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { size: _, ...contraInputStyleCompact } = contraInputStyle;
 
   return (
@@ -60,6 +75,8 @@ const CreateRoom = () => {
           value={name}
           onChange={handleChange}
           placeholder="The Quick Brown Fox"
+          isInvalid={errors.name?.length > 0}
+          helperText={errors.name}
         />
         <SpokerInput
           label="Room ID"
@@ -67,6 +84,8 @@ const CreateRoom = () => {
           value={id}
           onChange={handleChange}
           placeholder="define your own room slug"
+          isInvalid={errors.id?.length > 0}
+          helperText={errors.id}
         />
 
         <FormControl display="flex" alignItems="center" gridGap={2}>
@@ -108,7 +127,12 @@ const CreateRoom = () => {
         </FormControl>
       </Grid>
 
-      <Button colorScheme="green" onClick={() => handleSubmit()}>
+      <Button
+        isLoading={isLoading}
+        disabled={!dirty || (dirty && Object.keys(errors).length > 0)}
+        colorScheme="green"
+        onClick={() => handleSubmit()}
+      >
         Let's Have Some Fun!
       </Button>
     </SpokerWrapperGrid>

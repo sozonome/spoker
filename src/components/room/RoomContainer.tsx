@@ -112,7 +112,12 @@ const RoomContainer = () => {
 
             <Flex gridGap={2} wrap="wrap">
               <Button colorScheme="red">Clear</Button>
-              <Button colorScheme="orange">Rejoin</Button>
+              <Button
+                colorScheme="orange"
+                onClick={() => router.push(`/join/${id}`)}
+              >
+                Rejoin
+              </Button>
             </Flex>
 
             <Box>

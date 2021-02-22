@@ -9,10 +9,10 @@ export interface Rooms {
 export interface RoomInstance {
   room: RoomConfig;
   task: Task;
-  participants: {
+  participants?: {
     [participantUid: string]: Participant;
   };
-  observants: { [observantUid: string]: Observant };
+  observants?: { [observantUid: string]: Observant };
   config: {
     isFreezeAfterVote: boolean;
   };
