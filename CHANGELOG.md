@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/sozonome/spoker/compare/v0.1.3...v0.1.4) (2021-02-22)
+
+
+### Features
+
+* **auth:** add emailVerified checking ([4dcdb3d](https://github.com/sozonome/spoker/commit/4dcdb3d8ea961b18e9f2f16ad04d79615d006a13))
+* **auth:** hide login with github ([b22c417](https://github.com/sozonome/spoker/commit/b22c417eefedbe65d4d85c0339f3bab05169ba5f))
+* **room:** :sparkles: add controller section ([e714305](https://github.com/sozonome/spoker/commit/e7143052f9a71ca136be933deff057465caaf652))
+* **room:** integrate create and join room ([9f7a946](https://github.com/sozonome/spoker/commit/9f7a946ed817a7da5c8dd5d78c7dc348b3da02ee))
+
+
+### Bug Fixes
+
+* **room:** revise checkbox handler ([6eb87cc](https://github.com/sozonome/spoker/commit/6eb87cc8ad3a45a3cbb01c589718a67e3aa8ff59))
+
 ### [0.1.3](https://github.com/sozonome/spoker/compare/v0.1.2...v0.1.3) (2021-02-20)
 
 
