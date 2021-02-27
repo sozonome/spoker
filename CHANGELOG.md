@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/sozonome/spoker/compare/v0.1.4...v1.0.0) (2021-02-27)
+
+
+### Features
+
+* **room:** :sparkles: integrate room ([2d07287](https://github.com/sozonome/spoker/commit/2d07287f6bb41df8f74973f14b6c4e08544063c6))
+* **room:** :sparkles: integrate user operation in the room ([f1dd8fe](https://github.com/sozonome/spoker/commit/f1dd8fe70ca5e2353d1d51c429bf636d0832931c))
+
 ### [0.1.4](https://github.com/sozonome/spoker/compare/v0.1.3...v0.1.4) (2021-02-22)
 
 
