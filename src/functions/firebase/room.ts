@@ -22,7 +22,7 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
       room: {
         name: roomInstance.name,
         isPrivate: roomInstance.isPrivate,
-        password: roomInstance.isPrivate ? roomInstance.password : undefined,
+        password: roomInstance.isPrivate ? roomInstance.password : "",
       },
       config: {
         isFreezeAfterVote: true,
