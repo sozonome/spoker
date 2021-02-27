@@ -24,7 +24,7 @@ const Home = () => {
   const toast = useToast();
 
   const requestEmailVerification = () => {
-    currentUser.reload().then(() => {
+    currentUser?.reload().then(() => {
       if (currentUser.emailVerified) {
         setIsEmailVerified(currentUser.emailVerified);
         toast({
@@ -60,7 +60,7 @@ const Home = () => {
     setBusy(true);
     if (currentUser) {
       currentUser.reload().then(() => {
-        setName(currentUser.displayName);
+        setName(currentUser?.displayName ?? "");
         setIsEmailVerified(currentUser.emailVerified);
         setBusy(false);
       });

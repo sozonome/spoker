@@ -9,14 +9,12 @@ export interface Rooms {
 }
 
 export interface RoomInstance {
-  room: RoomConfig;
+  room: RoomInfo;
   task: Task;
   users?: {
     [participantUid: string]: User;
   };
-  config: {
-    isFreezeAfterVote: boolean;
-  };
+  config: RoomConfig;
 }
 
 export interface User {
@@ -25,12 +23,15 @@ export interface User {
   point?: number;
 }
 
-export interface RoomConfig {
+export interface RoomInfo {
   name: string;
   isPrivate: boolean;
   password?: string;
 }
 
+export interface RoomConfig {
+  isFreezeAfterVote: boolean;
+}
 export interface Task {
   name: string;
   description: string;

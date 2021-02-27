@@ -1,5 +1,5 @@
 import { CreateRoomFormType } from "components/hall/types";
-import { RoomInstance, User } from "types/RawDB";
+import { RoomConfig, RoomInstance, Task, User } from "types/RawDB";
 import { RoleType } from "types/room";
 import { getCurrentUser } from "./auth";
 import { fbase } from "./config";
@@ -41,7 +41,7 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
 export const getRoom = async (roomId: string) => {
   let roomData: RoomInstance | undefined;
 
-  const data = await roomsData.child(roomId).once("value", (snap) => {
+  await roomsData.child(roomId).once("value", (snap) => {
     if (snap.exists()) {
       roomData = snap.val();
     }
@@ -60,7 +60,7 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
         const user: User = snap.val();
         const mustRemovePoint = role !== user.role && role === "observant";
 
-        await roomsData.child(`${roomId}/users/${currentUser?.uid}`).update({
+        await snap.ref.update({
           point: mustRemovePoint ? null : user.point || null,
           role,
         });
@@ -71,4 +71,36 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
         });
       }
     });
+};
+
+export const updateRoomTask = async (roomId: string, task: Task) => {
+  await roomsData.child(`${roomId}/task`).update(task);
+};
+
+type UpdatePointParams = {
+  roomId: string;
+  uid: string;
+  point: number;
+};
+
+export const updatePoint = async (param: UpdatePointParams) => {
+  const { roomId, uid, point } = param;
+
+  await roomsData.child(`${roomId}/users/${uid}`).update({ point });
+};
+
+export const clearPoints = async (roomId: string) => {
+  await roomsData.child(`${roomId}/users`).once("value", (snap) => {
+    if (snap.exists()) {
+      snap.forEach((child) => {
+        child.ref.update({
+          point: null,
+        });
+      });
+    }
+  });
+};
+
+export const updateConfig = async (roomId: string, config: RoomConfig) => {
+  await roomsData.child(`${roomId}/config`).update(config);
 };

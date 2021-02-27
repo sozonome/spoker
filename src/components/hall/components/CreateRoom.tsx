@@ -23,6 +23,7 @@ import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { createRoom } from "functions/firebase/room";
 
 import { CreateRoomFormSchema, CreateRoomFormType } from "../types";
+import { nanoid } from "nanoid";
 
 const CreateRoom = () => {
   const toast = useToast();
@@ -36,7 +37,7 @@ const CreateRoom = () => {
   } = useFormik<CreateRoomFormType>({
     initialValues: {
       name: "",
-      id: "",
+      id: nanoid(21),
       isPrivate: false,
       password: "",
     },
@@ -75,7 +76,7 @@ const CreateRoom = () => {
           value={name}
           onChange={handleChange}
           placeholder="The Quick Brown Fox"
-          isInvalid={String(errors?.name).length > 0}
+          isInvalid={(errors?.name?.length ?? 0) > 0}
           helperText={errors?.name}
         />
         <SpokerInput
@@ -84,11 +85,11 @@ const CreateRoom = () => {
           value={id}
           onChange={handleChange}
           placeholder="define your own room slug"
-          isInvalid={String(errors?.id).length > 0}
+          isInvalid={(errors?.id?.length ?? 0) > 0}
           helperText={errors.id}
         />
 
-        <FormControl display="flex" alignItems="center" gridGap={2}>
+        {/* <FormControl display="flex" alignItems="center" gridGap={2}>
           <Switch
             name="isPrivate"
             isChecked={isPrivate}
@@ -124,7 +125,7 @@ const CreateRoom = () => {
               }
             />
           </InputGroup>
-        </FormControl>
+        </FormControl> */}
       </Grid>
 
       <Button
