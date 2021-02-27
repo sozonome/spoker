@@ -13,32 +13,37 @@
       "config": {
         "isFreezeAfterVote": false
       },
-      "participants": {
+      "users": {
         "uid-001": {
           "name": "User 01",
+          "role": "participant",
           "point": 5
         },
         "uid-002": {
           "name": "User 02",
+          "role": "participant",
           "point": 3
         },
         "uid-003": {
           "name": "User 03",
+          "role": "participant",
           "point": 2
         },
         "uid-004": {
-          "name": "User 10"
-        }
-      },
-      "observants": {
-        "uid-004": {
-          "name": "User 04"
+          "name": "User 10",
+          "role": "participant"
+        },
+        "uid-007": {
+          "name": "User 04",
+          "role": "observant"
         },
         "uid-005": {
-          "name": "User 05"
+          "name": "User 05",
+          "role": "observant"
         },
         "uid-006": {
-          "name": "User 06"
+          "name": "User 06",
+          "role": "observant"
         }
       }
     },
@@ -55,32 +60,37 @@
       "config": {
         "isFreezeAfterVote": true
       },
-      "participants": {
+      "users": {
         "uid-001": {
           "name": "User 01",
+          "role": "participant",
           "point": 5
         },
         "uid-002": {
           "name": "User 02",
+          "role": "participant",
           "point": 3
         },
         "uid-003": {
           "name": "User 03",
+          "role": "participant",
           "point": 2
         },
         "uid-004": {
-          "name": "User 10"
-        }
-      },
-      "observants": {
-        "uid-004": {
-          "name": "User 04"
+          "name": "User 10",
+          "role": "participant"
+        },
+        "uid-007": {
+          "name": "User 04",
+          "role": "observant"
         },
         "uid-005": {
-          "name": "User 05"
+          "name": "User 05",
+          "role": "observant"
         },
         "uid-006": {
-          "name": "User 06"
+          "name": "User 06",
+          "role": "observant"
         }
       }
     }

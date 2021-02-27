@@ -31,7 +31,7 @@ const Header = () => {
   useEffect(() => {
     if (currentUser) {
       currentUser.reload().then(() => {
-        setDisplayName(currentUser.displayName);
+        setDisplayName(currentUser?.displayName ?? "");
       });
     }
   }, [currentUser]);

@@ -23,7 +23,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
   const isPublicRoute = PUBLIC_ROUTES.indexOf(pathname) >= 0;
 
   const routeCheck = () => {
-    if (currentUser !== null) {
+    if (currentUser) {
       if (!currentUser.emailVerified && pathname !== "/" && !isPublicRoute) {
         setBusy(true);
 

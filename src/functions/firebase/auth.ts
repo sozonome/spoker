@@ -11,7 +11,7 @@ export const registerUserWithEmailAndPassword = async (
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((authState) => {
-        authState.user.sendEmailVerification();
+        authState?.user?.sendEmailVerification();
       });
 
     const user = fbase.auth().currentUser;

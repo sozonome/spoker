@@ -5,11 +5,11 @@ import FullScreenLoading from "components/layout/FullScreenLoading";
 import { fbase } from "functions/firebase";
 
 type AuthContextType = {
-  currentUser: firebase.default.User;
+  currentUser?: firebase.default.User;
 };
 
 export const AuthContext = createContext<AuthContextType>({
-  currentUser: null,
+  currentUser: undefined,
 });
 
 type AuthProviderProps = {

@@ -1,3 +1,5 @@
+import { RoleType } from "./room";
+
 export interface DBSample {
   rooms: Rooms;
 }
@@ -9,21 +11,17 @@ export interface Rooms {
 export interface RoomInstance {
   room: RoomConfig;
   task: Task;
-  participants?: {
-    [participantUid: string]: Participant;
+  users?: {
+    [participantUid: string]: User;
   };
-  observants?: { [observantUid: string]: Observant };
   config: {
     isFreezeAfterVote: boolean;
   };
 }
 
-export interface Observant {
+export interface User {
   name: string;
-}
-
-export interface Participant {
-  name: string;
+  role: RoleType;
   point?: number;
 }
 

@@ -62,7 +62,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
       {isUnauthorized && (
         <Modal
           isOpen={isOpen}
-          onClose={undefined}
+          onClose={() => void 0}
           motionPreset="slideInBottom"
           isCentered
         >

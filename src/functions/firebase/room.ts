@@ -1,5 +1,5 @@
 import { CreateRoomFormType } from "components/hall/types";
-import { RoomInstance } from "types/RawDB";
+import { RoomInstance, User } from "types/RawDB";
 import { RoleType } from "types/room";
 import { getCurrentUser } from "./auth";
 import { fbase } from "./config";
@@ -7,7 +7,7 @@ import { fbase } from "./config";
 export const roomsData = fbase.database().ref("rooms");
 
 export const createRoom = async (roomInstance: CreateRoomFormType) => {
-  let found;
+  let found: any;
 
   await roomsData.once("value", (snap) => {
     if (snap.hasChild(roomInstance.id)) {
@@ -22,7 +22,7 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
       room: {
         name: roomInstance.name,
         isPrivate: roomInstance.isPrivate,
-        password: roomInstance.isPrivate ? roomInstance.password : null,
+        password: roomInstance.isPrivate ? roomInstance.password : undefined,
       },
       config: {
         isFreezeAfterVote: true,
@@ -38,9 +38,10 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
   }
 };
 
-export const findRoom = async (roomId: string) => {
-  let roomData: RoomInstance;
-  await roomsData.child(roomId).once("value", (snap) => {
+export const getRoom = async (roomId: string) => {
+  let roomData: RoomInstance | undefined;
+
+  const data = await roomsData.child(roomId).once("value", (snap) => {
     if (snap.exists()) {
       roomData = snap.val();
     }
@@ -51,23 +52,23 @@ export const findRoom = async (roomId: string) => {
 
 export const joinRoom = async (roomId: string, role: RoleType) => {
   const currentUser = getCurrentUser();
-  const oppositeRole: RoleType =
-    role === "participants" ? "observants" : "participants";
 
-  await roomsData.child(roomId).once("value", async (snap) => {
-    if (snap.exists()) {
-      await roomsData
-        .child(`${roomId}/${oppositeRole}/${currentUser.uid}`)
-        .once("value", async (snapUser) => {
-          if (snapUser.exists()) {
-            await roomsData
-              .child(`${roomId}/${oppositeRole}/${currentUser.uid}`)
-              .set(null);
-          }
-          await roomsData
-            .child(`${roomId}/${role}/${currentUser.uid}`)
-            .set({ name: currentUser.displayName });
+  await roomsData
+    .child(`${roomId}/users/${currentUser?.uid}`)
+    .once("value", async (snap) => {
+      if (snap.exists()) {
+        const user: User = snap.val();
+        const mustRemovePoint = role !== user.role && role === "observant";
+
+        await roomsData.child(`${roomId}/users/${currentUser?.uid}`).update({
+          point: mustRemovePoint ? null : user.point || null,
+          role,
         });
-    }
-  });
+      } else {
+        await roomsData.child(`${roomId}/users/${currentUser?.uid}`).set({
+          name: currentUser?.displayName,
+          role,
+        });
+      }
+    });
 };

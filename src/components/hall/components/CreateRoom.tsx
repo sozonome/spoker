@@ -75,8 +75,8 @@ const CreateRoom = () => {
           value={name}
           onChange={handleChange}
           placeholder="The Quick Brown Fox"
-          isInvalid={errors.name?.length > 0}
-          helperText={errors.name}
+          isInvalid={String(errors?.name).length > 0}
+          helperText={errors?.name}
         />
         <SpokerInput
           label="Room ID"
@@ -84,7 +84,7 @@ const CreateRoom = () => {
           value={id}
           onChange={handleChange}
           placeholder="define your own room slug"
-          isInvalid={errors.id?.length > 0}
+          isInvalid={String(errors?.id).length > 0}
           helperText={errors.id}
         />
 

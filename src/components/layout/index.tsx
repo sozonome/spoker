@@ -12,8 +12,6 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const loggedIn = false;
-
   return (
     <Box margin="0 auto" maxWidth="4xl" transition="0.5s ease-out">
       <Meta />

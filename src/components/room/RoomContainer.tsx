@@ -13,25 +13,31 @@ import {
   useRadioGroup,
   useToast,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { BiShareAlt, BiLink } from "react-icons/bi";
 
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
+import SpokerLoading from "components/ui/SpokerLoading";
 
 import { AuthContext } from "components/auth/AuthProvider";
-import { pointOptions } from "types/room";
 import { DUMMY_PARTICIPANTS } from "constants/dummy_data/participants";
-import Head from "next/head";
+import { roomsData } from "functions/firebase/room";
+
+import { pointOptions, RoomUser } from "types/room";
+import { RoomInstance } from "types/RawDB";
 
 const RoomContainer = () => {
   const { currentUser } = useContext(AuthContext);
-  const [busy, setBusy] = useState<boolean>(false);
+  const [busy, setBusy] = useState<boolean>(true);
   const [showVote, setShowVote] = useState<boolean>(false);
   const [point, setPoint] = useState<number>();
   const [isFreezeAfterVote, setIsFreezeAfterVote] = useState<boolean>(true);
+  const [roomData, setRoomData] = useState<RoomInstance>();
+  const [users, setUsers] = useState<Array<RoomUser>>([]);
 
   const router = useRouter();
   const {
@@ -49,41 +55,84 @@ const RoomContainer = () => {
 
   const participants = [
     {
-      name: currentUser.displayName,
-      uid: currentUser.uid,
+      name: currentUser?.displayName,
+      uid: currentUser?.uid,
       point,
     },
     ...DUMMY_PARTICIPANTS,
   ];
 
+  const getRoomData = async () => {
+    roomsData.child(id as string).on("value", (snap) => {
+      if (snap.exists()) {
+        setRoomData(snap.val());
+      }
+    });
+  };
+
   const handleCopyRoomLink = () => {
-    navigator.clipboard.writeText(
-      `${location.protocol}://${location.host}/join/${id}`
-    );
+    const roomLink = `${location.protocol}://${location.host}/join/${id}`;
+    navigator.clipboard.writeText(roomLink);
 
     toast({
-      title: "Room Link Copied!",
+      title: `Room Link Copied!\n${roomLink}`,
       status: "success",
       isClosable: true,
       position: "top-right",
     });
   };
 
+  useEffect(() => {
+    getRoomData();
+  }, []);
+
+  useEffect(() => {
+    if (roomData) {
+      setBusy(false);
+
+      if (roomData.users) {
+        const updatedUsers: Array<RoomUser> = Object.entries(
+          roomData.users
+        ).map((a) => ({
+          uid: a[0],
+          ...a[1],
+        }));
+
+        setUsers(updatedUsers);
+      }
+    }
+  }, [roomData]);
+
+  if (busy) {
+    return <SpokerLoading />;
+  }
+
   return (
     <Grid gap={8}>
       <Head>
         <title>Room Name | spoker</title>
       </Head>
+      {console.log({ roomData })}
 
       <SpokerWrapperGrid gap={4}>
-        <Heading size="lg">Room Name</Heading>
+        <Heading size="lg">{roomData?.room.name}</Heading>
 
         <Flex gridGap={4}>
           <Heading size="md">Task</Heading>
 
           <Grid gap={2} width="full">
-            <SpokerInput label="Name" placeholder="Going to Mars" />
-            <SpokerInput label="Description" placeholder="Land to Moon first" />
+            <SpokerInput
+              label="Name"
+              value={roomData?.task.name}
+              onChange={() => {}}
+              placeholder="Going to Mars"
+            />
+            <SpokerInput
+              label="Description"
+              value={roomData?.task.description}
+              onChange={() => {}}
+              placeholder="Land to Moon first"
+            />
           </Grid>
         </Flex>
       </SpokerWrapperGrid>
@@ -134,8 +183,8 @@ const RoomContainer = () => {
             <Flex wrap="wrap" gridGap={2}>
               <Heading size="sm">Current Users: </Heading>
               <OrderedList spacing={1}>
-                {participants.map((participant, participantIndex) => (
-                  <ListItem key={participantIndex}>{participant.name}</ListItem>
+                {users.map((user, userIndex) => (
+                  <ListItem key={userIndex}>{user.name}</ListItem>
                 ))}
               </OrderedList>
             </Flex>
@@ -146,7 +195,7 @@ const RoomContainer = () => {
           <Heading>Current Votes</Heading>
 
           <Checkbox
-            isChecked={isFreezeAfterVote}
+            isChecked={roomData?.config.isFreezeAfterVote}
             onChange={(e) => {
               // replace this with firebase function
               setIsFreezeAfterVote(!isFreezeAfterVote);
@@ -158,19 +207,21 @@ const RoomContainer = () => {
           </Checkbox>
 
           <Grid gap={2}>
-            {participants.map((participant, participantIndex) => (
-              <Fragment key={participantIndex}>
-                <Grid templateColumns="2fr 1fr">
-                  <Heading size="sm">{participant.name}</Heading>
-                  <Text>
-                    {showVote || participant.uid === currentUser.uid
-                      ? participant.point
-                      : "🙊"}
-                  </Text>
-                </Grid>
-                {participantIndex !== participants.length - 1 && <Divider />}
-              </Fragment>
-            ))}
+            {users
+              .filter((user) => user.role === "participant")
+              .map((participant, participantIndex) => (
+                <Fragment key={participantIndex}>
+                  <Grid templateColumns="2fr 1fr">
+                    <Heading size="sm">{participant.name}</Heading>
+                    <Text>
+                      {showVote || participant.uid === currentUser?.uid
+                        ? participant.point
+                        : "🙊"}
+                    </Text>
+                  </Grid>
+                  {participantIndex !== participants.length - 1 && <Divider />}
+                </Fragment>
+              ))}
           </Grid>
 
           <Spacer />

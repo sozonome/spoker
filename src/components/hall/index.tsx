@@ -15,7 +15,7 @@ const HallWrapper = () => {
   useEffect(() => {
     if (currentUser) {
       currentUser.reload().then(() => {
-        setDisplayName(currentUser.displayName);
+        setDisplayName(currentUser?.displayName ?? "");
         setBusy(false);
       });
     } else {

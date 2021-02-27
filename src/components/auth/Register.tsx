@@ -53,7 +53,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
             isClosable: true,
           });
           toast({
-            title: `A verification email is sent to ${user.email}`,
+            title: `A verification email is sent to ${user?.email}`,
             description:
               "Before you can use any features, please verify your email first.",
             position: "top",
