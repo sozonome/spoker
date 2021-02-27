@@ -9,7 +9,13 @@ import { AuthProvider } from "components/auth/AuthProvider";
 import customTheme from "styles/customTheme";
 import "styles/globals.css";
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({
+  Component,
+  pageProps,
+}: {
+  Component: any;
+  pageProps: any;
+}) => {
   return (
     <ChakraProvider theme={customTheme}>
       <Head>
