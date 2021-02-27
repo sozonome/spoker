@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/sozonome/spoker/compare/v1.0.0...v1.0.1) (2021-02-27)
+
+
+### Bug Fixes
+
+* :bug: fix app.tsx typing, add auth route ([a2e4b4c](https://github.com/sozonome/spoker/commit/a2e4b4c55fbc9dfa01dfdcc2bf9189b2c5371e29))
+
 ## [1.0.0](https://github.com/sozonome/spoker/compare/v0.1.4...v1.0.0) (2021-02-27)
 
 
