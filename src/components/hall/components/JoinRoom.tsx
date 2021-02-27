@@ -27,7 +27,7 @@ const JoinRoom = () => {
         alignSelf="flex-end"
         backgroundColor="black"
         _hover={{ backgroundColor: "orange.400" }}
-        onClick={() => router.push(`/room/${roomId}`)}
+        onClick={() => router.push(`/join/${roomId}`)}
       >
         Let Me in!
       </Button>
