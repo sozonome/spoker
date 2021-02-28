@@ -1,4 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { AppProps } from "next/app";
 import Head from "next/head";
 import "@fontsource/jost/latin.css";
 import "@fontsource/inter/latin.css";
@@ -9,13 +10,7 @@ import { AuthProvider } from "components/auth/AuthProvider";
 import customTheme from "styles/customTheme";
 import "styles/globals.css";
 
-const MyApp = ({
-  Component,
-  pageProps,
-}: {
-  Component: any;
-  pageProps: any;
-}) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
       <Head>
