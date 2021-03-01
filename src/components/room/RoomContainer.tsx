@@ -57,6 +57,20 @@ const RoomContainer = () => {
   });
   const voteOptionGroup = getRootProps();
 
+  const averagePoint = showVote
+    ? [...users]
+        .filter((unfilteredUser) => unfilteredUser.role === "participant")
+        .map((user) => user.point ?? 0)
+        .reduce(
+          (points, point, index) => (points = (points += point) / (index + 1)),
+          0
+        )
+    : 0;
+  const isParticipant =
+    currentUser && roomData?.users?.[currentUser.uid]?.role === "participant";
+  const isObservant =
+    currentUser && roomData?.users?.[currentUser.uid]?.role === "observant";
+
   const getRoomData = async () => {
     roomsData.child(id as string).on("value", (snap) => {
       if (snap.exists()) {
@@ -109,16 +123,76 @@ const RoomContainer = () => {
   };
 
   const handleUpdateConfig = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedConfig: RoomConfig = {
-      isFreezeAfterVote: e.currentTarget.checked,
-    };
-    updateConfig(id as string, updatedConfig);
+    if (isObservant) {
+      const updatedConfig: RoomConfig = {
+        isFreezeAfterVote: e.currentTarget.checked,
+      };
+      updateConfig(id as string, updatedConfig);
+    } else {
+      toast({
+        title: "Participant cannot change configurations",
+        status: "warning",
+        isClosable: true,
+        position: "top-right",
+      });
+    }
   };
 
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
       setInRoom(false);
       await roomsData.child(`${id}/users/${currentUser.uid}`).remove();
+    }
+  };
+
+  const pointTextSize = (point: number) => {
+    switch (point.toString()) {
+      case "0":
+      case "0.5":
+      case "1":
+        return "1rem";
+      case "2":
+        return "1.2rem";
+      case "3":
+        return "1.4rem";
+      case "5":
+        return "2rem";
+      case "8":
+      case "13":
+        return "3rem";
+      case "20":
+      case "40":
+      case "60":
+      case "80":
+      case "100":
+        return "4rem";
+      default:
+        return "1rem";
+    }
+  };
+
+  const pointTextColor = (point: number) => {
+    switch (point.toString()) {
+      case "0":
+      case "0.5":
+        return "gray.600";
+      case "1":
+      case "2":
+        return "gray.700";
+      case "3":
+        return "orange.500";
+      case "5":
+        return "red.600";
+      case "8":
+      case "13":
+      case "20":
+      case "40":
+      case "60":
+      case "80":
+      case "100":
+        return "red.500";
+      default:
+        return "gray.900";
     }
   };
 
@@ -201,33 +275,34 @@ const RoomContainer = () => {
 
       <Grid templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]} gap={4}>
         <Grid gap={4}>
-          {currentUser &&
-            roomData?.users?.[currentUser.uid]?.role === "participant" && (
-              <SpokerWrapperGrid gap={4}>
-                <Heading color="teal.600">Vote!</Heading>
+          {isParticipant && (
+            <SpokerWrapperGrid gap={4}>
+              <Heading color="teal.600">Vote!</Heading>
 
-                <Flex wrap="wrap" gridGap={2} {...voteOptionGroup}>
-                  {pointOptions.map((voteOption) => {
-                    const radio = getRadioProps({ value: voteOption });
+              <Flex wrap="wrap" gridGap={2} {...voteOptionGroup}>
+                {pointOptions.map((voteOption) => {
+                  const radio = getRadioProps({ value: voteOption });
 
-                    return (
-                      <SpokerRadioBox key={voteOption} {...radio}>
-                        {voteOption}
-                      </SpokerRadioBox>
-                    );
-                  })}
-                </Flex>
-                <Spacer />
-              </SpokerWrapperGrid>
-            )}
+                  return (
+                    <SpokerRadioBox key={voteOption} {...radio}>
+                      {voteOption}
+                    </SpokerRadioBox>
+                  );
+                })}
+              </Flex>
+              <Spacer />
+            </SpokerWrapperGrid>
+          )}
 
           <SpokerWrapperGrid gap={4}>
             <Heading>Controller</Heading>
 
             <Flex gridGap={2} wrap="wrap">
-              <Button colorScheme="red" onClick={handleClearPoints}>
-                Clear
-              </Button>
+              {isObservant && (
+                <Button colorScheme="red" onClick={handleClearPoints}>
+                  Clear
+                </Button>
+              )}
               <Button
                 colorScheme="orange"
                 onClick={() => router.push(`/join/${id}`)}
@@ -262,6 +337,7 @@ const RoomContainer = () => {
           <Heading>Current Votes</Heading>
 
           <Checkbox
+            disabled={isParticipant}
             isChecked={roomData?.config.isFreezeAfterVote}
             onChange={handleUpdateConfig}
             colorScheme="teal"
@@ -271,13 +347,26 @@ const RoomContainer = () => {
           </Checkbox>
 
           <Grid gap={2}>
+            {showVote && <Text>average: {averagePoint}</Text>}
             {users
               .filter((user) => user.role === "participant")
+              .sort((a, b) => (showVote ? (b.point ?? 0) - (a.point ?? 0) : 0))
               .map((participant, participantIndex, participants) => (
                 <Fragment key={participantIndex}>
-                  <Grid templateColumns="2fr 1fr">
+                  <Grid templateColumns="2fr 1fr" alignItems="center">
                     <Heading size="sm">{participant.name}</Heading>
-                    <Text>
+                    <Text
+                      fontSize={
+                        showVote
+                          ? pointTextSize(participant.point ?? 0)
+                          : undefined
+                      }
+                      textColor={
+                        showVote
+                          ? pointTextColor(participant.point ?? 0)
+                          : undefined
+                      }
+                    >
                       {showVote || participant.uid === currentUser?.uid
                         ? participant.point
                         : participant.point
