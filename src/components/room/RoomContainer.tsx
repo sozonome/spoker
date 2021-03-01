@@ -75,7 +75,7 @@ const RoomContainer = () => {
   };
 
   const handleCopyRoomLink = () => {
-    const roomLink = `${location.protocol}://${location.host}/join/${id}`;
+    const roomLink = `${location.protocol}//${location.host}/join/${id}`;
     navigator.clipboard.writeText(roomLink);
 
     toast({
@@ -280,6 +280,8 @@ const RoomContainer = () => {
                     <Text>
                       {showVote || participant.uid === currentUser?.uid
                         ? participant.point
+                        : participant.point
+                        ? "🙉"
                         : "🙊"}
                     </Text>
                   </Grid>
