@@ -10,6 +10,7 @@ import {
 
 type SpokerInputProps = {
   helperText?: HelpTextProps["children"];
+  formControlWidth?: FormControlProps["width"];
 } & Pick<FormControlProps, "label" | "isInvalid"> &
   InputProps;
 
@@ -22,14 +23,15 @@ export const contraInputStyle: Partial<InputProps> = {
 
 const SpokerInput = ({
   label,
+  formControlWidth,
   isInvalid,
   helperText,
   ...inputProps
 }: SpokerInputProps) => {
   return (
-    <FormControl isInvalid={isInvalid}>
+    <FormControl isInvalid={isInvalid} width={formControlWidth}>
       {label && <FormLabel>{label}</FormLabel>}
-      <Input {...inputProps} {...contraInputStyle} />
+      <Input {...contraInputStyle} {...inputProps} />
       {helperText && (
         <FormHelperText color="red.400">{helperText}</FormHelperText>
       )}

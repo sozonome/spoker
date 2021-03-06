@@ -39,6 +39,16 @@ export const loginUserWithEmailAndPassword = async (
   }
 };
 
+export const updateDisplayName = async (displayName: string) => {
+  const user = fbase.auth().currentUser;
+
+  if (user) {
+    user.updateProfile({
+      displayName,
+    });
+  }
+};
+
 export const requestVerificationMail = async () => {
   const user = fbase.auth().currentUser;
 

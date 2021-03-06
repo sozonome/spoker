@@ -8,20 +8,26 @@ import SomeInfo from "./components/SomeInfo";
 import { AuthContext } from "components/auth/AuthProvider";
 
 const HallWrapper = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, isCurrentUserUpdating } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState<string>();
   const [busy, setBusy] = useState<boolean>(true);
 
-  useEffect(() => {
+  const checkUser = async () => {
     if (currentUser) {
-      currentUser.reload().then(() => {
-        setDisplayName(currentUser?.displayName ?? "");
-        setBusy(false);
-      });
+      setTimeout(() => {
+        currentUser.reload().then(() => {
+          setDisplayName(currentUser?.displayName ?? "");
+          setBusy(false);
+        });
+      }, 200);
     } else {
       setBusy(false);
     }
-  }, [currentUser]);
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [currentUser, isCurrentUserUpdating]);
 
   return (
     <Grid gap={12}>
