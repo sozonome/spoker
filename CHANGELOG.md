@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/sozonome/spoker/compare/v1.0.1...v1.1.0) (2021-03-06)
+
+
+### Features
+
+* **auth:** :sparkles: add the ability to update display name ([df91b47](https://github.com/sozonome/spoker/commit/df91b4783364393c3a3c31a382490de5239d5fb4))
+* **room:** :lipstick: grouping points, average, limit participant ability ([fb8752d](https://github.com/sozonome/spoker/commit/fb8752dc7260c12e6568588f3bbe217010e1382b))
+* **room:** open monkey mouth after select point ([712a72c](https://github.com/sozonome/spoker/commit/712a72cee061029e68464f19f8a9ef54846cd213))
+
+
+### Bug Fixes
+
+* **auth:** prolong the time to wait currentUser update ([8087831](https://github.com/sozonome/spoker/commit/80878319319df6ed398c4bac08fed01179264f2d))
+* revise _app typing ([af10477](https://github.com/sozonome/spoker/commit/af10477da24eed6ac71bd7279e3e2222059e1c66))
+
 ### [1.0.1](https://github.com/sozonome/spoker/compare/v1.0.0...v1.0.1) (2021-02-27)
 
 
