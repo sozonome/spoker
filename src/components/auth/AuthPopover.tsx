@@ -36,7 +36,7 @@ const AuthPopover = () => {
         currentUser.reload().then(() => {
           setDisplayName(currentUser.displayName ?? "");
         });
-      }, 200);
+      }, 500);
     }
   };
 

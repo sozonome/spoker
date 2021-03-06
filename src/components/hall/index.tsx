@@ -19,7 +19,7 @@ const HallWrapper = () => {
           setDisplayName(currentUser?.displayName ?? "");
           setBusy(false);
         });
-      }, 200);
+      }, 500);
     } else {
       setBusy(false);
     }
