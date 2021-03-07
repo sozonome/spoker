@@ -4,10 +4,13 @@ import {
   Checkbox,
   Divider,
   Flex,
+  FormControl,
+  FormLabel,
   Grid,
   Heading,
   ListItem,
   OrderedList,
+  Select,
   Spacer,
   Text,
   useRadioGroup,
@@ -22,6 +25,7 @@ import SpokerInput from "components/ui/SpokerInput";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import SpokerLoading from "components/ui/SpokerLoading";
+import PointWrapper from "./components/PointWrapper";
 
 import { AuthContext } from "components/auth/AuthProvider";
 import {
@@ -31,6 +35,7 @@ import {
   updatePoint,
   updateRoomTask,
 } from "functions/firebase/room";
+import { hideLabelOptions, HideLabelOptionsType } from "constants/hideLabel";
 
 import { pointOptions, RoomUser } from "types/room";
 import { RoomConfig, RoomInstance, Task } from "types/RawDB";
@@ -122,9 +127,9 @@ const RoomContainer = () => {
     clearPoints(id as string);
   };
 
-  const handleUpdateConfig = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleUpdateFreezeAfterVote = (e: ChangeEvent<HTMLInputElement>) => {
     if (isObservant) {
-      const updatedConfig: RoomConfig = {
+      const updatedConfig: Partial<RoomConfig> = {
         isFreezeAfterVote: e.currentTarget.checked,
       };
       updateConfig(id as string, updatedConfig);
@@ -135,6 +140,15 @@ const RoomContainer = () => {
         isClosable: true,
         position: "top-right",
       });
+    }
+  };
+
+  const handleUpdateHideLabel = (selectedHideLabel: HideLabelOptionsType) => {
+    if (isObservant) {
+      const updatedConfig: Partial<RoomConfig> = {
+        hideLabel: selectedHideLabel,
+      };
+      updateConfig(id as string, updatedConfig);
     }
   };
 
@@ -339,12 +353,33 @@ const RoomContainer = () => {
           <Checkbox
             disabled={isParticipant}
             isChecked={roomData?.config.isFreezeAfterVote}
-            onChange={handleUpdateConfig}
+            onChange={handleUpdateFreezeAfterVote}
             colorScheme="teal"
             marginY={4}
           >
             freeze after vote
           </Checkbox>
+
+          {isObservant && (
+            <FormControl display="flex" alignItems="center">
+              <FormLabel fontSize="sm" width="30%">
+                Hide Label
+              </FormLabel>
+              <Select
+                marginBottom={4}
+                onChange={(e) =>
+                  handleUpdateHideLabel(e.target.value as HideLabelOptionsType)
+                }
+                value={roomData?.config.hideLabel ?? "monkey"}
+              >
+                {hideLabelOptions.map((hideLabelOption) => (
+                  <Text as="option" value={hideLabelOption}>
+                    {hideLabelOption}
+                  </Text>
+                ))}
+              </Select>
+            </FormControl>
+          )}
 
           <Grid gap={2}>
             {showVote && <Text>average: {averagePoint}</Text>}
@@ -367,11 +402,14 @@ const RoomContainer = () => {
                           : undefined
                       }
                     >
-                      {showVote || participant.uid === currentUser?.uid
-                        ? participant.point
-                        : participant.point
-                        ? "🙉"
-                        : "🙊"}
+                      <PointWrapper
+                        showVote={showVote}
+                        roomSelectedHideLabel={
+                          roomData?.config.hideLabel ?? "monkey"
+                        }
+                        isCurrentUser={participant.uid === currentUser?.uid}
+                        point={participant.point}
+                      />
                     </Text>
                   </Grid>
                   {participantIndex !== participants.length - 1 && <Divider />}

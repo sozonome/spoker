@@ -1,3 +1,4 @@
+import { HideLabelOptionsType } from "constants/hideLabel";
 import { RoleType } from "./room";
 
 export interface DBSample {
@@ -31,6 +32,7 @@ export interface RoomInfo {
 
 export interface RoomConfig {
   isFreezeAfterVote: boolean;
+  hideLabel?: HideLabelOptionsType;
 }
 export interface Task {
   name: string;

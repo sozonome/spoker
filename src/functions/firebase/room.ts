@@ -26,6 +26,7 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
       },
       config: {
         isFreezeAfterVote: true,
+        hideLabel: "monkey",
       },
       task: {
         name: "#1 Task",
@@ -101,6 +102,9 @@ export const clearPoints = async (roomId: string) => {
   });
 };
 
-export const updateConfig = async (roomId: string, config: RoomConfig) => {
+export const updateConfig = async (
+  roomId: string,
+  config: Partial<RoomConfig>
+) => {
   await roomsData.child(`${roomId}/config`).update(config);
 };
