@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/sozonome/spoker/compare/v1.2.0...v1.2.1) (2021-03-08)
+
+
+### Bug Fixes
+
+* **room:** revise average ([ef24de0](https://github.com/sozonome/spoker/commit/ef24de09a67d83d59ea96c3a99196d970587661a))
+
 ## [1.2.0](https://github.com/sozonome/spoker/compare/v1.1.0...v1.2.0) (2021-03-07)
 
 
