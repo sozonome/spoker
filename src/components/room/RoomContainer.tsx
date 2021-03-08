@@ -62,15 +62,15 @@ const RoomContainer = () => {
   });
   const voteOptionGroup = getRootProps();
 
-  const averagePoint = showVote
+  const participantPoints = showVote
     ? [...users]
         .filter((unfilteredUser) => unfilteredUser.role === "participant")
         .map((user) => user.point ?? 0)
-        .reduce(
-          (points, point, index) => (points = (points += point) / (index + 1)),
-          0
-        )
-    : 0;
+    : [];
+
+  const averagePoint =
+    participantPoints.reduce((a, b) => a + b, 0) / participantPoints.length ??
+    0;
   const isParticipant =
     currentUser && roomData?.users?.[currentUser.uid]?.role === "participant";
   const isObservant =
