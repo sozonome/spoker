@@ -1,4 +1,5 @@
-import { Box, Grid, useToast } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";

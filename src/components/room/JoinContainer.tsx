@@ -1,12 +1,7 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Heading,
-  HStack,
-  useRadioGroup,
-  useToast,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import { Container, Grid, Heading, HStack } from "@chakra-ui/layout";
+import { useRadioGroup } from "@chakra-ui/radio";
+import { useToast } from "@chakra-ui/toast";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

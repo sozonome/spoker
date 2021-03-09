@@ -1,4 +1,6 @@
-import { Button, Grid, Text, useToast } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import { Grid, Text } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import { FcGoogle } from "react-icons/fc";
 import { useEffect } from "react";
 

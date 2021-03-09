@@ -1,12 +1,11 @@
 import {
-  Box,
   Grid,
   Heading,
   Link,
   ListItem,
   Text,
   UnorderedList,
-} from "@chakra-ui/react";
+} from "@chakra-ui/layout";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 

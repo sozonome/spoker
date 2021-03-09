@@ -1,8 +1,9 @@
-import { Button, Container, Grid, Heading, Text } from "@chakra-ui/react";
-import SomeInfo from "components/hall/components/SomeInfo";
-
-import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
+import { Button } from "@chakra-ui/button";
+import { Container, Heading, Text } from "@chakra-ui/layout";
 import { useRouter } from "next/router";
+
+import SomeInfo from "components/hall/components/SomeInfo";
+import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 
 const Intro = () => {
   const router = useRouter();

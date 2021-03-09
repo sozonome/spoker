@@ -1,4 +1,5 @@
-import { Grid, GridProps, useColorModeValue } from "@chakra-ui/react";
+import { useColorModeValue } from "@chakra-ui/color-mode";
+import { Grid, GridProps } from "@chakra-ui/layout";
 
 type SpokerWrapperGridProps = GridProps;
 

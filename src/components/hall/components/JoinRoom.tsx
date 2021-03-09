@@ -1,9 +1,10 @@
-import { Button, Grid, Heading } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import { Grid, Heading } from "@chakra-ui/layout";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { useState } from "react";
 
 const JoinRoom = () => {
   const router = useRouter();

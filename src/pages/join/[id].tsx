@@ -1,11 +1,7 @@
-import Join from "components/room/JoinContainer";
+import JoinContainer from "components/room/JoinContainer";
 
 const JoinPage = () => {
-  return (
-    <>
-      <Join />
-    </>
-  );
+  return <JoinContainer />;
 };
 
 export default JoinPage;

@@ -1,20 +1,18 @@
+import { useToast } from "@chakra-ui/toast";
+import { Box, Grid, Link } from "@chakra-ui/layout";
 import {
   Alert,
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Box,
-  Grid,
-  Link,
-  useToast,
-} from "@chakra-ui/react";
+} from "@chakra-ui/alert";
 import { useContext, useEffect, useState } from "react";
 
 import HallWrapper from "components/hall";
+import SpokerLoading from "components/ui/SpokerLoading";
 
 import { AuthContext } from "components/auth/AuthProvider";
 import { requestVerificationMail } from "functions/firebase/auth";
-import SpokerLoading from "components/ui/SpokerLoading";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);

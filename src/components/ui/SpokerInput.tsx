@@ -4,9 +4,8 @@ import {
   FormHelperText,
   FormLabel,
   HelpTextProps,
-  Input,
-  InputProps,
-} from "@chakra-ui/react";
+} from "@chakra-ui/form-control";
+import { Input, InputProps } from "@chakra-ui/input";
 
 type SpokerInputProps = {
   helperText?: HelpTextProps["children"];

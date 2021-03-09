@@ -1,4 +1,4 @@
-import { useToast } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/toast";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState } from "react";
 

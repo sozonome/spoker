@@ -1,4 +1,5 @@
-import { Grid, Heading, Skeleton } from "@chakra-ui/react";
+import { Grid, Heading } from "@chakra-ui/layout";
+import { Skeleton } from "@chakra-ui/skeleton";
 import { useContext, useEffect, useState } from "react";
 
 import CreateRoom from "./components/CreateRoom";

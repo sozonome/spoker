@@ -1,29 +1,17 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Grid,
-  Heading,
-  IconButton,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Switch,
-  toast,
-  useToast,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import { Grid, Heading } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import { useFormik } from "formik";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 
-import SpokerInput, { contraInputStyle } from "components/ui/SpokerInput";
+import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 
 import { createRoom } from "functions/firebase/room";
 
 import { CreateRoomFormSchema, CreateRoomFormType } from "../types";
-import { nanoid } from "nanoid";
 
 const CreateRoom = () => {
   const toast = useToast();
@@ -61,9 +49,9 @@ const CreateRoom = () => {
     },
   });
   const { name, id, isPrivate, password } = values;
-  const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
+  // const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { size: _, ...contraInputStyleCompact } = contraInputStyle;
+  // const { size: _, ...contraInputStyleCompact } = contraInputStyle;
 
   return (
     <SpokerWrapperGrid gap={8}>

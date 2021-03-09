@@ -1,11 +1,7 @@
 import RoomContainer from "components/room/RoomContainer";
 
 const Room = () => {
-  return (
-    <>
-      <RoomContainer />
-    </>
-  );
+  return <RoomContainer />;
 };
 
 export default Room;
