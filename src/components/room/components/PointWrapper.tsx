@@ -1,5 +1,3 @@
-import React from "react";
-
 import { hideLabel, HideLabelOptionsType } from "constants/hideLabel";
 
 type PointWrapperProps = {

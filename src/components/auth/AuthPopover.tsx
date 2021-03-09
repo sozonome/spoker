@@ -10,7 +10,7 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/popover";
 import { useToast } from "@chakra-ui/toast";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
 import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
