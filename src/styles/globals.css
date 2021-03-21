@@ -1,1 +1,8 @@
 /* Global Styling here */
+
+.emoji {
+  display: inline-block;
+  width: auto;
+  height: 1.75em;
+  vertical-align: -0.125em;
+}

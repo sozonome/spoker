@@ -18,8 +18,8 @@ export const hideLabelOptions: Array<HideLabelOptionsType> = Object.keys(
 type HideLabelType = Record<
   HideLabelOptionsType,
   {
-    empty: ReactNode;
-    selected: ReactNode;
+    empty: string;
+    selected: string;
   }
 >;
 

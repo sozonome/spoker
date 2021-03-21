@@ -1,3 +1,4 @@
+import Twemoji from "components/ui/Twemoji";
 import { hideLabel, HideLabelOptionsType } from "constants/hideLabel";
 
 type PointWrapperProps = {
@@ -16,9 +17,9 @@ const PointWrapper = ({
   if (showVote || isCurrentUser) {
     return <>{point}</>;
   } else if (point) {
-    return <>{hideLabel[roomSelectedHideLabel].selected}</>;
+    return <Twemoji emoji={hideLabel[roomSelectedHideLabel].selected} />;
   } else {
-    return <>{hideLabel[roomSelectedHideLabel].empty}</>;
+    return <Twemoji emoji={hideLabel[roomSelectedHideLabel].empty} />;
   }
 };
 
