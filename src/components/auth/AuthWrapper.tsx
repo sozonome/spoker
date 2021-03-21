@@ -68,7 +68,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
         >
           <ModalOverlay />
 
-          <ModalContent {...contraBoxStyle} marginX={8}>
+          <ModalContent {...contraBoxStyle} marginX={[2, 8]}>
             {isRegistered ? (
               <Login {...{ handleSwitchToRegister }} />
             ) : (
