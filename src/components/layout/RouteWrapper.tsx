@@ -6,6 +6,7 @@ import { AuthContext } from "components/auth/AuthProvider";
 import FullScreenLoading from "./FullScreenLoading";
 
 export const PUBLIC_ROUTES = ["/auth", "/intro", "/privacypolicy"];
+export const PRIVATE_ROUTES = ["/room/[id]", "/join/[id]", "/"];
 
 type RouteWrapperProps = {
   children: ReactNode;

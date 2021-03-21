@@ -10,14 +10,18 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/popover";
 import { useToast } from "@chakra-ui/toast";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
 import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
 
+import SpokerInput from "components/ui/SpokerInput";
+
 import { AuthContext } from "./AuthProvider";
 import { logoutUser, updateDisplayName } from "functions/firebase";
-import SpokerInput from "components/ui/SpokerInput";
+import { roomsData } from "functions/firebase/room";
+import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
 
 const AuthPopover = () => {
   const { currentUser, isCurrentUserUpdating, updateCurrentUser } = useContext(
@@ -29,6 +33,12 @@ const AuthPopover = () => {
   );
   const [displayNameInput, setDisplayNameInput] = useState<string>("");
   const toast = useToast();
+  const router = useRouter();
+
+  const {
+    query: { id },
+    pathname,
+  } = router;
 
   const checkUserDisplayName = () => {
     if (currentUser) {
@@ -78,6 +88,17 @@ const AuthPopover = () => {
     }
   };
 
+  const handleLogout = async () => {
+    if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
+      router.push("/").then(async () => {
+        await roomsData.child(`${id}/users/${currentUser.uid}`).remove();
+        logoutUser();
+      });
+    } else {
+      logoutUser();
+    }
+  };
+
   return (
     <>
       {currentUser && (
@@ -115,7 +136,7 @@ const AuthPopover = () => {
                 <Text>{currentUser.email}</Text>
               </PopoverHeader>
               <PopoverBody>
-                <Button isFullWidth colorScheme="red" onClick={logoutUser}>
+                <Button isFullWidth colorScheme="red" onClick={handleLogout}>
                   Sign Out
                 </Button>
               </PopoverBody>
