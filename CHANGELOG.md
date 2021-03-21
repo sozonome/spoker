@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/sozonome/spoker/compare/v1.2.2...v1.3.0) (2021-03-21)
+
+
+### Features
+
+* **auth:** handle sign out when still in room ([5d8e042](https://github.com/sozonome/spoker/commit/5d8e04253ec89e62742152acc24dfafbd64bd106))
+* **room:** render emoji with twemoji for consistent emoji ([0512c69](https://github.com/sozonome/spoker/commit/0512c696fa35cc107ca6465ab59d237a3dad06cf))
+
 ### [1.2.2](https://github.com/sozonome/spoker/compare/v1.2.1...v1.2.2) (2021-03-09)
 
 ### [1.2.1](https://github.com/sozonome/spoker/compare/v1.2.0...v1.2.1) (2021-03-08)
