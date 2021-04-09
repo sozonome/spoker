@@ -12,31 +12,31 @@
     "push-release": "git push --follow-tags origin main"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.3.3",
+    "@chakra-ui/react": "^1.5.0",
     "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
-    "@fontsource/inter": "^4.2.1",
-    "@fontsource/jost": "^4.2.1",
-    "firebase": "^8.2.7",
+    "@emotion/styled": "^11.3.0",
+    "@fontsource/inter": "^4.2.2",
+    "@fontsource/jost": "^4.2.2",
+    "firebase": "^8.3.3",
     "formik": "^2.2.6",
-    "framer-motion": "^3.6.1",
-    "nanoid": "^3.1.20",
-    "next": "^10.0.2",
-    "next-pwa": "^3.1.4",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "framer-motion": "^4.1.3",
+    "nanoid": "^3.1.22",
+    "next": "^10.1.3",
+    "next-pwa": "^5.2.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "twemoji": "^13.0.2",
-    "yup": "^0.32.8"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@jahed/firebase-rules": "^1.1.0",
-    "@netlify/plugin-nextjs": "^2.0.1",
-    "@types/node": "^14.14.31",
-    "@types/react": "^17.0.2",
+    "@netlify/plugin-nextjs": "^3.0.3",
+    "@types/node": "^14.14.37",
+    "@types/react": "^17.0.3",
     "@types/twemoji": "^12.1.1",
     "prettier": "^2.2.1",
-    "standard-version": "^9.1.0",
-    "typescript": "^4.1.5"
+    "standard-version": "^9.2.0",
+    "typescript": "^4.2.4"
   }
 }
