@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export enum HideLabelOptions {
   monkey,
   chicken,

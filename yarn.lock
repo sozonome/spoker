@@ -2488,6 +2488,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@jahed/firebase-rules@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@jahed/firebase-rules/-/firebase-rules-1.1.0.tgz#18431f4f2caf1735e34238ccf2155b5975c5e7ff"
+  integrity sha512-wAu+aDzlHuwdrpPKnjUFWuh2n6MV5A7fboCL8lqDtjPeYqFeJWeyjEGohrAXDLtLQH5r8HWx7aSkRIa1SoRCRg==
+
 "@jimp/bmp@^0.16.1":
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/@jimp/bmp/-/bmp-0.16.1.tgz#6e2da655b2ba22e721df0795423f34e92ef13768"
