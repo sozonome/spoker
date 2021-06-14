@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/sozonome/spoker/compare/v1.3.0...v1.4.0) (2021-06-14)
+
+
+### Features
+
+* **analytics:** add analytics ([8603cf7](https://github.com/sozonome/spoker/commit/8603cf73061e4c3250098a292ce271abfed0119c))
+
 ## [1.3.0](https://github.com/sozonome/spoker/compare/v1.2.2...v1.3.0) (2021-03-21)
 
 
