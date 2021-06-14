@@ -19,17 +19,16 @@ const RoomHeader = ({ roomData }: RoomHeaderProps) => {
     query: { id },
   } = router;
 
-  const handleUpdateTask = (field: keyof Task) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    if (roomData) {
-      const updatedTask: Task = {
-        ...roomData.task,
-        [field]: event.target.value,
-      };
-      updateRoomTask(id as string, updatedTask);
-    }
-  };
+  const handleUpdateTask =
+    (field: keyof Task) => (event: ChangeEvent<HTMLInputElement>) => {
+      if (roomData) {
+        const updatedTask: Task = {
+          ...roomData.task,
+          [field]: event.target.value,
+        };
+        updateRoomTask(id as string, updatedTask);
+      }
+    };
 
   return (
     <SpokerWrapperGrid gap={4}>
