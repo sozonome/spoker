@@ -24,13 +24,11 @@ import { roomsData } from "functions/firebase/room";
 import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
 
 const AuthPopover = () => {
-  const { currentUser, isCurrentUserUpdating, updateCurrentUser } = useContext(
-    AuthContext
-  );
+  const { currentUser, isCurrentUserUpdating, updateCurrentUser } =
+    useContext(AuthContext);
   const [displayName, setDisplayName] = useState<string>("");
-  const [isEditingDisplayName, setIsEditingDisplayName] = useState<boolean>(
-    false
-  );
+  const [isEditingDisplayName, setIsEditingDisplayName] =
+    useState<boolean>(false);
   const [displayNameInput, setDisplayNameInput] = useState<string>("");
   const toast = useToast();
   const router = useRouter();
@@ -65,7 +63,7 @@ const AuthPopover = () => {
               position: "top",
               isClosable: true,
             });
-            updateCurrentUser && updateCurrentUser();
+            updateCurrentUser();
           })
           .catch(async (e) => {
             toast({
@@ -78,14 +76,16 @@ const AuthPopover = () => {
           .finally(() => {
             setIsEditingDisplayName(false);
           });
-      } else {
-        checkUserDisplayName();
-        setIsEditingDisplayName(false);
+        return;
       }
-    } else {
-      setDisplayNameInput(displayName);
-      setIsEditingDisplayName(true);
+
+      checkUserDisplayName();
+      setIsEditingDisplayName(false);
+      return;
     }
+
+    setDisplayNameInput(displayName);
+    setIsEditingDisplayName(true);
   };
 
   const handleLogout = async () => {
@@ -94,9 +94,10 @@ const AuthPopover = () => {
         await roomsData.child(`${id}/users/${currentUser.uid}`).remove();
         logoutUser();
       });
-    } else {
-      logoutUser();
+      return;
     }
+
+    logoutUser();
   };
 
   return (

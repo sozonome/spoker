@@ -20,33 +20,29 @@ type LoginProps = {
 };
 
 const Login = ({ handleSwitchToRegister }: LoginProps) => {
-  const {
-    values,
-    dirty,
-    handleChange,
-    handleSubmit,
-  } = useFormik<LoginFormType>({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: (formValues: LoginFormType) => {
-      setIsLoading(true);
-      loginUserWithEmailAndPassword(formValues.email, formValues.password)
-        .then(() => {
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          toast({
-            description: err.message,
-            position: "top",
-            status: "error",
-            isClosable: true,
+  const { values, dirty, handleChange, handleSubmit } =
+    useFormik<LoginFormType>({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      onSubmit: (formValues: LoginFormType) => {
+        setIsLoading(true);
+        loginUserWithEmailAndPassword(formValues.email, formValues.password)
+          .then(() => {
+            setIsLoading(false);
+          })
+          .catch((err) => {
+            toast({
+              description: err.message,
+              position: "top",
+              status: "error",
+              isClosable: true,
+            });
+            setIsLoading(false);
           });
-          setIsLoading(false);
-        });
-    },
-  });
+      },
+    });
   const { email, password } = values;
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);

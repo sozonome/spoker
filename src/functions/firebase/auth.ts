@@ -6,37 +6,29 @@ export const registerUserWithEmailAndPassword = async (
   password: string,
   name: string
 ) => {
-  try {
-    await fbase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((authState) => {
-        authState?.user?.sendEmailVerification();
-      });
+  return await fbase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((authState) => {
+      authState?.user?.sendEmailVerification();
 
-    const user = fbase.auth().currentUser;
+      const user = fbase.auth().currentUser;
 
-    if (user !== null) {
-      user.updateProfile({
-        displayName: name,
-      });
+      if (user !== null) {
+        user.updateProfile({
+          displayName: name,
+        });
 
-      return user;
-    }
-  } catch (error) {
-    throw error;
-  }
+        return user;
+      }
+    });
 };
 
 export const loginUserWithEmailAndPassword = async (
   email: string,
   password: string
 ) => {
-  try {
-    await fbase.auth().signInWithEmailAndPassword(email, password);
-  } catch (error) {
-    throw error;
-  }
+  await fbase.auth().signInWithEmailAndPassword(email, password);
 };
 
 export const updateDisplayName = async (displayName: string) => {
@@ -54,17 +46,14 @@ export const requestVerificationMail = async () => {
 
   if (user) {
     if (!user.emailVerified) {
-      try {
-        await user.sendEmailVerification();
-      } catch (error) {
-        throw error;
-      }
-    } else {
-      throw { message: "Your email is already verified." };
+      await user.sendEmailVerification();
+      return;
     }
-  } else {
-    throw { message: "Invalid Request" };
+
+    throw new Error("Your email is already verified.");
   }
+
+  throw new Error("Invalid Request");
 };
 
 export const handleVerifyEmail = async (actionCode: string) => {
@@ -76,11 +65,7 @@ export const handleVerifyEmail = async (actionCode: string) => {
 };
 
 export const logoutUser = async () => {
-  try {
-    await fbase.auth().signOut();
-  } catch (error) {
-    throw error;
-  }
+  await fbase.auth().signOut();
 };
 
 export const getCurrentUser = () => {
@@ -94,12 +79,17 @@ export const getCurrentUser = () => {
 };
 
 export const requestPasswordReset = async (email: string) => {
-  try {
-    await fbase.auth().sendPasswordResetEmail(email);
-  } catch (error) {
-    throw error;
-  }
+  await fbase.auth().sendPasswordResetEmail(email);
 };
+
+const showErrorToast = (toast: any, err: any) =>
+  toast({
+    description: err.message,
+    status: "error",
+    position: "top",
+    isClosable: true,
+    duration: 15000,
+  });
 
 export const loginWithGoogle = async (toast: any) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -108,15 +98,7 @@ export const loginWithGoogle = async (toast: any) => {
     .auth()
     .signInWithPopup(googleProvider)
     .then((res) => res)
-    .catch((err) => {
-      toast({
-        description: err.message,
-        status: "error",
-        position: "top",
-        isClosable: true,
-        duration: 15000,
-      });
-    });
+    .catch((err) => showErrorToast(toast, err));
 };
 
 export const loginWithGithub = async (toast: any) => {
@@ -125,13 +107,5 @@ export const loginWithGithub = async (toast: any) => {
   fbase
     .auth()
     .signInWithPopup(githubProvider)
-    .catch((err) => {
-      toast({
-        description: err.message,
-        status: "error",
-        position: "top",
-        isClosable: true,
-        duration: 15000,
-      });
-    });
+    .catch((err) => showErrorToast(toast, err));
 };

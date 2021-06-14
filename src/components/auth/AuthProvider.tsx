@@ -7,13 +7,13 @@ import { fbase } from "functions/firebase";
 type AuthContextType = {
   currentUser?: firebase.default.User;
   isCurrentUserUpdating?: boolean;
-  updateCurrentUser?: () => void;
+  updateCurrentUser: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({
   currentUser: undefined,
   isCurrentUserUpdating: undefined,
-  updateCurrentUser: undefined,
+  updateCurrentUser: () => {},
 });
 
 type AuthProviderProps = {
@@ -23,9 +23,8 @@ type AuthProviderProps = {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUserState, setCurrentUserState] = useState<any>(null);
   const [busy, setBusy] = useState(true);
-  const [isCurrentUserUpdating, setIsCurrentUserUpdating] = useState<boolean>(
-    false
-  );
+  const [isCurrentUserUpdating, setIsCurrentUserUpdating] =
+    useState<boolean>(false);
 
   const updateCurrentUser = () => {
     setIsCurrentUserUpdating(true);

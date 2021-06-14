@@ -13,10 +13,6 @@ const SignInProviders = () => {
     loginWithGoogle(toast);
   };
 
-  // const handleLoginWithGithub = () => {
-  //   loginWithGithub(toast);
-  // };
-
   useEffect(() => {
     return () => {
       toast.closeAll();
@@ -34,9 +30,6 @@ const SignInProviders = () => {
       >
         Google
       </Button>
-      {/* <Button leftIcon={<FaGithub />} onClick={handleLoginWithGithub}>
-        Github
-      </Button> */}
     </Grid>
   );
 };

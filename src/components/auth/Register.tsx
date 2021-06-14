@@ -21,52 +21,48 @@ type RegisterProps = {
 };
 
 const Register = ({ handleSwitchToLogin }: RegisterProps) => {
-  const {
-    values,
-    dirty,
-    handleChange,
-    handleSubmit,
-  } = useFormik<RegisterFormType>({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-    onSubmit: async (formValues: RegisterFormType) => {
-      setIsLoading(true);
-      await registerUserWithEmailAndPassword(
-        formValues.email,
-        formValues.password,
-        formValues.name
-      )
-        .then((user) => {
-          setIsLoading(false);
-          toast({
-            title: "Registration Successful",
-            position: "top",
-            status: "success",
-            isClosable: true,
+  const { values, dirty, handleChange, handleSubmit } =
+    useFormik<RegisterFormType>({
+      initialValues: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      onSubmit: async (formValues: RegisterFormType) => {
+        setIsLoading(true);
+        await registerUserWithEmailAndPassword(
+          formValues.email,
+          formValues.password,
+          formValues.name
+        )
+          .then((user) => {
+            setIsLoading(false);
+            toast({
+              title: "Registration Successful",
+              position: "top",
+              status: "success",
+              isClosable: true,
+            });
+            toast({
+              title: `A verification email is sent to ${user?.email}`,
+              description:
+                "Before you can use any features, please verify your email first.",
+              position: "top",
+              status: "warning",
+              isClosable: true,
+            });
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            toast({
+              description: err.message,
+              position: "top",
+              status: "error",
+              isClosable: true,
+            });
           });
-          toast({
-            title: `A verification email is sent to ${user?.email}`,
-            description:
-              "Before you can use any features, please verify your email first.",
-            position: "top",
-            status: "warning",
-            isClosable: true,
-          });
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          toast({
-            description: err.message,
-            position: "top",
-            status: "error",
-            isClosable: true,
-          });
-        });
-    },
-  });
+      },
+    });
   const { name, email, password } = values;
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
