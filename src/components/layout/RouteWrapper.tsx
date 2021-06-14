@@ -21,7 +21,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
 
   const toast = useToast();
 
-  const isPublicRoute = PUBLIC_ROUTES.indexOf(pathname) >= 0;
+  const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
 
   const routeCheck = () => {
     if (currentUser) {
@@ -31,7 +31,6 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
         currentUser.reload().then(() => {
           if (!currentUser.emailVerified) {
             router.push("/").then(() => {
-              setBusy(false);
               toast({
                 title: "Your email is not verified yet.",
                 description: `Check your email (${currentUser.email}) for verification link.`,
@@ -40,16 +39,12 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
                 isClosable: true,
               });
             });
-          } else {
-            setBusy(false);
           }
         });
-      } else {
-        setBusy(false);
       }
-    } else {
-      setBusy(false);
     }
+
+    setBusy(false);
   };
 
   useEffect(() => {
