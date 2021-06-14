@@ -6,7 +6,7 @@ export const registerUserWithEmailAndPassword = async (
   password: string,
   name: string
 ) => {
-  return await fbase
+  const userData = await fbase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((authState) => {
@@ -22,6 +22,8 @@ export const registerUserWithEmailAndPassword = async (
         return user;
       }
     });
+
+  return userData;
 };
 
 export const loginUserWithEmailAndPassword = async (
@@ -57,11 +59,7 @@ export const requestVerificationMail = async () => {
 };
 
 export const handleVerifyEmail = async (actionCode: string) => {
-  try {
-    await fbase.auth().applyActionCode(actionCode);
-  } catch (error) {
-    throw error;
-  }
+  await fbase.auth().applyActionCode(actionCode);
 };
 
 export const logoutUser = async () => {
