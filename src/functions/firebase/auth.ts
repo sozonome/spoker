@@ -6,24 +6,19 @@ export const registerUserWithEmailAndPassword = async (
   password: string,
   name: string
 ) => {
-  const userData = await fbase
+  const authState = await fbase
     .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((authState) => {
-      authState?.user?.sendEmailVerification();
+    .createUserWithEmailAndPassword(email, password);
+  authState?.user?.sendEmailVerification();
 
-      const user = fbase.auth().currentUser;
-
-      if (user !== null) {
-        user.updateProfile({
-          displayName: name,
-        });
-
-        return user;
-      }
+  const user = fbase.auth().currentUser;
+  if (user !== null) {
+    user.updateProfile({
+      displayName: name,
     });
 
-  return userData;
+    return user;
+  }
 };
 
 export const loginUserWithEmailAndPassword = async (
