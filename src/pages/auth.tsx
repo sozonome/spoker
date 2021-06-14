@@ -13,7 +13,7 @@ import FullScreenLoading from "components/layout/FullScreenLoading";
 import { AuthContext } from "components/auth/AuthProvider";
 import { handleVerifyEmail } from "functions/firebase";
 
-const AuthPage = () => {
+const Auth = () => {
   const router = useRouter();
   const { mode, oobCode } = router.query;
 
@@ -70,4 +70,4 @@ const AuthPage = () => {
   return <FullScreenLoading height="75vh" />;
 };
 
-export default AuthPage;
+export default Auth;
