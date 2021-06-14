@@ -13,7 +13,7 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
   currentUser: undefined,
   isCurrentUserUpdating: undefined,
-  updateCurrentUser: () => {},
+  updateCurrentUser: () => 0,
 });
 
 type AuthProviderProps = {
