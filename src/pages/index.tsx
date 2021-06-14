@@ -16,7 +16,6 @@ import { requestVerificationMail } from "functions/firebase/auth";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
-  const [name, setName] = useState<string>();
   const [busy, setBusy] = useState<boolean>(true);
   const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
   const toast = useToast();
@@ -58,7 +57,6 @@ const Home = () => {
     setBusy(true);
     if (currentUser) {
       currentUser.reload().then(() => {
-        setName(currentUser?.displayName ?? "");
         setIsEmailVerified(currentUser.emailVerified);
         setBusy(false);
       });
