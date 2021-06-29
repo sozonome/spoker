@@ -16,7 +16,7 @@ const Header = () => {
       <Link href="/" passHref>
         <ChakraLink _hover={undefined}>
           <Flex alignItems="center" gridGap={4}>
-            <Image src="/chip.svg" width={12} />
+            <Image src="/chip.svg" alt="poker icon" width={12} />
             <Box>
               <Heading as="h1">spoker</Heading>
               <Text>Online Scrum Poker</Text>

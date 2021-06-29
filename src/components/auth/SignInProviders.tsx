@@ -17,6 +17,7 @@ const SignInProviders = () => {
     return () => {
       toast.closeAll();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -81,7 +81,7 @@ const Home = () => {
             </AlertTitle>
 
             <AlertDescription>
-              Haven't received any verification email?{" "}
+              {"Haven't received any verification email?"}{" "}
               <Link fontWeight="semibold" onClick={requestEmailVerification}>
                 Request Verification Link
               </Link>
