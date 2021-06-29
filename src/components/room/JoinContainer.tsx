@@ -58,6 +58,7 @@ const JoinContainer = () => {
     if (id) {
       getRoomData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (busy) {
@@ -88,7 +89,7 @@ const JoinContainer = () => {
         </Grid>
 
         <Button isLoading={isLoading} colorScheme="blue" onClick={handleJoin}>
-          Let's Go!
+          {"Let's Go!"}
         </Button>
       </SpokerWrapperGrid>
     </Container>

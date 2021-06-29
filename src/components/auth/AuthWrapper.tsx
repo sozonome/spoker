@@ -36,6 +36,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     } else {
       onClose();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, pathname]);
 
   useEffect(() => {

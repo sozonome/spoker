@@ -50,6 +50,7 @@ const AuthPopover = () => {
 
   useEffect(() => {
     checkUserDisplayName();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, isCurrentUserUpdating]);
 
   const handleEditClick = () => {

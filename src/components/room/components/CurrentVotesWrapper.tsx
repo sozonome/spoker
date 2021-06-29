@@ -143,7 +143,7 @@ const CurrentVotesWrapper = ({
             value={roomData?.config.hideLabel ?? "monkey"}
           >
             {hideLabelOptions.map((hideLabelOption) => (
-              <Text as="option" value={hideLabelOption}>
+              <Text as="option" value={hideLabelOption} key={hideLabelOption}>
                 {hideLabelOption}
               </Text>
             ))}

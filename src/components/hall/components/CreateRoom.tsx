@@ -77,7 +77,7 @@ const CreateRoom = () => {
         colorScheme="green"
         onClick={() => handleSubmit()}
       >
-        Let's Have Some Fun!
+        {"Let's Have Some Fun!"}
       </Button>
     </SpokerWrapperGrid>
   );

@@ -74,6 +74,7 @@ const RoomContainer = () => {
   useEffect(() => {
     toast.closeAll();
     getRoomData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -106,6 +107,7 @@ const RoomContainer = () => {
         });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomData, inRoom]);
 
   useEffect(() => {

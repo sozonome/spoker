@@ -49,6 +49,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
 
   useEffect(() => {
     routeCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentUser]);
 
   return <>{busy ? <FullScreenLoading /> : children}</>;
