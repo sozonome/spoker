@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@jahed/firebase-rules": "^1.1.0",
-    "@netlify/plugin-nextjs": "^3.7.1",
     "@types/node": "^15.14.2",
     "@types/react": "^17.0.14",
     "@types/twemoji": "^12.1.2",
