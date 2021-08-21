@@ -22,6 +22,7 @@ import { AuthContext } from "./AuthProvider";
 import { logoutUser, updateDisplayName } from "functions/firebase";
 import { roomsData } from "functions/firebase/room";
 import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 const AuthPopover = () => {
   const { currentUser, isCurrentUserUpdating, updateCurrentUser } =
@@ -32,6 +33,10 @@ const AuthPopover = () => {
   const [displayNameInput, setDisplayNameInput] = useState<string>("");
   const toast = useToast();
   const router = useRouter();
+  const buttonSize = useBreakpointValue({
+    base: "md",
+    sm: "lg",
+  });
 
   const {
     query: { id },
@@ -104,13 +109,17 @@ const AuthPopover = () => {
   return (
     <>
       {currentUser && (
-        <Box marginLeft="auto">
+        <Box>
           <Popover
             placement="bottom-end"
             onClose={() => setIsEditingDisplayName(false)}
           >
             <PopoverTrigger>
-              <IconButton aria-label="account" icon={<IoMdPerson />} />
+              <IconButton
+                size={buttonSize}
+                aria-label="account"
+                icon={<IoMdPerson />}
+              />
             </PopoverTrigger>
 
             <PopoverContent>

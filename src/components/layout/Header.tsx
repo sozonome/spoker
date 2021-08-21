@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 
 import AuthPopover from "components/auth/AuthPopover";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   return (
@@ -25,7 +26,10 @@ const Header = () => {
         </ChakraLink>
       </Link>
 
-      <AuthPopover />
+      <Flex alignItems="center" marginLeft="auto" gridGap={[2, 4]}>
+        <AuthPopover />
+        <ThemeToggle />
+      </Flex>
     </Flex>
   );
 };
