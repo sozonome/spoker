@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write src",
-    "pre-commit": "lint-staged",
+    "up-latest": "yarn upgrade-interactive --latest",
     "release": "standard-version",
     "push-release": "git push --follow-tags origin main",
     "prepare": "husky install"
@@ -20,12 +20,12 @@
     "@emotion/styled": "^11.3.0",
     "@fontsource/inter": "^4.5.0",
     "@fontsource/jost": "^4.5.0",
-    "firebase": "^8.9.1",
+    "firebase": "^8.10.0",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "nanoid": "^3.1.25",
     "next": "^11.1.0",
-    "next-pwa": "^5.2.24",
+    "next-pwa": "^5.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-ga": "^3.3.0",
@@ -34,10 +34,12 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
     "@jahed/firebase-rules": "^1.1.0",
-    "@types/node": "^15.14.7",
-    "@types/react": "^17.0.18",
+    "@types/node": "^16.7.1",
+    "@types/react": "^17.0.19",
     "@types/twemoji": "^12.1.2",
+    "commitlint": "^13.1.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.0",
     "husky": "^7.0.0",
@@ -50,7 +52,8 @@
     "url": "https://github.com/sozonome/spoker"
   },
   "lint-staged": {
-    "src": [
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "eslint --max-warnings=0",
       "prettier --write"
     ]
   }
