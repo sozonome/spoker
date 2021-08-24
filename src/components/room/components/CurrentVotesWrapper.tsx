@@ -95,14 +95,12 @@ const CurrentVotesWrapper = ({
     switch (point.toString()) {
       case "0":
       case "0.5":
-        return "gray.600";
       case "1":
       case "2":
-        return "gray.700";
+        return undefined;
       case "3":
-        return "orange.500";
+        return "orange";
       case "5":
-        return "red.600";
       case "8":
       case "13":
       case "20":
@@ -110,9 +108,9 @@ const CurrentVotesWrapper = ({
       case "60":
       case "80":
       case "100":
-        return "red.500";
+        return "red";
       default:
-        return "gray.900";
+        return undefined;
     }
   };
 
@@ -152,7 +150,9 @@ const CurrentVotesWrapper = ({
       )}
 
       <Grid gap={2}>
-        {showVote && <Text>average: {averagePoint}</Text>}
+        {showVote && !isNaN(averagePoint) && (
+          <Text>average: {averagePoint}</Text>
+        )}
         {users
           .filter((user) => user.role === "participant")
           .sort((a, b) => (showVote ? (b.point ?? 0) - (a.point ?? 0) : 0))

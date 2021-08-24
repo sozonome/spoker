@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/react";
 import Twemoji from "components/ui/Twemoji";
 import { hideLabel, HideLabelOptionsType } from "constants/hideLabel";
 
@@ -15,7 +16,16 @@ const PointWrapper = ({
   point,
 }: PointWrapperProps) => {
   if (showVote || isCurrentUser) {
-    return <>{point}</>;
+    return (
+      <Text
+        as="span"
+        minWidth="1.875rem"
+        display="inline-block"
+        textAlign="center"
+      >
+        {point}
+      </Text>
+    );
   } else if (point) {
     return <Twemoji emoji={hideLabel[roomSelectedHideLabel].selected} />;
   } else {
