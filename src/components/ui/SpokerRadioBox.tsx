@@ -1,5 +1,4 @@
-import { Box } from "@chakra-ui/layout";
-import { RadioProps, useRadio } from "@chakra-ui/radio";
+import { Box, RadioProps, useRadio } from "@chakra-ui/react";
 
 const SpokerRadioBox = (props: RadioProps) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);

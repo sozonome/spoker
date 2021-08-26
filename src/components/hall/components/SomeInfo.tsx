@@ -5,7 +5,7 @@ import {
   ListItem,
   Text,
   UnorderedList,
-} from "@chakra-ui/layout";
+} from "@chakra-ui/react";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 
@@ -39,16 +39,6 @@ const SomeInfo = () => {
           </Link>
         </Text>
       </Grid>
-
-      {/* <Box>
-          <Heading size="md">Which stacks are used?</Heading>
-          <UnorderedList>
-            <ListItem>Next.js</ListItem>
-            <ListItem>Chakra-UI</ListItem>
-            <ListItem>Firebase</ListItem>
-          </UnorderedList>
-          <Text>Design inspired by Contra-UI Kit (Vijay Verma)</Text>
-        </Box> */}
     </SpokerWrapperGrid>
   );
 };

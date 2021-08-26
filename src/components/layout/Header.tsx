@@ -1,11 +1,11 @@
-import { Image } from "@chakra-ui/image";
 import {
   Box,
   Flex,
   Heading,
+  Image,
   Link as ChakraLink,
   Text,
-} from "@chakra-ui/layout";
+} from "@chakra-ui/react";
 import Link from "next/link";
 
 import AuthPopover from "components/auth/AuthPopover";

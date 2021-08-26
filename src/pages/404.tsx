@@ -1,7 +1,12 @@
-import { Button } from "@chakra-ui/button";
-import { useColorMode } from "@chakra-ui/color-mode";
-import { Image } from "@chakra-ui/image";
-import { Box, Heading, Link as ChakraLink, Text } from "@chakra-ui/layout";
+import {
+  Box,
+  Button,
+  Heading,
+  Image,
+  Link as ChakraLink,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import Link from "next/link";
 
 const Page404 = () => {
@@ -27,7 +32,7 @@ const Page404 = () => {
             <Button
               backgroundColor={colorMode === "light" ? "gray.300" : "teal.500"}
             >
-              {"Let's Head Back"}
+              Let&apos;s Head Back
             </Button>
           </Link>
         </Box>

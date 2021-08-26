@@ -1,4 +1,4 @@
-import { Heading, Link, List, ListItem, Text } from "@chakra-ui/layout";
+import { Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 

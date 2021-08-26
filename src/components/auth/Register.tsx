@@ -1,7 +1,12 @@
-import { Button } from "@chakra-ui/button";
-import { Grid, Heading } from "@chakra-ui/layout";
-import { ModalBody, ModalFooter, ModalHeader } from "@chakra-ui/modal";
-import { useToast } from "@chakra-ui/toast";
+import {
+  Button,
+  Grid,
+  Heading,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  useToast,
+} from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useState } from "react";
 

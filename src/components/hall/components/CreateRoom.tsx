@@ -1,6 +1,4 @@
-import { Button } from "@chakra-ui/button";
-import { Grid, Heading } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/toast";
+import { Button, Grid, Heading, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";

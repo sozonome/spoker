@@ -1,8 +1,15 @@
-import { Checkbox } from "@chakra-ui/checkbox";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { Divider, Grid, Heading, Spacer, Text } from "@chakra-ui/layout";
-import { Select } from "@chakra-ui/select";
-import { useToast } from "@chakra-ui/toast";
+import {
+  Checkbox,
+  Divider,
+  FormControl,
+  FormLabel,
+  Grid,
+  Heading,
+  Select,
+  Spacer,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent, Fragment } from "react";
 

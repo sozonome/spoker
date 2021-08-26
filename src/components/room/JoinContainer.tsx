@@ -1,7 +1,12 @@
-import { Button } from "@chakra-ui/button";
-import { Container, Grid, Heading, HStack } from "@chakra-ui/layout";
-import { useRadioGroup } from "@chakra-ui/radio";
-import { useToast } from "@chakra-ui/toast";
+import {
+  Button,
+  Container,
+  Grid,
+  Heading,
+  HStack,
+  useRadioGroup,
+  useToast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -12,8 +17,6 @@ import SpokerLoading from "components/ui/SpokerLoading";
 import { getRoom, joinRoom } from "functions/firebase/room";
 
 import { roleOptions, RoleType } from "types/room";
-
-const DUMMY_ROOM_NAME = "Hello World";
 
 const JoinContainer = () => {
   const router = useRouter();
@@ -89,7 +92,7 @@ const JoinContainer = () => {
         </Grid>
 
         <Button isLoading={isLoading} colorScheme="blue" onClick={handleJoin}>
-          {"Let's Go!"}
+          Let&apos;s Go!
         </Button>
       </SpokerWrapperGrid>
     </Container>

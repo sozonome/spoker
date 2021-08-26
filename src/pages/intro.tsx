@@ -1,5 +1,4 @@
-import { Button } from "@chakra-ui/button";
-import { Container, Heading, Text } from "@chakra-ui/layout";
+import { Button, Container, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import SomeInfo from "components/hall/components/SomeInfo";

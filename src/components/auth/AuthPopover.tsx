@@ -1,6 +1,9 @@
-import { Button, IconButton } from "@chakra-ui/button";
-import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
 import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  IconButton,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -8,8 +11,10 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-} from "@chakra-ui/popover";
-import { useToast } from "@chakra-ui/toast";
+  Text,
+  useBreakpointValue,
+  useToast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
@@ -22,7 +27,6 @@ import { AuthContext } from "./AuthProvider";
 import { logoutUser, updateDisplayName } from "functions/firebase";
 import { roomsData } from "functions/firebase/room";
 import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
-import { useBreakpointValue } from "@chakra-ui/react";
 
 const AuthPopover = () => {
   const { currentUser, isCurrentUserUpdating, updateCurrentUser } =

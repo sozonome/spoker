@@ -1,6 +1,12 @@
-import { Button } from "@chakra-ui/button";
-import { Box, Flex, Heading, ListItem, OrderedList } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/toast";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  ListItem,
+  OrderedList,
+  useToast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { BiLink, BiShareAlt } from "react-icons/bi";
 

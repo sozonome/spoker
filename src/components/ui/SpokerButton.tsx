@@ -1,5 +1,4 @@
-import { Button, ButtonProps } from "@chakra-ui/button";
-import { useColorModeValue } from "@chakra-ui/color-mode";
+import { Button, ButtonProps, useColorModeValue } from "@chakra-ui/react";
 
 type SpokerButtonProps = ButtonProps;
 

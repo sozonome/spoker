@@ -1,11 +1,11 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { useDisclosure } from "@chakra-ui/hooks";
 import {
   Modal,
   ModalContent,
   ModalContentProps,
   ModalOverlay,
-} from "@chakra-ui/modal";
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState } from "react";
 

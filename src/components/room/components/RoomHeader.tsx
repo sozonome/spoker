@@ -1,4 +1,4 @@
-import { Flex, Grid, Heading } from "@chakra-ui/layout";
+import { Flex, Grid, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
 

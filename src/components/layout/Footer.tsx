@@ -1,4 +1,4 @@
-import { Flex, Link, Text } from "@chakra-ui/layout";
+import { Flex, Link, Text } from "@chakra-ui/react";
 import { RiGithubFill } from "react-icons/ri";
 
 import packageInfo from "../../../package.json";
@@ -14,7 +14,10 @@ const Footer = () => {
       </Text>
 
       <Flex marginLeft="auto" alignItems="center" gridGap={2}>
-        <Link href={`${packageInfo.repository.url}/blob/main/CHANGELOG.md`} isExternal>
+        <Link
+          href={`${packageInfo.repository.url}/blob/main/CHANGELOG.md`}
+          isExternal
+        >
           v{packageInfo.version}
         </Link>
         <Link href={packageInfo.repository.url} isExternal>

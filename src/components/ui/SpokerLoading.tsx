@@ -1,5 +1,4 @@
-import { Box, Text } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
+import { Box, Spinner, Text } from "@chakra-ui/react";
 
 const SpokerLoading = () => {
   return (

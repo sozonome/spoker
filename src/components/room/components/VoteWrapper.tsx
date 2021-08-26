@@ -1,5 +1,4 @@
-import { Flex, Heading, Spacer } from "@chakra-ui/layout";
-import { useRadioGroup } from "@chakra-ui/radio";
+import { Flex, Heading, Spacer, useRadioGroup } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import SpokerRadioBox from "components/ui/SpokerRadioBox";

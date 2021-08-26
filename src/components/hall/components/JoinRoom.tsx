@@ -1,5 +1,4 @@
-import { Button } from "@chakra-ui/button";
-import { Grid, Heading } from "@chakra-ui/layout";
+import { Button, Grid, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import { ChangeEventHandler, useState } from "react";
 

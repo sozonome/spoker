@@ -1,11 +1,13 @@
-import { useToast } from "@chakra-ui/toast";
-import { Box, Grid, Link } from "@chakra-ui/layout";
 import {
   Alert,
   AlertDescription,
   AlertIcon,
   AlertTitle,
-} from "@chakra-ui/alert";
+  Box,
+  Grid,
+  Link,
+  useToast,
+} from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
 import HallWrapper from "components/hall";
@@ -81,7 +83,7 @@ const Home = () => {
             </AlertTitle>
 
             <AlertDescription>
-              {"Haven't received any verification email?"}{" "}
+              Haven&apos;t received any verification email?{" "}
               <Link fontWeight="semibold" onClick={requestEmailVerification}>
                 Request Verification Link
               </Link>
