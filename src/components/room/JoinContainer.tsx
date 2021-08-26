@@ -10,12 +10,10 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import SpokerRadioBox from "components/ui/SpokerRadioBox";
 import SpokerLoading from "components/ui/SpokerLoading";
-
+import SpokerRadioBox from "components/ui/SpokerRadioBox";
+import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { getRoom, joinRoom } from "functions/firebase/room";
-
 import { roleOptions, RoleType } from "types/room";
 
 const JoinContainer = () => {

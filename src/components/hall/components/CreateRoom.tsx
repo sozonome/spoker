@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-
 import { createRoom } from "functions/firebase/room";
 
 import { CreateRoomFormSchema, CreateRoomFormType } from "../types";

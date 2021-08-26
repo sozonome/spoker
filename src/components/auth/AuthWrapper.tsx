@@ -9,9 +9,9 @@ import {
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState } from "react";
 
-import { AuthContext } from "./AuthProvider";
 import { PUBLIC_ROUTES } from "components/layout/RouteWrapper";
 
+import { AuthContext } from "./AuthProvider";
 import Login from "./Login";
 import Register from "./Register";
 

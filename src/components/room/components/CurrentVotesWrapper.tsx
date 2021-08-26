@@ -14,13 +14,12 @@ import { useRouter } from "next/router";
 import { ChangeEvent, Fragment } from "react";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import PointWrapper from "./PointWrapper";
-
-import { updateConfig } from "functions/firebase/room";
 import { hideLabelOptions, HideLabelOptionsType } from "constants/hideLabel";
-
+import { updateConfig } from "functions/firebase/room";
 import { RoomConfig, RoomInstance } from "types/RawDB";
 import { RoomUser } from "types/room";
+
+import PointWrapper from "./PointWrapper";
 
 type CurrentVotesWrapperProps = {
   isObservant: boolean;

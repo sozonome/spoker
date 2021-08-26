@@ -21,12 +21,12 @@ import { BsPencil } from "react-icons/bs";
 import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
 
+import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
 import SpokerInput from "components/ui/SpokerInput";
-
-import { AuthContext } from "./AuthProvider";
 import { logoutUser, updateDisplayName } from "functions/firebase";
 import { roomsData } from "functions/firebase/room";
-import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
+
+import { AuthContext } from "./AuthProvider";
 
 const AuthPopover = () => {
   const { currentUser, isCurrentUserUpdating, updateCurrentUser } =

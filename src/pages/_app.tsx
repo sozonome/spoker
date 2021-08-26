@@ -1,16 +1,14 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
-import { useRouter } from "next/router";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import "@fontsource/jost/latin.css";
 import "@fontsource/inter/latin.css";
 
-import Layout from "components/layout";
 import { AuthProvider } from "components/auth/AuthProvider";
-
+import Layout from "components/layout";
 import { initGA, logPageView } from "lib/analytics";
-
 import customTheme from "styles/customTheme";
 import "styles/globals.css";
 

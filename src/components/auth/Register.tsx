@@ -11,9 +11,9 @@ import { useFormik } from "formik";
 import { useState } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
-import SignInProviders from "./SignInProviders";
-
 import { registerUserWithEmailAndPassword } from "functions/firebase";
+
+import SignInProviders from "./SignInProviders";
 
 type RegisterFormType = {
   name: string;

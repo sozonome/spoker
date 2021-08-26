@@ -1,11 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-import Header from "./Header";
+import AuthWrapper from "components/auth/AuthWrapper";
+
 import Footer from "./Footer";
+import Header from "./Header";
 import Meta from "./Meta";
 import RouteWrapper from "./RouteWrapper";
-import AuthWrapper from "components/auth/AuthWrapper";
 
 type LayoutProps = {
   children: ReactNode;

@@ -3,17 +3,16 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
+import { AuthContext } from "components/auth/AuthProvider";
 import SpokerLoading from "components/ui/SpokerLoading";
-import RoomHeader from "./components/RoomHeader";
-import VoteWrapper from "./components/VoteWrapper";
+import { roomsData } from "functions/firebase/room";
+import { RoomInstance } from "types/RawDB";
+import { RoomUser } from "types/room";
+
 import ControllerWrapper from "./components/ControllerWrapper";
 import CurrentVotesWrapper from "./components/CurrentVotesWrapper";
-
-import { AuthContext } from "components/auth/AuthProvider";
-import { roomsData } from "functions/firebase/room";
-
-import { RoomUser } from "types/room";
-import { RoomInstance } from "types/RawDB";
+import RoomHeader from "./components/RoomHeader";
+import VoteWrapper from "./components/VoteWrapper";
 
 const RoomContainer = () => {
   const { currentUser } = useContext(AuthContext);

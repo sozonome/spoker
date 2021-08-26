@@ -1,4 +1,5 @@
 import { HideLabelOptionsType } from "constants/hideLabel";
+
 import { RoleType } from "./room";
 
 export interface DBSample {

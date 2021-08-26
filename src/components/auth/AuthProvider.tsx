@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
 import FullScreenLoading from "components/layout/FullScreenLoading";
-
 import { fbase } from "functions/firebase";
 
 type AuthContextType = {

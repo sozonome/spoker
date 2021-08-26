@@ -1,11 +1,11 @@
 import { Grid, Heading, Skeleton } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
+import { AuthContext } from "components/auth/AuthProvider";
+
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
 import SomeInfo from "./components/SomeInfo";
-
-import { AuthContext } from "components/auth/AuthProvider";
 
 const HallWrapper = () => {
   const { currentUser, isCurrentUserUpdating } = useContext(AuthContext);

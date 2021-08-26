@@ -8,9 +8,8 @@ import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-import FullScreenLoading from "components/layout/FullScreenLoading";
-
 import { AuthContext } from "components/auth/AuthProvider";
+import FullScreenLoading from "components/layout/FullScreenLoading";
 import { handleVerifyEmail } from "functions/firebase";
 
 const Auth = () => {

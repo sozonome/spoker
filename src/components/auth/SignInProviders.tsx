@@ -1,6 +1,6 @@
 import { Button, Grid, Text, useToast } from "@chakra-ui/react";
-import { FcGoogle } from "react-icons/fc";
 import { useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 import { loginWithGoogle } from "functions/firebase";
 

@@ -11,9 +11,7 @@ import { useRouter } from "next/router";
 import { BiLink, BiShareAlt } from "react-icons/bi";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-
 import { clearPoints } from "functions/firebase/room";
-
 import { RoomUser } from "types/room";
 
 type ControllerWrapperProps = {

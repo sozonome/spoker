@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+
 import { fbase } from "./config";
 
 export const registerUserWithEmailAndPassword = async (

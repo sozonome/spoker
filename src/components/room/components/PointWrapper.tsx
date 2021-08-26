@@ -1,4 +1,5 @@
 import { Text } from "@chakra-ui/react";
+
 import Twemoji from "components/ui/Twemoji";
 import { hideLabel, HideLabelOptionsType } from "constants/hideLabel";
 

@@ -1,5 +1,6 @@
-import { ALLOWED_CHAR_CHECK } from "constants/allowedValues";
 import * as yup from "yup";
+
+import { ALLOWED_CHAR_CHECK } from "constants/allowedValues";
 
 export type CreateRoomFormType = {
   name: string;
