@@ -16,7 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.6",
+    "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@fontsource/inter": "^4.5.0",
@@ -37,12 +37,12 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
     "@jahed/firebase-rules": "^1.1.0",
-    "@types/node": "^16.7.4",
+    "@types/node": "^16.7.10",
     "@types/react": "^17.0.19",
     "@types/twemoji": "^12.1.2",
     "commitlint": "^13.1.0",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^11.1.0",
+    "eslint-config-next": "^11.1.2",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
