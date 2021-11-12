@@ -41,7 +41,7 @@
     "@types/react": "^17.0.34",
     "@types/twemoji": "^12.1.2",
     "commitlint": "^14.1.0",
-    "eslint": "^8.2.0",
+    "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.3",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
