@@ -35,16 +35,16 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^14.1.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@jahed/firebase-rules": "^1.1.0",
     "@types/node": "^16.11.14",
-    "@types/react": "^17.0.37",
+    "@types/react": "^17.0.38",
     "@types/twemoji": "^12.1.2",
-    "commitlint": "^14.1.0",
+    "commitlint": "^15.0.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.7",
     "husky": "^7.0.4",
-    "lint-staged": "^11.2.6",
+    "lint-staged": "^12.1.4",
     "prettier": "^2.5.1",
     "standard-version": "^9.3.2",
     "typescript": "^4.5.4"
