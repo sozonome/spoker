@@ -1,5 +1,6 @@
-// eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Html, Head, Main, NextScript } from "next/document";
+
+import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "constants/umami";
 
 const APP_NAME = "spoker";
 const APP_DESCRIPTION = "Scrum Poker";
@@ -34,6 +35,16 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/app-icon.png" /> */}
           <link rel="manifest" href="/manifest.json" />
+
+          {/* umami self-hosted analytics */}
+
+          <script
+            async
+            defer
+            data-website-id={UMAMI_WEBSITE_ID}
+            src={UMAMI_SRC}
+            data-domains="spoker.sznm.dev"
+          />
         </Head>
         <body>
           <Main />
