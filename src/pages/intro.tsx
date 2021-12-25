@@ -3,9 +3,15 @@ import { useRouter } from "next/router";
 
 import SomeInfo from "components/hall/components/SomeInfo";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
+import { trackEvent } from "utils/trackEvent";
 
 const Intro = () => {
   const router = useRouter();
+
+  const handleClickStart = () => {
+    trackEvent("Open app from Intro page", "navigate");
+    router.push("/");
+  };
 
   return (
     <Container paddingX={0} display="grid" gridGap={8}>
@@ -16,7 +22,7 @@ const Intro = () => {
           Welcome to my take on scrum poker web app. Just click start below.
         </Text>
 
-        <Button colorScheme="pink" onClick={() => router.push("/")}>
+        <Button colorScheme="pink" onClick={handleClickStart}>
           Start
         </Button>
       </SpokerWrapperGrid>

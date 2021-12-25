@@ -29,7 +29,6 @@
     "next-pwa": "^5.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-ga": "^3.3.0",
     "react-icons": "^4.3.1",
     "twemoji": "^13.1.0",
     "yup": "^0.32.11"
@@ -40,6 +39,7 @@
     "@types/node": "^16.11.14",
     "@types/react": "^17.0.38",
     "@types/twemoji": "^12.1.2",
+    "@types/umami": "^0.1.0",
     "commitlint": "^15.0.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.7",

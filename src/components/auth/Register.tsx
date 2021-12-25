@@ -12,6 +12,7 @@ import { useState } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
 import { registerUserWithEmailAndPassword } from "functions/firebase";
+import { trackEvent } from "utils/trackEvent";
 
 import SignInProviders from "./SignInProviders";
 
@@ -42,6 +43,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
         )
           .then((user) => {
             setIsLoading(false);
+            trackEvent("New User Register", "registration");
             toast({
               title: "Registration Successful",
               position: "top",
