@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/sozonome/spoker/compare/v1.5.1...v1.5.2) (2021-12-25)
+
+
+### Improvements
+
+* :recycle: revise chakra-ui imports ([95bf28e](https://github.com/sozonome/spoker/commit/95bf28e326bd9b2d228b995c481db23dc954e5a8))
+* **hall:** :recycle: convert anon func and change button onClick to Link ([2c670f7](https://github.com/sozonome/spoker/commit/2c670f7359fef6a9e444117d7c699f222cbe80eb))
+
 ### [1.5.1](https://github.com/sozonome/spoker/compare/v1.5.0...v1.5.1) (2021-08-24)
 
 ## [1.5.0](https://github.com/sozonome/spoker/compare/v1.4.0...v1.5.0) (2021-08-21)
