@@ -8,10 +8,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import * as React from "react";
 import { BiLink, BiShareAlt } from "react-icons/bi";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { clearPoints } from "functions/firebase/room";
+import { clearPoints } from "services/firebase/room";
 import { RoomUser } from "types/room";
 
 type ControllerWrapperProps = {
@@ -31,7 +32,7 @@ const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
   };
 
   const handleCopyRoomLink = () => {
-    const roomLink = `${location.protocol}//${location.host}/join/${id}`;
+    const roomLink = `${window.location.protocol}//${window.location.host}/join/${id}`;
     navigator.clipboard.writeText(roomLink);
 
     toast({
@@ -41,6 +42,11 @@ const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
       position: "top-right",
     });
   };
+
+  const currentUserList = React.useMemo(
+    () => users.map((user) => <ListItem key={user.uid}>{user.name}</ListItem>),
+    [users]
+  );
 
   return (
     <SpokerWrapperGrid gap={4}>
@@ -70,11 +76,7 @@ const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
 
       <Flex wrap="wrap" gridGap={2}>
         <Heading size="sm">Current Users: </Heading>
-        <OrderedList spacing={1}>
-          {users.map((user, userIndex) => (
-            <ListItem key={userIndex}>{user.name}</ListItem>
-          ))}
-        </OrderedList>
+        <OrderedList spacing={1}>{currentUserList}</OrderedList>
       </Flex>
     </SpokerWrapperGrid>
   );

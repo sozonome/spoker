@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 import { AuthContext } from "components/auth/AuthProvider";
 import FullScreenLoading from "components/layout/FullScreenLoading";
-import { handleVerifyEmail } from "functions/firebase";
+import { handleVerifyEmail } from "services/firebase";
 
 const Auth = () => {
   const router = useRouter();
@@ -32,6 +32,7 @@ const Auth = () => {
   };
 
   if (mode && oobCode) {
+    // eslint-disable-next-line sonarjs/no-small-switch
     switch (mode) {
       case "verifyEmail":
         handleVerifyEmail(oobCode as string)

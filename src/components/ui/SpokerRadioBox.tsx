@@ -1,6 +1,8 @@
 import { Box, RadioProps, useRadio } from "@chakra-ui/react";
 
-const SpokerRadioBox = (props: RadioProps) => {
+type SpokerRadioBoxProps = RadioProps;
+
+const SpokerRadioBox = ({ children, ...props }: SpokerRadioBoxProps) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const input = getInputProps();
@@ -30,7 +32,7 @@ const SpokerRadioBox = (props: RadioProps) => {
         px={5}
         py={3}
       >
-        {props.children}
+        {children}
       </Box>
     </Box>
   );

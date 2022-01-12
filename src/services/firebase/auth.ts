@@ -13,13 +13,16 @@ export const registerUserWithEmailAndPassword = async (
   authState?.user?.sendEmailVerification();
 
   const user = fbase.auth().currentUser;
-  if (user !== null) {
-    user.updateProfile({
-      displayName: name,
-    });
 
-    return user;
+  if (!user) {
+    return undefined;
   }
+
+  user.updateProfile({
+    displayName: name,
+  });
+
+  return user;
 };
 
 export const loginUserWithEmailAndPassword = async (
@@ -67,15 +70,15 @@ export const getCurrentUser = () => {
 
   if (user) {
     return user;
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const requestPasswordReset = async (email: string) => {
   await fbase.auth().sendPasswordResetEmail(email);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const showErrorToast = (toast: any, err: any) =>
   toast({
     description: err.message,
@@ -85,6 +88,7 @@ const showErrorToast = (toast: any, err: any) =>
     duration: 15000,
   });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const loginWithGoogle = async (toast: any) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -95,6 +99,7 @@ export const loginWithGoogle = async (toast: any) => {
     .catch((err) => showErrorToast(toast, err));
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const loginWithGithub = async (toast: any) => {
   const githubProvider = new firebase.auth.GithubAuthProvider();
 

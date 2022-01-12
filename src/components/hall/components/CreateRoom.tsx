@@ -4,15 +4,16 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+import { CreateRoomFormSchema, CreateRoomFormType } from "../types";
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { createRoom } from "functions/firebase/room";
-
-import { CreateRoomFormSchema, CreateRoomFormType } from "../types";
+import { createRoom } from "services/firebase/room";
 
 const CreateRoom = () => {
   const toast = useToast();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { values, errors, dirty, handleChange, handleSubmit } =
     useFormik<CreateRoomFormType>({
       initialValues: {
@@ -24,24 +25,23 @@ const CreateRoom = () => {
       validationSchema: CreateRoomFormSchema,
       onSubmit: async (formValues: CreateRoomFormType) => {
         setIsLoading(true);
-        await createRoom(formValues).then((res) => {
-          setIsLoading(false);
-          if (res !== true && res.message) {
+        await createRoom(formValues)
+          .then(() => {
+            router.push(`/join/${formValues.id}`);
+          })
+          .catch((err) => {
             toast({
               position: "top-right",
               title: "Create Room Fail",
-              description: res.message,
+              description: err.message,
               status: "error",
               isClosable: true,
             });
-          } else {
-            router.push(`/join/${formValues.id}`);
-          }
-        });
+          })
+          .finally(() => setIsLoading(false));
       },
     });
   const { name, id } = values;
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <SpokerWrapperGrid gap={8}>
@@ -74,7 +74,7 @@ const CreateRoom = () => {
         colorScheme="green"
         onClick={() => handleSubmit()}
       >
-        {"Let's Have Some Fun!"}
+        Let&apos;s Have Some Fun!
       </Button>
     </SpokerWrapperGrid>
   );
