@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "components/auth/AuthProvider";
 import SpokerLoading from "components/ui/SpokerLoading";
-import { roomsData } from "functions/firebase/room";
+import { roomsData } from "services/firebase/room";
 import { RoomInstance } from "types/RawDB";
 import { RoomUser } from "types/room";
 

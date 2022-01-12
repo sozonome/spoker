@@ -23,8 +23,8 @@ import { IoMdPerson } from "react-icons/io";
 
 import { PRIVATE_ROUTES } from "components/layout/RouteWrapper";
 import SpokerInput from "components/ui/SpokerInput";
-import { logoutUser, updateDisplayName } from "functions/firebase";
-import { roomsData } from "functions/firebase/room";
+import { logoutUser, updateDisplayName } from "services/firebase";
+import { roomsData } from "services/firebase/room";
 
 import { AuthContext } from "./AuthProvider";
 
@@ -110,56 +110,56 @@ const AuthPopover = () => {
     logoutUser();
   };
 
-  return (
-    <>
-      {currentUser && (
-        <Box>
-          <Popover
-            placement="bottom-end"
-            onClose={() => setIsEditingDisplayName(false)}
-          >
-            <PopoverTrigger>
-              <IconButton
-                size={buttonSize}
-                aria-label="account"
-                icon={<IoMdPerson />}
-              />
-            </PopoverTrigger>
+  if (!currentUser) {
+    return null;
+  }
 
-            <PopoverContent>
-              <PopoverArrow />
-              <PopoverCloseButton />
-              <PopoverHeader>
-                <Flex gridGap={2} alignItems="center">
-                  {isEditingDisplayName ? (
-                    <SpokerInput
-                      value={displayNameInput}
-                      onChange={(e) => setDisplayNameInput(e.target.value)}
-                      size="sm"
-                      formControlWidth="70%"
-                    />
-                  ) : (
-                    <Heading size="sm">{displayName}</Heading>
-                  )}
-                  <IconButton
-                    size="xs"
-                    aria-label="edit"
-                    icon={isEditingDisplayName ? <ImCheckmark /> : <BsPencil />}
-                    onClick={handleEditClick}
-                  />
-                </Flex>
-                <Text>{currentUser.email}</Text>
-              </PopoverHeader>
-              <PopoverBody>
-                <Button isFullWidth colorScheme="red" onClick={handleLogout}>
-                  Sign Out
-                </Button>
-              </PopoverBody>
-            </PopoverContent>
-          </Popover>
-        </Box>
-      )}
-    </>
+  return (
+    <Box>
+      <Popover
+        placement="bottom-end"
+        onClose={() => setIsEditingDisplayName(false)}
+      >
+        <PopoverTrigger>
+          <IconButton
+            size={buttonSize}
+            aria-label="account"
+            icon={<IoMdPerson />}
+          />
+        </PopoverTrigger>
+
+        <PopoverContent>
+          <PopoverArrow />
+          <PopoverCloseButton />
+          <PopoverHeader>
+            <Flex gridGap={2} alignItems="center">
+              {isEditingDisplayName ? (
+                <SpokerInput
+                  value={displayNameInput}
+                  onChange={(e) => setDisplayNameInput(e.target.value)}
+                  size="sm"
+                  formControlWidth="70%"
+                />
+              ) : (
+                <Heading size="sm">{displayName}</Heading>
+              )}
+              <IconButton
+                size="xs"
+                aria-label="edit"
+                icon={isEditingDisplayName ? <ImCheckmark /> : <BsPencil />}
+                onClick={handleEditClick}
+              />
+            </Flex>
+            <Text>{currentUser.email}</Text>
+          </PopoverHeader>
+          <PopoverBody>
+            <Button isFullWidth colorScheme="red" onClick={handleLogout}>
+              Sign Out
+            </Button>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+    </Box>
   );
 };
 

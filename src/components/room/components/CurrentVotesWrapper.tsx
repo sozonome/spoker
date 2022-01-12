@@ -11,15 +11,16 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, Fragment } from "react";
+import * as React from "react";
 
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
 import { hideLabelOptions, HideLabelOptionsType } from "constants/hideLabel";
-import { updateConfig } from "functions/firebase/room";
+import { updateConfig } from "services/firebase/room";
 import { RoomConfig, RoomInstance } from "types/RawDB";
 import { RoomUser } from "types/room";
 
 import PointWrapper from "./PointWrapper";
+import { pointTextColor, pointTextSize } from "./utils";
 
 type CurrentVotesWrapperProps = {
   isObservant: boolean;
@@ -46,7 +47,9 @@ const CurrentVotesWrapper = ({
   } = router;
   const toast = useToast();
 
-  const handleUpdateFreezeAfterVote = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleUpdateFreezeAfterVote = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (isObservant) {
       const updatedConfig: Partial<RoomConfig> = {
         isFreezeAfterVote: e.currentTarget.checked,
@@ -71,54 +74,41 @@ const CurrentVotesWrapper = ({
     }
   };
 
-  const pointTextSize = (point: number) => {
-    switch (point.toString()) {
-      case "0":
-      case "0.5":
-      case "1":
-        return "1rem";
-      case "2":
-        return "1.2rem";
-      case "3":
-        return "1.4rem";
-      case "5":
-        return "2rem";
-      case "8":
-      case "13":
-        return "3rem";
-      case "20":
-      case "40":
-      case "60":
-      case "80":
-      case "100":
-        return "4rem";
-      default:
-        return "1rem";
-    }
-  };
+  const showAveragePoint = React.useMemo(
+    () => showVote && !Number.isNaN(averagePoint),
+    [averagePoint, showVote]
+  );
 
-  const pointTextColor = (point: number) => {
-    switch (point.toString()) {
-      case "0":
-      case "0.5":
-      case "1":
-      case "2":
-        return undefined;
-      case "3":
-        return "orange";
-      case "5":
-      case "8":
-      case "13":
-      case "20":
-      case "40":
-      case "60":
-      case "80":
-      case "100":
-        return "red";
-      default:
-        return undefined;
-    }
-  };
+  const sortedParticipants = React.useMemo(
+    () =>
+      users
+        .filter((user) => user.role === "participant")
+        .sort((a, b) => (showVote ? (b.point ?? 0) - (a.point ?? 0) : 0))
+        .map((participant, participantIndex, participants) => (
+          <React.Fragment key={participant.uid}>
+            <Grid templateColumns="2fr 1fr" alignItems="center">
+              <Heading size="sm">{participant.name}</Heading>
+              <Text
+                fontSize={
+                  showVote ? pointTextSize(participant.point ?? 0) : undefined
+                }
+                textColor={
+                  showVote ? pointTextColor(participant.point ?? 0) : undefined
+                }
+              >
+                <PointWrapper
+                  showVote={showVote}
+                  roomSelectedHideLabel={roomData?.config.hideLabel ?? "monkey"}
+                  isCurrentUser={participant.uid === currentUser?.uid}
+                  point={participant.point}
+                />
+              </Text>
+            </Grid>
+            {participantIndex !== participants.length - 1 && <Divider />}
+          </React.Fragment>
+        )),
+    [currentUser?.uid, roomData?.config.hideLabel, showVote, users]
+  );
 
   return (
     <SpokerWrapperGrid display="inline-block" gap={4}>
@@ -156,39 +146,8 @@ const CurrentVotesWrapper = ({
       )}
 
       <Grid gap={2}>
-        {showVote && !isNaN(averagePoint) && (
-          <Text>average: {averagePoint}</Text>
-        )}
-        {users
-          .filter((user) => user.role === "participant")
-          .sort((a, b) => (showVote ? (b.point ?? 0) - (a.point ?? 0) : 0))
-          .map((participant, participantIndex, participants) => (
-            <Fragment key={participantIndex}>
-              <Grid templateColumns="2fr 1fr" alignItems="center">
-                <Heading size="sm">{participant.name}</Heading>
-                <Text
-                  fontSize={
-                    showVote ? pointTextSize(participant.point ?? 0) : undefined
-                  }
-                  textColor={
-                    showVote
-                      ? pointTextColor(participant.point ?? 0)
-                      : undefined
-                  }
-                >
-                  <PointWrapper
-                    showVote={showVote}
-                    roomSelectedHideLabel={
-                      roomData?.config.hideLabel ?? "monkey"
-                    }
-                    isCurrentUser={participant.uid === currentUser?.uid}
-                    point={participant.point}
-                  />
-                </Text>
-              </Grid>
-              {participantIndex !== participants.length - 1 && <Divider />}
-            </Fragment>
-          ))}
+        {showAveragePoint && <Text>average: {averagePoint}</Text>}
+        {sortedParticipants}
       </Grid>
 
       <Spacer />

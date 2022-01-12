@@ -10,7 +10,7 @@ export type HideLabelOptionsType = keyof typeof HideLabelOptions;
 export const hideLabelOptions: Array<HideLabelOptionsType> = Object.keys(
   HideLabelOptions
 )
-  .filter((label) => isNaN(Number(label)))
+  .filter((label) => Number.isNaN(Number(label)))
   .map((labelOption) => labelOption as HideLabelOptionsType);
 
 type HideLabelType = Record<

@@ -56,29 +56,27 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const handleSwitchToRegister = () => setIsRegistered(false);
   const handleSwitchToLogin = () => setIsRegistered(true);
 
+  if (!isUnauthorized) {
+    return children as React.ReactElement;
+  }
+
   return (
-    <>
-      {!isUnauthorized && children}
+    <Modal
+      isOpen={isOpen}
+      onClose={() => 0}
+      motionPreset="slideInBottom"
+      isCentered
+    >
+      <ModalOverlay />
 
-      {isUnauthorized && (
-        <Modal
-          isOpen={isOpen}
-          onClose={() => void 0}
-          motionPreset="slideInBottom"
-          isCentered
-        >
-          <ModalOverlay />
-
-          <ModalContent {...contraBoxStyle} marginX={[2, 8]}>
-            {isRegistered ? (
-              <Login {...{ handleSwitchToRegister }} />
-            ) : (
-              <Register {...{ handleSwitchToLogin }} />
-            )}
-          </ModalContent>
-        </Modal>
-      )}
-    </>
+      <ModalContent {...contraBoxStyle} marginX={[2, 8]}>
+        {isRegistered ? (
+          <Login {...{ handleSwitchToRegister }} />
+        ) : (
+          <Register {...{ handleSwitchToLogin }} />
+        )}
+      </ModalContent>
+    </Modal>
   );
 };
 

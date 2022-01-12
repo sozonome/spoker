@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
-import { loginUserWithEmailAndPassword } from "functions/firebase";
+import { loginUserWithEmailAndPassword } from "services/firebase";
 
 import SignInProviders from "./SignInProviders";
 
@@ -25,6 +25,9 @@ type LoginProps = {
 };
 
 const Login = ({ handleSwitchToRegister }: LoginProps) => {
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { values, dirty, handleChange, handleSubmit } =
     useFormik<LoginFormType>({
       initialValues: {
@@ -49,8 +52,6 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
       },
     });
   const { email, password } = values;
-  const toast = useToast();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <>

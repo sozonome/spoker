@@ -1,6 +1,6 @@
 import { CreateRoomFormType } from "components/hall/types";
-import { RoomConfig, RoomInstance, Task, User } from "types/RawDB";
-import { RoleType } from "types/room";
+import { RoomConfig, RoomInstance, Task } from "types/RawDB";
+import { RoleType, User } from "types/user";
 
 import { getCurrentUser } from "./auth";
 import { fbase } from "./config";
@@ -8,36 +8,30 @@ import { fbase } from "./config";
 export const roomsData = fbase.database().ref("rooms");
 
 export const createRoom = async (roomInstance: CreateRoomFormType) => {
-  let found: any;
-
   await roomsData.once("value", (snap) => {
     if (snap.hasChild(roomInstance.id)) {
-      found = { message: "room already exists, try another id." };
+      throw Error("room already exists, try another id.");
     }
   });
 
-  if (found?.message) {
-    return found;
-  } else {
-    const newRoom: RoomInstance = {
-      room: {
-        name: roomInstance.name,
-        isPrivate: roomInstance.isPrivate,
-        password: roomInstance.isPrivate ? roomInstance.password : "",
-      },
-      config: {
-        isFreezeAfterVote: true,
-        hideLabel: "monkey",
-      },
-      task: {
-        name: "#1 Task",
-        description: "Edit Me",
-      },
-    };
+  const newRoom: RoomInstance = {
+    room: {
+      name: roomInstance.name,
+      isPrivate: roomInstance.isPrivate,
+      password: roomInstance.isPrivate ? roomInstance.password : "",
+    },
+    config: {
+      isFreezeAfterVote: true,
+      hideLabel: "monkey",
+    },
+    task: {
+      name: "#1 Task",
+      description: "Edit Me",
+    },
+  };
 
-    await roomsData.child(roomInstance.id).set(newRoom);
-    return true;
-  }
+  await roomsData.child(roomInstance.id).set(newRoom);
+  return true;
 };
 
 export const getRoom = async (roomId: string) => {

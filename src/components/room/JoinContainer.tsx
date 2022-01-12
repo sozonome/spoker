@@ -13,8 +13,8 @@ import { useEffect, useState } from "react";
 import SpokerLoading from "components/ui/SpokerLoading";
 import SpokerRadioBox from "components/ui/SpokerRadioBox";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { getRoom, joinRoom } from "functions/firebase/room";
-import { roleOptions, RoleType } from "types/room";
+import { getRoom, joinRoom } from "services/firebase/room";
+import { roleOptions, RoleType } from "types/user";
 
 const JoinContainer = () => {
   const router = useRouter();

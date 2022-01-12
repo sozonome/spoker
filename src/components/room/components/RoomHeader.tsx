@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 
 import SpokerInput from "components/ui/SpokerInput";
 import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { updateRoomTask } from "functions/firebase/room";
+import { updateRoomTask } from "services/firebase/room";
 import { RoomInstance, Task } from "types/RawDB";
 
 type RoomHeaderProps = {

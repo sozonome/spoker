@@ -1,62 +1,65 @@
-import { createContext, useEffect, useState } from "react";
+import * as React from "react";
 
 import FullScreenLoading from "components/layout/FullScreenLoading";
-import { fbase } from "functions/firebase";
+import { fbase } from "services/firebase";
 
 type AuthContextType = {
-  currentUser?: firebase.default.User;
+  currentUser?: firebase.default.User | null;
   isCurrentUserUpdating?: boolean;
   updateCurrentUser: () => void;
 };
 
-export const AuthContext = createContext<AuthContextType>({
+export const AuthContext = React.createContext<AuthContextType>({
   currentUser: undefined,
   isCurrentUserUpdating: undefined,
   updateCurrentUser: () => 0,
 });
 
 type AuthProviderProps = {
-  children: any;
+  children: React.ReactNode;
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUserState, setCurrentUserState] = useState<any>(null);
-  const [busy, setBusy] = useState(true);
+  const [currentUserState, setCurrentUserState] =
+    React.useState<firebase.default.User | null>(null);
+  const [busy, setBusy] = React.useState(true);
   const [isCurrentUserUpdating, setIsCurrentUserUpdating] =
-    useState<boolean>(false);
+    React.useState<boolean>(false);
 
   const updateCurrentUser = () => {
     setIsCurrentUserUpdating(true);
   };
 
-  useEffect(() => {
-    fbase.auth().onAuthStateChanged((user: any) => {
+  React.useEffect(() => {
+    fbase.auth().onAuthStateChanged((user) => {
       setCurrentUserState(user);
       setBusy(false);
     });
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isCurrentUserUpdating) {
       setIsCurrentUserUpdating(false);
     }
   }, [isCurrentUserUpdating]);
 
+  const contextValues = React.useMemo(
+    () =>
+      ({
+        currentUser: currentUserState,
+        isCurrentUserUpdating,
+        updateCurrentUser,
+      } as AuthContextType),
+    [currentUserState, isCurrentUserUpdating]
+  );
+
+  if (busy) {
+    return <FullScreenLoading />;
+  }
+
   return (
-    <>
-      {busy ? (
-        <FullScreenLoading />
-      ) : (
-        <AuthContext.Provider
-          value={{
-            currentUser: currentUserState,
-            isCurrentUserUpdating,
-            updateCurrentUser,
-          }}
-        >
-          {children}
-        </AuthContext.Provider>
-      )}
-    </>
+    <AuthContext.Provider value={contextValues}>
+      {children}
+    </AuthContext.Provider>
   );
 };

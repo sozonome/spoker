@@ -1,6 +1,6 @@
 import { HideLabelOptionsType } from "constants/hideLabel";
 
-import { RoleType } from "./room";
+import { User } from "./user";
 
 export interface DBSample {
   rooms: Rooms;
@@ -17,12 +17,6 @@ export interface RoomInstance {
     [participantUid: string]: User;
   };
   config: RoomConfig;
-}
-
-export interface User {
-  name: string;
-  role: RoleType;
-  point?: number;
 }
 
 export interface RoomInfo {

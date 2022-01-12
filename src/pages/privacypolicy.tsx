@@ -201,7 +201,7 @@ const PrivacyPolicy = () => {
         like to exercise any of these rights, please contact us.
       </Text>
 
-      <Heading size="lg">{"Children's Information"}</Heading>
+      <Heading size="lg">Children&apos;s Information</Heading>
 
       <Text>
         Another part of our priority is adding protection for children while

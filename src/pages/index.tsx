@@ -4,8 +4,8 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
+  Button,
   Grid,
-  Link,
   useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "components/auth/AuthProvider";
 import HallWrapper from "components/hall";
 import SpokerLoading from "components/ui/SpokerLoading";
-import { requestVerificationMail } from "functions/firebase/auth";
+import { requestVerificationMail } from "services/firebase/auth";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
@@ -83,9 +83,13 @@ const Home = () => {
 
             <AlertDescription>
               Haven&apos;t received any verification email?{" "}
-              <Link fontWeight="semibold" onClick={requestEmailVerification}>
+              <Button
+                variant="ghost"
+                fontWeight="semibold"
+                onClick={requestEmailVerification}
+              >
                 Request Verification Link
-              </Link>
+              </Button>
             </AlertDescription>
           </Grid>
         </Alert>
