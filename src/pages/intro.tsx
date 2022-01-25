@@ -1,9 +1,9 @@
 import { Button, Container, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-import SomeInfo from "components/hall/components/SomeInfo";
-import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
-import { trackEvent } from "utils/trackEvent";
+import SomeInfo from "lib/components/hall/components/SomeInfo";
+import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
+import { trackEvent } from "lib/utils/trackEvent";
 
 const Intro = () => {
   const router = useRouter();

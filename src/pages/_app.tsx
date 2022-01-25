@@ -4,10 +4,10 @@ import Head from "next/head";
 import "@fontsource/jost/latin.css";
 import "@fontsource/inter/latin.css";
 
-import { AuthProvider } from "components/auth/AuthProvider";
-import Layout from "components/layout";
-import customTheme from "styles/customTheme";
-import "styles/globals.css";
+import { AuthProvider } from "lib/components/auth/AuthProvider";
+import Layout from "lib/components/layout";
+import customTheme from "lib/styles/customTheme";
+import "lib/styles/globals.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

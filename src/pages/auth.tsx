@@ -8,9 +8,9 @@ import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-import { AuthContext } from "components/auth/AuthProvider";
-import FullScreenLoading from "components/layout/FullScreenLoading";
-import { handleVerifyEmail } from "services/firebase";
+import { AuthContext } from "lib/components/auth/AuthProvider";
+import FullScreenLoading from "lib/components/layout/FullScreenLoading";
+import { handleVerifyEmail } from "lib/services/firebase";
 
 const Auth = () => {
   const router = useRouter();

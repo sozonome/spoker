@@ -1,4 +1,4 @@
-import RoomContainer from "components/room/RoomContainer";
+import RoomContainer from "lib/components/room/RoomContainer";
 
 const Room = () => {
   return <RoomContainer />;

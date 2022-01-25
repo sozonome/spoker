@@ -10,10 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
-import { AuthContext } from "components/auth/AuthProvider";
-import HallWrapper from "components/hall";
-import SpokerLoading from "components/ui/SpokerLoading";
-import { requestVerificationMail } from "services/firebase/auth";
+import { AuthContext } from "lib/components/auth/AuthProvider";
+import HallWrapper from "lib/components/hall";
+import SpokerLoading from "lib/components/ui/SpokerLoading";
+import { requestVerificationMail } from "lib/services/firebase/auth";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
