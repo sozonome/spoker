@@ -1,4 +1,4 @@
-import JoinContainer from "components/room/JoinContainer";
+import JoinContainer from "lib/components/room/JoinContainer";
 
 const JoinPage = () => {
   return <JoinContainer />;

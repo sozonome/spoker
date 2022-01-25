@@ -1,6 +1,6 @@
 import { Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
 
-import SpokerWrapperGrid from "components/ui/SpokerWrapperGrid";
+import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
 
 const PrivacyPolicy = () => {
   return (

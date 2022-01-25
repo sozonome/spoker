@@ -6,7 +6,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 
-import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "constants/umami";
+import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "lib/constants/umami";
 
 const APP_NAME = "spoker";
 const APP_DESCRIPTION = "Scrum Poker";
