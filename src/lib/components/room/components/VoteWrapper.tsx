@@ -1,4 +1,5 @@
 import { Flex, Heading, Spacer, useRadioGroup } from "@chakra-ui/react";
+import type { User } from "firebase/auth";
 import { useRouter } from "next/router";
 
 import SpokerRadioBox from "lib/components/ui/SpokerRadioBox";
@@ -9,7 +10,7 @@ import { pointOptions } from "lib/types/room";
 
 type VoteWrapperProps = {
   roomData: RoomInstance;
-  currentUser: firebase.default.User;
+  currentUser: User;
   showVote: boolean;
 };
 

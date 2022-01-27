@@ -1,6 +1,4 @@
-import firebase from "firebase/app";
-import "firebase/database";
-import "firebase/auth";
+import { getApp, getApps, initializeApp } from "firebase/app";
 
 import type { FirebaseConfigType } from "./types";
 
@@ -15,6 +13,4 @@ export const config: FirebaseConfigType = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID ?? "",
 };
 
-export const fbase = firebase.apps.length
-  ? firebase.app()
-  : firebase.initializeApp(config);
+export const fbase = getApps().length ? getApp() : initializeApp(config);

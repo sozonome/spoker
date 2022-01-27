@@ -10,6 +10,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import type { User } from "firebase/auth";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -30,7 +31,7 @@ type CurrentVotesWrapperProps = {
   showVote: boolean;
   averagePoint: number;
   users: Array<RoomUser>;
-  currentUser: firebase.default.User;
+  currentUser: User;
 };
 
 const CurrentVotesWrapper = ({

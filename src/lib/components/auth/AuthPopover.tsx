@@ -15,6 +15,7 @@ import {
   useBreakpointValue,
   useToast,
 } from "@chakra-ui/react";
+import { child, remove } from "firebase/database";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
@@ -101,7 +102,7 @@ const AuthPopover = () => {
   const handleLogout = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       router.push("/").then(async () => {
-        await roomsData.child(`${id}/users/${currentUser.uid}`).remove();
+        await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
         logoutUser();
       });
       return;

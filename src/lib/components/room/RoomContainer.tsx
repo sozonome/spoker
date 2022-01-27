@@ -1,4 +1,5 @@
 import { Box, Grid, useToast } from "@chakra-ui/react";
+import { child, onValue, onDisconnect, remove } from "firebase/database";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -46,10 +47,10 @@ const RoomContainer = () => {
     false;
 
   const getRoomData = async () => {
-    roomsData.child(id as string).on("value", (snap) => {
+    onValue(child(roomsData, id as string), (snap) => {
       if (snap.exists()) {
         setRoomData(snap.val());
-        snap.ref.child(`users/${currentUser?.uid}`).onDisconnect().remove();
+        onDisconnect(child(snap.ref, `users/${currentUser?.uid}`)).remove();
       } else {
         router.push("/");
         toast({
@@ -65,7 +66,7 @@ const RoomContainer = () => {
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
       setInRoom(false);
-      await roomsData.child(`${id}/users/${currentUser.uid}`).remove();
+      await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
     }
   };
 

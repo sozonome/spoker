@@ -13,6 +13,7 @@ const CommitLintConfiguration = {
         "layout",
         "ui",
         "pages",
+        "services",
         "storybook",
         "functions",
         "types",

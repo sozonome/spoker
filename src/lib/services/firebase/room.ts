@@ -1,3 +1,5 @@
+import { child, get, getDatabase, ref, set, update } from "firebase/database";
+
 import type { CreateRoomFormType } from "lib/components/hall/types";
 import type { RoomConfig, RoomInstance, Task } from "lib/types/RawDB";
 import type { RoleType, User } from "lib/types/user";
@@ -5,10 +7,12 @@ import type { RoleType, User } from "lib/types/user";
 import { getCurrentUser } from "./auth";
 import { fbase } from "./config";
 
-export const roomsData = fbase.database().ref("rooms");
+const database = getDatabase(fbase);
+
+export const roomsData = ref(database, "rooms");
 
 export const createRoom = async (roomInstance: CreateRoomFormType) => {
-  await roomsData.once("value", (snap) => {
+  await get(roomsData).then((snap) => {
     if (snap.hasChild(roomInstance.id)) {
       throw Error("room already exists, try another id.");
     }
@@ -30,14 +34,14 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
     },
   };
 
-  await roomsData.child(roomInstance.id).set(newRoom);
+  await set(child(roomsData, roomInstance.id), newRoom);
   return true;
 };
 
 export const getRoom = async (roomId: string) => {
   let roomData: RoomInstance | undefined;
 
-  await roomsData.child(roomId).once("value", (snap) => {
+  await get(child(roomsData, roomId)).then((snap) => {
     if (snap.exists()) {
       roomData = snap.val();
     }
@@ -49,28 +53,28 @@ export const getRoom = async (roomId: string) => {
 export const joinRoom = async (roomId: string, role: RoleType) => {
   const currentUser = getCurrentUser();
 
-  await roomsData
-    .child(`${roomId}/users/${currentUser?.uid}`)
-    .once("value", async (snap) => {
+  await get(child(roomsData, `${roomId}/users/${currentUser?.uid}`)).then(
+    async (snap) => {
       if (snap.exists()) {
         const user: User = snap.val();
         const mustRemovePoint = role !== user.role && role === "observant";
 
-        await snap.ref.update({
+        await update(snap.ref, {
           point: mustRemovePoint ? null : user.point || null,
           role,
         });
       } else {
-        await roomsData.child(`${roomId}/users/${currentUser?.uid}`).set({
+        await set(child(roomsData, `${roomId}/users/${currentUser?.uid}`), {
           name: currentUser?.displayName,
           role,
         });
       }
-    });
+    }
+  );
 };
 
 export const updateRoomTask = async (roomId: string, task: Task) => {
-  await roomsData.child(`${roomId}/task`).update(task);
+  await update(child(roomsData, `${roomId}/task`), task);
 };
 
 type UpdatePointParams = {
@@ -82,14 +86,14 @@ type UpdatePointParams = {
 export const updatePoint = async (param: UpdatePointParams) => {
   const { roomId, uid, point } = param;
 
-  await roomsData.child(`${roomId}/users/${uid}`).update({ point });
+  await update(child(roomsData, `${roomId}/users/${uid}`), { point });
 };
 
 export const clearPoints = async (roomId: string) => {
-  await roomsData.child(`${roomId}/users`).once("value", (snap) => {
+  await get(child(roomsData, `${roomId}/users`)).then((snap) => {
     if (snap.exists()) {
-      snap.forEach((child) => {
-        child.ref.update({
+      snap.forEach((user) => {
+        update(user.ref, {
           point: null,
         });
       });
@@ -101,5 +105,5 @@ export const updateConfig = async (
   roomId: string,
   config: Partial<RoomConfig>
 ) => {
-  await roomsData.child(`${roomId}/config`).update(config);
+  await update(child(roomsData, `${roomId}/config`), config);
 };

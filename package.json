@@ -23,7 +23,7 @@
     "@emotion/styled": "^11.6.0",
     "@fontsource/inter": "^4.5.2",
     "@fontsource/jost": "^4.5.2",
-    "firebase": "^8.10.0",
+    "firebase": "^9.6.4",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "nanoid": "^3.2.0",
