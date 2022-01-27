@@ -1,24 +1,36 @@
-import firebase from "firebase/app";
+import {
+  applyActionCode,
+  createUserWithEmailAndPassword,
+  getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  sendEmailVerification,
+  updateProfile,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 import { fbase } from "./config";
+
+const auth = getAuth(fbase);
 
 export const registerUserWithEmailAndPassword = async (
   email: string,
   password: string,
   name: string
 ) => {
-  const authState = await fbase
-    .auth()
-    .createUserWithEmailAndPassword(email, password);
-  authState?.user?.sendEmailVerification();
+  const authState = await createUserWithEmailAndPassword(auth, email, password);
+  sendEmailVerification(authState.user);
 
-  const user = fbase.auth().currentUser;
+  const user = auth.currentUser;
 
   if (!user) {
     return undefined;
   }
 
-  user.updateProfile({
+  updateProfile(user, {
     displayName: name,
   });
 
@@ -29,25 +41,25 @@ export const loginUserWithEmailAndPassword = async (
   email: string,
   password: string
 ) => {
-  await fbase.auth().signInWithEmailAndPassword(email, password);
+  await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const updateDisplayName = async (displayName: string) => {
-  const user = fbase.auth().currentUser;
+  const user = auth.currentUser;
 
   if (user) {
-    user.updateProfile({
+    updateProfile(user, {
       displayName,
     });
   }
 };
 
 export const requestVerificationMail = async () => {
-  const user = fbase.auth().currentUser;
+  const user = auth.currentUser;
 
   if (user) {
     if (!user.emailVerified) {
-      await user.sendEmailVerification();
+      await sendEmailVerification(user);
       return;
     }
 
@@ -58,15 +70,15 @@ export const requestVerificationMail = async () => {
 };
 
 export const handleVerifyEmail = async (actionCode: string) => {
-  await fbase.auth().applyActionCode(actionCode);
+  await applyActionCode(auth, actionCode);
 };
 
 export const logoutUser = async () => {
-  await fbase.auth().signOut();
+  await signOut(auth);
 };
 
 export const getCurrentUser = () => {
-  const user = fbase.auth().currentUser;
+  const user = auth.currentUser;
 
   if (user) {
     return user;
@@ -75,7 +87,7 @@ export const getCurrentUser = () => {
 };
 
 export const requestPasswordReset = async (email: string) => {
-  await fbase.auth().sendPasswordResetEmail(email);
+  await sendPasswordResetEmail(auth, email);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -90,21 +102,18 @@ const showErrorToast = (toast: any, err: any) =>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const loginWithGoogle = async (toast: any) => {
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
 
-  fbase
-    .auth()
-    .signInWithPopup(googleProvider)
+  signInWithPopup(auth, googleProvider)
     .then((res) => res)
     .catch((err) => showErrorToast(toast, err));
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const loginWithGithub = async (toast: any) => {
-  const githubProvider = new firebase.auth.GithubAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
-  fbase
-    .auth()
-    .signInWithPopup(githubProvider)
-    .catch((err) => showErrorToast(toast, err));
+  signInWithPopup(auth, githubProvider).catch((err) =>
+    showErrorToast(toast, err)
+  );
 };

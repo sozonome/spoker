@@ -1,10 +1,12 @@
+import type { User } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import * as React from "react";
 
 import FullScreenLoading from "lib/components/layout/FullScreenLoading";
 import { fbase } from "lib/services/firebase";
 
 type AuthContextType = {
-  currentUser?: firebase.default.User | null;
+  currentUser?: User | null;
   isCurrentUserUpdating?: boolean;
   updateCurrentUser: () => void;
 };
@@ -19,9 +21,12 @@ type AuthProviderProps = {
   children: React.ReactNode;
 };
 
+const auth = getAuth(fbase);
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUserState, setCurrentUserState] =
-    React.useState<firebase.default.User | null>(null);
+  const [currentUserState, setCurrentUserState] = React.useState<User | null>(
+    null
+  );
   const [busy, setBusy] = React.useState(true);
   const [isCurrentUserUpdating, setIsCurrentUserUpdating] =
     React.useState<boolean>(false);
@@ -31,7 +36,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   React.useEffect(() => {
-    fbase.auth().onAuthStateChanged((user) => {
+    onAuthStateChanged(auth, (user) => {
       setCurrentUserState(user);
       setBusy(false);
     });
