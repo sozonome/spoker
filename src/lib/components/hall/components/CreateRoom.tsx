@@ -4,7 +4,8 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { CreateRoomFormSchema, CreateRoomFormType } from "../types";
+import type { CreateRoomFormType } from "../types";
+import { CreateRoomFormSchema } from "../types";
 import SpokerInput from "lib/components/ui/SpokerInput";
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
 import { createRoom } from "lib/services/firebase/room";

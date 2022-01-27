@@ -1,11 +1,11 @@
 import { Flex, Grid, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
 
 import SpokerInput from "lib/components/ui/SpokerInput";
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
 import { updateRoomTask } from "lib/services/firebase/room";
-import { RoomInstance, Task } from "lib/types/RawDB";
+import type { RoomInstance, Task } from "lib/types/RawDB";
 
 type RoomHeaderProps = {
   roomData: RoomInstance;

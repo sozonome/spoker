@@ -6,8 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import SpokerLoading from "lib/components/ui/SpokerLoading";
 import { roomsData } from "lib/services/firebase/room";
-import { RoomInstance } from "lib/types/RawDB";
-import { RoomUser } from "lib/types/room";
+import type { RoomInstance } from "lib/types/RawDB";
+import type { RoomUser } from "lib/types/room";
 
 import ControllerWrapper from "./components/ControllerWrapper";
 import CurrentVotesWrapper from "./components/CurrentVotesWrapper";

@@ -1,6 +1,6 @@
-import { HideLabelOptionsType } from "lib/constants/hideLabel";
+import type { HideLabelOptionsType } from "lib/constants/hideLabel";
 
-import { User } from "./user";
+import type { User } from "./user";
 
 export interface DBSample {
   rooms: Rooms;

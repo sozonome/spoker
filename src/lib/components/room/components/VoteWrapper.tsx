@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import SpokerRadioBox from "lib/components/ui/SpokerRadioBox";
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
 import { updatePoint } from "lib/services/firebase/room";
-import { RoomInstance } from "lib/types/RawDB";
+import type { RoomInstance } from "lib/types/RawDB";
 import { pointOptions } from "lib/types/room";
 
 type VoteWrapperProps = {

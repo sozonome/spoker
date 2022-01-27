@@ -14,13 +14,11 @@ import { useRouter } from "next/router";
 import * as React from "react";
 
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
-import {
-  hideLabelOptions,
-  HideLabelOptionsType,
-} from "lib/constants/hideLabel";
+import type { HideLabelOptionsType } from "lib/constants/hideLabel";
+import { hideLabelOptions } from "lib/constants/hideLabel";
 import { updateConfig } from "lib/services/firebase/room";
-import { RoomConfig, RoomInstance } from "lib/types/RawDB";
-import { RoomUser } from "lib/types/room";
+import type { RoomConfig, RoomInstance } from "lib/types/RawDB";
+import type { RoomUser } from "lib/types/room";
 
 import PointWrapper from "./PointWrapper";
 import { pointTextColor, pointTextSize } from "./utils";
