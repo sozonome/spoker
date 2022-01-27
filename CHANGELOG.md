@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.3](https://github.com/sozonome/spoker/compare/v1.5.2...v1.5.3) (2022-01-27)
+
+
+### Improvements
+
+* **services:** upgrade firebase sdk to v9 modular ([#44](https://github.com/sozonome/spoker/issues/44)) ([6e80bb6](https://github.com/sozonome/spoker/commit/6e80bb63af14c3c16209093d5ab9221d7c603e84))
+
 ### [1.5.2](https://github.com/sozonome/spoker/compare/v1.5.1...v1.5.2) (2021-12-25)
 
 
