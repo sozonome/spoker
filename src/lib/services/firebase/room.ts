@@ -1,6 +1,6 @@
-import { CreateRoomFormType } from "lib/components/hall/types";
-import { RoomConfig, RoomInstance, Task } from "lib/types/RawDB";
-import { RoleType, User } from "lib/types/user";
+import type { CreateRoomFormType } from "lib/components/hall/types";
+import type { RoomConfig, RoomInstance, Task } from "lib/types/RawDB";
+import type { RoleType, User } from "lib/types/user";
 
 import { getCurrentUser } from "./auth";
 import { fbase } from "./config";

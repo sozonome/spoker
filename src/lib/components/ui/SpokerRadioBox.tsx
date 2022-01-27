@@ -1,4 +1,5 @@
-import { Box, RadioProps, useRadio } from "@chakra-ui/react";
+import type { RadioProps } from "@chakra-ui/react";
+import { Box, useRadio } from "@chakra-ui/react";
 
 type SpokerRadioBoxProps = RadioProps;
 

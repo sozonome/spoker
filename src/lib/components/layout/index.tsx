@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import AuthWrapper from "lib/components/auth/AuthWrapper";
 

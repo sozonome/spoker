@@ -13,7 +13,7 @@ import { BiLink, BiShareAlt } from "react-icons/bi";
 
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
 import { clearPoints } from "lib/services/firebase/room";
-import { RoomUser } from "lib/types/room";
+import type { RoomUser } from "lib/types/room";
 
 type ControllerWrapperProps = {
   users: Array<RoomUser>;

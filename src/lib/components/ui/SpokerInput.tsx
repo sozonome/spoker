@@ -1,11 +1,13 @@
+import type {
+  FormControlProps,
+  HelpTextProps,
+  InputProps,
+} from "@chakra-ui/react";
 import {
   FormControl,
-  FormControlProps,
   FormHelperText,
   FormLabel,
-  HelpTextProps,
   Input,
-  InputProps,
 } from "@chakra-ui/react";
 
 type SpokerInputProps = {

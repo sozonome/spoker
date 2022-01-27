@@ -1,13 +1,14 @@
+import type { ModalContentProps } from "@chakra-ui/react";
 import {
   Modal,
   ModalContent,
-  ModalContentProps,
   ModalOverlay,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ReactNode, useContext, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { PUBLIC_ROUTES } from "lib/components/layout/RouteWrapper";
 

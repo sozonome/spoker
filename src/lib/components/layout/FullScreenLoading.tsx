@@ -1,4 +1,5 @@
-import { Grid, LayoutProps } from "@chakra-ui/react";
+import type { LayoutProps } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 
 import SpokerLoading from "lib/components/ui/SpokerLoading";
 

@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
 
-import { FirebaseConfigType } from "./types";
+import type { FirebaseConfigType } from "./types";
 
 export const config: FirebaseConfigType = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ?? "",

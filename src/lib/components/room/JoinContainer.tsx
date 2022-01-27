@@ -14,7 +14,8 @@ import SpokerLoading from "lib/components/ui/SpokerLoading";
 import SpokerRadioBox from "lib/components/ui/SpokerRadioBox";
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
 import { getRoom, joinRoom } from "lib/services/firebase/room";
-import { roleOptions, RoleType } from "lib/types/user";
+import type { RoleType } from "lib/types/user";
+import { roleOptions } from "lib/types/user";
 
 const JoinContainer = () => {
   const router = useRouter();

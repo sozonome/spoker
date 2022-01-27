@@ -1,6 +1,7 @@
 import { Button, Grid, Heading } from "@chakra-ui/react";
 import Link from "next/link";
-import { ChangeEventHandler, useState } from "react";
+import type { ChangeEventHandler } from "react";
+import { useState } from "react";
 
 import SpokerInput from "lib/components/ui/SpokerInput";
 import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
