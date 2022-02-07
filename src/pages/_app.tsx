@@ -1,12 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import "@fontsource/jost/latin.css";
-import "@fontsource/inter/latin.css";
+import "@fontsource/outfit/latin.css";
 
 import { AuthProvider } from "lib/components/auth/AuthProvider";
 import Layout from "lib/components/layout";
-import customTheme from "lib/styles/customTheme";
+import customTheme from "lib/styles/theme";
 import "lib/styles/globals.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
