@@ -7,9 +7,8 @@ const APP_NAME = "spoker";
 const APP_DESCRIPTION = "Scrum Poker";
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+  static getInitialProps(ctx: DocumentContext) {
+    return Document.getInitialProps(ctx);
   }
 
   render() {

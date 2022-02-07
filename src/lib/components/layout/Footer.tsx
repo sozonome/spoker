@@ -5,7 +5,7 @@ import packageInfo from "../../../../package.json";
 
 const Footer = () => {
   return (
-    <Flex as="footer" width="full" align="center">
+    <Flex as="footer" width="full" align="center" paddingY={8}>
       <Text>
         2021 |{" "}
         <Link href="https://sznm.dev" isExternal>

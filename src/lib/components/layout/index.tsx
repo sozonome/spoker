@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Header />
         <RouteWrapper>
           <AuthWrapper>
-            <Box as="main" marginY={22}>
+            <Box as="main" marginY={12}>
               {children}
             </Box>
           </AuthWrapper>

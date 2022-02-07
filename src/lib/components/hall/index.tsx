@@ -5,7 +5,6 @@ import { AuthContext } from "lib/components/auth/AuthProvider";
 
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
-import SomeInfo from "./components/SomeInfo";
 
 const HallWrapper = () => {
   const { currentUser, isCurrentUserUpdating } = useContext(AuthContext);
@@ -39,8 +38,6 @@ const HallWrapper = () => {
         <CreateRoom />
         <JoinRoom />
       </Grid>
-
-      <SomeInfo />
     </Grid>
   );
 };
