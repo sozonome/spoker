@@ -3,8 +3,8 @@ import Link from "next/link";
 import type { ChangeEventHandler } from "react";
 import { useState } from "react";
 
-import SpokerInput from "lib/components/ui/SpokerInput";
-import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
+import SpokerInput from "lib/components/shared/SpokerInput";
+import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 
 const JoinRoom = () => {
   const [roomId, setRoomId] = useState<string>("");

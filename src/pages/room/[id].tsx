@@ -1,7 +1,3 @@
-import RoomContainer from "lib/components/room/RoomContainer";
+import RoomPage from "lib/pages/room";
 
-const Room = () => {
-  return <RoomContainer />;
-};
-
-export default Room;
+export default RoomPage;

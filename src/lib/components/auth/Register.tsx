@@ -10,7 +10,7 @@ import {
 import { useFormik } from "formik";
 import { useState } from "react";
 
-import SpokerInput from "lib/components/ui/SpokerInput";
+import SpokerInput from "lib/components/shared/SpokerInput";
 import { registerUserWithEmailAndPassword } from "lib/services/firebase";
 import { trackEvent } from "lib/utils/trackEvent";
 

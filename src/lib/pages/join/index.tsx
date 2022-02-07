@@ -10,14 +10,14 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import SpokerLoading from "lib/components/ui/SpokerLoading";
-import SpokerRadioBox from "lib/components/ui/SpokerRadioBox";
-import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
+import SpokerLoading from "lib/components/shared/SpokerLoading";
+import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
+import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { getRoom, joinRoom } from "lib/services/firebase/room";
 import type { RoleType } from "lib/types/user";
 import { roleOptions } from "lib/types/user";
 
-const JoinContainer = () => {
+const JoinRoomPage = () => {
   const router = useRouter();
   const toast = useToast();
   const {
@@ -98,4 +98,4 @@ const JoinContainer = () => {
   );
 };
 
-export default JoinContainer;
+export default JoinRoomPage;

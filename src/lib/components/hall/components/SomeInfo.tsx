@@ -7,7 +7,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
-import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
+import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 
 const SomeInfo = () => {
   return (
