@@ -14,7 +14,7 @@ import type { User } from "firebase/auth";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
+import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import type { HideLabelOptionsType } from "lib/constants/hideLabel";
 import { hideLabelOptions } from "lib/constants/hideLabel";
 import { updateConfig } from "lib/services/firebase/room";

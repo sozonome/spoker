@@ -1,7 +1,3 @@
-import JoinContainer from "lib/components/room/JoinContainer";
+import JoinRoomPage from "lib/pages/join";
 
-const JoinPage = () => {
-  return <JoinContainer />;
-};
-
-export default JoinPage;
+export default JoinRoomPage;

@@ -2,8 +2,8 @@ import { Flex, Heading, Spacer, useRadioGroup } from "@chakra-ui/react";
 import type { User } from "firebase/auth";
 import { useRouter } from "next/router";
 
-import SpokerRadioBox from "lib/components/ui/SpokerRadioBox";
-import SpokerWrapperGrid from "lib/components/ui/SpokerWrapperGrid";
+import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
+import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { updatePoint } from "lib/services/firebase/room";
 import type { RoomInstance } from "lib/types/RawDB";
 import { pointOptions } from "lib/types/room";
