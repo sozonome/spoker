@@ -4,5 +4,6 @@ module.exports = {
     "sznm/react",
     "plugin:react/jsx-runtime",
     "plugin:@next/next/recommended",
+    "plugin:storybook/recommended",
   ],
 };
