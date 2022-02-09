@@ -1,10 +1,13 @@
 const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
 
-const path = require("path")
-const toPath = (_path) => path.join(process.cwd(), _path)
+const path = require("path");
+const toPath = (_path) => path.join(process.cwd(), _path);
 
 /** @type {import('@storybook/react/types').StorybookConfig} */
 module.exports = {
+  core: {
+    builder: "webpack5",
+  },
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -27,6 +30,16 @@ module.exports = {
         },
         plugins: [...(config.resolve.plugins ?? []), new TsconfigPathsPlugin()],
       },
-    }
+    };
+  },
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: false,
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    },
   },
 };

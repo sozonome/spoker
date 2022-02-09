@@ -9,6 +9,7 @@ import { Parameters, StoryContext } from "@storybook/react";
 import * as React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { withPerformance } from "storybook-addon-performance";
+import "@fontsource/outfit/latin.css";
 
 import customTheme from "../src/lib/styles/theme";
 
@@ -51,10 +52,6 @@ const ColorModeToggleBar = () => {
 const withChakra = (StoryFn: Function, context: StoryContext) => {
   const { direction } = context.globals;
   const dir = direction.toLowerCase();
-
-  React.useEffect(() => {
-    document.documentElement.dir = dir;
-  }, [dir]);
 
   return (
     <ChakraProvider theme={customTheme}>
