@@ -12,17 +12,10 @@ export interface Rooms {
 
 export interface RoomInstance {
   room: RoomInfo;
-
-  /** @deprecated will be replaced with tasks */
   task: Task;
-
-  tasks: Array<TaskEntry>;
-  selectedTaskIndex: number;
-
   users?: {
     [participantUid: string]: User;
   };
-
   config: RoomConfig;
 }
 
@@ -36,18 +29,7 @@ export interface RoomConfig {
   isFreezeAfterVote: boolean;
   hideLabel?: HideLabelOptionsType;
 }
-
-/**
- * @deprecated will be replaced with TaskEntry
- */
 export interface Task {
   name: string;
   description: string;
-}
-
-export interface TaskEntry {
-  name: string;
-  description: string;
-  point?: number;
-  isLocked: boolean;
 }

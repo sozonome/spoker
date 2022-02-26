@@ -92,19 +92,18 @@ const RoomContainer = () => {
 
         setShowVote(hello.indexOf("empty") < 0);
         setUsers(updatedUsers);
-        return;
+      } else {
+        router.push(`/join/${id}`);
+        toast({
+          status: "warning",
+          title: "You haven't pick any role yet",
+          description:
+            "Either you haven't join the room before or rejoin or disconnected / refreshed the page",
+          position: "top-right",
+          duration: 15000,
+          isClosable: true,
+        });
       }
-
-      router.push(`/join/${id}`);
-      toast({
-        status: "warning",
-        title: "You haven't pick any role yet",
-        description:
-          "Either you haven't join the room before or rejoin or disconnected / refreshed the page",
-        position: "top-right",
-        duration: 15000,
-        isClosable: true,
-      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomData, inRoom]);

@@ -24,8 +24,6 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
       isPrivate: roomInstance.isPrivate,
       password: roomInstance.isPrivate ? roomInstance.password : "",
     },
-    tasks: [],
-    selectedTaskIndex: -1,
     config: {
       isFreezeAfterVote: true,
       hideLabel: "monkey",
