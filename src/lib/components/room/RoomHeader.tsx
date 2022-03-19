@@ -5,7 +5,7 @@ import type { ChangeEvent } from "react";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { updateRoomTask } from "lib/services/firebase/room";
-import type { RoomInstance, TaskEntry } from "lib/types/RawDB";
+import type { RoomInstance, Task } from "lib/types/RawDB";
 
 type RoomHeaderProps = {
   roomData: RoomInstance;
@@ -18,10 +18,10 @@ const RoomHeader = ({ roomData }: RoomHeaderProps) => {
   } = router;
 
   const handleUpdateTask =
-    (field: keyof TaskEntry) => (event: ChangeEvent<HTMLInputElement>) => {
+    (field: keyof Task) => (event: ChangeEvent<HTMLInputElement>) => {
       if (roomData) {
-        const updatedTask: TaskEntry = {
-          ...roomData.active,
+        const updatedTask: Task = {
+          ...roomData.task,
           [field]: event.target.value,
         };
         updateRoomTask(id as string, updatedTask);
@@ -38,13 +38,13 @@ const RoomHeader = ({ roomData }: RoomHeaderProps) => {
         <Grid gap={2} width="full">
           <SpokerInput
             label="Name"
-            value={roomData?.active.name}
+            value={roomData?.task.name}
             onChange={handleUpdateTask("name")}
             placeholder="Going to Mars"
           />
           <SpokerInput
             label="Description"
-            value={roomData?.active.description}
+            value={roomData?.task.description}
             onChange={handleUpdateTask("description")}
             placeholder="Land to Moon first"
           />

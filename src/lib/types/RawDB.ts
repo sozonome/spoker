@@ -12,13 +12,9 @@ export interface Rooms {
 
 export interface RoomInstance {
   room: RoomInfo;
-
-  /** @deprecated will be replaced with tasks */
-  task?: Task;
-
-  active: TaskEntry;
-  queue: Array<TaskEntry>;
-  completed: Array<TaskEntry>;
+  task: Task;
+  queue: Array<Task>;
+  completed: Array<Task>;
   selectedTaskIndex: number;
 
   users?: {
@@ -39,17 +35,9 @@ export interface RoomConfig {
   hideLabel?: HideLabelOptionsType;
 }
 
-/**
- * @deprecated will be replaced with TaskEntry
- */
-export interface Task {
-  name: string;
-  description: string;
-}
-
 export type PointEntry = Pick<User, "name" | "point">;
 
-export interface TaskEntry {
+export interface Task {
   id: string;
   name: string;
   description: string;
