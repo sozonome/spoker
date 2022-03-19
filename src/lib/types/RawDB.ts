@@ -16,7 +16,9 @@ export interface RoomInstance {
   /** @deprecated will be replaced with tasks */
   task: Task;
 
-  tasks: Array<TaskEntry>;
+  active: TaskEntry;
+  queue: Array<TaskEntry>;
+  completed: Array<TaskEntry>;
   selectedTaskIndex: number;
 
   users?: {
@@ -45,9 +47,13 @@ export interface Task {
   description: string;
 }
 
+export type PointEntry = Pick<User, "name" | "point">;
+
 export interface TaskEntry {
+  id: string;
   name: string;
   description: string;
-  point?: number;
+  estimation?: number;
+  pointEntries?: Array<PointEntry>;
   isLocked: boolean;
 }
