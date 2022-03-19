@@ -14,7 +14,7 @@ export interface RoomInstance {
   room: RoomInfo;
 
   /** @deprecated will be replaced with tasks */
-  task: Task;
+  task?: Task;
 
   active: TaskEntry;
   queue: Array<TaskEntry>;
@@ -55,5 +55,4 @@ export interface TaskEntry {
   description: string;
   estimation?: number;
   pointEntries?: Array<PointEntry>;
-  isLocked: boolean;
 }
