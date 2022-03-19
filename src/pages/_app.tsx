@@ -4,7 +4,7 @@ import Head from "next/head";
 import "@fontsource/outfit/latin.css";
 
 import { AuthProvider } from "lib/components/auth/AuthProvider";
-import Layout from "lib/components/layout";
+import Layout from "lib/layout";
 import customTheme from "lib/styles/theme";
 import "lib/styles/globals.css";
 

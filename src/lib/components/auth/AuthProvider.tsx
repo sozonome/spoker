@@ -2,7 +2,7 @@ import type { User } from "firebase/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import * as React from "react";
 
-import FullScreenLoading from "lib/components/layout/FullScreenLoading";
+import FullScreenLoading from "lib/layout/FullScreenLoading";
 import { fbase } from "lib/services/firebase";
 
 type AuthContextType = {

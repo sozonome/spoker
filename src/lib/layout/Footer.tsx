@@ -1,7 +1,7 @@
 import { Flex, Link, Text } from "@chakra-ui/react";
 import { RiGithubFill } from "react-icons/ri";
 
-import packageInfo from "../../../../package.json";
+import packageInfo from "../../../package.json";
 
 const Footer = () => {
   return (
