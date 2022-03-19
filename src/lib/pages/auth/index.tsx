@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
-import FullScreenLoading from "lib/components/layout/FullScreenLoading";
+import FullScreenLoading from "lib/layout/FullScreenLoading";
 import { handleVerifyEmail } from "lib/services/firebase";
 
 const Auth = () => {
