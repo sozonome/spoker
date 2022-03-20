@@ -1,4 +1,5 @@
 import { child, get, getDatabase, ref, set, update } from "firebase/database";
+import { nanoid } from "nanoid";
 
 import type { CreateRoomFormType } from "lib/components/hall/types";
 import type { RoomConfig, RoomInstance, Task } from "lib/types/RawDB";
@@ -18,19 +19,25 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
     }
   });
 
+  const randomId = nanoid(21);
+
   const newRoom: RoomInstance = {
     room: {
       name: roomInstance.name,
       isPrivate: roomInstance.isPrivate,
       password: roomInstance.isPrivate ? roomInstance.password : "",
     },
+    task: {
+      id: randomId,
+      name: "#1 Task",
+      description: "Edit Me",
+    },
+    queue: [],
+    completed: [],
+    selectedTaskIndex: -1,
     config: {
       isFreezeAfterVote: true,
       hideLabel: "monkey",
-    },
-    task: {
-      name: "#1 Task",
-      description: "Edit Me",
     },
   };
 
@@ -74,7 +81,7 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
 };
 
 export const updateRoomTask = async (roomId: string, task: Task) => {
-  await update(child(roomsData, `${roomId}/task`), task);
+  await update(child(roomsData, `${roomId}/active`), task);
 };
 
 type UpdatePointParams = {
