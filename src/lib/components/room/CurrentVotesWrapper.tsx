@@ -47,7 +47,7 @@ const CurrentVotesWrapper = ({
   users,
   currentUser,
 }: CurrentVotesWrapperProps) => {
-  const wrapperBackgroundColor = useColorModeValue("green.100", "green.600");
+  const wrapperBackgroundColor = useColorModeValue("green.50", "gray.600");
   const router = useRouter();
   const {
     query: { id },

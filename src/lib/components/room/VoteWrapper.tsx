@@ -21,7 +21,7 @@ type VoteWrapperProps = {
 };
 
 const VoteWrapper = ({ roomData, currentUser, showVote }: VoteWrapperProps) => {
-  const wrapperBackgroundColor = useColorModeValue("orange.100", "orange.600");
+  const wrapperBackgroundColor = useColorModeValue("orange.50", "gray.600");
   const router = useRouter();
   const {
     query: { id },

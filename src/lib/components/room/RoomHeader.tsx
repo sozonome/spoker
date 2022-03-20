@@ -12,7 +12,7 @@ type RoomHeaderProps = {
 };
 
 const RoomHeader = ({ roomData }: RoomHeaderProps) => {
-  const wrapperBackgroundColor = useColorModeValue("teal.100", "teal.600");
+  const wrapperBackgroundColor = useColorModeValue("teal.50", "teal.600");
   const router = useRouter();
   const {
     query: { id },
