@@ -1,13 +1,14 @@
 import { Button, Grid, Heading } from "@chakra-ui/react";
-import Link from "next/link";
 import type { ChangeEventHandler } from "react";
-import { useState } from "react";
+import * as React from "react";
 
+import LinkWrap from "lib/components/shared/LinkWrap";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 
 const JoinRoom = () => {
-  const [roomId, setRoomId] = useState<string>("");
+  const [roomId, setRoomId] = React.useState<string>("");
+  const isDisabled = React.useMemo(() => roomId.length === 0, [roomId.length]);
 
   const handleChangeInput: ChangeEventHandler<HTMLInputElement> = (e) =>
     setRoomId(e.target.value);
@@ -26,17 +27,17 @@ const JoinRoom = () => {
         />
       </Grid>
 
-      <Link href={`/join/${roomId}`} passHref>
+      <LinkWrap isDisabled={isDisabled} href={`/join/${roomId}`} passHref>
         <Button
           as="a"
-          disabled={roomId.length === 0}
+          isDisabled={isDisabled}
           alignSelf="flex-end"
           backgroundColor="black"
           _hover={{ backgroundColor: "orange.400" }}
         >
           Let Me in!
         </Button>
-      </Link>
+      </LinkWrap>
     </SpokerWrapperGrid>
   );
 };
