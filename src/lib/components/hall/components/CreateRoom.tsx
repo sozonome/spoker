@@ -10,6 +10,8 @@ import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { createRoom } from "lib/services/firebase/room";
 
+const randomId = nanoid(21);
+
 const CreateRoom = () => {
   const toast = useToast();
   const router = useRouter();
@@ -19,7 +21,7 @@ const CreateRoom = () => {
     useFormik<CreateRoomFormType>({
       initialValues: {
         name: "",
-        id: nanoid(21),
+        id: randomId,
         isPrivate: false,
         password: "",
       },

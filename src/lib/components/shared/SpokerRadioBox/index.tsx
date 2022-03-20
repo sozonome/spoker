@@ -18,7 +18,6 @@ const SpokerRadioBox = ({ children, ...props }: SpokerRadioBoxProps) => {
         borderWidth="1px"
         borderRadius="xl"
         boxShadow="md"
-        color="gray.500"
         _checked={{
           bg: "teal.500",
           color: "white",

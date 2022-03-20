@@ -14,8 +14,7 @@ import SpokerLoading from "lib/components/shared/SpokerLoading";
 import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { getRoom, joinRoom } from "lib/services/firebase/room";
-import type { RoleType } from "lib/types/user";
-import { roleOptions } from "lib/types/user";
+import { RoleType, roleOptions } from "lib/types/user";
 
 const JoinRoomPage = () => {
   const router = useRouter();
@@ -23,7 +22,7 @@ const JoinRoomPage = () => {
   const {
     query: { id },
   } = router;
-  const [role, setRole] = useState<RoleType>("participant");
+  const [role, setRole] = useState<RoleType>(RoleType.participant);
   const [busy, setBusy] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [roomName, setRoomName] = useState<string>("");
