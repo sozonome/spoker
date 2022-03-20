@@ -1,4 +1,4 @@
-import { Flex, Grid, Heading } from "@chakra-ui/react";
+import { Flex, Grid, Heading, useColorModeValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import type { ChangeEvent } from "react";
 
@@ -12,6 +12,7 @@ type RoomHeaderProps = {
 };
 
 const RoomHeader = ({ roomData }: RoomHeaderProps) => {
+  const wrapperBackgroundColor = useColorModeValue("teal.100", "teal.600");
   const router = useRouter();
   const {
     query: { id },
@@ -29,7 +30,7 @@ const RoomHeader = ({ roomData }: RoomHeaderProps) => {
     };
 
   return (
-    <SpokerWrapperGrid gap={4}>
+    <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>
       <Heading size="lg">{roomData?.room.name}</Heading>
 
       <Flex gridGap={4}>

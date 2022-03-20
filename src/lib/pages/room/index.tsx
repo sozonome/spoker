@@ -34,7 +34,9 @@ const RoomContainer = () => {
       return [];
     }
     return [...users]
-      .filter((unfilteredUser) => unfilteredUser.role === RoleType.participant)
+      .filter((unfilteredUser) =>
+        [RoleType.owner, RoleType.participant].includes(unfilteredUser.role)
+      )
       .map((user) => user.point ?? 0);
   }, [showVote, users]);
 
@@ -135,8 +137,8 @@ const RoomContainer = () => {
 
       <RoomHeader roomData={roomData} />
 
-      <Grid templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]} gap={4}>
-        <Grid gap={4}>
+      <Grid templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]} gap={6}>
+        <Grid gap={6}>
           {(isOwner || isParticipant) && (
             <VoteWrapper
               roomData={roomData}
@@ -145,10 +147,14 @@ const RoomContainer = () => {
             />
           )}
 
-          <ControllerWrapper users={users} isObservant={isObservant} />
+          <ControllerWrapper
+            users={users}
+            isResetEnabled={isOwner || isObservant}
+          />
         </Grid>
 
         <CurrentVotesWrapper
+          isOwner={isOwner}
           isObservant={isObservant}
           isParticipant={isParticipant}
           roomData={roomData}

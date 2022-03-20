@@ -17,10 +17,13 @@ import type { RoomUser } from "lib/types/room";
 
 type ControllerWrapperProps = {
   users: Array<RoomUser>;
-  isObservant: boolean;
+  isResetEnabled: boolean;
 };
 
-const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
+const ControllerWrapper = ({
+  users,
+  isResetEnabled,
+}: ControllerWrapperProps) => {
   const router = useRouter();
   const {
     query: { id },
@@ -44,18 +47,23 @@ const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
   };
 
   const currentUserList = React.useMemo(
-    () => users.map((user) => <ListItem key={user.uid}>{user.name}</ListItem>),
+    () =>
+      users.map((user) => (
+        <ListItem key={user.uid}>
+          {user.name} - {user.role}
+        </ListItem>
+      )),
     [users]
   );
 
   return (
     <SpokerWrapperGrid gap={4}>
-      <Heading>Controller</Heading>
+      <Heading size="md">Controller</Heading>
 
       <Flex gridGap={2} wrap="wrap">
-        {isObservant && (
+        {isResetEnabled && (
           <Button colorScheme="red" onClick={handleClearPoints}>
-            Clear
+            Reset
           </Button>
         )}
         <Button colorScheme="orange" onClick={() => router.push(`/join/${id}`)}>

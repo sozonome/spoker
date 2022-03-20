@@ -1,4 +1,10 @@
-import { Flex, Heading, Spacer, useRadioGroup } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Spacer,
+  useColorModeValue,
+  useRadioGroup,
+} from "@chakra-ui/react";
 import type { User } from "firebase/auth";
 import { useRouter } from "next/router";
 
@@ -15,6 +21,7 @@ type VoteWrapperProps = {
 };
 
 const VoteWrapper = ({ roomData, currentUser, showVote }: VoteWrapperProps) => {
+  const wrapperBackgroundColor = useColorModeValue("orange.100", "orange.600");
   const router = useRouter();
   const {
     query: { id },
@@ -36,8 +43,8 @@ const VoteWrapper = ({ roomData, currentUser, showVote }: VoteWrapperProps) => {
   const voteOptionGroup = getRootProps();
 
   return (
-    <SpokerWrapperGrid gap={4}>
-      <Heading color="teal.600">Vote!</Heading>
+    <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>
+      <Heading size="lg">Vote!</Heading>
 
       <Flex wrap="wrap" gridGap={2} {...voteOptionGroup}>
         {pointOptions.map((voteOption) => {
