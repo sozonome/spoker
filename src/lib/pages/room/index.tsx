@@ -8,6 +8,7 @@ import { AuthContext } from "lib/components/auth/AuthProvider";
 import ControllerWrapper from "lib/components/room/ControllerWrapper";
 import CurrentVotesWrapper from "lib/components/room/CurrentVotesWrapper";
 import RoomHeader from "lib/components/room/RoomHeader";
+import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
 import { roomsData } from "lib/services/firebase/room";
@@ -135,9 +136,11 @@ const RoomContainer = () => {
         <title>{roomData.room.name} | spoker</title>
       </Head>
 
-      <RoomHeader roomData={roomData} />
+      <RoomHeader roomData={roomData} isOwner={isOwner} />
 
-      <Grid templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]} gap={6}>
+      {isOwner && <TaskList />}
+
+      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6}>
         <Grid gap={6}>
           {(isOwner || isParticipant) && (
             <VoteWrapper

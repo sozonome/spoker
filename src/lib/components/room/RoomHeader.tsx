@@ -9,9 +9,10 @@ import type { RoomInstance, Task } from "lib/types/RawDB";
 
 type RoomHeaderProps = {
   roomData: RoomInstance;
+  isOwner: boolean;
 };
 
-const RoomHeader = ({ roomData }: RoomHeaderProps) => {
+const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
   const wrapperBackgroundColor = useColorModeValue("teal.50", "teal.600");
   const router = useRouter();
   const {
@@ -20,7 +21,7 @@ const RoomHeader = ({ roomData }: RoomHeaderProps) => {
 
   const handleUpdateTask =
     (field: keyof Task) => (event: ChangeEvent<HTMLInputElement>) => {
-      if (roomData) {
+      if (roomData && isOwner) {
         const updatedTask: Task = {
           ...roomData.task,
           [field]: event.target.value,

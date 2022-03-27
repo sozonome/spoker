@@ -81,7 +81,7 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
 };
 
 export const updateRoomTask = async (roomId: string, task: Task) => {
-  await update(child(roomsData, `${roomId}/active`), task);
+  await update(child(roomsData, `${roomId}/task`), task);
 };
 
 type UpdatePointParams = {
