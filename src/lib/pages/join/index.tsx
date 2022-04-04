@@ -3,7 +3,6 @@ import {
   Container,
   Grid,
   Heading,
-  HStack,
   useRadioGroup,
   useToast,
 } from "@chakra-ui/react";
@@ -76,7 +75,15 @@ const JoinRoomPage = () => {
         <Grid gap={2}>
           <Heading size="sm">Pick your role:</Heading>
 
-          <HStack {...group}>
+          <Grid
+            {...group}
+            gap={2}
+            templateColumns={{
+              base: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+            }}
+          >
             {roleOptions.map((roleOption) => {
               const radio = getRadioProps({ value: roleOption });
 
@@ -86,7 +93,7 @@ const JoinRoomPage = () => {
                 </SpokerRadioBox>
               );
             })}
-          </HStack>
+          </Grid>
         </Grid>
 
         <Button isLoading={isLoading} colorScheme="blue" onClick={handleJoin}>

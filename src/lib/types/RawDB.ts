@@ -13,8 +13,8 @@ export interface Rooms {
 export interface RoomInstance {
   room: RoomInfo;
   task: Task;
-  queue: Array<Task>;
-  completed: Array<Task>;
+  queue?: Array<Task>;
+  completed?: Array<Task>;
   selectedTaskIndex: number;
 
   users?: {
