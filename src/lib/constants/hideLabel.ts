@@ -3,6 +3,7 @@ export enum HideLabelOptions {
   chicken,
   cow,
   fish,
+  money,
 }
 
 export type HideLabelOptionsType = keyof typeof HideLabelOptions;
@@ -37,5 +38,9 @@ export const hideLabel: HideLabelType = {
   fish: {
     empty: "🐟",
     selected: "🎣",
+  },
+  money: {
+    empty: "💸",
+    selected: "💰",
   },
 };
