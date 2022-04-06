@@ -28,13 +28,21 @@ const TaskList = ({ roomData }: TaskListProps) => {
     md: "Add Story",
   });
 
+  const { queue, completed } = roomData;
+
+  const queueLengthText = queue?.length ? ` (${queue.length})` : "";
+  const queueTabText = `Queue${queueLengthText}`;
+
+  const completedLengthText = completed?.length ? ` (${completed.length})` : "";
+  const completedTabText = `Completed${completedLengthText}`;
+
   return (
     <>
       <SpokerWrapperGrid>
         <Tabs variant="soft-rounded">
           <TabList alignItems="center">
-            <Tab>Queue</Tab>
-            <Tab>Completed</Tab>
+            <Tab>{queueTabText}</Tab>
+            <Tab>{completedTabText}</Tab>
             <Tab>All</Tab>
             <Button
               marginLeft="auto"
@@ -48,10 +56,10 @@ const TaskList = ({ roomData }: TaskListProps) => {
 
           <TabPanels>
             <TabPanel>
-              {roomData.queue?.map((queue) => (
+              {queue?.map((queueItem) => (
                 <Box>
-                  <Heading>{queue.name}</Heading>
-                  <Text>{queue.description}</Text>
+                  <Heading>{queueItem.name}</Heading>
+                  <Text>{queueItem.description}</Text>
                 </Box>
               ))}
             </TabPanel>

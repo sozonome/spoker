@@ -1,5 +1,5 @@
 import { Box, Grid, useToast } from "@chakra-ui/react";
-import { child, onValue, onDisconnect, remove } from "firebase/database";
+import { child, onValue, onDisconnect } from "firebase/database";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -11,7 +11,7 @@ import RoomHeader from "lib/components/room/RoomHeader";
 import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
-import { roomsData } from "lib/services/firebase/room";
+import { disconnectUser, roomsData } from "lib/services/firebase/room";
 import type { RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
@@ -75,7 +75,7 @@ const RoomContainer = () => {
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
       setInRoom(false);
-      await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
+      disconnectUser(id as string, currentUser.uid);
     }
   };
 
@@ -89,12 +89,12 @@ const RoomContainer = () => {
     if (roomData && currentUser && inRoom) {
       if (roomData.users?.[currentUser.uid]) {
         setBusy(false);
-        const updatedUsers: Array<RoomUser> = Object.entries(
-          roomData.users
-        ).map(([uid, userData]) => ({
-          uid,
-          ...userData,
-        }));
+        const updatedUsers: Array<RoomUser> = Object.entries(roomData.users)
+          .map(([uid, userData]) => ({
+            uid,
+            ...userData,
+          }))
+          .filter((user) => user.isConnected);
 
         const isAllParticipantVoted = updatedUsers
           .filter((user) => user.role === RoleType.participant)

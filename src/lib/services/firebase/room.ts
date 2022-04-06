@@ -3,7 +3,8 @@ import { nanoid } from "nanoid";
 
 import type { CreateRoomFormType } from "lib/components/hall/types";
 import type { RoomConfig, RoomInstance, Task } from "lib/types/RawDB";
-import type { RoleType, User } from "lib/types/user";
+import type { User } from "lib/types/user";
+import { RoleType } from "lib/types/user";
 
 import { getCurrentUser } from "./auth";
 import { fbase } from "./config";
@@ -64,16 +65,20 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
     async (snap) => {
       if (snap.exists()) {
         const user: User = snap.val();
-        const mustRemovePoint = role !== user.role && role === "observant";
+        const mustRemovePoint =
+          role !== user.role &&
+          [RoleType.observant, RoleType.owner].includes(role);
 
         await update(snap.ref, {
           point: mustRemovePoint ? null : user.point || null,
           role,
+          isConnected: true,
         });
       } else {
         await set(child(roomsData, `${roomId}/users/${currentUser?.uid}`), {
           name: currentUser?.displayName,
           role,
+          isConnected: true,
         });
       }
     }
@@ -82,6 +87,12 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
 
 export const updateRoomTask = async (roomId: string, task: Task) => {
   await update(child(roomsData, `${roomId}/task`), task);
+};
+
+export const disconnectUser = async (roomId: string, uid: string) => {
+  await update(child(roomsData, `${roomId}/users/${uid}`), {
+    isConnected: false,
+  });
 };
 
 type UpdatePointParams = {

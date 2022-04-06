@@ -12,4 +12,5 @@ export interface User {
   name: string;
   role: RoleType;
   point?: number;
+  isConnected: boolean;
 }
