@@ -8,6 +8,7 @@ import {
   Select,
   Spacer,
   Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import type { User } from "firebase/auth";
@@ -20,11 +21,13 @@ import { hideLabelOptions } from "lib/constants/hideLabel";
 import { updateConfig } from "lib/services/firebase/room";
 import type { RoomConfig, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
+import { RoleType } from "lib/types/user";
 
 import PointWrapper from "./PointWrapper";
 import { pointTextColor, pointTextSize } from "./utils";
 
 type CurrentVotesWrapperProps = {
+  isOwner: boolean;
   isObservant: boolean;
   isParticipant: boolean;
   roomData: RoomInstance;
@@ -35,6 +38,7 @@ type CurrentVotesWrapperProps = {
 };
 
 const CurrentVotesWrapper = ({
+  isOwner,
   isObservant,
   isParticipant,
   roomData,
@@ -43,6 +47,7 @@ const CurrentVotesWrapper = ({
   users,
   currentUser,
 }: CurrentVotesWrapperProps) => {
+  const wrapperBackgroundColor = useColorModeValue("green.50", "gray.600");
   const router = useRouter();
   const {
     query: { id },
@@ -52,7 +57,7 @@ const CurrentVotesWrapper = ({
   const handleUpdateFreezeAfterVote = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (isObservant) {
+    if (isOwner || isObservant) {
       const updatedConfig: Partial<RoomConfig> = {
         isFreezeAfterVote: e.currentTarget.checked,
       };
@@ -68,7 +73,7 @@ const CurrentVotesWrapper = ({
   };
 
   const handleUpdateHideLabel = (selectedHideLabel: HideLabelOptionsType) => {
-    if (isObservant) {
+    if (isOwner || isObservant) {
       const updatedConfig: Partial<RoomConfig> = {
         hideLabel: selectedHideLabel,
       };
@@ -84,7 +89,9 @@ const CurrentVotesWrapper = ({
   const sortedParticipants = React.useMemo(
     () =>
       users
-        .filter((user) => user.role === "participant")
+        .filter((user) =>
+          [RoleType.participant, RoleType.owner].includes(user.role)
+        )
         .sort((a, b) => (showVote ? (b.point ?? 0) - (a.point ?? 0) : 0))
         .map((participant, participantIndex, participants) => (
           <React.Fragment key={participant.uid}>
@@ -113,8 +120,12 @@ const CurrentVotesWrapper = ({
   );
 
   return (
-    <SpokerWrapperGrid display="inline-block" gap={4}>
-      <Heading>Current Votes</Heading>
+    <SpokerWrapperGrid
+      display="inline-block"
+      gap={4}
+      backgroundColor={wrapperBackgroundColor}
+    >
+      <Heading size="lg">Current Votes</Heading>
 
       <Checkbox
         disabled={isParticipant}
@@ -126,7 +137,7 @@ const CurrentVotesWrapper = ({
         freeze after vote
       </Checkbox>
 
-      {isObservant && (
+      {(isOwner || isObservant) && (
         <FormControl display="flex" alignItems="center">
           <FormLabel fontSize="sm" width="30%">
             Hide Label

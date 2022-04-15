@@ -1,26 +1,28 @@
 import { Box, Grid, useToast } from "@chakra-ui/react";
-import { child, onValue, onDisconnect, remove } from "firebase/database";
+import { child, onValue, onDisconnect } from "firebase/database";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import * as React from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import ControllerWrapper from "lib/components/room/ControllerWrapper";
 import CurrentVotesWrapper from "lib/components/room/CurrentVotesWrapper";
 import RoomHeader from "lib/components/room/RoomHeader";
+import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
-import { roomsData } from "lib/services/firebase/room";
+import { disconnectUser, roomsData } from "lib/services/firebase/room";
 import type { RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
+import { RoleType } from "lib/types/user";
 
 const RoomContainer = () => {
-  const { currentUser } = useContext(AuthContext);
-  const [busy, setBusy] = useState<boolean>(true);
-  const [showVote, setShowVote] = useState<boolean>(false);
-  const [roomData, setRoomData] = useState<RoomInstance>();
-  const [users, setUsers] = useState<Array<RoomUser>>([]);
-  const [inRoom, setInRoom] = useState<boolean>(true);
+  const { currentUser } = React.useContext(AuthContext);
+  const [busy, setBusy] = React.useState<boolean>(true);
+  const [showVote, setShowVote] = React.useState<boolean>(false);
+  const [roomData, setRoomData] = React.useState<RoomInstance>();
+  const [users, setUsers] = React.useState<Array<RoomUser>>([]);
+  const [inRoom, setInRoom] = React.useState<boolean>(true);
 
   const router = useRouter();
   const {
@@ -28,22 +30,30 @@ const RoomContainer = () => {
   } = router;
   const toast = useToast();
 
-  const participantPoints = showVote
-    ? [...users]
-        .filter((unfilteredUser) => unfilteredUser.role === "participant")
-        .map((user) => user.point ?? 0)
-    : [];
+  const participantPoints = React.useMemo(() => {
+    if (!showVote) {
+      return [];
+    }
+    return [...users]
+      .filter((unfilteredUser) =>
+        [RoleType.owner, RoleType.participant].includes(unfilteredUser.role)
+      )
+      .map((user) => user.point ?? 0);
+  }, [showVote, users]);
 
-  const averagePoint =
-    participantPoints.reduce((a, b) => a + b, 0) / participantPoints.length ??
-    0;
-  const isParticipant =
-    (currentUser &&
-      roomData?.users?.[currentUser.uid]?.role === "participant") ??
-    false;
-  const isObservant =
-    (currentUser && roomData?.users?.[currentUser.uid]?.role === "observant") ??
-    false;
+  const averagePoint = React.useMemo(
+    () =>
+      participantPoints.reduce((a, b) => a + b, 0) / participantPoints.length ??
+      0,
+    [participantPoints]
+  );
+  const userRole = React.useMemo(
+    () => currentUser && roomData?.users?.[currentUser.uid]?.role,
+    [currentUser, roomData?.users]
+  );
+  const isParticipant = userRole === RoleType.participant;
+  const isObservant = userRole === RoleType.observant;
+  const isOwner = userRole === RoleType.owner;
 
   const getRoomData = async () => {
     onValue(child(roomsData, id as string), (snap) => {
@@ -65,32 +75,32 @@ const RoomContainer = () => {
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
       setInRoom(false);
-      await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
+      disconnectUser(id as string, currentUser.uid);
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     toast.closeAll();
     getRoomData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (roomData && currentUser && inRoom) {
       if (roomData.users?.[currentUser.uid]) {
         setBusy(false);
-        const updatedUsers: Array<RoomUser> = Object.entries(
-          roomData.users
-        ).map((a) => ({
-          uid: a[0],
-          ...a[1],
-        }));
+        const updatedUsers: Array<RoomUser> = Object.entries(roomData.users)
+          .map(([uid, userData]) => ({
+            uid,
+            ...userData,
+          }))
+          .filter((user) => user.isConnected);
 
-        const hello = updatedUsers
-          .filter((user) => user.role === "participant")
-          .map((user) => user.point ?? "empty");
+        const isAllParticipantVoted = updatedUsers
+          .filter((user) => user.role === RoleType.participant)
+          .every((user) => user.point);
 
-        setShowVote(hello.indexOf("empty") < 0);
+        setShowVote(isAllParticipantVoted);
         setUsers(updatedUsers);
         return;
       }
@@ -109,7 +119,7 @@ const RoomContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomData, inRoom]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     router.events.on("routeChangeStart", removeUserFromRoom);
     return () => {
       router.events.off("routeChangeStart", removeUserFromRoom);
@@ -126,11 +136,13 @@ const RoomContainer = () => {
         <title>{roomData.room.name} | spoker</title>
       </Head>
 
-      <RoomHeader roomData={roomData} />
+      <RoomHeader roomData={roomData} isOwner={isOwner} />
 
-      <Grid templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]} gap={4}>
-        <Grid gap={4}>
-          {isParticipant && (
+      {isOwner && <TaskList roomData={roomData} />}
+
+      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6}>
+        <Grid gap={6}>
+          {(isOwner || isParticipant) && (
             <VoteWrapper
               roomData={roomData}
               currentUser={currentUser}
@@ -138,10 +150,14 @@ const RoomContainer = () => {
             />
           )}
 
-          <ControllerWrapper users={users} isObservant={isObservant} />
+          <ControllerWrapper
+            users={users}
+            isResetEnabled={isOwner || isObservant}
+          />
         </Grid>
 
         <CurrentVotesWrapper
+          isOwner={isOwner}
           isObservant={isObservant}
           isParticipant={isParticipant}
           roomData={roomData}
