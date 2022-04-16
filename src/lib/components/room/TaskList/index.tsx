@@ -10,7 +10,9 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as React from "react";
+import { useForm } from "react-hook-form";
 import { GoPlus } from "react-icons/go";
 
 import SpokerButton from "lib/components/shared/SpokerButton";
@@ -19,17 +21,18 @@ import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import type { RoomInstance } from "lib/types/RawDB";
 
+import { submitStoryFormValidationSchema } from "./constants";
 import TaskItem from "./TaskItem";
-// import type { SubmitStoryForm } from "./types";
+import type { SubmitStoryForm } from "./types";
 
 type TaskListProps = {
   roomData: RoomInstance;
 };
 
-// const initialFormValue = {
-//   name: "",
-//   description: "",
-// };
+const initialFormValue: SubmitStoryForm = {
+  name: "",
+  description: "",
+};
 
 const TaskList = ({ roomData }: TaskListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,11 +41,25 @@ const TaskList = ({ roomData }: TaskListProps) => {
     md: "Add Story",
   });
   const [selectedTabIndex, setSelectedTabIndex] = React.useState<number>(0);
-  // const { values, errors, handleChange, handleSubmit, resetForm } =
-  //   useFormik<SubmitStoryForm>({
-  //     initialValues: initialFormValue,
-  //     onSubmit: (formValues) => {},
-  //   });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    // getValues,
+    formState: { errors, isValid },
+  } = useForm<SubmitStoryForm>({
+    defaultValues: initialFormValue,
+    resolver: yupResolver(submitStoryFormValidationSchema),
+    mode: "onChange",
+  });
+
+  const handleAddStory = async () => {
+    if (isValid) {
+      // const values = getValues();
+      reset();
+    }
+  };
 
   const { queue, completed, task } = roomData;
   const all = React.useMemo(
@@ -103,16 +120,32 @@ const TaskList = ({ roomData }: TaskListProps) => {
         isOpen={isOpen}
         onClose={onClose}
         header="Add Story"
+        contentWrapperProps={{
+          as: "form",
+          onSubmit: handleSubmit(handleAddStory),
+        }}
         body={
           <Grid gap={4}>
-            <SpokerInput isRequired label="Name" />
-            <SpokerInput label="Description" />
+            <SpokerInput
+              {...register("name")}
+              isRequired
+              label="Name"
+              isInvalid={!!errors.name?.message}
+              errorText={errors.name?.message}
+            />
+            <SpokerInput {...register("description")} label="Description" />
           </Grid>
         }
         footer={
           <Flex gridGap={2}>
             <SpokerButton onClick={onClose}>Cancel</SpokerButton>
-            <SpokerButton colorScheme="teal">Add</SpokerButton>
+            <SpokerButton
+              colorScheme="teal"
+              type="submit"
+              isDisabled={!isValid}
+            >
+              Add
+            </SpokerButton>
           </Flex>
         }
       />

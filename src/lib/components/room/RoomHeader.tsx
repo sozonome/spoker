@@ -33,18 +33,19 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
   );
 
   const content = React.useMemo(() => {
+    const task = roomData?.task;
     if (isOwner) {
       return (
         <>
           <SpokerInput
             label="Name"
-            value={roomData?.task.name}
+            value={task.name}
             onChange={handleUpdateTask("name")}
             placeholder="Going to Mars"
           />
           <SpokerInput
             label="Description"
-            value={roomData?.task.description}
+            value={task.description}
             onChange={handleUpdateTask("description")}
             placeholder="Land to Moon first"
           />
@@ -54,16 +55,11 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
 
     return (
       <>
-        <Heading fontSize="2xl">{roomData?.task.name}</Heading>
-        <Text>{roomData?.task.description}</Text>
+        <Heading fontSize="2xl">{task.name}</Heading>
+        {task.description && <Text>{task.description}</Text>}
       </>
     );
-  }, [
-    handleUpdateTask,
-    isOwner,
-    roomData?.task.description,
-    roomData?.task.name,
-  ]);
+  }, [handleUpdateTask, isOwner, roomData?.task]);
 
   return (
     <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>

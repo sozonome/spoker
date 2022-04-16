@@ -1,4 +1,4 @@
-import type { ModalProps } from "@chakra-ui/react";
+import type { ModalContentProps, ModalProps } from "@chakra-ui/react";
 import {
   Modal,
   ModalBody,
@@ -20,6 +20,7 @@ export type SpokerModalWrapperProps = Pick<
   withCloseButton?: boolean;
   body?: React.ReactNode;
   footer?: React.ReactNode;
+  contentWrapperProps?: ModalContentProps;
 };
 
 const SpokerModalWrapper = ({
@@ -30,6 +31,7 @@ const SpokerModalWrapper = ({
   body,
   footer,
   closeOnOverlayClick = false,
+  contentWrapperProps,
   onClose,
 }: SpokerModalWrapperProps) => {
   return (
@@ -42,7 +44,7 @@ const SpokerModalWrapper = ({
     >
       <ModalOverlay />
 
-      <ModalContent {...contraGridStyle} marginX="6">
+      <ModalContent {...contraGridStyle} marginX="6" {...contentWrapperProps}>
         {header && (
           <ModalHeader fontWeight="bold" fontSize={{ base: "2xl", lg: "3xl" }}>
             {header}
