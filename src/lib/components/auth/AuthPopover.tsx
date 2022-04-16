@@ -99,16 +99,26 @@ const AuthPopover = () => {
     setIsEditingDisplayName(true);
   };
 
+  const processLogout = async () => {
+    await logoutUser().then(() => {
+      toast({
+        description: "Successfully logged out",
+        status: "info",
+        position: "top",
+      });
+    });
+  };
+
   const handleLogout = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       router.push("/").then(async () => {
         await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
-        logoutUser();
+        processLogout();
       });
       return;
     }
 
-    logoutUser();
+    processLogout();
   };
 
   if (!currentUser) {

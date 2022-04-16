@@ -1,11 +1,4 @@
-import type { ModalContentProps } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Modal, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import { useContext, useEffect, useState } from "react";
@@ -46,14 +39,6 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     }
   }, [isUnauthorized]);
 
-  const borderColor = useColorModeValue("#18191F", "#FFFFFF");
-  const contraBoxStyle: Partial<ModalContentProps> = {
-    paddingY: 2,
-    borderRadius: 16,
-    border: `2px solid ${borderColor}`,
-    boxShadow: `0px 6px 0px ${borderColor}`,
-  };
-
   const handleSwitchToRegister = () => setIsRegistered(false);
   const handleSwitchToLogin = () => setIsRegistered(true);
 
@@ -70,13 +55,11 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     >
       <ModalOverlay />
 
-      <ModalContent {...contraBoxStyle} marginX={[2, 8]}>
-        {isRegistered ? (
-          <Login {...{ handleSwitchToRegister }} />
-        ) : (
-          <Register {...{ handleSwitchToLogin }} />
-        )}
-      </ModalContent>
+      {isRegistered ? (
+        <Login {...{ handleSwitchToRegister }} />
+      ) : (
+        <Register {...{ handleSwitchToLogin }} />
+      )}
     </Modal>
   );
 };
