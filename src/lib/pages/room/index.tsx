@@ -11,8 +11,12 @@ import RoomHeader from "lib/components/room/RoomHeader";
 import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
-import { disconnectUser, roomsData } from "lib/services/firebase/room";
-import type { RoomInstance } from "lib/types/RawDB";
+import {
+  disconnectUser,
+  roomsData,
+  submitVote,
+} from "lib/services/firebase/room";
+import type { PointEntry, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
 
@@ -41,10 +45,19 @@ const RoomContainer = () => {
       .map((user) => user.point ?? 0);
   }, [showVote, users]);
 
-  const averagePoint = React.useMemo(
-    () =>
-      participantPoints.reduce((a, b) => a + b, 0) / participantPoints.length ??
-      0,
+  const averagePoint = React.useMemo(() => {
+    const filledPoints = participantPoints.filter((point) => point);
+    return (
+      filledPoints.reduce((prev, current) => {
+        if (current) {
+          return current + prev;
+        }
+        return prev;
+      }, 0) / filledPoints.length ?? 0
+    );
+  }, [participantPoints]);
+  const highestPoint = React.useMemo(
+    () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
     [participantPoints]
   );
   const userRole = React.useMemo(
@@ -79,11 +92,38 @@ const RoomContainer = () => {
     }
   };
 
+  const handleFinishVote = async (estimate: number) => {
+    if (roomData && currentUser && isOwner) {
+      const pointEntries: Array<PointEntry> = users.map(
+        (user) => ({ name: user.name, point: user.point ?? 0 } as PointEntry)
+      );
+      await submitVote(
+        id as string,
+        roomData.task,
+        pointEntries,
+        estimate,
+        roomData.queue,
+        roomData.completed
+      );
+    }
+  };
+
   React.useEffect(() => {
     toast.closeAll();
     getRoomData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    if (roomData?.task.lastVoted?.name) {
+      toast({
+        description: `${roomData.task.lastVoted.name} just voted`,
+        status: "info",
+        position: "bottom-right",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomData?.task.lastVoted?.name, roomData?.task.lastVoted?.time]);
 
   React.useEffect(() => {
     if (roomData && currentUser && inRoom) {
@@ -136,12 +176,9 @@ const RoomContainer = () => {
         <title>{roomData.room.name} | spoker</title>
       </Head>
 
-      <RoomHeader roomData={roomData} isOwner={isOwner} />
-
-      {isOwner && <TaskList roomData={roomData} />}
-
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6}>
+      <Grid templateColumns={{ base: "1fr", md: "3fr 2fr" }} gap={6}>
         <Grid gap={6}>
+          <RoomHeader roomData={roomData} isOwner={isOwner} />
           {(isOwner || isParticipant) && (
             <VoteWrapper
               roomData={roomData}
@@ -149,24 +186,29 @@ const RoomContainer = () => {
               showVote={showVote}
             />
           )}
+        </Grid>
 
+        <Grid gap={6}>
+          <CurrentVotesWrapper
+            isOwner={isOwner}
+            isObservant={isObservant}
+            isParticipant={isParticipant}
+            roomData={roomData}
+            showVote={showVote}
+            averagePoint={averagePoint}
+            highestPoint={highestPoint}
+            users={users}
+            currentUser={currentUser}
+            onFinishVote={handleFinishVote}
+          />
           <ControllerWrapper
             users={users}
             isResetEnabled={isOwner || isObservant}
           />
         </Grid>
-
-        <CurrentVotesWrapper
-          isOwner={isOwner}
-          isObservant={isObservant}
-          isParticipant={isParticipant}
-          roomData={roomData}
-          showVote={showVote}
-          averagePoint={averagePoint}
-          users={users}
-          currentUser={currentUser}
-        />
       </Grid>
+
+      <TaskList isOwner={isOwner} roomData={roomData} showVote={showVote} />
     </Grid>
   ) : (
     <Box>Error</Box>

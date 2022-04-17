@@ -2,7 +2,12 @@ import { child, get, getDatabase, ref, set, update } from "firebase/database";
 import { nanoid } from "nanoid";
 
 import type { CreateRoomFormType } from "lib/components/hall/types";
-import type { RoomConfig, RoomInstance, Task } from "lib/types/RawDB";
+import type {
+  PointEntry,
+  RoomConfig,
+  RoomInstance,
+  Task,
+} from "lib/types/RawDB";
 import type { User } from "lib/types/user";
 import { RoleType } from "lib/types/user";
 
@@ -70,6 +75,7 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
           [RoleType.observant, RoleType.owner].includes(role);
 
         await update(snap.ref, {
+          name: currentUser?.displayName,
           point: mustRemovePoint ? null : user.point || null,
           role,
           isConnected: true,
@@ -103,8 +109,19 @@ type UpdatePointParams = {
 
 export const updatePoint = async (param: UpdatePointParams) => {
   const { roomId, uid, point } = param;
+  const currentTime = new Date().toISOString();
 
   await update(child(roomsData, `${roomId}/users/${uid}`), { point });
+  const roomData = await getRoom(roomId);
+
+  if (roomData?.task) {
+    const currentUser = await getCurrentUser();
+    const updatedTask: Task = {
+      ...roomData.task,
+      lastVoted: { name: currentUser?.displayName ?? "", time: currentTime },
+    };
+    await updateRoomTask(roomId, updatedTask);
+  }
 };
 
 export const clearPoints = async (roomId: string) => {
@@ -124,4 +141,62 @@ export const updateConfig = async (
   config: Partial<RoomConfig>
 ) => {
   await update(child(roomsData, `${roomId}/config`), config);
+};
+
+export const rewriteQueue = async (roomId: string, queue: Array<Task>) => {
+  await set(child(roomsData, `${roomId}/queue`), queue);
+};
+
+export const rewriteCompleted = async (
+  roomId: string,
+  completed: Array<Task>
+) => {
+  await set(child(roomsData, `${roomId}/completed`), completed);
+};
+
+export const submitVote = async (
+  roomId: string,
+  task: Task,
+  entries: Array<PointEntry>,
+  estimate: number,
+  queue?: Array<Task>,
+  completed?: Array<Task>
+) => {
+  const votedTask: Task = {
+    ...task,
+    estimation: estimate,
+    pointEntries: entries,
+  };
+
+  const randomId = nanoid(21);
+
+  const nextTask = queue?.[0] ?? {
+    id: randomId,
+    name: "Placeholder Story (end of Stories)",
+    description: "Edit Me",
+  };
+  const updatedQueue = queue?.slice(1) ?? [];
+  const updatedCompleted = [votedTask, ...(completed ?? [])];
+
+  await updateRoomTask(roomId, nextTask);
+  await rewriteQueue(roomId, updatedQueue);
+  await rewriteCompleted(roomId, updatedCompleted);
+  await clearPoints(roomId);
+};
+
+export const swapSelectedQueueWithCurrent = async (
+  roomId: string,
+  task: Task,
+  selectedQueueIndex: number,
+  queue?: Array<Task>
+) => {
+  if (queue) {
+    const currentTask = queue[selectedQueueIndex];
+    const updatedQueue = [...queue];
+    updatedQueue[selectedQueueIndex] = { ...task, lastVoted: null };
+
+    await clearPoints(roomId);
+    await updateRoomTask(roomId, currentTask);
+    await rewriteQueue(roomId, updatedQueue);
+  }
 };

@@ -18,6 +18,12 @@ const taskNode = node(
     id: node(validate(newData.isString())),
     name: node(validate(newData.isString())),
     description: node(validate(newData.isString())),
+    lastVoted: node(
+      props({
+        name: node(validate(newData.isString())),
+        time: node(validate(newData.isString())),
+      })
+    ),
     estimation: node(validate(newData.isNumber())),
     pointEntries: node(
       param("$index", () =>
@@ -29,7 +35,13 @@ const taskNode = node(
         )
       )
     ),
-  })
+  }),
+  write(allowAll)
+);
+
+const taskArrayNode = node(
+  param("$index", () => taskNode),
+  write(allowAll)
 );
 
 export const rules = {
@@ -59,8 +71,8 @@ export const rules = {
                 })
               ),
               task: taskNode,
-              queue: node(param("$index", () => taskNode)),
-              completed: node(param("$index", () => taskNode)),
+              queue: taskArrayNode,
+              completed: taskArrayNode,
               selectedTaskIndex: node(validate(newData.isNumber())),
               users: node(
                 param("$userID", ($userID) =>

@@ -27,9 +27,9 @@ const VoteWrapper = ({ roomData, currentUser, showVote }: VoteWrapperProps) => {
     query: { id },
   } = router;
 
-  const handleUpdatePoint = (point: number) => {
+  const handleUpdatePoint = async (point: number) => {
     if (currentUser && !(roomData.config.isFreezeAfterVote && showVote)) {
-      updatePoint({ uid: currentUser.uid, point, roomId: id as string });
+      await updatePoint({ uid: currentUser.uid, point, roomId: id as string });
     }
   };
 

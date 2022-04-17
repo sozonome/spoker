@@ -42,7 +42,7 @@ const ControllerWrapper = ({
       title: `Room Link Copied!\n${roomLink}`,
       status: "success",
       isClosable: true,
-      position: "top-right",
+      position: "top",
     });
   };
 
@@ -57,16 +57,20 @@ const ControllerWrapper = ({
   );
 
   return (
-    <SpokerWrapperGrid gap={4}>
+    <SpokerWrapperGrid gap={2}>
       <Heading size="md">Controller</Heading>
 
       <Flex gridGap={2} wrap="wrap">
         {isResetEnabled && (
-          <Button colorScheme="red" onClick={handleClearPoints}>
+          <Button size="sm" colorScheme="red" onClick={handleClearPoints}>
             Reset
           </Button>
         )}
-        <Button colorScheme="orange" onClick={() => router.push(`/join/${id}`)}>
+        <Button
+          size="sm"
+          colorScheme="orange"
+          onClick={() => router.push(`/join/${id}`)}
+        >
           Rejoin
         </Button>
       </Flex>
@@ -77,6 +81,7 @@ const ControllerWrapper = ({
           rightIcon={<BiLink />}
           colorScheme="blue"
           onClick={handleCopyRoomLink}
+          size="sm"
         >
           Copy Invite Link
         </Button>

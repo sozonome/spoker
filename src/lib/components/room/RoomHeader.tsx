@@ -1,4 +1,12 @@
-import { Flex, Grid, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Grid,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -63,7 +71,10 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
 
   return (
     <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>
-      <Heading size="lg">{roomData?.room.name}</Heading>
+      <Box>
+        <Heading size="lg">{roomData?.room.name}</Heading>
+        <Divider borderColor="black" marginTop={2} />
+      </Box>
 
       <Flex gridGap={4}>
         <Heading size="md">Story</Heading>

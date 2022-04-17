@@ -37,10 +37,16 @@ export interface RoomConfig {
 
 export type PointEntry = Pick<User, "name" | "point">;
 
+export type LastVoted = {
+  name: string;
+  time: string;
+};
+
 export interface Task {
   id: string;
   name: string;
   description?: string;
   estimation?: number;
+  lastVoted?: LastVoted | null;
   pointEntries?: Array<PointEntry>;
 }
