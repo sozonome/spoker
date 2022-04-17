@@ -125,3 +125,14 @@ export const updateConfig = async (
 ) => {
   await update(child(roomsData, `${roomId}/config`), config);
 };
+
+export const rewriteQueue = async (roomId: string, queue: Array<Task>) => {
+  await set(child(roomsData, `${roomId}/queue`), queue);
+};
+
+export const rewriteCompleted = async (
+  roomId: string,
+  completed: Array<Task>
+) => {
+  await set(child(roomsData, `${roomId}/completed`), completed);
+};
