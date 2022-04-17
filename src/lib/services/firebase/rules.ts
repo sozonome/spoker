@@ -13,6 +13,25 @@ import {
   write,
 } from "@jahed/firebase-rules";
 
+const taskNode = node(
+  props({
+    id: node(validate(newData.isString())),
+    name: node(validate(newData.isString())),
+    description: node(validate(newData.isString())),
+    estimation: node(validate(newData.isNumber())),
+    pointEntries: node(
+      param("$index", () =>
+        node(
+          props({
+            name: node(validate(newData.isString())),
+            point: node(validate(newData.isNumber())),
+          })
+        )
+      )
+    ),
+  })
+);
+
 export const rules = {
   rules: node(
     props({
@@ -25,7 +44,7 @@ export const rules = {
                   hideLabel: node(
                     validate(
                       newData.isString((newVal) =>
-                        newVal.matches(/monkey|chicken|cow|fish/)
+                        newVal.matches(/monkey|chicken|cow|fish|money/)
                       )
                     )
                   ),
@@ -39,12 +58,10 @@ export const rules = {
                   password: node(validate(newData.isString())),
                 })
               ),
-              task: node(
-                props({
-                  description: node(validate(newData.isString())),
-                  name: node(validate(newData.isString())),
-                })
-              ),
+              task: taskNode,
+              queue: node(param("$index", () => taskNode)),
+              completed: node(param("$index", () => taskNode)),
+              selectedTaskIndex: node(validate(newData.isNumber())),
               users: node(
                 param("$userID", ($userID) =>
                   node(
@@ -56,6 +73,7 @@ export const rules = {
                           newData.isNumber((newVal) => between(newVal, -1, 101))
                         )
                       ),
+                      isConnected: node(validate(newData.isBoolean())),
                     }),
                     write(equal($userID, auth.uid)),
                     validate(newData.hasChildren(["name", "role"]))
