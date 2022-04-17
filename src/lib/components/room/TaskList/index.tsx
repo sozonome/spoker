@@ -45,7 +45,7 @@ const TaskList = ({ roomData }: TaskListProps) => {
   const {
     query: { id },
   } = router;
-  const wrapperBackgroundColor = useColorModeValue("green.50", "gray.900");
+  const wrapperBackgroundColor = useColorModeValue("gray.50", "gray.900");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const buttonContent = useBreakpointValue({
     base: <GoPlus />,

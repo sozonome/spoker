@@ -23,7 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
     >
       <Meta />
 
-      <Box margin="0 auto" maxWidth="4xl" padding={8}>
+      <Box margin="0 auto" maxWidth="6xl" padding={8}>
         <Header />
         <RouteWrapper>
           <AuthWrapper>

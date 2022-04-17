@@ -136,10 +136,9 @@ const RoomContainer = () => {
         <title>{roomData.room.name} | spoker</title>
       </Head>
 
-      <RoomHeader roomData={roomData} isOwner={isOwner} />
-
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6}>
+      <Grid templateColumns={{ base: "1fr", md: "3fr 2fr" }} gap={6}>
         <Grid gap={6}>
+          <RoomHeader roomData={roomData} isOwner={isOwner} />
           {(isOwner || isParticipant) && (
             <VoteWrapper
               roomData={roomData}
@@ -147,23 +146,24 @@ const RoomContainer = () => {
               showVote={showVote}
             />
           )}
+        </Grid>
 
+        <Grid gap={6}>
+          <CurrentVotesWrapper
+            isOwner={isOwner}
+            isObservant={isObservant}
+            isParticipant={isParticipant}
+            roomData={roomData}
+            showVote={showVote}
+            averagePoint={averagePoint}
+            users={users}
+            currentUser={currentUser}
+          />
           <ControllerWrapper
             users={users}
             isResetEnabled={isOwner || isObservant}
           />
         </Grid>
-
-        <CurrentVotesWrapper
-          isOwner={isOwner}
-          isObservant={isObservant}
-          isParticipant={isParticipant}
-          roomData={roomData}
-          showVote={showVote}
-          averagePoint={averagePoint}
-          users={users}
-          currentUser={currentUser}
-        />
       </Grid>
 
       {isOwner && <TaskList roomData={roomData} />}
