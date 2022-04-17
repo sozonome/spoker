@@ -47,6 +47,6 @@ export interface Task {
   name: string;
   description?: string;
   estimation?: number;
-  lastVoted?: LastVoted;
+  lastVoted?: LastVoted | null;
   pointEntries?: Array<PointEntry>;
 }

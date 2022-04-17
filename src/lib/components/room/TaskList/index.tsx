@@ -14,6 +14,7 @@ import {
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { nanoid } from "nanoid";
@@ -29,7 +30,10 @@ import SpokerButton from "lib/components/shared/SpokerButton";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { rewriteQueue } from "lib/services/firebase/room";
+import {
+  rewriteQueue,
+  swapSelectedQueueWithCurrent,
+} from "lib/services/firebase/room";
 import type { RoomInstance, Task } from "lib/types/RawDB";
 
 import { submitStoryFormValidationSchema } from "./constants";
@@ -38,6 +42,7 @@ import type { SortableTaskItem, SubmitStoryForm } from "./types";
 
 type TaskListProps = {
   roomData: RoomInstance;
+  showVote: boolean;
 };
 
 const initialFormValue: SubmitStoryForm = {
@@ -45,13 +50,14 @@ const initialFormValue: SubmitStoryForm = {
   description: "",
 };
 
-const TaskList = ({ roomData }: TaskListProps) => {
+const TaskList = ({ roomData, showVote }: TaskListProps) => {
   const router = useRouter();
   const {
     query: { id },
   } = router;
   const wrapperBackgroundColor = useColorModeValue("gray.50", "gray.900");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
   const buttonContent = useBreakpointValue({
     base: <GoPlus />,
     md: "Add Story",
@@ -62,6 +68,22 @@ const TaskList = ({ roomData }: TaskListProps) => {
   const sortableQueue: Array<SortableTaskItem> = React.useMemo(() => {
     return (queue ?? []) as Array<SortableTaskItem>;
   }, [queue]);
+
+  const all = React.useMemo(
+    () => [task, ...(queue ?? []), ...(completed ?? [])],
+    [completed, queue, task]
+  );
+
+  const activeStoriesLengthText = queue?.length
+    ? ` (${queue.length + 1})`
+    : " (1)";
+  const activeStoriesTabText = `Active Stories${activeStoriesLengthText}`;
+  const queueLengthText = queue?.length ? ` (${queue.length})` : "";
+  const queueTabText = `Queue${queueLengthText}`;
+  const completedLengthText = completed?.length ? ` (${completed.length})` : "";
+  const completedTabText = `Completed${completedLengthText}`;
+  const allLengthText = ` (${all.length})`;
+  const allTabText = `All${allLengthText}`;
 
   const {
     register,
@@ -78,9 +100,10 @@ const TaskList = ({ roomData }: TaskListProps) => {
   const handleAddStory = async () => {
     if (isValid) {
       const values = getValues();
+      const randomId = nanoid(21);
       await rewriteQueue(id as string, [
         ...(queue ?? []),
-        { ...values, id: nanoid(21) } as Task,
+        { ...values, id: randomId } as Task,
       ]);
       onClose();
       setSelectedTabIndex(0);
@@ -101,21 +124,23 @@ const TaskList = ({ roomData }: TaskListProps) => {
     }
   };
 
-  const all = React.useMemo(
-    () => [task, ...(queue ?? []), ...(completed ?? [])],
-    [completed, queue, task]
-  );
-
-  const activeStoriesLengthText = queue?.length
-    ? ` (${queue.length + 1})`
-    : " (1)";
-  const activeStoriesTabText = `Active Stories${activeStoriesLengthText}`;
-  const queueLengthText = queue?.length ? ` (${queue.length})` : "";
-  const queueTabText = `Queue${queueLengthText}`;
-  const completedLengthText = completed?.length ? ` (${completed.length})` : "";
-  const completedTabText = `Completed${completedLengthText}`;
-  const allLengthText = ` (${all.length})`;
-  const allTabText = `All${allLengthText}`;
+  const handleClickSwap = async (selectedQueueIndex: number) => {
+    if (showVote) {
+      toast({
+        description:
+          "Cannot swap now as current story is already voted by all participants. Either finish or reset vote of current story to be able to swap.",
+        status: "warning",
+        position: "top",
+      });
+      return;
+    }
+    await swapSelectedQueueWithCurrent(
+      id as string,
+      task,
+      selectedQueueIndex,
+      queue
+    );
+  };
 
   const handleChangeTab = (index: number) => setSelectedTabIndex(index);
 
@@ -164,8 +189,16 @@ const TaskList = ({ roomData }: TaskListProps) => {
                 setList={handleRewriteQueue}
                 animation={200}
               >
-                {queue?.map((queueItem) => (
-                  <TaskItem task={queueItem} key={queueItem.id} isQueue />
+                {sortableQueue?.map((queueItem, index) => (
+                  <TaskItem
+                    task={queueItem}
+                    key={queueItem.id}
+                    queueProps={{
+                      isQueue: true,
+                      taskIndex: index,
+                      onClickSwap: handleClickSwap,
+                    }}
+                  />
                 ))}
               </ReactSortable>
             </TabPanel>

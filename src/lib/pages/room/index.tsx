@@ -207,7 +207,7 @@ const RoomContainer = () => {
         </Grid>
       </Grid>
 
-      {isOwner && <TaskList roomData={roomData} />}
+      {isOwner && <TaskList roomData={roomData} showVote={showVote} />}
     </Grid>
   ) : (
     <Box>Error</Box>

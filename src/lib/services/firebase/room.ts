@@ -172,7 +172,7 @@ export const submitVote = async (
 
   const nextTask = queue?.[0] ?? {
     id: randomId,
-    name: "#1 Task",
+    name: "Placeholder Story (end of Stories)",
     description: "Edit Me",
   };
   const updatedQueue = queue?.slice(1) ?? [];
@@ -182,4 +182,21 @@ export const submitVote = async (
   await rewriteQueue(roomId, updatedQueue);
   await rewriteCompleted(roomId, updatedCompleted);
   await clearPoints(roomId);
+};
+
+export const swapSelectedQueueWithCurrent = async (
+  roomId: string,
+  task: Task,
+  selectedQueueIndex: number,
+  queue?: Array<Task>
+) => {
+  if (queue) {
+    const currentTask = queue[selectedQueueIndex];
+    const updatedQueue = [...queue];
+    updatedQueue[selectedQueueIndex] = { ...task, lastVoted: null };
+
+    await clearPoints(roomId);
+    await updateRoomTask(roomId, currentTask);
+    await rewriteQueue(roomId, updatedQueue);
+  }
 };

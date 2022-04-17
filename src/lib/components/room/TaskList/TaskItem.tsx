@@ -4,10 +4,20 @@ import type { Task } from "lib/types/RawDB";
 
 type TaskItemProps = {
   task: Task;
-  isQueue?: boolean;
+  queueProps?: {
+    isQueue: boolean;
+    taskIndex: number;
+    onClickSwap: (selectedIndex: number) => Promise<void>;
+  };
 };
 
-const TaskItem = ({ task, isQueue }: TaskItemProps) => {
+const TaskItem = ({ task, queueProps }: TaskItemProps) => {
+  const handleClickSwap = () => {
+    if (queueProps) {
+      queueProps.onClickSwap(queueProps.taskIndex);
+    }
+  };
+
   return (
     <Flex
       borderRadius={12}
@@ -17,16 +27,18 @@ const TaskItem = ({ task, isQueue }: TaskItemProps) => {
       marginBottom={2}
       justifyContent="space-between"
       alignItems="center"
-      _hover={{ cursor: isQueue ? "move" : undefined }}
-      _active={{ cursor: isQueue ? "grab" : undefined }}
+      _hover={{ cursor: queueProps?.isQueue ? "move" : undefined }}
+      _active={{ cursor: queueProps?.isQueue ? "grab" : undefined }}
     >
       <Box>
         <Heading fontSize="xl">{task.name}</Heading>
         {task.description && <Text>{task.description}</Text>}
 
-        {isQueue && (
+        {queueProps?.isQueue && (
           <Flex marginTop={2}>
-            <Button size="sm">Swap with Current</Button>
+            <Button size="sm" onClick={handleClickSwap}>
+              Swap with Current
+            </Button>
           </Flex>
         )}
       </Box>
