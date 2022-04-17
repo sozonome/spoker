@@ -8,7 +8,13 @@ type TaskItemProps = {
 
 const TaskItem = ({ task }: TaskItemProps) => {
   return (
-    <Box borderRadius={12} borderWidth={2} borderColor="gray.400" padding={4}>
+    <Box
+      borderRadius={12}
+      borderWidth={2}
+      borderColor="gray.400"
+      padding={4}
+      marginBottom={2}
+    >
       <Heading fontSize="xl">{task.name}</Heading>
       {task.description && <Text>{task.description}</Text>}
     </Box>

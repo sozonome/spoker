@@ -29,7 +29,13 @@ const taskNode = node(
         )
       )
     ),
-  })
+  }),
+  write(allowAll)
+);
+
+const taskArrayNode = node(
+  param("$index", () => taskNode),
+  write(allowAll)
 );
 
 export const rules = {
@@ -59,8 +65,8 @@ export const rules = {
                 })
               ),
               task: taskNode,
-              queue: node(param("$index", () => taskNode)),
-              completed: node(param("$index", () => taskNode)),
+              queue: taskArrayNode,
+              completed: taskArrayNode,
               selectedTaskIndex: node(validate(newData.isNumber())),
               users: node(
                 param("$userID", ($userID) =>

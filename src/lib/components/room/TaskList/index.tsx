@@ -1,4 +1,3 @@
-import type { TabPanelProps } from "@chakra-ui/react";
 import {
   Button,
   Flex,
@@ -9,13 +8,17 @@ import {
   TabPanels,
   Tabs,
   useBreakpointValue,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import * as React from "react";
+import isEqual from "react-fast-compare";
 import { useForm } from "react-hook-form";
 import { GoPlus } from "react-icons/go";
+import { ReactSortable } from "react-sortablejs";
 
 import SpokerButton from "lib/components/shared/SpokerButton";
 import SpokerInput from "lib/components/shared/SpokerInput";
@@ -26,7 +29,7 @@ import type { RoomInstance, Task } from "lib/types/RawDB";
 
 import { submitStoryFormValidationSchema } from "./constants";
 import TaskItem from "./TaskItem";
-import type { SubmitStoryForm } from "./types";
+import type { SortableTaskItem, SubmitStoryForm } from "./types";
 
 type TaskListProps = {
   roomData: RoomInstance;
@@ -37,16 +40,12 @@ const initialFormValue: SubmitStoryForm = {
   description: "",
 };
 
-const tabPanelProps: TabPanelProps = {
-  display: "grid",
-  gap: 2,
-};
-
 const TaskList = ({ roomData }: TaskListProps) => {
   const router = useRouter();
   const {
     query: { id },
   } = router;
+  const wrapperBackgroundColor = useColorModeValue("green.50", "gray.900");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const buttonContent = useBreakpointValue({
     base: <GoPlus />,
@@ -54,6 +53,10 @@ const TaskList = ({ roomData }: TaskListProps) => {
   });
   const [selectedTabIndex, setSelectedTabIndex] = React.useState<number>(0);
   const { queue, completed, task } = roomData;
+
+  const sortableQueue: Array<SortableTaskItem> = React.useMemo(() => {
+    return (queue ?? []) as Array<SortableTaskItem>;
+  }, [queue]);
 
   const {
     register,
@@ -70,9 +73,25 @@ const TaskList = ({ roomData }: TaskListProps) => {
   const handleAddStory = async () => {
     if (isValid) {
       const values = getValues();
-      await rewriteQueue(id as string, [...(queue ?? []), values as Task]);
+      await rewriteQueue(id as string, [
+        ...(queue ?? []),
+        { ...values, id: nanoid(21) } as Task,
+      ]);
       onClose();
       reset();
+    }
+  };
+
+  const handleRewriteQueue = async (updatedQueue: Array<SortableTaskItem>) => {
+    const updated: Array<Task> = updatedQueue.map((queueItem) => {
+      const temp = queueItem;
+      delete temp.chosen;
+      delete temp.selected;
+      delete temp.filtered;
+      return temp;
+    });
+    if (!isEqual(queue, updated)) {
+      await rewriteQueue(id as string, updated);
     }
   };
 
@@ -92,7 +111,7 @@ const TaskList = ({ roomData }: TaskListProps) => {
 
   return (
     <>
-      <SpokerWrapperGrid>
+      <SpokerWrapperGrid backgroundColor={wrapperBackgroundColor}>
         <Tabs
           index={selectedTabIndex}
           onChange={handleChangeTab}
@@ -113,17 +132,23 @@ const TaskList = ({ roomData }: TaskListProps) => {
           </TabList>
 
           <TabPanels>
-            <TabPanel {...tabPanelProps}>
-              {queue?.map((queueItem) => (
-                <TaskItem task={queueItem} key={queueItem.id} />
-              ))}
+            <TabPanel>
+              <ReactSortable
+                list={sortableQueue}
+                setList={handleRewriteQueue}
+                animation={200}
+              >
+                {queue?.map((queueItem) => (
+                  <TaskItem task={queueItem} key={queueItem.id} />
+                ))}
+              </ReactSortable>
             </TabPanel>
-            <TabPanel {...tabPanelProps}>
+            <TabPanel>
               {completed?.map((completedItem) => (
                 <TaskItem task={completedItem} key={completedItem.id} />
               ))}
             </TabPanel>
-            <TabPanel {...tabPanelProps}>
+            <TabPanel>
               {all.map((completedItem) => (
                 <TaskItem task={completedItem} key={completedItem.id} />
               ))}

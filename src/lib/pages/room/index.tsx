@@ -138,8 +138,6 @@ const RoomContainer = () => {
 
       <RoomHeader roomData={roomData} isOwner={isOwner} />
 
-      {isOwner && <TaskList roomData={roomData} />}
-
       <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6}>
         <Grid gap={6}>
           {(isOwner || isParticipant) && (
@@ -167,6 +165,8 @@ const RoomContainer = () => {
           currentUser={currentUser}
         />
       </Grid>
+
+      {isOwner && <TaskList roomData={roomData} />}
     </Grid>
   ) : (
     <Box>Error</Box>
