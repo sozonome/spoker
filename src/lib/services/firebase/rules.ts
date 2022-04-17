@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
+  allowAll,
   auth,
   between,
   equal,
@@ -8,6 +9,7 @@ import {
   param,
   props,
   validate,
+  read,
   write,
 } from "@jahed/firebase-rules";
 
@@ -76,9 +78,11 @@ export const rules = {
                   )
                 )
               ),
-            })
+            }),
+            write(allowAll)
           )
-        )
+        ),
+        read(allowAll)
       ),
     })
   ),
