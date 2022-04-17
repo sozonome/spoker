@@ -61,6 +61,7 @@ export const rules = {
               task: taskNode,
               queue: node(param("$index", () => taskNode)),
               completed: node(param("$index", () => taskNode)),
+              selectedTaskIndex: node(validate(newData.isNumber())),
               users: node(
                 param("$userID", ($userID) =>
                   node(
@@ -72,6 +73,7 @@ export const rules = {
                           newData.isNumber((newVal) => between(newVal, -1, 101))
                         )
                       ),
+                      isConnected: node(validate(newData.isBoolean())),
                     }),
                     write(equal($userID, auth.uid)),
                     validate(newData.hasChildren(["name", "role"]))
