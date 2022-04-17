@@ -31,6 +31,8 @@ import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import {
+  editQueueItem,
+  removeQueueItem,
   rewriteQueue,
   swapSelectedQueueWithCurrent,
 } from "lib/services/firebase/room";
@@ -38,7 +40,7 @@ import type { RoomInstance, Task } from "lib/types/RawDB";
 
 import { submitStoryFormValidationSchema } from "./constants";
 import TaskItem from "./TaskItem";
-import type { SortableTaskItem, SubmitStoryForm } from "./types";
+import type { EditStoryForm, SortableTaskItem, SubmitStoryForm } from "./types";
 
 type TaskListProps = {
   roomData: RoomInstance;
@@ -57,13 +59,30 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
     query: { id },
   } = router;
   const wrapperBackgroundColor = useColorModeValue("gray.50", "gray.900");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenAddStory,
+    onOpen: onOpenAddStory,
+    onClose: onCloseAddStory,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenEditStory,
+    onOpen: onOpenEditStory,
+    onClose: onCloseEditStory,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenRemoveStory,
+    onOpen: onOpenRemoveStory,
+    onClose: onCloseRemoveStory,
+  } = useDisclosure();
   const toast = useToast();
   const buttonContent = useBreakpointValue({
     base: <GoPlus />,
     md: "Add Story",
   });
   const [selectedTabIndex, setSelectedTabIndex] = React.useState<number>(0);
+  const [isBusy, setIsBusy] = React.useState<boolean>();
+  const [selectedEditStoryIndex, setSelectedEditStoryIndex] =
+    React.useState<number>();
   const { queue, completed, task } = roomData;
 
   const sortableQueue: Array<SortableTaskItem> = React.useMemo(() => {
@@ -78,7 +97,7 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
   const activeStoriesLengthText = queue?.length
     ? ` (${queue.length + 1})`
     : " (1)";
-  const activeStoriesTabText = `Active Stories${activeStoriesLengthText}`;
+  const activeStoriesTabText = `Active${activeStoriesLengthText}`;
   const queueLengthText = queue?.length ? ` (${queue.length})` : "";
   const queueTabText = `Queue${queueLengthText}`;
   const completedLengthText = completed?.length ? ` (${completed.length})` : "";
@@ -98,17 +117,85 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
     mode: "onChange",
   });
 
+  const {
+    register: registerEditStoryField,
+    handleSubmit: handleSubmitEditStory,
+    reset: resetEditStoryForm,
+    getValues: getEditStoryValues,
+    formState: {
+      errors: editStoryErrors,
+      isValid: isEditStoryValid,
+      isDirty: isEditStoryDirty,
+    },
+  } = useForm<EditStoryForm>({
+    resolver: yupResolver(submitStoryFormValidationSchema),
+    mode: "onChange",
+  });
+
   const handleAddStory = async () => {
     if (isValid && isOwner) {
       const values = getValues();
       const randomId = nanoid(21);
+      setIsBusy(true);
       await rewriteQueue(id as string, [
         ...(queue ?? []),
         { ...values, id: randomId } as Task,
       ]);
-      onClose();
+      onCloseAddStory();
+      setIsBusy(false);
       setSelectedTabIndex(0);
       reset();
+    }
+  };
+
+  const handleOpenEditStory = (selectedIndex: number) => {
+    setSelectedEditStoryIndex(selectedIndex);
+    const selectedQueueItem = queue?.[selectedIndex];
+    resetEditStoryForm({
+      id: selectedQueueItem?.id,
+      name: selectedQueueItem?.name,
+      description: selectedQueueItem?.description,
+    });
+    onOpenEditStory();
+  };
+
+  const closeEditStory = () => {
+    setSelectedEditStoryIndex(undefined);
+    onCloseEditStory();
+    resetEditStoryForm();
+  };
+
+  const processEditStory = async () => {
+    if (isOwner && selectedEditStoryIndex && isEditStoryValid) {
+      const values = getEditStoryValues();
+      setIsBusy(true);
+      await editQueueItem(
+        id as string,
+        values as Task,
+        selectedEditStoryIndex,
+        queue
+      );
+      closeEditStory();
+      setIsBusy(false);
+    }
+  };
+
+  const handleOpenRemoveStory = (selectedIndex: number) => {
+    setSelectedEditStoryIndex(selectedIndex);
+    onOpenRemoveStory();
+  };
+
+  const closeRemoveStory = () => {
+    setSelectedEditStoryIndex(undefined);
+    onCloseRemoveStory();
+  };
+
+  const processRemoveStory = async () => {
+    if (isOwner && selectedEditStoryIndex !== undefined) {
+      setIsBusy(true);
+      await removeQueueItem(id as string, selectedEditStoryIndex, queue);
+      closeRemoveStory();
+      setIsBusy(false);
     }
   };
 
@@ -166,7 +253,7 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
                 marginLeft="auto"
                 size="md"
                 colorScheme="facebook"
-                onClick={onOpen}
+                onClick={onOpenAddStory}
               >
                 {buttonContent}
               </Button>
@@ -205,6 +292,8 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
                         isQueue: true,
                         taskIndex: index,
                         onClickSwap: handleClickSwap,
+                        onClickEdit: handleOpenEditStory,
+                        onClickRemove: handleOpenRemoveStory,
                       }}
                     />
                   ))}
@@ -226,8 +315,8 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
       </SpokerWrapperGrid>
 
       <SpokerModalWrapper
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isOpenAddStory}
+        onClose={onCloseAddStory}
         header="Add Story"
         contentWrapperProps={{
           as: "form",
@@ -235,6 +324,7 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         }}
         body={
           <Grid gap={4}>
+            <Text>Add story to queue</Text>
             <SpokerInput
               {...register("name")}
               isRequired
@@ -247,13 +337,83 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         }
         footer={
           <Flex gridGap={2}>
-            <SpokerButton onClick={onClose}>Cancel</SpokerButton>
+            <SpokerButton onClick={onCloseAddStory} disabled={isBusy}>
+              Cancel
+            </SpokerButton>
             <SpokerButton
               colorScheme="teal"
               type="submit"
-              isDisabled={!isValid}
+              isDisabled={!isValid || isBusy}
+              isLoading={isBusy}
             >
               Add
+            </SpokerButton>
+          </Flex>
+        }
+      />
+
+      <SpokerModalWrapper
+        isOpen={isOpenEditStory}
+        onClose={closeEditStory}
+        header="Edit Story"
+        contentWrapperProps={{
+          as: "form",
+          onSubmit: handleSubmitEditStory(processEditStory),
+        }}
+        body={
+          <Grid gap={4}>
+            <SpokerInput
+              {...registerEditStoryField("name")}
+              isRequired
+              label="Name"
+              isInvalid={!!editStoryErrors.name?.message}
+              errorText={editStoryErrors.name?.message}
+            />
+            <SpokerInput
+              {...registerEditStoryField("description")}
+              label="Description"
+            />
+          </Grid>
+        }
+        footer={
+          <Flex gridGap={2}>
+            <SpokerButton onClick={closeEditStory} disabled={isBusy}>
+              Cancel
+            </SpokerButton>
+            <SpokerButton
+              type="submit"
+              colorScheme="blue"
+              isDisabled={!isEditStoryValid || !isEditStoryDirty || isBusy}
+              isLoading={isBusy}
+            >
+              Save
+            </SpokerButton>
+          </Flex>
+        }
+      />
+
+      <SpokerModalWrapper
+        isOpen={isOpenRemoveStory}
+        onClose={closeRemoveStory}
+        header="Confirm Remove Story"
+        body={
+          <Box>
+            <Text>
+              Are you sure you want to remove{" "}
+              {queue?.[selectedEditStoryIndex ?? 0]?.name ?? ""}?
+            </Text>
+          </Box>
+        }
+        footer={
+          <Flex gridGap={2}>
+            <SpokerButton onClick={closeRemoveStory}>Cancel</SpokerButton>
+            <SpokerButton
+              colorScheme="red"
+              onClick={processRemoveStory}
+              isLoading={isBusy}
+              isDisabled={isBusy}
+            >
+              Yes, Remove
             </SpokerButton>
           </Flex>
         }
