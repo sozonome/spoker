@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/sozonome/spoker/compare/v1.5.3...v1.6.0) (2022-04-17)
+
+
+### Features
+
+* add notifier for last voter ([db86c06](https://github.com/sozonome/spoker/commit/db86c067a31cb28ea09233e8adbef7825e5e189f))
+* add rewrite queue ([f9a5007](https://github.com/sozonome/spoker/commit/f9a5007118a28950ab8289a2934656804d2f5bb5))
+* add submit vote functionality ([32c0f89](https://github.com/sozonome/spoker/commit/32c0f895888bf35c3ac999f72df8cc6713ec57f2))
+* add swap story capabilities ([a29916b](https://github.com/sozonome/spoker/commit/a29916b24383d08d5f115c2a06805aa27a53bea6))
+* implement sorting ([7fc92cd](https://github.com/sozonome/spoker/commit/7fc92cd578ed561a96cc57454dca56c09c481890))
+* **layout:** :lipstick: minor revamp ([#47](https://github.com/sozonome/spoker/issues/47)) ([3ccb8ee](https://github.com/sozonome/spoker/commit/3ccb8ee53c1c819efbb512ae8315460b6970335e))
+* re-arrange layout ([da16485](https://github.com/sozonome/spoker/commit/da164854ad3101fd79b4e6530c29ee403be3ac3a))
+* **room:** ✨ add task queue section wrapper ([#59](https://github.com/sozonome/spoker/issues/59)) ([1bd842d](https://github.com/sozonome/spoker/commit/1bd842dbadb156bb080c86377abb118c5f7e745e))
+* **room:** multi task queue ([#52](https://github.com/sozonome/spoker/issues/52)) ([8075f51](https://github.com/sozonome/spoker/commit/8075f5123b3dbd489e937854bbfd48753225e0a0))
+* show tasklist for all role ([680e767](https://github.com/sozonome/spoker/commit/680e76701a18f8315715b38430b395d1a277b2ef))
+
+
+### Bug Fixes
+
+* **hall:** make next link switchable for disable state ([#57](https://github.com/sozonome/spoker/issues/57)) ([a68e11d](https://github.com/sozonome/spoker/commit/a68e11db3883d79f7abda0114d3ba68ca88b500a))
+
+
+### Improvements
+
+* switch from formik to react-hook-form ([#62](https://github.com/sozonome/spoker/issues/62)) ([5ac2d21](https://github.com/sozonome/spoker/commit/5ac2d215c97467f8c17d5c4128499c65934e955d))
+* **types:** extend task model for multi task queue ([#54](https://github.com/sozonome/spoker/issues/54)) ([a03f6fe](https://github.com/sozonome/spoker/commit/a03f6fe3df7441de4a2a4fc71f47906a3f59bfe9))
+
 ### [1.5.3](https://github.com/sozonome/spoker/compare/v1.5.2...v1.5.3) (2022-01-27)
 
 
