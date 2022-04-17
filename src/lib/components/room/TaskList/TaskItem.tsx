@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { HiPencil, HiSwitchVertical, HiTrash } from "react-icons/hi";
 
 import type { Task } from "lib/types/RawDB";
 
@@ -8,6 +9,8 @@ type TaskItemProps = {
     isQueue: boolean;
     taskIndex: number;
     onClickSwap: (selectedIndex: number) => Promise<void>;
+    onClickEdit: (selectedIndex: number) => void;
+    onClickRemove: (selectedIndex: number) => void;
   };
 };
 
@@ -15,6 +18,18 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
   const handleClickSwap = () => {
     if (queueProps) {
       queueProps.onClickSwap(queueProps.taskIndex);
+    }
+  };
+
+  const handleClickEdit = () => {
+    if (queueProps) {
+      queueProps.onClickEdit(queueProps.taskIndex);
+    }
+  };
+
+  const handleClickRemove = () => {
+    if (queueProps) {
+      queueProps.onClickRemove(queueProps.taskIndex);
     }
   };
 
@@ -35,9 +50,32 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
         {task.description && <Text>{task.description}</Text>}
 
         {queueProps?.isQueue && (
-          <Flex marginTop={2}>
-            <Button size="sm" onClick={handleClickSwap}>
-              Swap with Current
+          <Flex marginTop={2} gridGap={2}>
+            <Button
+              colorScheme="orange"
+              size="sm"
+              onClick={handleClickSwap}
+              leftIcon={<HiSwitchVertical />}
+            >
+              Swap
+            </Button>
+
+            <Button
+              colorScheme="teal"
+              size="sm"
+              onClick={handleClickEdit}
+              leftIcon={<HiPencil />}
+            >
+              Edit
+            </Button>
+
+            <Button
+              colorScheme="red"
+              size="sm"
+              onClick={handleClickRemove}
+              leftIcon={<HiTrash />}
+            >
+              Remove
             </Button>
           </Flex>
         )}

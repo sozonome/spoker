@@ -200,3 +200,30 @@ export const swapSelectedQueueWithCurrent = async (
     await rewriteQueue(roomId, updatedQueue);
   }
 };
+
+export const editQueueItem = async (
+  roomId: string,
+  updatedItem: Task,
+  selectedQueueIndex: number,
+  queue?: Array<Task>
+) => {
+  if (queue) {
+    const updatedQueue = [...queue];
+    updatedQueue[selectedQueueIndex] = updatedItem;
+
+    await rewriteQueue(roomId, updatedQueue);
+  }
+};
+
+export const removeQueueItem = async (
+  roomId: string,
+  selectedQueueIndex: number,
+  queue?: Array<Task>
+) => {
+  if (queue) {
+    const updatedQueue = [...queue];
+    updatedQueue.splice(selectedQueueIndex, 1);
+
+    await rewriteQueue(roomId, updatedQueue);
+  }
+};
