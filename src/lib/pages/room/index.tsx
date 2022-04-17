@@ -11,7 +11,11 @@ import RoomHeader from "lib/components/room/RoomHeader";
 import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
-import { disconnectUser, roomsData } from "lib/services/firebase/room";
+import {
+  disconnectUser,
+  roomsData,
+  submitVote,
+} from "lib/services/firebase/room";
 import type { RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
@@ -47,6 +51,10 @@ const RoomContainer = () => {
       0,
     [participantPoints]
   );
+  const highestPoint = React.useMemo(
+    () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
+    [participantPoints]
+  );
   const userRole = React.useMemo(
     () => currentUser && roomData?.users?.[currentUser.uid]?.role,
     [currentUser, roomData?.users]
@@ -76,6 +84,18 @@ const RoomContainer = () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
       setInRoom(false);
       disconnectUser(id as string, currentUser.uid);
+    }
+  };
+
+  const handleFinishVote = async (estimate: number) => {
+    if (roomData && currentUser && isOwner) {
+      await submitVote(
+        id as string,
+        roomData.task,
+        estimate,
+        roomData.queue,
+        roomData.completed
+      );
     }
   };
 
@@ -156,8 +176,10 @@ const RoomContainer = () => {
             roomData={roomData}
             showVote={showVote}
             averagePoint={averagePoint}
+            highestPoint={highestPoint}
             users={users}
             currentUser={currentUser}
+            onFinishVote={handleFinishVote}
           />
           <ControllerWrapper
             users={users}

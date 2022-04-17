@@ -12,7 +12,7 @@ const SpokerButton = ({ children, ...props }: SpokerButtonProps) => {
   };
 
   return (
-    <Button {...props} {...contraButtonStyle}>
+    <Button {...contraButtonStyle} {...props}>
       {children}
     </Button>
   );

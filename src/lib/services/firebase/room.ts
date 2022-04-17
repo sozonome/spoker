@@ -136,3 +136,31 @@ export const rewriteCompleted = async (
 ) => {
   await set(child(roomsData, `${roomId}/completed`), completed);
 };
+
+export const submitVote = async (
+  roomId: string,
+  task: Task,
+  estimate: number,
+  queue?: Array<Task>,
+  completed?: Array<Task>
+) => {
+  const votedTask: Task = {
+    ...task,
+    estimation: estimate,
+  };
+
+  const randomId = nanoid(21);
+
+  const nextTask = queue?.[0] ?? {
+    id: randomId,
+    name: "#1 Task",
+    description: "Edit Me",
+  };
+  const updatedQueue = queue?.slice(1) ?? [];
+  const updatedCompleted = [votedTask, ...(completed ?? [])];
+
+  await updateRoomTask(roomId, nextTask);
+  await rewriteQueue(roomId, updatedQueue);
+  await rewriteCompleted(roomId, updatedCompleted);
+  await clearPoints(roomId);
+};

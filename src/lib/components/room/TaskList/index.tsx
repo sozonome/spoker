@@ -1,12 +1,16 @@
 import {
+  Box,
   Button,
   Flex,
   Grid,
+  Icon,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
+  Tooltip,
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
@@ -18,6 +22,7 @@ import * as React from "react";
 import isEqual from "react-fast-compare";
 import { useForm } from "react-hook-form";
 import { GoPlus } from "react-icons/go";
+import { RiInformationLine } from "react-icons/ri";
 import { ReactSortable } from "react-sortablejs";
 
 import SpokerButton from "lib/components/shared/SpokerButton";
@@ -78,6 +83,7 @@ const TaskList = ({ roomData }: TaskListProps) => {
         { ...values, id: nanoid(21) } as Task,
       ]);
       onClose();
+      setSelectedTabIndex(0);
       reset();
     }
   };
@@ -100,6 +106,10 @@ const TaskList = ({ roomData }: TaskListProps) => {
     [completed, queue, task]
   );
 
+  const activeStoriesLengthText = queue?.length
+    ? ` (${queue.length + 1})`
+    : " (1)";
+  const activeStoriesTabText = `Active Stories${activeStoriesLengthText}`;
   const queueLengthText = queue?.length ? ` (${queue.length})` : "";
   const queueTabText = `Queue${queueLengthText}`;
   const completedLengthText = completed?.length ? ` (${completed.length})` : "";
@@ -118,7 +128,7 @@ const TaskList = ({ roomData }: TaskListProps) => {
           variant="soft-rounded"
         >
           <TabList alignItems="center">
-            <Tab>{queueTabText}</Tab>
+            <Tab>{activeStoriesTabText}</Tab>
             <Tab>{completedTabText}</Tab>
             <Tab>{allTabText}</Tab>
             <Button
@@ -132,14 +142,30 @@ const TaskList = ({ roomData }: TaskListProps) => {
           </TabList>
 
           <TabPanels>
-            <TabPanel>
+            <TabPanel display="flex" flexDir="column" gap={2}>
+              <Text>Current:</Text>
+              <TaskItem task={task} />
+
+              <Box>
+                <Tooltip label="Queue can be re-arranged using drag and drop, the first item will be the next story to be voted.">
+                  <Text
+                    as="span"
+                    _hover={{ cursor: "help" }}
+                    textDecoration="underline"
+                    fontWeight="semibold"
+                    alignItems="center"
+                  >
+                    {queueTabText}: <Icon as={RiInformationLine} />
+                  </Text>
+                </Tooltip>
+              </Box>
               <ReactSortable
                 list={sortableQueue}
                 setList={handleRewriteQueue}
                 animation={200}
               >
                 {queue?.map((queueItem) => (
-                  <TaskItem task={queueItem} key={queueItem.id} />
+                  <TaskItem task={queueItem} key={queueItem.id} isQueue />
                 ))}
               </ReactSortable>
             </TabPanel>
