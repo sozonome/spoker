@@ -84,7 +84,8 @@ const Home = () => {
             <AlertDescription>
               Haven&apos;t received any verification email?{" "}
               <Button
-                variant="ghost"
+                colorScheme="orange"
+                size="sm"
                 fontWeight="semibold"
                 onClick={requestEmailVerification}
               >

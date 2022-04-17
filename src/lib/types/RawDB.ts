@@ -40,7 +40,7 @@ export type PointEntry = Pick<User, "name" | "point">;
 export interface Task {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   estimation?: number;
   pointEntries?: Array<PointEntry>;
 }
