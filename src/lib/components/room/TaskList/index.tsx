@@ -43,6 +43,7 @@ import type { SortableTaskItem, SubmitStoryForm } from "./types";
 type TaskListProps = {
   roomData: RoomInstance;
   showVote: boolean;
+  isOwner: boolean;
 };
 
 const initialFormValue: SubmitStoryForm = {
@@ -50,7 +51,7 @@ const initialFormValue: SubmitStoryForm = {
   description: "",
 };
 
-const TaskList = ({ roomData, showVote }: TaskListProps) => {
+const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
   const router = useRouter();
   const {
     query: { id },
@@ -98,7 +99,7 @@ const TaskList = ({ roomData, showVote }: TaskListProps) => {
   });
 
   const handleAddStory = async () => {
-    if (isValid) {
+    if (isValid && isOwner) {
       const values = getValues();
       const randomId = nanoid(21);
       await rewriteQueue(id as string, [
@@ -112,34 +113,38 @@ const TaskList = ({ roomData, showVote }: TaskListProps) => {
   };
 
   const handleRewriteQueue = async (updatedQueue: Array<SortableTaskItem>) => {
-    const updated: Array<Task> = updatedQueue.map((queueItem) => {
-      const temp = queueItem;
-      delete temp.chosen;
-      delete temp.selected;
-      delete temp.filtered;
-      return temp;
-    });
-    if (!isEqual(queue, updated)) {
-      await rewriteQueue(id as string, updated);
+    if (isOwner) {
+      const updated: Array<Task> = updatedQueue.map((queueItem) => {
+        const temp = queueItem;
+        delete temp.chosen;
+        delete temp.selected;
+        delete temp.filtered;
+        return temp;
+      });
+      if (!isEqual(queue, updated)) {
+        await rewriteQueue(id as string, updated);
+      }
     }
   };
 
   const handleClickSwap = async (selectedQueueIndex: number) => {
-    if (showVote) {
-      toast({
-        description:
-          "Cannot swap now as current story is already voted by all participants. Either finish or reset vote of current story to be able to swap.",
-        status: "warning",
-        position: "top",
-      });
-      return;
+    if (isOwner) {
+      if (showVote) {
+        toast({
+          description:
+            "Cannot swap now as current story is already voted by all participants. Either finish or reset vote of current story to be able to swap.",
+          status: "warning",
+          position: "top",
+        });
+        return;
+      }
+      await swapSelectedQueueWithCurrent(
+        id as string,
+        task,
+        selectedQueueIndex,
+        queue
+      );
     }
-    await swapSelectedQueueWithCurrent(
-      id as string,
-      task,
-      selectedQueueIndex,
-      queue
-    );
   };
 
   const handleChangeTab = (index: number) => setSelectedTabIndex(index);
@@ -153,55 +158,59 @@ const TaskList = ({ roomData, showVote }: TaskListProps) => {
           variant="soft-rounded"
         >
           <TabList alignItems="center">
-            <Tab>{activeStoriesTabText}</Tab>
+            {isOwner && <Tab>{activeStoriesTabText}</Tab>}
             <Tab>{completedTabText}</Tab>
             <Tab>{allTabText}</Tab>
-            <Button
-              marginLeft="auto"
-              size="md"
-              colorScheme="facebook"
-              onClick={onOpen}
-            >
-              {buttonContent}
-            </Button>
+            {isOwner && (
+              <Button
+                marginLeft="auto"
+                size="md"
+                colorScheme="facebook"
+                onClick={onOpen}
+              >
+                {buttonContent}
+              </Button>
+            )}
           </TabList>
 
           <TabPanels>
-            <TabPanel display="flex" flexDir="column" gap={2}>
-              <Text>Current:</Text>
-              <TaskItem task={task} />
+            {isOwner && (
+              <TabPanel display="flex" flexDir="column" gap={2}>
+                <Text>Current:</Text>
+                <TaskItem task={task} />
 
-              <Box>
-                <Tooltip label="Queue can be re-arranged using drag and drop, the first item will be the next story to be voted.">
-                  <Text
-                    as="span"
-                    _hover={{ cursor: "help" }}
-                    textDecoration="underline"
-                    fontWeight="semibold"
-                    alignItems="center"
-                  >
-                    {queueTabText}: <Icon as={RiInformationLine} />
-                  </Text>
-                </Tooltip>
-              </Box>
-              <ReactSortable
-                list={sortableQueue}
-                setList={handleRewriteQueue}
-                animation={200}
-              >
-                {sortableQueue?.map((queueItem, index) => (
-                  <TaskItem
-                    task={queueItem}
-                    key={queueItem.id}
-                    queueProps={{
-                      isQueue: true,
-                      taskIndex: index,
-                      onClickSwap: handleClickSwap,
-                    }}
-                  />
-                ))}
-              </ReactSortable>
-            </TabPanel>
+                <Box>
+                  <Tooltip label="Queue can be re-arranged using drag and drop, the first item will be the next story to be voted.">
+                    <Text
+                      as="span"
+                      _hover={{ cursor: "help" }}
+                      textDecoration="underline"
+                      fontWeight="semibold"
+                      alignItems="center"
+                    >
+                      {queueTabText}: <Icon as={RiInformationLine} />
+                    </Text>
+                  </Tooltip>
+                </Box>
+                <ReactSortable
+                  list={sortableQueue}
+                  setList={handleRewriteQueue}
+                  animation={200}
+                >
+                  {sortableQueue?.map((queueItem, index) => (
+                    <TaskItem
+                      task={queueItem}
+                      key={queueItem.id}
+                      queueProps={{
+                        isQueue: true,
+                        taskIndex: index,
+                        onClickSwap: handleClickSwap,
+                      }}
+                    />
+                  ))}
+                </ReactSortable>
+              </TabPanel>
+            )}
             <TabPanel>
               {completed?.map((completedItem) => (
                 <TaskItem task={completedItem} key={completedItem.id} />

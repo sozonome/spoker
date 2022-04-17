@@ -95,7 +95,7 @@ const RoomContainer = () => {
   const handleFinishVote = async (estimate: number) => {
     if (roomData && currentUser && isOwner) {
       const pointEntries: Array<PointEntry> = users.map(
-        (user) => ({ name: user.name, point: user.point } as PointEntry)
+        (user) => ({ name: user.name, point: user.point ?? 0 } as PointEntry)
       );
       await submitVote(
         id as string,
@@ -122,7 +122,8 @@ const RoomContainer = () => {
         position: "bottom-right",
       });
     }
-  }, [roomData?.task.lastVoted?.name, roomData?.task.lastVoted?.time, toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomData?.task.lastVoted?.name, roomData?.task.lastVoted?.time]);
 
   React.useEffect(() => {
     if (roomData && currentUser && inRoom) {
@@ -207,7 +208,7 @@ const RoomContainer = () => {
         </Grid>
       </Grid>
 
-      {isOwner && <TaskList roomData={roomData} showVote={showVote} />}
+      <TaskList isOwner={isOwner} roomData={roomData} showVote={showVote} />
     </Grid>
   ) : (
     <Box>Error</Box>
