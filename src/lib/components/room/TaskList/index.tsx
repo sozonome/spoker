@@ -166,7 +166,7 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
   };
 
   const processEditStory = async () => {
-    if (isOwner && selectedEditStoryIndex && isEditStoryValid) {
+    if (isOwner && selectedEditStoryIndex !== undefined && isEditStoryValid) {
       const values = getEditStoryValues();
       setIsBusy(true);
       await editQueueItem(
