@@ -16,7 +16,7 @@ import {
   roomsData,
   submitVote,
 } from "lib/services/firebase/room";
-import type { RoomInstance } from "lib/types/RawDB";
+import type { PointEntry, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
 
@@ -45,12 +45,17 @@ const RoomContainer = () => {
       .map((user) => user.point ?? 0);
   }, [showVote, users]);
 
-  const averagePoint = React.useMemo(
-    () =>
-      participantPoints.reduce((a, b) => a + b, 0) / participantPoints.length ??
-      0,
-    [participantPoints]
-  );
+  const averagePoint = React.useMemo(() => {
+    const filledPoints = participantPoints.filter((point) => point);
+    return (
+      filledPoints.reduce((prev, current) => {
+        if (current) {
+          return current + prev;
+        }
+        return prev;
+      }, 0) / filledPoints.length ?? 0
+    );
+  }, [participantPoints]);
   const highestPoint = React.useMemo(
     () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
     [participantPoints]
@@ -89,9 +94,13 @@ const RoomContainer = () => {
 
   const handleFinishVote = async (estimate: number) => {
     if (roomData && currentUser && isOwner) {
+      const pointEntries: Array<PointEntry> = users.map(
+        (user) => ({ name: user.name, point: user.point } as PointEntry)
+      );
       await submitVote(
         id as string,
         roomData.task,
+        pointEntries,
         estimate,
         roomData.queue,
         roomData.completed
@@ -104,6 +113,16 @@ const RoomContainer = () => {
     getRoomData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    if (roomData?.task.lastVoted?.name) {
+      toast({
+        description: `${roomData.task.lastVoted.name} just voted`,
+        status: "info",
+        position: "bottom-right",
+      });
+    }
+  }, [roomData?.task.lastVoted?.name, roomData?.task.lastVoted?.time, toast]);
 
   React.useEffect(() => {
     if (roomData && currentUser && inRoom) {

@@ -18,6 +18,12 @@ const taskNode = node(
     id: node(validate(newData.isString())),
     name: node(validate(newData.isString())),
     description: node(validate(newData.isString())),
+    lastVoted: node(
+      props({
+        name: node(validate(newData.isString())),
+        time: node(validate(newData.isString())),
+      })
+    ),
     estimation: node(validate(newData.isNumber())),
     pointEntries: node(
       param("$index", () =>
