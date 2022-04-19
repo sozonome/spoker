@@ -1,4 +1,11 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { HiPencil, HiSwitchVertical, HiTrash } from "react-icons/hi";
 
 import type { Task } from "lib/types/RawDB";
@@ -15,6 +22,16 @@ type TaskItemProps = {
 };
 
 const TaskItem = ({ task, queueProps }: TaskItemProps) => {
+  const swapButtonContent = useBreakpointValue({
+    base: null,
+    md: "Swap with Current",
+  });
+
+  const removeButtonContent = useBreakpointValue({
+    base: null,
+    md: "Remove",
+  });
+
   const handleClickSwap = () => {
     if (queueProps) {
       queueProps.onClickSwap(queueProps.taskIndex);
@@ -57,7 +74,7 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
               onClick={handleClickSwap}
               leftIcon={<HiSwitchVertical />}
             >
-              Swap
+              {swapButtonContent}
             </Button>
 
             <Button
@@ -75,7 +92,7 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
               onClick={handleClickRemove}
               leftIcon={<HiTrash />}
             >
-              Remove
+              {removeButtonContent}
             </Button>
           </Flex>
         )}
