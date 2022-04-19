@@ -32,6 +32,7 @@ const CreateRoom = () => {
   const processCreateRoom = async () => {
     setIsLoading(true);
     const values = getValues();
+    values.id = values.id.trim().replace(" ", "-");
     await createRoom(values)
       .then(() => {
         router.push(`/join/${values.id}`);
