@@ -1,4 +1,5 @@
 import { Button, Grid, Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import type { ChangeEventHandler } from "react";
 import * as React from "react";
 
@@ -7,11 +8,20 @@ import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 
 const JoinRoom = () => {
+  const router = useRouter();
   const [roomId, setRoomId] = React.useState<string>("");
   const isDisabled = React.useMemo(() => roomId.length === 0, [roomId.length]);
 
   const handleChangeInput: ChangeEventHandler<HTMLInputElement> = (e) =>
     setRoomId(e.target.value);
+
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter" && !isDisabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      router.push(`/join/${roomId}`);
+    }
+  };
 
   return (
     <SpokerWrapperGrid gap={8} backgroundColor="orange.500" color="white">
@@ -24,6 +34,7 @@ const JoinRoom = () => {
           onChange={handleChangeInput}
           placeholder="quick-brown-fox"
           _placeholder={{ color: "orange.200" }}
+          onKeyDown={handleKeyDown}
         />
       </Grid>
 
