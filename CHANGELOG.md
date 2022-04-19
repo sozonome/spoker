@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/sozonome/spoker/compare/v1.6.0...v1.6.1) (2022-04-19)
+
+
+### Features
+
+* **room:** ✨ add edit and remove for queue item ([#72](https://github.com/sozonome/spoker/issues/72)) ([1314853](https://github.com/sozonome/spoker/commit/131485359fec71ec7ff40223d5a3684eb6bead72))
+
+
+### Bug Fixes
+
+* **room:** revise validation checking for edit story ([f4cd18a](https://github.com/sozonome/spoker/commit/f4cd18a72c2f2327c1d3507a30821845c70f41c8))
+
+
+### Improvements
+
+* adjust task item button for mobile ([db6c96d](https://github.com/sozonome/spoker/commit/db6c96dc568303cf4382da7d4138e1a396e82e61))
+* **hall:** add enter keydown handler when join room ([898986d](https://github.com/sozonome/spoker/commit/898986d083072f050118ce0b91247012dde16914))
+* prevent weird room id creation ([313409a](https://github.com/sozonome/spoker/commit/313409aa2c7c9369ecb9504eb7be13880475c9b9))
+
 ## [1.6.0](https://github.com/sozonome/spoker/compare/v1.5.3...v1.6.0) (2022-04-17)
 
 
