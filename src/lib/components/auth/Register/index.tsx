@@ -48,7 +48,10 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
     )
       .then((user) => {
         setIsLoading(false);
-        trackEvent("New User Register", "registration");
+        trackEvent({
+          eventValue: "New User Register",
+          eventType: "registration",
+        });
         toast({
           title: "Registration Successful",
           position: "top",
