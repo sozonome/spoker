@@ -17,6 +17,7 @@ const CommitLintConfiguration = {
         "storybook",
         "functions",
         "types",
+        "utils",
       ],
     ],
     "scope-case": [2, "always", "kebab-case"],

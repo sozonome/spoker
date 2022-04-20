@@ -12,6 +12,7 @@ import type { CreateRoomFormType } from "lib/components/hall/types";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { createRoom } from "lib/services/firebase/room";
+import { formatId } from "lib/utils/formatId";
 
 const CreateRoom = () => {
   const toast = useToast();
@@ -32,7 +33,7 @@ const CreateRoom = () => {
   const processCreateRoom = async () => {
     setIsLoading(true);
     const values = getValues();
-    values.id = values.id.trim().replace(" ", "-");
+    values.id = formatId(values.id);
     await createRoom(values)
       .then(() => {
         router.push(`/join/${values.id}`);
