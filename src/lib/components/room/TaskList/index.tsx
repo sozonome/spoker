@@ -169,12 +169,12 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
     if (isOwner && selectedEditStoryIndex !== undefined && isEditStoryValid) {
       const values = getEditStoryValues();
       setIsBusy(true);
-      await editQueueItem(
-        id as string,
-        values as Task,
-        selectedEditStoryIndex,
-        queue
-      );
+      await editQueueItem({
+        roomId: id as string,
+        updatedItem: values as Task,
+        selectedQueueIndex: selectedEditStoryIndex,
+        queue,
+      });
       closeEditStory();
       setIsBusy(false);
     }
@@ -193,7 +193,11 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
   const processRemoveStory = async () => {
     if (isOwner && selectedEditStoryIndex !== undefined) {
       setIsBusy(true);
-      await removeQueueItem(id as string, selectedEditStoryIndex, queue);
+      await removeQueueItem({
+        roomId: id as string,
+        selectedQueueIndex: selectedEditStoryIndex,
+        queue,
+      });
       closeRemoveStory();
       setIsBusy(false);
     }
@@ -225,12 +229,12 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         });
         return;
       }
-      await swapSelectedQueueWithCurrent(
-        id as string,
+      await swapSelectedQueueWithCurrent({
+        roomId: id as string,
         task,
         selectedQueueIndex,
-        queue
-      );
+        queue,
+      });
     }
   };
 

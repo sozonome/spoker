@@ -97,14 +97,14 @@ const RoomContainer = () => {
       const pointEntries: Array<PointEntry> = users.map(
         (user) => ({ name: user.name, point: user.point ?? 0 } as PointEntry)
       );
-      await submitVote(
-        id as string,
-        roomData.task,
-        pointEntries,
+      await submitVote({
+        roomId: id as string,
+        task: roomData.task,
+        entries: pointEntries,
         estimate,
-        roomData.queue,
-        roomData.completed
-      );
+        queue: roomData.queue,
+        completed: roomData.completed,
+      });
     }
   };
 

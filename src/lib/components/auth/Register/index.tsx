@@ -41,11 +41,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
   const processRegister = async () => {
     setIsLoading(true);
     const values = getValues();
-    await registerUserWithEmailAndPassword(
-      values.email,
-      values.password,
-      values.name
-    )
+    await registerUserWithEmailAndPassword(values)
       .then((user) => {
         setIsLoading(false);
         trackEvent({

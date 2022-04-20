@@ -154,14 +154,23 @@ export const rewriteCompleted = async (
   await set(child(roomsData, `${roomId}/completed`), completed);
 };
 
-export const submitVote = async (
-  roomId: string,
-  task: Task,
-  entries: Array<PointEntry>,
-  estimate: number,
-  queue?: Array<Task>,
-  completed?: Array<Task>
-) => {
+type SubmitVoteArgs = {
+  roomId: string;
+  task: Task;
+  entries: Array<PointEntry>;
+  estimate: number;
+  queue?: Array<Task>;
+  completed?: Array<Task>;
+};
+
+export const submitVote = async ({
+  roomId,
+  task,
+  entries,
+  estimate,
+  queue,
+  completed,
+}: SubmitVoteArgs) => {
   const votedTask: Task = {
     ...task,
     estimation: estimate,
@@ -184,12 +193,19 @@ export const submitVote = async (
   await clearPoints(roomId);
 };
 
-export const swapSelectedQueueWithCurrent = async (
-  roomId: string,
-  task: Task,
-  selectedQueueIndex: number,
-  queue?: Array<Task>
-) => {
+type SwapSelectedQueueWithCurrentArgs = {
+  roomId: string;
+  task: Task;
+  selectedQueueIndex: number;
+  queue?: Array<Task>;
+};
+
+export const swapSelectedQueueWithCurrent = async ({
+  roomId,
+  task,
+  selectedQueueIndex,
+  queue,
+}: SwapSelectedQueueWithCurrentArgs) => {
   if (queue) {
     const currentTask = queue[selectedQueueIndex];
     const updatedQueue = [...queue];
@@ -201,12 +217,19 @@ export const swapSelectedQueueWithCurrent = async (
   }
 };
 
-export const editQueueItem = async (
-  roomId: string,
-  updatedItem: Task,
-  selectedQueueIndex: number,
-  queue?: Array<Task>
-) => {
+type EditQueueItemArgs = {
+  roomId: string;
+  updatedItem: Task;
+  selectedQueueIndex: number;
+  queue?: Array<Task>;
+};
+
+export const editQueueItem = async ({
+  roomId,
+  updatedItem,
+  selectedQueueIndex,
+  queue,
+}: EditQueueItemArgs) => {
   if (queue) {
     const updatedQueue = [...queue];
     updatedQueue[selectedQueueIndex] = updatedItem;
@@ -215,11 +238,17 @@ export const editQueueItem = async (
   }
 };
 
-export const removeQueueItem = async (
-  roomId: string,
-  selectedQueueIndex: number,
-  queue?: Array<Task>
-) => {
+type RemoveQueueItemArgs = {
+  roomId: string;
+  selectedQueueIndex: number;
+  queue?: Array<Task>;
+};
+
+export const removeQueueItem = async ({
+  roomId,
+  selectedQueueIndex,
+  queue,
+}: RemoveQueueItemArgs) => {
   if (queue) {
     const updatedQueue = [...queue];
     updatedQueue.splice(selectedQueueIndex, 1);

@@ -16,11 +16,17 @@ import { fbase } from "./config";
 
 const auth = getAuth(fbase);
 
-export const registerUserWithEmailAndPassword = async (
-  email: string,
-  password: string,
-  name: string
-) => {
+type RegisterUserWithEmailAndPasswordArgs = {
+  email: string;
+  password: string;
+  name: string;
+};
+
+export const registerUserWithEmailAndPassword = async ({
+  email,
+  password,
+  name,
+}: RegisterUserWithEmailAndPasswordArgs) => {
   const authState = await createUserWithEmailAndPassword(auth, email, password);
   sendEmailVerification(authState.user);
 
