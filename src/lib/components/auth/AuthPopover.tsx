@@ -22,8 +22,8 @@ import { BsPencil } from "react-icons/bs";
 import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
 
-import { PRIVATE_ROUTES } from "lib/components/layout/RouteWrapper";
 import SpokerInput from "lib/components/shared/SpokerInput";
+import { PRIVATE_ROUTES } from "lib/layout/RouteWrapper";
 import { logoutUser, updateDisplayName } from "lib/services/firebase";
 import { roomsData } from "lib/services/firebase/room";
 
@@ -99,16 +99,26 @@ const AuthPopover = () => {
     setIsEditingDisplayName(true);
   };
 
+  const processLogout = async () => {
+    await logoutUser().then(() => {
+      toast({
+        description: "Successfully logged out",
+        status: "info",
+        position: "top",
+      });
+    });
+  };
+
   const handleLogout = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       router.push("/").then(async () => {
         await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
-        logoutUser();
+        processLogout();
       });
       return;
     }
 
-    logoutUser();
+    processLogout();
   };
 
   if (!currentUser) {

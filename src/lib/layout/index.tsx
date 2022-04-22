@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 
 import AuthWrapper from "lib/components/auth/AuthWrapper";
@@ -13,11 +13,17 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const backgroundColor = useColorModeValue("gray.100", "gray.800");
+
   return (
-    <Box margin="0 auto" maxWidth="4xl" transition="0.5s ease-out">
+    <Box
+      backgroundColor={backgroundColor}
+      transition="0.5s ease-out"
+      minHeight="100vh"
+    >
       <Meta />
 
-      <Box margin="8">
+      <Box margin="0 auto" maxWidth="6xl" padding={8}>
         <Header />
         <RouteWrapper>
           <AuthWrapper>

@@ -1,4 +1,5 @@
 import {
+  Button,
   Checkbox,
   Divider,
   FormControl,
@@ -6,8 +7,8 @@ import {
   Grid,
   Heading,
   Select,
-  Spacer,
   Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import type { User } from "firebase/auth";
@@ -20,61 +21,52 @@ import { hideLabelOptions } from "lib/constants/hideLabel";
 import { updateConfig } from "lib/services/firebase/room";
 import type { RoomConfig, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
+import { pointOptions } from "lib/types/room";
+import { RoleType } from "lib/types/user";
 
 import PointWrapper from "./PointWrapper";
 import { pointTextColor, pointTextSize } from "./utils";
 
 type CurrentVotesWrapperProps = {
+  isOwner: boolean;
   isObservant: boolean;
   isParticipant: boolean;
   roomData: RoomInstance;
   showVote: boolean;
   averagePoint: number;
+  highestPoint: number;
   users: Array<RoomUser>;
   currentUser: User;
+  onFinishVote: (estimate: number) => Promise<void>;
 };
 
 const CurrentVotesWrapper = ({
+  isOwner,
   isObservant,
   isParticipant,
   roomData,
   showVote,
   averagePoint,
+  highestPoint,
   users,
   currentUser,
+  onFinishVote,
 }: CurrentVotesWrapperProps) => {
+  const wrapperBackgroundColor = useColorModeValue("green.50", "gray.600");
   const router = useRouter();
   const {
     query: { id },
   } = router;
   const toast = useToast();
+  const [isLoadingSubmitVote, setIsLoadingSubmitVote] =
+    React.useState<boolean>(false);
+  const [estimate, setEstimate] = React.useState<number>(0);
 
-  const handleUpdateFreezeAfterVote = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (isObservant) {
-      const updatedConfig: Partial<RoomConfig> = {
-        isFreezeAfterVote: e.currentTarget.checked,
-      };
-      updateConfig(id as string, updatedConfig);
-    } else {
-      toast({
-        title: "Participant cannot change configurations",
-        status: "warning",
-        isClosable: true,
-        position: "top-right",
-      });
+  React.useEffect(() => {
+    if (showVote) {
+      setEstimate(highestPoint);
     }
-  };
-
-  const handleUpdateHideLabel = (selectedHideLabel: HideLabelOptionsType) => {
-    if (isObservant) {
-      const updatedConfig: Partial<RoomConfig> = {
-        hideLabel: selectedHideLabel,
-      };
-      updateConfig(id as string, updatedConfig);
-    }
-  };
+  }, [highestPoint, showVote]);
 
   const showAveragePoint = React.useMemo(
     () => showVote && !Number.isNaN(averagePoint),
@@ -84,7 +76,9 @@ const CurrentVotesWrapper = ({
   const sortedParticipants = React.useMemo(
     () =>
       users
-        .filter((user) => user.role === "participant")
+        .filter((user) =>
+          [RoleType.participant, RoleType.owner].includes(user.role)
+        )
         .sort((a, b) => (showVote ? (b.point ?? 0) - (a.point ?? 0) : 0))
         .map((participant, participantIndex, participants) => (
           <React.Fragment key={participant.uid}>
@@ -112,9 +106,50 @@ const CurrentVotesWrapper = ({
     [currentUser?.uid, roomData?.config.hideLabel, showVote, users]
   );
 
+  const handleUpdateFreezeAfterVote = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (isOwner || isObservant) {
+      const updatedConfig: Partial<RoomConfig> = {
+        isFreezeAfterVote: e.currentTarget.checked,
+      };
+      await updateConfig(id as string, updatedConfig);
+    } else {
+      toast({
+        title: "Participant cannot change configurations",
+        status: "warning",
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
+
+  const handleUpdateHideLabel = (selectedHideLabel: HideLabelOptionsType) => {
+    if (isOwner || isObservant) {
+      const updatedConfig: Partial<RoomConfig> = {
+        hideLabel: selectedHideLabel,
+      };
+      updateConfig(id as string, updatedConfig);
+    }
+  };
+
+  const handleSetEstimate = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setEstimate(Number(e.target.value));
+  };
+
+  const handleFinishVoting = async () => {
+    setIsLoadingSubmitVote(true);
+    await onFinishVote(estimate);
+    setIsLoadingSubmitVote(false);
+  };
+
   return (
-    <SpokerWrapperGrid display="inline-block" gap={4}>
-      <Heading>Current Votes</Heading>
+    <SpokerWrapperGrid
+      display="inline-block"
+      gap={4}
+      backgroundColor={wrapperBackgroundColor}
+    >
+      <Heading size="lg">Current Votes</Heading>
 
       <Checkbox
         disabled={isParticipant}
@@ -126,7 +161,7 @@ const CurrentVotesWrapper = ({
         freeze after vote
       </Checkbox>
 
-      {isObservant && (
+      {(isOwner || isObservant) && (
         <FormControl display="flex" alignItems="center">
           <FormLabel fontSize="sm" width="30%">
             Hide Label
@@ -152,7 +187,38 @@ const CurrentVotesWrapper = ({
         {sortedParticipants}
       </Grid>
 
-      <Spacer />
+      {isOwner && (
+        <Grid marginTop={6}>
+          {showVote && (
+            <Grid gap={2} templateColumns="1fr 3fr">
+              <Select
+                borderRadius={12}
+                borderWidth={2}
+                borderColor="gray.500"
+                value={estimate}
+                size="sm"
+                onChange={handleSetEstimate}
+                fontWeight="bold"
+              >
+                {pointOptions.map((point) => (
+                  <option value={point} key={point}>
+                    {point}
+                  </option>
+                ))}
+              </Select>
+              <Button
+                isLoading={isLoadingSubmitVote}
+                disabled={isLoadingSubmitVote}
+                size="sm"
+                colorScheme="teal"
+                onClick={handleFinishVoting}
+              >
+                Finish Vote
+              </Button>
+            </Grid>
+          )}
+        </Grid>
+      )}
     </SpokerWrapperGrid>
   );
 };

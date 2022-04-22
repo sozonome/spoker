@@ -17,10 +17,13 @@ import type { RoomUser } from "lib/types/room";
 
 type ControllerWrapperProps = {
   users: Array<RoomUser>;
-  isObservant: boolean;
+  isResetEnabled: boolean;
 };
 
-const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
+const ControllerWrapper = ({
+  users,
+  isResetEnabled,
+}: ControllerWrapperProps) => {
   const router = useRouter();
   const {
     query: { id },
@@ -39,26 +42,35 @@ const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
       title: `Room Link Copied!\n${roomLink}`,
       status: "success",
       isClosable: true,
-      position: "top-right",
+      position: "top",
     });
   };
 
   const currentUserList = React.useMemo(
-    () => users.map((user) => <ListItem key={user.uid}>{user.name}</ListItem>),
+    () =>
+      users.map((user) => (
+        <ListItem key={user.uid}>
+          {user.name} - {user.role}
+        </ListItem>
+      )),
     [users]
   );
 
   return (
-    <SpokerWrapperGrid gap={4}>
-      <Heading>Controller</Heading>
+    <SpokerWrapperGrid gap={2}>
+      <Heading size="md">Controller</Heading>
 
       <Flex gridGap={2} wrap="wrap">
-        {isObservant && (
-          <Button colorScheme="red" onClick={handleClearPoints}>
-            Clear
+        {isResetEnabled && (
+          <Button size="sm" colorScheme="red" onClick={handleClearPoints}>
+            Reset
           </Button>
         )}
-        <Button colorScheme="orange" onClick={() => router.push(`/join/${id}`)}>
+        <Button
+          size="sm"
+          colorScheme="orange"
+          onClick={() => router.push(`/join/${id}`)}
+        >
           Rejoin
         </Button>
       </Flex>
@@ -69,6 +81,7 @@ const ControllerWrapper = ({ users, isObservant }: ControllerWrapperProps) => {
           rightIcon={<BiLink />}
           colorScheme="blue"
           onClick={handleCopyRoomLink}
+          size="sm"
         >
           Copy Invite Link
         </Button>

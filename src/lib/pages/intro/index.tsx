@@ -8,7 +8,10 @@ const Intro = () => {
   const router = useRouter();
 
   const handleClickStart = () => {
-    trackEvent("Open app from Intro page", "navigate");
+    trackEvent({
+      eventValue: "Open app from Intro page",
+      eventType: "navigate",
+    });
     router.push("/");
   };
 

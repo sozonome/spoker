@@ -1,79 +1,85 @@
 import { Button, Grid, Heading, useToast } from "@chakra-ui/react";
-import { useFormik } from "formik";
-import { nanoid } from "nanoid";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import type { CreateRoomFormType } from "../types";
-import { CreateRoomFormSchema } from "../types";
+import {
+  createRoomFormSchema,
+  initialValues,
+} from "lib/components/hall/constants";
+import type { CreateRoomFormType } from "lib/components/hall/types";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { createRoom } from "lib/services/firebase/room";
+import { formatId } from "lib/utils/formatId";
 
 const CreateRoom = () => {
   const toast = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { values, errors, dirty, handleChange, handleSubmit } =
-    useFormik<CreateRoomFormType>({
-      initialValues: {
-        name: "",
-        id: nanoid(21),
-        isPrivate: false,
-        password: "",
-      },
-      validationSchema: CreateRoomFormSchema,
-      onSubmit: async (formValues: CreateRoomFormType) => {
-        setIsLoading(true);
-        await createRoom(formValues)
-          .then(() => {
-            router.push(`/join/${formValues.id}`);
-          })
-          .catch((err) => {
-            toast({
-              position: "top-right",
-              title: "Create Room Fail",
-              description: err.message,
-              status: "error",
-              isClosable: true,
-            });
-          })
-          .finally(() => setIsLoading(false));
-      },
-    });
-  const { name, id } = values;
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { isDirty, isValid, errors },
+  } = useForm<CreateRoomFormType>({
+    defaultValues: initialValues,
+    mode: "onChange",
+    resolver: yupResolver(createRoomFormSchema),
+  });
+
+  const processCreateRoom = async () => {
+    setIsLoading(true);
+    const values = getValues();
+    values.id = formatId(values.id);
+    await createRoom(values)
+      .then(() => {
+        router.push(`/join/${values.id}`);
+      })
+      .catch((err) => {
+        toast({
+          position: "top-right",
+          title: "Create Room Fail",
+          description: err.message,
+          status: "error",
+          isClosable: true,
+        });
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   return (
-    <SpokerWrapperGrid gap={8}>
+    <SpokerWrapperGrid
+      gap={8}
+      as="form"
+      onSubmit={handleSubmit(processCreateRoom)}
+    >
       <Heading size="lg">Create Room</Heading>
 
       <Grid gap={4}>
         <SpokerInput
           label="Room Name"
-          name="name"
-          value={name}
-          onChange={handleChange}
+          {...register("name")}
+          isInvalid={!!errors.name?.message}
+          errorText={errors.name?.message}
           placeholder="The Quick Brown Fox"
-          isInvalid={(errors?.name?.length ?? 0) > 0}
-          helperText={errors?.name}
         />
         <SpokerInput
           label="Room ID"
-          name="id"
-          value={id}
-          onChange={handleChange}
+          {...register("id")}
+          isInvalid={!!errors.id?.message}
+          errorText={errors.id?.message}
           placeholder="define your own room slug"
-          isInvalid={(errors?.id?.length ?? 0) > 0}
-          helperText={errors.id}
         />
       </Grid>
 
       <Button
         isLoading={isLoading}
-        disabled={!dirty || (dirty && Object.keys(errors).length > 0)}
+        disabled={!isDirty || !isValid || isLoading}
         colorScheme="green"
-        onClick={() => handleSubmit()}
+        type="submit"
       >
         Let&apos;s Have Some Fun!
       </Button>
