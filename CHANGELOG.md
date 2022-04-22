@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/sozonome/spoker/compare/v1.6.1...v1.6.2) (2022-04-22)
+
+
+### Improvements
+
+* use object as args ([dab75d7](https://github.com/sozonome/spoker/commit/dab75d745980342f72d919ea5d5cbd8b0e252cbd))
+* use object for trackEvent arguments ([8f91832](https://github.com/sozonome/spoker/commit/8f9183200de721968d08de1b1811267774d6b3d0))
+* **utils:** add formatId ([5fecb0b](https://github.com/sozonome/spoker/commit/5fecb0baef9055ee4470af01e96117ba6b87b85c))
+
 ### [1.6.1](https://github.com/sozonome/spoker/compare/v1.6.0...v1.6.1) (2022-04-19)
 
 
