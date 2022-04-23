@@ -44,6 +44,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/cz-commitlint": "^16.2.3",
     "@jahed/firebase-rules": "^1.1.0",
     "@storybook/addon-a11y": "^6.4.21",
     "@storybook/addon-actions": "^6.4.21",
@@ -59,6 +60,7 @@
     "@types/twemoji": "^12.1.2",
     "@types/umami": "^0.1.0",
     "babel-loader": "^8.2.4",
+    "commitizen": "^4.2.4",
     "commitlint": "^16.2.3",
     "eslint": "^8.13.0",
     "eslint-config-next": "^12.1.4",
