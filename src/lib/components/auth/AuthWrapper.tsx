@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import { useContext, useEffect, useState } from "react";
 
-import { PUBLIC_ROUTES } from "lib/layout/RouteWrapper";
+import { PUBLIC_ROUTES } from "lib/constants/routes/public";
 
 import { AuthContext } from "./AuthProvider";
 import Login from "./Login";
