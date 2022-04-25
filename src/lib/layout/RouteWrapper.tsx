@@ -16,7 +16,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
   const { pathname } = router;
 
   const { currentUser } = React.useContext(AuthContext);
-  const [busy, setBusy] = React.useState<boolean>(true);
+  const [busy, setBusy] = React.useState<boolean>(false);
 
   const toast = useToast();
 
