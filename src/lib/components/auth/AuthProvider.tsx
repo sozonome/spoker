@@ -1,7 +1,9 @@
 import type { User } from "firebase/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
 import * as React from "react";
 
+import { PUBLIC_ROUTES } from "lib/constants/routes/public";
 import FullScreenLoading from "lib/layout/FullScreenLoading";
 import { fbase } from "lib/services/firebase";
 
@@ -30,6 +32,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [busy, setBusy] = React.useState(true);
   const [isCurrentUserUpdating, setIsCurrentUserUpdating] =
     React.useState<boolean>(false);
+  const router = useRouter();
+  const { pathname } = router;
+
+  const isPublicRoute = React.useMemo(
+    () => PUBLIC_ROUTES.includes(pathname),
+    [pathname]
+  );
 
   const updateCurrentUser = () => {
     setIsCurrentUserUpdating(true);
@@ -58,7 +67,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     [currentUserState, isCurrentUserUpdating]
   );
 
-  if (busy) {
+  if (busy && !isPublicRoute) {
     return <FullScreenLoading />;
   }
 

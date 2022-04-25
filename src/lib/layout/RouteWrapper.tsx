@@ -3,11 +3,9 @@ import { useRouter } from "next/router";
 import * as React from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
+import { PUBLIC_ROUTES } from "lib/constants/routes/public";
 
 import FullScreenLoading from "./FullScreenLoading";
-
-export const PUBLIC_ROUTES = ["/auth", "/intro", "/privacypolicy"];
-export const PRIVATE_ROUTES = ["/room/[id]", "/join/[id]", "/"];
 
 type RouteWrapperProps = {
   children: React.ReactNode;
@@ -18,7 +16,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
   const { pathname } = router;
 
   const { currentUser } = React.useContext(AuthContext);
-  const [busy, setBusy] = React.useState<boolean>(true);
+  const [busy, setBusy] = React.useState<boolean>(false);
 
   const toast = useToast();
 

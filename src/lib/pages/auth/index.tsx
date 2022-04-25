@@ -6,7 +6,7 @@
 
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import * as React from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import FullScreenLoading from "lib/layout/FullScreenLoading";
@@ -16,11 +16,12 @@ const Auth = () => {
   const router = useRouter();
   const { mode, oobCode } = router.query;
 
-  const { currentUser } = useContext(AuthContext);
-
+  const { currentUser } = React.useContext(AuthContext);
+  const [isProcessed, setIsProcessed] = React.useState<boolean>(false);
   const toast = useToast();
 
-  const handleInvalidLink = () => {
+  const handleInvalidLink = React.useCallback(() => {
+    setIsProcessed(true);
     router.push("/").then(() => {
       toast({
         description: "Invalid Link",
@@ -29,12 +30,13 @@ const Auth = () => {
         isClosable: true,
       });
     });
-  };
+  }, [router, toast]);
 
-  if (mode && oobCode) {
+  const handleAuthCallback = React.useCallback(() => {
     // eslint-disable-next-line sonarjs/no-small-switch
     switch (mode) {
       case "verifyEmail":
+        setIsProcessed(true);
         handleVerifyEmail(oobCode as string)
           .then(() => {
             toast({
@@ -63,9 +65,16 @@ const Auth = () => {
       default:
         handleInvalidLink();
     }
-  } else {
-    handleInvalidLink();
-  }
+  }, [currentUser, handleInvalidLink, mode, oobCode, router, toast]);
+
+  React.useEffect(() => {
+    if (isProcessed) {
+      return;
+    }
+    if (router.isReady) {
+      handleAuthCallback();
+    }
+  }, [handleAuthCallback, isProcessed, router.isReady]);
 
   return <FullScreenLoading height="75vh" />;
 };

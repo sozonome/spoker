@@ -23,7 +23,7 @@ import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
 
 import SpokerInput from "lib/components/shared/SpokerInput";
-import { PRIVATE_ROUTES } from "lib/layout/RouteWrapper";
+import { PRIVATE_ROUTES } from "lib/constants/routes/private";
 import { logoutUser, updateDisplayName } from "lib/services/firebase";
 import { roomsData } from "lib/services/firebase/room";
 
