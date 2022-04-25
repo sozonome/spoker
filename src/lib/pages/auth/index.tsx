@@ -17,10 +17,11 @@ const Auth = () => {
   const { mode, oobCode } = router.query;
 
   const { currentUser } = React.useContext(AuthContext);
-
+  const [isProcessed, setIsProcessed] = React.useState<boolean>(false);
   const toast = useToast();
 
   const handleInvalidLink = React.useCallback(() => {
+    setIsProcessed(true);
     router.push("/").then(() => {
       toast({
         description: "Invalid Link",
@@ -35,6 +36,7 @@ const Auth = () => {
     // eslint-disable-next-line sonarjs/no-small-switch
     switch (mode) {
       case "verifyEmail":
+        setIsProcessed(true);
         handleVerifyEmail(oobCode as string)
           .then(() => {
             toast({
@@ -66,12 +68,13 @@ const Auth = () => {
   }, [currentUser, handleInvalidLink, mode, oobCode, router, toast]);
 
   React.useEffect(() => {
-    if (mode && oobCode) {
-      handleAuthCallback();
+    if (isProcessed) {
       return;
     }
-    handleInvalidLink();
-  }, [handleAuthCallback, handleInvalidLink, mode, oobCode]);
+    if (router.isReady) {
+      handleAuthCallback();
+    }
+  }, [handleAuthCallback, isProcessed, router.isReady]);
 
   return <FullScreenLoading height="75vh" />;
 };
