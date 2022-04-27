@@ -62,6 +62,7 @@
     "babel-loader": "^8.2.5",
     "commitizen": "^4.2.4",
     "commitlint": "^16.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "^8.14.0",
     "eslint-config-next": "^12.1.5",
     "eslint-config-sznm": "^0.2.1",
