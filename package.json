@@ -11,7 +11,7 @@
     "lint:fix": "eslint src --fix && yarn format",
     "type-check": "tsc --noEmit",
     "format": "prettier --write src",
-    "release": "standard-version",
+    "release": "cross-env HUSKY=0 standard-version",
     "push-release": "git push --follow-tags origin main",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
