@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.3](https://github.com/sozonome/spoker/compare/v1.6.2...v1.6.3) (2022-04-27)
+
+
+### Improvements
+
+* **layout:** enhance public route handling ([#76](https://github.com/sozonome/spoker/issues/76)) ([6f342a0](https://github.com/sozonome/spoker/commit/6f342a0800dd592fb24b9339c1776c7200154a3c))
+
 ### [1.6.2](https://github.com/sozonome/spoker/compare/v1.6.1...v1.6.2) (2022-04-22)
 
 
