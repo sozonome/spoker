@@ -1,6 +1,6 @@
 {
   "name": "spoker",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "private": true,
   "author": "sozonome",
   "scripts": {
@@ -12,7 +12,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write src",
     "release": "cross-env HUSKY=0 standard-version",
-    "push-release": "git push --follow-tags origin main",
+    "push-release": "git push --follow-tags origin dev",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "up": "yarn upgrade-interactive",
