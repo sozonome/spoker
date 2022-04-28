@@ -192,7 +192,6 @@ const RoomContainer = () => {
           <CurrentVotesWrapper
             isOwner={isOwner}
             isObservant={isObservant}
-            isParticipant={isParticipant}
             roomData={roomData}
             showVote={showVote}
             averagePoint={averagePoint}
@@ -201,10 +200,7 @@ const RoomContainer = () => {
             currentUser={currentUser}
             onFinishVote={handleFinishVote}
           />
-          <ControllerWrapper
-            users={users}
-            isResetEnabled={isOwner || isObservant}
-          />
+          <ControllerWrapper users={users} isResetEnabled={isOwner} />
         </Grid>
       </Grid>
 

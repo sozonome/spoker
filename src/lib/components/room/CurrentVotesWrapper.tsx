@@ -30,7 +30,6 @@ import { pointTextColor, pointTextSize } from "./utils";
 type CurrentVotesWrapperProps = {
   isOwner: boolean;
   isObservant: boolean;
-  isParticipant: boolean;
   roomData: RoomInstance;
   showVote: boolean;
   averagePoint: number;
@@ -43,7 +42,6 @@ type CurrentVotesWrapperProps = {
 const CurrentVotesWrapper = ({
   isOwner,
   isObservant,
-  isParticipant,
   roomData,
   showVote,
   averagePoint,
@@ -109,14 +107,14 @@ const CurrentVotesWrapper = ({
   const handleUpdateFreezeAfterVote = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (isOwner || isObservant) {
+    if (isOwner) {
       const updatedConfig: Partial<RoomConfig> = {
         isFreezeAfterVote: e.currentTarget.checked,
       };
       await updateConfig(id as string, updatedConfig);
     } else {
       toast({
-        title: "Participant cannot change configurations",
+        title: "Participant/observant cannot change configurations",
         status: "warning",
         isClosable: true,
         position: "top-right",
@@ -152,7 +150,7 @@ const CurrentVotesWrapper = ({
       <Heading size="lg">Current Votes</Heading>
 
       <Checkbox
-        disabled={isParticipant}
+        disabled={!isOwner}
         isChecked={roomData.config.isFreezeAfterVote}
         onChange={handleUpdateFreezeAfterVote}
         colorScheme="teal"
