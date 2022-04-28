@@ -10,7 +10,7 @@ import {
 import { useRouter } from "next/router";
 import * as React from "react";
 
-import SpokerInput from "lib/components/shared/SpokerInput";
+import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { updateRoomTask } from "lib/services/firebase/room";
 import type { RoomInstance, Task } from "lib/types/RawDB";
@@ -28,7 +28,7 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
   } = router;
 
   const handleUpdateTask = React.useCallback(
-    (field: keyof Task) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (field: keyof Task) => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (roomData && isOwner) {
         const updatedTask: Task = {
           ...roomData.task,
@@ -45,13 +45,13 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
     if (isOwner) {
       return (
         <>
-          <SpokerInput
+          <AutoResizeTextarea
             label="Name"
             value={task.name}
             onChange={handleUpdateTask("name")}
             placeholder="Going to Mars"
           />
-          <SpokerInput
+          <AutoResizeTextarea
             label="Description"
             value={task.description}
             onChange={handleUpdateTask("description")}

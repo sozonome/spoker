@@ -26,8 +26,8 @@ import { GoPlus } from "react-icons/go";
 import { RiInformationLine } from "react-icons/ri";
 import { ReactSortable } from "react-sortablejs";
 
+import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
 import SpokerButton from "lib/components/shared/SpokerButton";
-import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import {
@@ -329,14 +329,17 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         body={
           <Grid gap={4}>
             <Text>Add story to queue</Text>
-            <SpokerInput
+            <AutoResizeTextarea
               {...register("name")}
               isRequired
               label="Name"
               isInvalid={!!errors.name?.message}
               errorText={errors.name?.message}
             />
-            <SpokerInput {...register("description")} label="Description" />
+            <AutoResizeTextarea
+              {...register("description")}
+              label="Description"
+            />
           </Grid>
         }
         footer={
@@ -366,14 +369,14 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         }}
         body={
           <Grid gap={4}>
-            <SpokerInput
+            <AutoResizeTextarea
               {...registerEditStoryField("name")}
               isRequired
               label="Name"
               isInvalid={!!editStoryErrors.name?.message}
               errorText={editStoryErrors.name?.message}
             />
-            <SpokerInput
+            <AutoResizeTextarea
               {...registerEditStoryField("description")}
               label="Description"
             />
