@@ -192,7 +192,6 @@ const RoomContainer = () => {
           <CurrentVotesWrapper
             isOwner={isOwner}
             isObservant={isObservant}
-            isParticipant={isParticipant}
             roomData={roomData}
             showVote={showVote}
             averagePoint={averagePoint}
