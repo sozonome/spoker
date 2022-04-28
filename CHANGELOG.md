@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.4](https://github.com/sozonome/spoker/compare/v1.6.3...v1.6.4) (2022-04-28)
+
+
+### Features
+
+* **room:** switch input with auto resize textarea for name and description ([#83](https://github.com/sozonome/spoker/issues/83)) ([93c3f82](https://github.com/sozonome/spoker/commit/93c3f82c74e253ff1a3c9caf106d4ca2174798ae))
+
+
+### Improvements
+
+* **room:** enable reset button for owner only ([#82](https://github.com/sozonome/spoker/issues/82)) ([3c8c289](https://github.com/sozonome/spoker/commit/3c8c289274e02a5d3a1f1ccd98e356ee1559ecdc))
+
 ### [1.6.3](https://github.com/sozonome/spoker/compare/v1.6.2...v1.6.3) (2022-04-27)
 
 
