@@ -7,6 +7,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import debounce from "lodash-es/debounce";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -28,15 +29,16 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
   } = router;
 
   const handleUpdateTask = React.useCallback(
-    (field: keyof Task) => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (roomData && isOwner) {
-        const updatedTask: Task = {
-          ...roomData.task,
-          [field]: event.target.value,
-        };
-        updateRoomTask(id as string, updatedTask);
-      }
-    },
+    (field: keyof Task) =>
+      debounce((event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (roomData && isOwner) {
+          const updatedTask: Task = {
+            ...roomData.task,
+            [field]: event.target.value,
+          };
+          updateRoomTask(id as string, updatedTask);
+        }
+      }, 500),
     [id, isOwner, roomData]
   );
 
@@ -47,13 +49,13 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
         <>
           <AutoResizeTextarea
             label="Name"
-            value={task.name}
+            defaultValue={task.name}
             onChange={handleUpdateTask("name")}
             placeholder="Going to Mars"
           />
           <AutoResizeTextarea
             label="Description"
-            value={task.description}
+            defaultValue={task.description}
             onChange={handleUpdateTask("description")}
             placeholder="Land to Moon first"
           />
