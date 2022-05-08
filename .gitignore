@@ -41,3 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 
 *rules.json
+
+# storybook
+storybook-static/
