@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.5](https://github.com/sozonome/spoker/compare/v1.6.4...v1.6.5) (2022-05-08)
+
+
+### Features
+
+* **room:** debounce for edit name & description ([#87](https://github.com/sozonome/spoker/issues/87)) ([964f76d](https://github.com/sozonome/spoker/commit/964f76d35f5ed922ee7254dca7d933bfe57bd567))
+* **room:** switch input with auto resize textarea for name and description ([#83](https://github.com/sozonome/spoker/issues/83)) ([ed716d7](https://github.com/sozonome/spoker/commit/ed716d7c4d93f26f9eb0fca40565cf940f45f9ec))
+
+
+### Improvements
+
+* **room:** enable reset button for owner only ([#82](https://github.com/sozonome/spoker/issues/82)) ([48cd56e](https://github.com/sozonome/spoker/commit/48cd56e1598b89c2fec767f598a2b4583b3cb137))
+
+## [1.7.0](https://github.com/sozonome/spoker/compare/v1.6.4...v1.7.0) (2022-05-08)
+
+
+### Features
+
+* **room:** debounce for edit name & description ([#87](https://github.com/sozonome/spoker/issues/87)) ([964f76d](https://github.com/sozonome/spoker/commit/964f76d35f5ed922ee7254dca7d933bfe57bd567))
+* **room:** switch input with auto resize textarea for name and description ([#83](https://github.com/sozonome/spoker/issues/83)) ([ed716d7](https://github.com/sozonome/spoker/commit/ed716d7c4d93f26f9eb0fca40565cf940f45f9ec))
+
+
+### Improvements
+
+* **room:** enable reset button for owner only ([#82](https://github.com/sozonome/spoker/issues/82)) ([48cd56e](https://github.com/sozonome/spoker/commit/48cd56e1598b89c2fec767f598a2b4583b3cb137))
+
 ### [1.6.4](https://github.com/sozonome/spoker/compare/v1.6.3...v1.6.4) (2022-04-28)
 
 
