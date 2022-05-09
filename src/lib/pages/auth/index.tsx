@@ -1,9 +1,3 @@
-/**
- * @todo
- * [ ] handle mode "resetPassword"
- * [ ] handle mode "recoverEmail"
- */
-
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -11,6 +5,7 @@ import * as React from "react";
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import FullScreenLoading from "lib/layout/FullScreenLoading";
 import { handleVerifyEmail } from "lib/services/firebase";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 const Auth = () => {
   const router = useRouter();
@@ -33,38 +28,36 @@ const Auth = () => {
   }, [router, toast]);
 
   const handleAuthCallback = React.useCallback(() => {
-    // eslint-disable-next-line sonarjs/no-small-switch
-    switch (mode) {
-      case "verifyEmail":
-        setIsProcessed(true);
-        handleVerifyEmail(oobCode as string)
-          .then(() => {
+    if (mode === "verifyEmail") {
+      setIsProcessed(true);
+      handleVerifyEmail(oobCode as string)
+        .then(() => {
+          toast({
+            title: "Email Verification Success",
+            status: "success",
+            position: "top",
+            isClosable: true,
+          });
+          if (currentUser) {
+            currentUser.reload().then(() => router.push("/"));
+          } else {
+            router.push("/");
+          }
+        })
+        .catch((err) => {
+          router.push("/").then(() => {
             toast({
-              title: "Email Verification Success",
-              status: "success",
+              description: removeFirebasePrefix(err.message),
+              status: "error",
               position: "top",
               isClosable: true,
             });
-            if (currentUser) {
-              currentUser.reload().then(() => router.push("/"));
-            } else {
-              router.push("/");
-            }
-          })
-          .catch((err) => {
-            router.push("/").then(() => {
-              toast({
-                description: err.message,
-                status: "error",
-                position: "top",
-                isClosable: true,
-              });
-            });
           });
-        break;
-      default:
-        handleInvalidLink();
+        });
+      return;
     }
+
+    handleInvalidLink();
   }, [currentUser, handleInvalidLink, mode, oobCode, router, toast]);
 
   React.useEffect(() => {

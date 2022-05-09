@@ -14,6 +14,7 @@ import { AuthContext } from "lib/components/auth/AuthProvider";
 import HallWrapper from "lib/components/hall";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
 import { requestVerificationMail } from "lib/services/firebase/auth";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
@@ -44,7 +45,7 @@ const Home = () => {
           })
           .catch((err) => {
             toast({
-              description: err.message,
+              description: removeFirebasePrefix(err.message),
               status: "warning",
               position: "top",
               isClosable: true,

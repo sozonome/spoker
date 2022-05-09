@@ -12,6 +12,8 @@ import {
   signOut,
 } from "firebase/auth";
 
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
+
 import { fbase } from "./config";
 
 const auth = getAuth(fbase);
@@ -99,7 +101,7 @@ export const requestPasswordReset = async (email: string) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const showErrorToast = (toast: any, err: any) =>
   toast({
-    description: err.message,
+    description: removeFirebasePrefix(err.message),
     status: "error",
     position: "top",
     isClosable: true,
