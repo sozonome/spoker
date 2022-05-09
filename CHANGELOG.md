@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.7](https://github.com/sozonome/spoker/compare/v1.6.6...v1.6.7) (2022-05-09)
+
+
+### Improvements
+
+* remove firebase prefix for error message ([0951f02](https://github.com/sozonome/spoker/commit/0951f028cf937ab48fb30f4cd36d275e9799af7d))
+* remove todo and remove switch in auth page ([238a3af](https://github.com/sozonome/spoker/commit/238a3afe9c44afdd9f10aacb3d5b1c5c558c125d))
+
 ### [1.6.6](https://github.com/sozonome/spoker/compare/v1.6.5...v1.6.6) (2022-05-09)
 
 
