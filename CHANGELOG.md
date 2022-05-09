@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.6](https://github.com/sozonome/spoker/compare/v1.6.5...v1.6.6) (2022-05-09)
+
+
+### Bug Fixes
+
+* **room:** improve async update name and description ([#90](https://github.com/sozonome/spoker/issues/90)) ([1339427](https://github.com/sozonome/spoker/commit/13394275a0d7838e90c583933ade12a1aacc2c28))
+
 ### [1.6.5](https://github.com/sozonome/spoker/compare/v1.6.4...v1.6.5) (2022-05-08)
 
 
