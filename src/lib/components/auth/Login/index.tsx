@@ -17,6 +17,7 @@ import SignInProviders from "lib/components/auth/SignInProviders";
 import { contraBoxStyle } from "lib/components/auth/style";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import { loginUserWithEmailAndPassword } from "lib/services/firebase";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 import { initialValues, loginFormValidationSchema } from "./constants";
 import type { LoginFormType, LoginProps } from "./types";
@@ -46,7 +47,7 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
       })
       .catch((err) => {
         toast({
-          description: err.message,
+          description: removeFirebasePrefix(err.message),
           position: "top",
           status: "error",
           isClosable: true,

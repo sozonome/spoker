@@ -5,6 +5,7 @@ import * as React from "react";
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import FullScreenLoading from "lib/layout/FullScreenLoading";
 import { handleVerifyEmail } from "lib/services/firebase";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 const Auth = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const Auth = () => {
         .catch((err) => {
           router.push("/").then(() => {
             toast({
-              description: err.message,
+              description: removeFirebasePrefix(err.message),
               status: "error",
               position: "top",
               isClosable: true,

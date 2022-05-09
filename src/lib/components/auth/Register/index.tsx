@@ -17,6 +17,7 @@ import SignInProviders from "lib/components/auth/SignInProviders";
 import { contraBoxStyle } from "lib/components/auth/style";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import { registerUserWithEmailAndPassword } from "lib/services/firebase";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 import { trackEvent } from "lib/utils/trackEvent";
 
 import { initialValues, registerFormValidationSchema } from "./constants";
@@ -66,7 +67,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
       .catch((err) => {
         setIsLoading(false);
         toast({
-          description: err.message,
+          description: removeFirebasePrefix(err.message),
           position: "top",
           status: "error",
           isClosable: true,

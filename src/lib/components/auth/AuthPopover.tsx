@@ -26,6 +26,7 @@ import SpokerInput from "lib/components/shared/SpokerInput";
 import { PRIVATE_ROUTES } from "lib/constants/routes/private";
 import { logoutUser, updateDisplayName } from "lib/services/firebase";
 import { roomsData } from "lib/services/firebase/room";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 import { AuthContext } from "./AuthProvider";
 
@@ -78,7 +79,7 @@ const AuthPopover = () => {
           })
           .catch(async (e) => {
             toast({
-              description: e.message,
+              description: removeFirebasePrefix(e.message),
               status: "error",
               position: "top",
               isClosable: true,

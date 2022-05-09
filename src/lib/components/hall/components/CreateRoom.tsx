@@ -13,6 +13,7 @@ import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { createRoom } from "lib/services/firebase/room";
 import { formatId } from "lib/utils/formatId";
+import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 const CreateRoom = () => {
   const toast = useToast();
@@ -42,7 +43,7 @@ const CreateRoom = () => {
         toast({
           position: "top-right",
           title: "Create Room Fail",
-          description: err.message,
+          description: removeFirebasePrefix(err.message),
           status: "error",
           isClosable: true,
         });
