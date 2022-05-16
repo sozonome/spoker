@@ -165,7 +165,7 @@ const AuthPopover = () => {
             <Text>{currentUser.email}</Text>
           </PopoverHeader>
           <PopoverBody>
-            <Button isFullWidth colorScheme="red" onClick={handleLogout}>
+            <Button width="full" colorScheme="red" onClick={handleLogout}>
               Sign Out
             </Button>
           </PopoverBody>

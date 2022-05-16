@@ -16,7 +16,11 @@ module.exports = {
     "@storybook/addon-a11y",
     "@storybook/addon-storysource",
     "storybook-addon-performance/register",
+    "@chakra-ui/storybook-addon",
   ],
+  features: {
+    emotionAlias: false,
+  },
   framework: "@storybook/react",
   webpackFinal: async (config) => {
     return {
