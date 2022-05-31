@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/sozonome/spoker/compare/v1.6.7...v1.7.0) (2022-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade chakra-ui to v2 and react to v18
+
+- https://chakra-ui.com/guides/integrations/with-storybook
+- https://storybook.js.org/addons/storybook-addon-performance
+
+* chore: deduplicate deps
+
+* chore: update to latest
+
+* refactor: add colormodescript
+
+* chore: update packages
+
+### Chores
+
+* 📦 update packages to latest ([#93](https://github.com/sozonome/spoker/issues/93)) ([f710d68](https://github.com/sozonome/spoker/commit/f710d68614cbeea8a76d295f2782c4563934b088))
+
 ### [1.6.7](https://github.com/sozonome/spoker/compare/v1.6.6...v1.6.7) (2022-05-09)
 
 

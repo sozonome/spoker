@@ -1,7 +1,9 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import type { DocumentContext } from "next/document";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "lib/constants/umami";
+import customTheme from "lib/styles/theme";
 
 const APP_NAME = "spoker";
 const APP_DESCRIPTION = "Scrum Poker";
@@ -47,6 +49,9 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
+          <ColorModeScript
+            initialColorMode={customTheme.config?.initialColorMode}
+          />
           <Main />
           <NextScript />
         </body>
