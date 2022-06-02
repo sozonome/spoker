@@ -91,6 +91,26 @@ export const joinRoom = async (roomId: string, role: RoleType) => {
   );
 };
 
+export const rejoinRoom = async (roomId: string, role?: RoleType | null) => {
+  const currentUser = getCurrentUser();
+
+  await get(child(roomsData, `${roomId}/users/${currentUser?.uid}`)).then(
+    async (snap) => {
+      if (snap.exists()) {
+        await update(snap.ref, {
+          isConnected: true,
+        });
+      } else {
+        await set(child(roomsData, `${roomId}/users/${currentUser?.uid}`), {
+          name: currentUser?.displayName,
+          role,
+          isConnected: true,
+        });
+      }
+    }
+  );
+};
+
 export const updateRoomTask = async (roomId: string, task: Task) => {
   await update(child(roomsData, `${roomId}/task`), task);
 };

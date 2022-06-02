@@ -13,6 +13,7 @@ import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
 import {
   disconnectUser,
+  rejoinRoom,
   roomsData,
   submitVote,
 } from "lib/services/firebase/room";
@@ -68,11 +69,21 @@ const RoomContainer = () => {
   const isObservant = userRole === RoleType.observant;
   const isOwner = userRole === RoleType.owner;
 
+  const handleOnDisconnect = () => {
+    if (currentUser?.uid) {
+      onDisconnect(
+        child(roomsData, `${id as string}/users/${currentUser.uid}`)
+      ).update({
+        isConnected: false,
+      });
+    }
+  };
+
   const getRoomData = async () => {
     onValue(child(roomsData, id as string), (snap) => {
       if (snap.exists()) {
         setRoomData(snap.val());
-        onDisconnect(child(snap.ref, `users/${currentUser?.uid}`)).remove();
+        handleOnDisconnect();
       } else {
         router.push("/");
         toast({
@@ -108,6 +119,10 @@ const RoomContainer = () => {
     }
   };
 
+  const handleRejoin = React.useCallback(async () => {
+    await rejoinRoom(id as string, userRole);
+  }, [id, userRole]);
+
   React.useEffect(() => {
     toast.closeAll();
     getRoomData();
@@ -138,7 +153,7 @@ const RoomContainer = () => {
 
         const isAllParticipantVoted = updatedUsers
           .filter((user) => user.role === RoleType.participant)
-          .every((user) => user.point);
+          .every((user) => user.point !== null);
 
         setShowVote(isAllParticipantVoted);
         setUsers(updatedUsers);
@@ -158,6 +173,20 @@ const RoomContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomData, inRoom]);
+
+  React.useEffect(() => {
+    const inRoomDisconnected =
+      roomData &&
+      currentUser &&
+      inRoom &&
+      currentUser &&
+      roomData.users?.[currentUser?.uid] &&
+      !roomData.users?.[currentUser.uid]?.isConnected;
+
+    if (inRoomDisconnected) {
+      handleRejoin();
+    }
+  }, [currentUser, handleRejoin, inRoom, roomData, roomData?.users]);
 
   React.useEffect(() => {
     router.events.on("routeChangeStart", removeUserFromRoom);
