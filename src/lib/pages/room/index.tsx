@@ -180,7 +180,8 @@ const RoomContainer = () => {
       currentUser &&
       inRoom &&
       currentUser &&
-      !roomData.users?.[currentUser?.uid]?.isConnected;
+      roomData.users?.[currentUser?.uid] &&
+      !roomData.users?.[currentUser.uid]?.isConnected;
 
     if (inRoomDisconnected) {
       handleRejoin();
