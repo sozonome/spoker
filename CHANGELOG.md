@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.3](https://github.com/sozonome/spoker/compare/v1.7.2...v1.7.3) (2022-06-13)
+
+
+### Bug Fixes
+
+* **room:** revise showVote condition that cause vote being locked ([e2f6740](https://github.com/sozonome/spoker/commit/e2f6740d06d48675fcd95d2ec4d1d0a0f2bb0926))
+
 ### [1.7.2](https://github.com/sozonome/spoker/compare/v1.7.1...v1.7.2) (2022-06-02)
 
 
