@@ -153,7 +153,7 @@ const RoomContainer = () => {
 
         const isAllParticipantVoted = updatedUsers
           .filter((user) => user.role === RoleType.participant)
-          .every((user) => user.point !== null);
+          .every((user) => (user.point ?? -1) >= 0);
 
         setShowVote(isAllParticipantVoted);
         setUsers(updatedUsers);
