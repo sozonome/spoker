@@ -188,15 +188,21 @@ const CurrentVotesWrapper = ({
       {isOwner && showVote && (
         <Grid
           marginTop={6}
-          gap={2}
+          gap={4}
           padding={2}
           borderColor="orange.400"
           borderWidth={2}
           borderRadius={16}
         >
-          <Heading fontSize="md" fontStyle="italic">
-            Final Estimate
-          </Heading>
+          <Grid gap={2}>
+            <Heading fontSize="md" fontStyle="italic">
+              Final Estimate
+            </Heading>
+            <Text textColor="gray.500" fontSize="xs">
+              Select final estimate point and click finish vote to proceed to
+              next story in queue.
+            </Text>
+          </Grid>
 
           <Grid gap={2} templateColumns="2fr 3fr">
             <Select
