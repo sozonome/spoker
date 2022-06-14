@@ -205,7 +205,11 @@ const RoomContainer = () => {
         <title>{roomData.room.name} | spoker</title>
       </Head>
 
-      <Grid templateColumns={{ base: "1fr", md: "3fr 2fr" }} gap={6}>
+      <Grid
+        templateColumns={{ base: "1fr", md: "3fr 2fr" }}
+        gap={6}
+        alignItems="start"
+      >
         <Grid gap={6}>
           <RoomHeader roomData={roomData} isOwner={isOwner} />
           {(isOwner || isParticipant) && (
