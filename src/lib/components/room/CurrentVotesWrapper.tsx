@@ -185,36 +185,50 @@ const CurrentVotesWrapper = ({
         {sortedParticipants}
       </Grid>
 
-      {isOwner && (
-        <Grid marginTop={6}>
-          {showVote && (
-            <Grid gap={2} templateColumns="1fr 3fr">
-              <Select
-                borderRadius={12}
-                borderWidth={2}
-                borderColor="gray.500"
-                value={estimate}
-                size="sm"
-                onChange={handleSetEstimate}
-                fontWeight="bold"
-              >
-                {pointOptions.map((point) => (
-                  <option value={point} key={point}>
-                    {point}
-                  </option>
-                ))}
-              </Select>
-              <Button
-                isLoading={isLoadingSubmitVote}
-                disabled={isLoadingSubmitVote}
-                size="sm"
-                colorScheme="teal"
-                onClick={handleFinishVoting}
-              >
-                Finish Vote
-              </Button>
-            </Grid>
-          )}
+      {isOwner && showVote && (
+        <Grid
+          marginTop={6}
+          gap={4}
+          padding={2}
+          borderColor="orange.400"
+          borderWidth={2}
+          borderRadius={16}
+        >
+          <Grid gap={2}>
+            <Heading fontSize="md" fontStyle="italic">
+              Final Estimate
+            </Heading>
+            <Text textColor="gray.500" fontSize="xs">
+              Select final estimate point and click finish vote to proceed to
+              next story in queue.
+            </Text>
+          </Grid>
+
+          <Grid gap={2} templateColumns="2fr 3fr">
+            <Select
+              borderRadius={12}
+              borderWidth={2}
+              borderColor="gray.500"
+              value={estimate}
+              onChange={handleSetEstimate}
+              fontWeight="bold"
+            >
+              {pointOptions.map((point) => (
+                <option value={point} key={point}>
+                  {point}
+                </option>
+              ))}
+            </Select>
+            <Button
+              isLoading={isLoadingSubmitVote}
+              disabled={isLoadingSubmitVote}
+              colorScheme="teal"
+              size="md"
+              onClick={handleFinishVoting}
+            >
+              Finish Vote
+            </Button>
+          </Grid>
         </Grid>
       )}
     </SpokerWrapperGrid>
