@@ -27,6 +27,7 @@ import { PRIVATE_ROUTES } from "lib/constants/routes/private";
 import { logoutUser, updateDisplayName } from "lib/services/firebase";
 import { roomsData } from "lib/services/firebase/room";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
+import { trackEvent } from "lib/utils/trackEvent";
 
 import { AuthContext } from "./AuthProvider";
 
@@ -110,7 +111,7 @@ const AuthPopover = () => {
     });
   };
 
-  const handleLogout = async () => {
+  const clearUserSessionData = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       router.push("/").then(async () => {
         await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
@@ -120,6 +121,14 @@ const AuthPopover = () => {
     }
 
     processLogout();
+  };
+
+  const handleLogout = async () => {
+    await clearUserSessionData();
+    trackEvent({
+      eventValue: "sign out",
+      eventType: "auth",
+    });
   };
 
   if (!currentUser) {

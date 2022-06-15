@@ -19,7 +19,7 @@ export const createRoomFormSchema = yup.object().shape({
   id: yup
     .string()
     .matches(ALLOWED_CHAR_CHECK, {
-      message: "username contain unallowed character",
+      message: "room id contain unallowed character",
     })
     .required()
     .defined(),

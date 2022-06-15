@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/sozonome/spoker/compare/v1.7.4...v1.8.0) (2022-06-15)
+
+
+### Features
+
+* **analytics:** add tracking for theme toggle, footer, and sign out ([9c24066](https://github.com/sozonome/spoker/commit/9c240667e1a7996bcdda8c1cc4ad6a603633d0ba))
+* **room:** add new hidelabel | shrimp, cloud, think ([2da0caa](https://github.com/sozonome/spoker/commit/2da0caad4a4362d2b2632a262d72cf499d6407aa))
+
+
+### Improvements
+
+* **hall:** revise error text message for invalid room id ([c2827d1](https://github.com/sozonome/spoker/commit/c2827d108e3d3203573160623537e80e40109d6d))
+
 ### [1.7.4](https://github.com/sozonome/spoker/compare/v1.7.3...v1.7.4) (2022-06-14)
 
 
