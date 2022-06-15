@@ -82,5 +82,10 @@
   },
   "repository": {
     "url": "https://github.com/sozonome/spoker"
+  },
+  "nextBundleAnalysis": {
+    "budget": null,
+    "budgetPercentIncreaseRed": 20,
+    "showDetails": true
   }
 }
