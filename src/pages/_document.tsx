@@ -2,7 +2,11 @@ import { ColorModeScript } from "@chakra-ui/react";
 import type { DocumentContext } from "next/document";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "lib/constants/umami";
+import {
+  UMAMI_DATA_DOMAIN,
+  UMAMI_SRC,
+  UMAMI_WEBSITE_ID,
+} from "lib/constants/umami";
 import customTheme from "lib/styles/theme";
 
 const APP_NAME = "spoker";
@@ -45,7 +49,7 @@ class MyDocument extends Document {
             defer
             data-website-id={UMAMI_WEBSITE_ID}
             src={UMAMI_SRC}
-            data-domains="spoker.sznm.dev"
+            data-domains={UMAMI_DATA_DOMAIN}
           />
         </Head>
         <body>
