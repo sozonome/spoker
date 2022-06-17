@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/sozonome/spoker/compare/v1.8.0...v1.8.1) (2022-06-17)
+
+
+### Improvements
+
+* **analytics:** make data domain configurable ([82e3468](https://github.com/sozonome/spoker/commit/82e3468f3dd340f8aacd34d646fd7a5cf9518e8c))
+
 ## [1.8.0](https://github.com/sozonome/spoker/compare/v1.7.4...v1.8.0) (2022-06-15)
 
 
