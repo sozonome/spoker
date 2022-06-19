@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
 import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { getRoom, joinRoom } from "lib/services/firebase/room";
+import { getRoom } from "lib/services/firebase/room/get";
+import { joinRoom } from "lib/services/firebase/room/join";
 import { RoleType, roleOptions } from "lib/types/user";
 
 const JoinRoomPage = () => {

@@ -18,7 +18,7 @@ import * as React from "react";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import type { HideLabelOptionsType } from "lib/constants/hideLabel";
 import { hideLabelOptions } from "lib/constants/hideLabel";
-import { updateConfig } from "lib/services/firebase/room";
+import { updateConfig } from "lib/services/firebase/room/update/roomConfig";
 import type { RoomConfig, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { pointOptions } from "lib/types/room";

@@ -15,7 +15,6 @@ import {
   useBreakpointValue,
   useToast,
 } from "@chakra-ui/react";
-import { child, remove } from "firebase/database";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { BsPencil } from "react-icons/bs";
@@ -26,7 +25,7 @@ import SpokerInput from "lib/components/shared/SpokerInput";
 import { PRIVATE_ROUTES } from "lib/constants/routes/private";
 import { logoutUser } from "lib/services/firebase/auth/logout";
 import { updateDisplayName } from "lib/services/firebase/auth/updateDisplayName";
-import { roomsData } from "lib/services/firebase/room";
+import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 import { trackEvent } from "lib/utils/trackEvent";
 
@@ -114,7 +113,7 @@ const AuthPopover = () => {
   const clearUserSessionData = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       router.push("/").then(async () => {
-        await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
+        await disconnectUser(id as string, currentUser.uid);
         processLogout();
       });
       return;
