@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import SignInProviders from "lib/components/auth/SignInProviders";
 import { contraBoxStyle } from "lib/components/auth/style";
 import SpokerInput from "lib/components/shared/SpokerInput";
-import { registerUserWithEmailAndPassword } from "lib/services/firebase";
+import { registerUserWithEmailAndPassword } from "lib/services/firebase/auth/register";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 import { trackEvent } from "lib/utils/trackEvent";
 

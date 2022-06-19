@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { updatePoint } from "lib/services/firebase/room";
+import { updatePoint } from "lib/services/firebase/room/update/point";
 import type { RoomInstance } from "lib/types/RawDB";
 import { pointOptions } from "lib/types/room";
 

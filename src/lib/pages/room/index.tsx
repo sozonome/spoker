@@ -11,12 +11,10 @@ import RoomHeader from "lib/components/room/RoomHeader";
 import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
-import {
-  disconnectUser,
-  rejoinRoom,
-  roomsData,
-  submitVote,
-} from "lib/services/firebase/room";
+import { roomsData } from "lib/services/firebase/room/common";
+import { rejoinRoom } from "lib/services/firebase/room/rejoin";
+import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
+import { submitVote } from "lib/services/firebase/room/update/submitVote";
 import type { PointEntry, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";

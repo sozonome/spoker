@@ -30,12 +30,10 @@ import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
 import SpokerButton from "lib/components/shared/SpokerButton";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import {
-  editQueueItem,
-  removeQueueItem,
-  rewriteQueue,
-  swapSelectedQueueWithCurrent,
-} from "lib/services/firebase/room";
+import { editQueueItem } from "lib/services/firebase/room/update/queue/edit";
+import { removeQueueItem } from "lib/services/firebase/room/update/queue/remove";
+import { swapSelectedQueueWithCurrent } from "lib/services/firebase/room/update/queue/swap";
+import { rewriteQueue } from "lib/services/firebase/room/update/rewriteQueue";
 import type { RoomInstance, Task } from "lib/types/RawDB";
 
 import { submitStoryFormValidationSchema } from "./constants";

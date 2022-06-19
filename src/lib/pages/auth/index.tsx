@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import FullScreenLoading from "lib/layout/FullScreenLoading";
-import { handleVerifyEmail } from "lib/services/firebase";
+import { handleVerifyEmail } from "lib/services/firebase/auth/verifyEmail";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 const Auth = () => {
@@ -44,7 +44,7 @@ const Auth = () => {
             router.push("/");
           }
         })
-        .catch((err) => {
+        .catch((err: Error) => {
           router.push("/").then(() => {
             toast({
               description: removeFirebasePrefix(err.message),

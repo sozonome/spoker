@@ -11,7 +11,7 @@ import {
 import type { CreateRoomFormType } from "lib/components/hall/types";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { createRoom } from "lib/services/firebase/room";
+import { createRoom } from "lib/services/firebase/room/create";
 import { formatId } from "lib/utils/formatId";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
@@ -39,7 +39,7 @@ const CreateRoom = () => {
       .then(() => {
         router.push(`/join/${values.id}`);
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         toast({
           position: "top-right",
           title: "Create Room Fail",

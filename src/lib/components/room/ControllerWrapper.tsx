@@ -12,7 +12,7 @@ import * as React from "react";
 import { BiLink, BiShareAlt } from "react-icons/bi";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { clearPoints } from "lib/services/firebase/room";
+import { clearPoints } from "lib/services/firebase/room/update/point/clear";
 import type { RoomUser } from "lib/types/room";
 
 type ControllerWrapperProps = {

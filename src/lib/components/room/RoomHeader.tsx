@@ -13,7 +13,7 @@ import * as React from "react";
 
 import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { updateRoomTask } from "lib/services/firebase/room";
+import { updateRoomTask } from "lib/services/firebase/room/update/roomTask";
 import type { RoomInstance, Task } from "lib/types/RawDB";
 
 type RoomHeaderProps = {
