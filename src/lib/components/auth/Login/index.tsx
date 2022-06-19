@@ -7,7 +7,6 @@ import {
   ModalFooter,
   ModalHeader,
   useColorModeValue,
-  useToast,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
@@ -16,14 +15,12 @@ import { useForm } from "react-hook-form";
 import SignInProviders from "lib/components/auth/SignInProviders";
 import { contraBoxStyle } from "lib/components/auth/style";
 import SpokerInput from "lib/components/shared/SpokerInput";
-import { loginUserWithEmailAndPassword } from "lib/services/firebase";
-import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
+import { loginUserWithEmailAndPassword } from "lib/services/firebase/auth/login/emailAndPassword";
 
 import { initialValues, loginFormValidationSchema } from "./constants";
 import type { LoginFormType, LoginProps } from "./types";
 
 const Login = ({ handleSwitchToRegister }: LoginProps) => {
-  const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const borderColor = useColorModeValue("#18191F", "#FFFFFF");
 
@@ -41,19 +38,9 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
   const processLogin = async () => {
     setIsLoading(true);
     const values = getValues();
-    await loginUserWithEmailAndPassword(values.email, values.password)
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        toast({
-          description: removeFirebasePrefix(err.message),
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-        setIsLoading(false);
-      });
+    await loginUserWithEmailAndPassword(values.email, values.password).finally(
+      () => setIsLoading(false)
+    );
   };
 
   return (

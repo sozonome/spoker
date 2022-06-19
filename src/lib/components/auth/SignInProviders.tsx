@@ -2,13 +2,13 @@ import { Button, Grid, Text, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 
-import { loginWithGoogle } from "lib/services/firebase";
+import { loginWithGoogle } from "lib/services/firebase/auth/login/google";
 
 const SignInProviders = () => {
   const toast = useToast();
 
   const handleLoginWithGoogle = () => {
-    loginWithGoogle(toast);
+    loginWithGoogle();
   };
 
   useEffect(() => {

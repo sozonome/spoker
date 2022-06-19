@@ -11,7 +11,7 @@ import type {
 import type { User } from "lib/types/user";
 import { RoleType } from "lib/types/user";
 
-import { getCurrentUser } from "./auth";
+import { getCurrentUser } from "./auth/getCurrentUser";
 import { fbase } from "./config";
 
 const database = getDatabase(fbase);
