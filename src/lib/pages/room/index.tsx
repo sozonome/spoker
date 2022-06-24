@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import ControllerWrapper from "lib/components/room/ControllerWrapper";
 import CurrentVotesWrapper from "lib/components/room/CurrentVotesWrapper";
-import RoomHeader from "lib/components/room/RoomHeader";
+import RoomHeader from "lib/components/room/header";
 import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
