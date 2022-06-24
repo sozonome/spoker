@@ -12,6 +12,13 @@ import type { PointEntry, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
 
+import {
+  checkAllParticipantVoted,
+  connectedUsers,
+  countAveragePoint,
+  filterUserWithPoints,
+} from "./utils";
+
 export const useRoom = () => {
   const router = useRouter();
   const toast = useToast();
@@ -31,23 +38,12 @@ export const useRoom = () => {
     if (!showVote) {
       return [];
     }
-    return [...users]
-      .filter((unfilteredUser) =>
-        [RoleType.owner, RoleType.participant].includes(unfilteredUser.role)
-      )
-      .map((user) => user.point ?? 0);
+    return filterUserWithPoints(users).map((user) => user.point ?? 0);
   }, [showVote, users]);
 
   const averagePoint = React.useMemo(() => {
     const filledPoints = participantPoints.filter((point) => point);
-    return (
-      filledPoints.reduce((prev, current) => {
-        if (current) {
-          return current + prev;
-        }
-        return prev;
-      }, 0) / filledPoints.length ?? 0
-    );
+    return countAveragePoint(filledPoints);
   }, [participantPoints]);
   const highestPoint = React.useMemo(
     () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
@@ -137,16 +133,9 @@ export const useRoom = () => {
     if (roomData && currentUser && inRoom) {
       if (roomData.users?.[currentUser.uid]) {
         setBusy(false);
-        const updatedUsers: Array<RoomUser> = Object.entries(roomData.users)
-          .map(([uid, userData]) => ({
-            uid,
-            ...userData,
-          }))
-          .filter((user) => user.isConnected);
+        const updatedUsers: Array<RoomUser> = connectedUsers(roomData.users);
 
-        const isAllParticipantVoted = updatedUsers
-          .filter((user) => user.role === RoleType.participant)
-          .every((user) => (user.point ?? -1) >= 0);
+        const isAllParticipantVoted = checkAllParticipantVoted(updatedUsers);
 
         setShowVote(isAllParticipantVoted);
         setUsers(updatedUsers);

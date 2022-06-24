@@ -10,6 +10,10 @@ export interface Rooms {
   [roomId: string]: RoomInstance;
 }
 
+export interface RoomMappedUser {
+  [participantUid: string]: User;
+}
+
 export interface RoomInstance {
   room: RoomInfo;
   task: Task;
@@ -17,9 +21,7 @@ export interface RoomInstance {
   completed?: Array<Task>;
   selectedTaskIndex: number;
 
-  users?: {
-    [participantUid: string]: User;
-  };
+  users?: RoomMappedUser;
 
   config: RoomConfig;
 }
