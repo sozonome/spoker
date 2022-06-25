@@ -8,13 +8,13 @@ import {
   Grid,
   useToast,
 } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
 import HallWrapper from "lib/components/hall";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
-import { requestVerificationMail } from "lib/services/firebase/auth";
-import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
+import { requestVerificationMail } from "lib/services/firebase/auth/requestVerificationMail";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
@@ -23,7 +23,7 @@ const Home = () => {
   const toast = useToast();
 
   const requestEmailVerification = () => {
-    currentUser?.reload().then(() => {
+    currentUser?.reload().then(async () => {
       if (currentUser.emailVerified) {
         setIsEmailVerified(currentUser.emailVerified);
         toast({
@@ -33,24 +33,7 @@ const Home = () => {
           isClosable: true,
         });
       } else {
-        requestVerificationMail()
-          .then(() => {
-            toast({
-              title: "Verification Requested",
-              description: `Please check your email (${currentUser.email}).`,
-              status: "info",
-              position: "top",
-              isClosable: true,
-            });
-          })
-          .catch((err) => {
-            toast({
-              description: removeFirebasePrefix(err.message),
-              status: "warning",
-              position: "top",
-              isClosable: true,
-            });
-          });
+        await requestVerificationMail();
       }
     });
   };
@@ -73,6 +56,7 @@ const Home = () => {
 
   return (
     <Box mb={8} w="full">
+      <NextSeo title="Home" />
       {currentUser && !isEmailVerified ? (
         <Alert borderRadius={24} status="warning">
           <AlertIcon />

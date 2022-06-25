@@ -15,17 +15,17 @@ import {
   useBreakpointValue,
   useToast,
 } from "@chakra-ui/react";
-import { child, remove } from "firebase/database";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import * as React from "react";
 import { BsPencil } from "react-icons/bs";
 import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
 
 import SpokerInput from "lib/components/shared/SpokerInput";
 import { PRIVATE_ROUTES } from "lib/constants/routes/private";
-import { logoutUser, updateDisplayName } from "lib/services/firebase";
-import { roomsData } from "lib/services/firebase/room";
+import { logoutUser } from "lib/services/firebase/auth/logout";
+import { updateDisplayName } from "lib/services/firebase/auth/updateDisplayName";
+import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 import { trackEvent } from "lib/utils/trackEvent";
 
@@ -33,11 +33,11 @@ import { AuthContext } from "./AuthProvider";
 
 const AuthPopover = () => {
   const { currentUser, isCurrentUserUpdating, updateCurrentUser } =
-    useContext(AuthContext);
-  const [displayName, setDisplayName] = useState<string>("");
+    React.useContext(AuthContext);
+  const [displayName, setDisplayName] = React.useState<string>("");
   const [isEditingDisplayName, setIsEditingDisplayName] =
-    useState<boolean>(false);
-  const [displayNameInput, setDisplayNameInput] = useState<string>("");
+    React.useState<boolean>(false);
+  const [displayNameInput, setDisplayNameInput] = React.useState<string>("");
   const toast = useToast();
   const router = useRouter();
   const buttonSize = useBreakpointValue({
@@ -50,7 +50,7 @@ const AuthPopover = () => {
     pathname,
   } = router;
 
-  const checkUserDisplayName = () => {
+  const checkUserDisplayName = React.useCallback(() => {
     if (currentUser) {
       setTimeout(() => {
         currentUser.reload().then(() => {
@@ -58,12 +58,11 @@ const AuthPopover = () => {
         });
       }, 500);
     }
-  };
+  }, [currentUser]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     checkUserDisplayName();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, isCurrentUserUpdating]);
+  }, [checkUserDisplayName, isCurrentUserUpdating]);
 
   const handleEditClick = () => {
     if (isEditingDisplayName) {
@@ -114,7 +113,7 @@ const AuthPopover = () => {
   const clearUserSessionData = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       router.push("/").then(async () => {
-        await remove(child(roomsData, `${id}/users/${currentUser.uid}`));
+        await disconnectUser(id as string, currentUser.uid);
         processLogout();
       });
       return;

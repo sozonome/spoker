@@ -1,4 +1,5 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 import type { FirebaseConfigType } from "./types";
 
@@ -14,3 +15,11 @@ export const config: FirebaseConfigType = {
 };
 
 export const fbase = getApps().length ? getApp() : initializeApp(config);
+if (global?.document) {
+  initializeAppCheck(fbase, {
+    provider: new ReCaptchaV3Provider(
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""
+    ),
+    isTokenAutoRefreshEnabled: true,
+  });
+}
