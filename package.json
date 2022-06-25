@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
@@ -32,6 +33,7 @@
     "nanoid": "^4.0.0",
     "next": "^12.1.6",
     "next-pwa": "^5.5.4",
+    "next-seo": "^5.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-compare": "^3.2.0",
@@ -73,6 +75,7 @@
     "eslint-plugin-storybook": "^0.5.12",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.1",
+    "next-sitemap": "^3.1.6",
     "prettier": "^2.7.0",
     "standard-version": "^9.5.0",
     "storybook-addon-performance": "^0.16.1",

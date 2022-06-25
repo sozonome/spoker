@@ -8,6 +8,7 @@ import {
   Grid,
   useToast,
 } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "lib/components/auth/AuthProvider";
@@ -55,6 +56,7 @@ const Home = () => {
 
   return (
     <Box mb={8} w="full">
+      <NextSeo title="Home" />
       {currentUser && !isEmailVerified ? (
         <Alert borderRadius={24} status="warning">
           <AlertIcon />
