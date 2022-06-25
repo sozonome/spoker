@@ -1,4 +1,5 @@
 import { Box, Button, Container, Heading, Text } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
@@ -23,6 +24,7 @@ const Intro = () => {
       minHeight="60vh"
       alignItems="center"
     >
+      <NextSeo title="Intro" />
       <Box>
         <SpokerWrapperGrid textAlign="center" gap={8}>
           <Heading>Estimate with your team</Heading>

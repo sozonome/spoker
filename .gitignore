@@ -40,6 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# sitemap
+robots.txt
+sitemap*.xml
+
 *rules.json
 
 # storybook

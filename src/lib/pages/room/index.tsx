@@ -1,5 +1,5 @@
 import { Box, Grid } from "@chakra-ui/react";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 import ControllerWrapper from "lib/components/room/ControllerWrapper";
 import CurrentVotesWrapper from "lib/components/room/CurrentVotesWrapper";
@@ -32,10 +32,7 @@ const RoomContainer = () => {
   if (currentUser && roomData) {
     return (
       <Grid gap={8}>
-        <Head>
-          <title>{roomData.room.name} | spoker</title>
-        </Head>
-
+        <NextSeo title={roomData.room.name} />
         <Grid
           templateColumns={{ base: "1fr", md: "3fr 2fr" }}
           gap={6}
