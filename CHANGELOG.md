@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/sozonome/spoker/compare/v1.8.1...v1.9.0) (2022-06-25)
+
+
+### Features
+
+* **seo:** setup next-seo and next-sitemap ([#108](https://github.com/sozonome/spoker/issues/108)) ([d3a26e9](https://github.com/sozonome/spoker/commit/d3a26e9abbbeea72f78a818eab412c29846b458e))
+* **services:** implement firebase app check ([9940d88](https://github.com/sozonome/spoker/commit/9940d88da35987a01d4f9722fb27e7b992be8fad))
+
+
+### Improvements
+
+* **services:** split code into each own file ([#105](https://github.com/sozonome/spoker/issues/105)) ([5afc049](https://github.com/sozonome/spoker/commit/5afc049f6069fe4e70895c5604a0af168260fe0d))
+* use hook as page model pattern ([#107](https://github.com/sozonome/spoker/issues/107)) ([1a64758](https://github.com/sozonome/spoker/commit/1a6475821138ae061e8caaa716f0b60996c4e275))
+
 ### [1.8.1](https://github.com/sozonome/spoker/compare/v1.8.0...v1.8.1) (2022-06-17)
 
 
