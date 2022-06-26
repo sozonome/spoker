@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/sozonome/spoker/compare/v1.9.0...v1.9.1) (2022-06-26)
+
+
+### Improvements
+
+* **auth:** switch auth provider with zustand store ([#110](https://github.com/sozonome/spoker/issues/110)) ([9276459](https://github.com/sozonome/spoker/commit/9276459a8e25c982358f1238d71b871d4853144a))
+
 ## [1.9.0](https://github.com/sozonome/spoker/compare/v1.8.1...v1.9.0) (2022-06-25)
 
 
