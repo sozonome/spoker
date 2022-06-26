@@ -1,11 +1,11 @@
 import { Modal, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
-import { useContext, useEffect, useState } from "react";
+import * as React from "react";
 
 import { PUBLIC_ROUTES } from "lib/constants/routes/public";
+import { useAuth } from "lib/stores/auth";
 
-import { AuthContext } from "./AuthProvider";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -15,8 +15,8 @@ type AuthWrapperProps = {
 
 const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isRegistered, setIsRegistered] = useState<boolean>(true);
-  const { currentUser } = useContext(AuthContext);
+  const [isRegistered, setIsRegistered] = React.useState<boolean>(true);
+  const currentUser = useAuth((state) => state.currentUser);
 
   const router = useRouter();
   const { pathname } = router;
@@ -24,7 +24,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
 
   const isUnauthorized = currentUser === null && !isPublicRoute;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isUnauthorized) {
       onOpen();
     } else {
@@ -33,7 +33,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, pathname]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isUnauthorized) {
       setIsRegistered(true);
     }

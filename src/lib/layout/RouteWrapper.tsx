@@ -2,10 +2,11 @@ import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-import { AuthContext } from "lib/components/auth/AuthProvider";
 import { PUBLIC_ROUTES } from "lib/constants/routes/public";
+import { useAuth } from "lib/stores/auth";
 
 import FullScreenLoading from "./FullScreenLoading";
+import { useAuthObserver } from "./useAuthObserver";
 
 type RouteWrapperProps = {
   children: React.ReactNode;
@@ -14,8 +15,9 @@ type RouteWrapperProps = {
 const RouteWrapper = ({ children }: RouteWrapperProps) => {
   const router = useRouter();
   const { pathname } = router;
+  const { isLoadingAuth } = useAuthObserver();
 
-  const { currentUser } = React.useContext(AuthContext);
+  const currentUser = useAuth((state) => state.currentUser);
   const [busy, setBusy] = React.useState<boolean>(false);
 
   const toast = useToast();
@@ -61,7 +63,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentUser]);
 
-  if (busy) {
+  if (busy || isLoadingAuth) {
     return <FullScreenLoading />;
   }
 
