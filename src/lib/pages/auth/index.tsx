@@ -2,16 +2,16 @@ import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-import { AuthContext } from "lib/components/auth/AuthProvider";
 import FullScreenLoading from "lib/layout/FullScreenLoading";
 import { handleVerifyEmail } from "lib/services/firebase/auth/verifyEmail";
+import { useAuth } from "lib/stores/auth";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 
 const Auth = () => {
   const router = useRouter();
   const { mode, oobCode } = router.query;
 
-  const { currentUser } = React.useContext(AuthContext);
+  const currentUser = useAuth((state) => state.currentUser);
   const [isProcessed, setIsProcessed] = React.useState<boolean>(false);
   const toast = useToast();
 
