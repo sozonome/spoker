@@ -3,11 +3,11 @@ import { child, onDisconnect, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-import { AuthContext } from "lib/components/auth/AuthProvider";
 import { roomsData } from "lib/services/firebase/room/common";
 import { rejoinRoom } from "lib/services/firebase/room/rejoin";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
 import { submitVote } from "lib/services/firebase/room/update/submitVote";
+import { useAuth } from "lib/stores/auth";
 import type { PointEntry, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
@@ -22,7 +22,7 @@ import {
 export const useRoom = () => {
   const router = useRouter();
   const toast = useToast();
-  const { currentUser } = React.useContext(AuthContext);
+  const currentUser = useAuth((state) => state.currentUser);
   const [busy, setBusy] = React.useState<boolean>(true);
   const [showVote, setShowVote] = React.useState<boolean>(false);
   const [roomData, setRoomData] = React.useState<RoomInstance>();

@@ -20,21 +20,22 @@ import * as React from "react";
 import { BsPencil } from "react-icons/bs";
 import { ImCheckmark } from "react-icons/im";
 import { IoMdPerson } from "react-icons/io";
+import shallow from "zustand/shallow";
 
 import SpokerInput from "lib/components/shared/SpokerInput";
 import { PRIVATE_ROUTES } from "lib/constants/routes/private";
 import { logoutUser } from "lib/services/firebase/auth/logout";
 import { updateDisplayName } from "lib/services/firebase/auth/updateDisplayName";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
+import { useAuth } from "lib/stores/auth";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 import { trackEvent } from "lib/utils/trackEvent";
 
-import { AuthContext } from "./AuthProvider";
-
 const AuthPopover = () => {
-  const { currentUser, isCurrentUserUpdating, updateCurrentUser } =
-    React.useContext(AuthContext);
-  const [displayName, setDisplayName] = React.useState<string>("");
+  const [currentUser, displayName, setDisplayName] = useAuth(
+    (state) => [state.currentUser, state.displayName, state.setDisplayName],
+    shallow
+  );
   const [isEditingDisplayName, setIsEditingDisplayName] =
     React.useState<boolean>(false);
   const [displayNameInput, setDisplayNameInput] = React.useState<string>("");
@@ -50,20 +51,6 @@ const AuthPopover = () => {
     pathname,
   } = router;
 
-  const checkUserDisplayName = React.useCallback(() => {
-    if (currentUser) {
-      setTimeout(() => {
-        currentUser.reload().then(() => {
-          setDisplayName(currentUser.displayName ?? "");
-        });
-      }, 500);
-    }
-  }, [currentUser]);
-
-  React.useEffect(() => {
-    checkUserDisplayName();
-  }, [checkUserDisplayName, isCurrentUserUpdating]);
-
   const handleEditClick = () => {
     if (isEditingDisplayName) {
       if (displayNameInput !== displayName) {
@@ -75,7 +62,7 @@ const AuthPopover = () => {
               position: "top",
               isClosable: true,
             });
-            updateCurrentUser();
+            setDisplayName(displayNameInput);
           })
           .catch(async (e) => {
             toast({
@@ -91,7 +78,6 @@ const AuthPopover = () => {
         return;
       }
 
-      checkUserDisplayName();
       setIsEditingDisplayName(false);
       return;
     }

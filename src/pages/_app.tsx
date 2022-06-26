@@ -5,7 +5,6 @@ import Head from "next/head";
 import "@fontsource/outfit/latin.css";
 
 import defaultSEOConfig from "../../next-seo.config";
-import { AuthProvider } from "lib/components/auth/AuthProvider";
 import Layout from "lib/layout";
 import customTheme from "lib/styles/theme";
 import "lib/styles/globals.css";
@@ -23,11 +22,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           />
         </Head>
         <DefaultSeo {...defaultSEOConfig} />
-        <AuthProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ChakraProvider>
       <ToastContainer />
     </>

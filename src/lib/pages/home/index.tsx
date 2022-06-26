@@ -9,17 +9,17 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import { useContext, useEffect, useState } from "react";
+import * as React from "react";
 
-import { AuthContext } from "lib/components/auth/AuthProvider";
 import HallWrapper from "lib/components/hall";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
 import { requestVerificationMail } from "lib/services/firebase/auth/requestVerificationMail";
+import { useAuth } from "lib/stores/auth";
 
 const Home = () => {
-  const { currentUser } = useContext(AuthContext);
-  const [busy, setBusy] = useState<boolean>(true);
-  const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
+  const currentUser = useAuth((state) => state.currentUser);
+  const [busy, setBusy] = React.useState<boolean>(true);
+  const [isEmailVerified, setIsEmailVerified] = React.useState<boolean>(false);
   const toast = useToast();
 
   const requestEmailVerification = () => {
@@ -38,7 +38,7 @@ const Home = () => {
     });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setBusy(true);
     if (currentUser) {
       currentUser.reload().then(() => {
