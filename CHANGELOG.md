@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/sozonome/spoker/compare/v1.9.1...v1.10.0) (2022-07-09)
+
+
+### Features
+
+* **room:** 🎉  add confetti when show vote ([#113](https://github.com/sozonome/spoker/issues/113)) ([ec516df](https://github.com/sozonome/spoker/commit/ec516dfc3b83d6455c375639c0b59e99badcdc72))
+
 ### [1.9.1](https://github.com/sozonome/spoker/compare/v1.9.0...v1.9.1) (2022-06-26)
 
 
