@@ -2,7 +2,9 @@ import { useToast } from "@chakra-ui/react";
 import { child, onDisconnect, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import * as React from "react";
+import { useReward } from "react-rewards";
 
+import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
 import { roomsData } from "lib/services/firebase/room/common";
 import { rejoinRoom } from "lib/services/firebase/room/rejoin";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
@@ -29,6 +31,7 @@ export const useRoom = () => {
   const [users, setUsers] = React.useState<Array<RoomUser>>([]);
   const [inRoom, setInRoom] = React.useState<boolean>(true);
   const firstRenderRef = React.useRef(true);
+  const { reward } = useReward(CURRENT_VOTE_WRAPPER_ID, "confetti");
 
   const {
     query: { id },
@@ -134,9 +137,7 @@ export const useRoom = () => {
       if (roomData.users?.[currentUser.uid]) {
         setBusy(false);
         const updatedUsers: Array<RoomUser> = connectedUsers(roomData.users);
-
         const isAllParticipantVoted = checkAllParticipantVoted(updatedUsers);
-
         setShowVote(isAllParticipantVoted);
         setUsers(updatedUsers);
         return;
@@ -154,6 +155,12 @@ export const useRoom = () => {
       });
     }
   }, [roomData, inRoom, currentUser, router, id, toast]);
+
+  React.useEffect(() => {
+    if (showVote) {
+      reward();
+    }
+  }, [showVote, reward]);
 
   React.useEffect(() => {
     const inRoomDisconnected =

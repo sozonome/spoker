@@ -18,6 +18,7 @@ import * as React from "react";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import type { HideLabelOptionsType } from "lib/constants/hideLabel";
 import { hideLabelOptions } from "lib/constants/hideLabel";
+import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
 import { updateConfig } from "lib/services/firebase/room/update/roomConfig";
 import type { RoomConfig, RoomInstance } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
@@ -146,6 +147,7 @@ const CurrentVotesWrapper = ({
       display="inline-block"
       gap={4}
       backgroundColor={wrapperBackgroundColor}
+      id={CURRENT_VOTE_WRAPPER_ID}
     >
       <Heading size="lg">Current Votes</Heading>
 
