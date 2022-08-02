@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.1](https://github.com/sozonome/spoker/compare/v1.10.0...v1.10.1) (2022-08-02)
+
+
+### Improvements
+
+* **services:** adjust 3rd party auth handler ([3134fb2](https://github.com/sozonome/spoker/commit/3134fb2fdbd91a15dcc87dd3c63af87714edca69))
+
 ## [1.10.0](https://github.com/sozonome/spoker/compare/v1.9.1...v1.10.0) (2022-07-09)
 
 
