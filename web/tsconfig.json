@@ -13,7 +13,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": "src",
+    "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "web"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src", "tools"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "moduleTypes": {
+      "*": "cjs"
+    }
+  }
 }

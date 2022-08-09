@@ -2,7 +2,7 @@ import { addDecorator, Parameters } from "@storybook/react";
 import { withPerformance } from "storybook-addon-performance";
 import "@fontsource/outfit/latin.css";
 
-import customTheme from "../src/lib/styles/theme";
+import customTheme from "../web/src/lib/styles/theme";
 
 /**
  * Add global context for RTL-LTR switching
