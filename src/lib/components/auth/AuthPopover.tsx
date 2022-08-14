@@ -24,6 +24,7 @@ import shallow from "zustand/shallow";
 
 import SpokerInput from "lib/components/shared/SpokerInput";
 import { PRIVATE_ROUTES } from "lib/constants/routes/private";
+import { EVENT_TYPE_AUTH } from "lib/constants/tracking";
 import { logoutUser } from "lib/services/firebase/auth/logout";
 import { updateDisplayName } from "lib/services/firebase/auth/updateDisplayName";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
@@ -111,8 +112,8 @@ const AuthPopover = () => {
   const handleLogout = async () => {
     await clearUserSessionData();
     trackEvent({
-      eventValue: "sign out",
-      eventType: "auth",
+      eventName: "sign out",
+      eventData: { type: EVENT_TYPE_AUTH },
     });
   };
 

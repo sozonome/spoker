@@ -1,6 +1,7 @@
 import { IconButton, useBreakpointValue, useColorMode } from "@chakra-ui/react";
 import { RiMoonFill, RiSunLine } from "react-icons/ri";
 
+import { EVENT_TYPE_CTA } from "lib/constants/tracking";
 import { trackEvent } from "lib/utils/trackEvent";
 
 const ThemeToggle = () => {
@@ -11,8 +12,8 @@ const ThemeToggle = () => {
   });
   const handleClickToggle = () => {
     trackEvent({
-      eventValue: `toggle theme to ${colorMode === "light" ? "dark" : "light"}`,
-      eventType: "cta",
+      eventName: `toggle theme to ${colorMode === "light" ? "dark" : "light"}`,
+      eventData: { type: EVENT_TYPE_CTA },
     });
     toggleColorMode();
   };
