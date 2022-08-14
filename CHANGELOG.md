@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.2](https://github.com/sozonome/spoker/compare/v1.10.1...v1.10.2) (2022-08-14)
+
+
+### Improvements
+
+* **analytics:** adjust with umami trackEvent update ([cd43986](https://github.com/sozonome/spoker/commit/cd43986047fad02ff2bbb1a4dc319746d5a561a2))
+
 ### [1.10.1](https://github.com/sozonome/spoker/compare/v1.10.0...v1.10.1) (2022-08-02)
 
 
