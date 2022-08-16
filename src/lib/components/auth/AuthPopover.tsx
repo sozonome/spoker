@@ -151,6 +151,8 @@ const AuthPopover = () => {
                 <Heading size="sm">{displayName}</Heading>
               )}
               <IconButton
+                border="none"
+                boxShadow="none"
                 size="xs"
                 aria-label="edit"
                 icon={isEditingDisplayName ? <ImCheckmark /> : <BsPencil />}
