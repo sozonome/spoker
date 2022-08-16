@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/sozonome/spoker/compare/v1.10.2...v1.11.0) (2022-08-16)
+
+
+### Features
+
+* **layout:** add support CTA ([#120](https://github.com/sozonome/spoker/issues/120)) ([e13b4cf](https://github.com/sozonome/spoker/commit/e13b4cf515d1b588b9b3689c62ef92d21abb10d0))
+
 ### [1.10.2](https://github.com/sozonome/spoker/compare/v1.10.1...v1.10.2) (2022-08-14)
 
 
