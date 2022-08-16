@@ -1,3 +1,4 @@
+import type { TabProps } from "@chakra-ui/react";
 import {
   Box,
   Button,
@@ -27,7 +28,6 @@ import { RiInformationLine } from "react-icons/ri";
 import { ReactSortable } from "react-sortablejs";
 
 import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
-import SpokerButton from "lib/components/shared/SpokerButton";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { editQueueItem } from "lib/services/firebase/room/update/queue/edit";
@@ -49,6 +49,13 @@ type TaskListProps = {
 const initialFormValue: SubmitStoryForm = {
   name: "",
   description: "",
+};
+
+const tabStyle: TabProps = {
+  fontSize: {
+    base: "xs",
+    md: "md",
+  },
 };
 
 const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
@@ -247,9 +254,9 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
           variant="soft-rounded"
         >
           <TabList alignItems="center">
-            {isOwner && <Tab>{activeStoriesTabText}</Tab>}
-            <Tab>{completedTabText}</Tab>
-            <Tab>{allTabText}</Tab>
+            {isOwner && <Tab {...tabStyle}>{activeStoriesTabText}</Tab>}
+            <Tab {...tabStyle}>{completedTabText}</Tab>
+            <Tab {...tabStyle}>{allTabText}</Tab>
             {isOwner && (
               <Button
                 marginLeft="auto"
@@ -342,17 +349,17 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         }
         footer={
           <Flex gridGap={2}>
-            <SpokerButton onClick={onCloseAddStory} disabled={isBusy}>
+            <Button onClick={onCloseAddStory} disabled={isBusy}>
               Cancel
-            </SpokerButton>
-            <SpokerButton
+            </Button>
+            <Button
               colorScheme="teal"
               type="submit"
               isDisabled={!isValid || isBusy}
               isLoading={isBusy}
             >
               Add
-            </SpokerButton>
+            </Button>
           </Flex>
         }
       />
@@ -382,17 +389,17 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         }
         footer={
           <Flex gridGap={2}>
-            <SpokerButton onClick={closeEditStory} disabled={isBusy}>
+            <Button onClick={closeEditStory} disabled={isBusy}>
               Cancel
-            </SpokerButton>
-            <SpokerButton
+            </Button>
+            <Button
               type="submit"
               colorScheme="blue"
               isDisabled={!isEditStoryValid || !isEditStoryDirty || isBusy}
               isLoading={isBusy}
             >
               Save
-            </SpokerButton>
+            </Button>
           </Flex>
         }
       />
@@ -411,15 +418,15 @@ const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
         }
         footer={
           <Flex gridGap={2}>
-            <SpokerButton onClick={closeRemoveStory}>Cancel</SpokerButton>
-            <SpokerButton
+            <Button onClick={closeRemoveStory}>Cancel</Button>
+            <Button
               colorScheme="red"
               onClick={processRemoveStory}
               isLoading={isBusy}
               isDisabled={isBusy}
             >
               Yes, Remove
-            </SpokerButton>
+            </Button>
           </Flex>
         }
       />
