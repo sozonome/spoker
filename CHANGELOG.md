@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/sozonome/spoker/compare/v1.11.0...v1.11.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* fix show filled point hide label ([6b94acd](https://github.com/sozonome/spoker/commit/6b94acd224a06bd2ff3a8f94a52cb43cafe3296b))
+
 ## [1.11.0](https://github.com/sozonome/spoker/compare/v1.10.2...v1.11.0) (2022-08-16)
 
 
