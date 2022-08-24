@@ -29,7 +29,7 @@ const PointWrapper = ({
       </Text>
     );
   }
-  if ((point ?? 0) >= 0) {
+  if (point || point === 0) {
     return <Twemoji emoji={hideLabel[roomSelectedHideLabel].selected} />;
   }
   return <Twemoji emoji={hideLabel[roomSelectedHideLabel].empty} />;
