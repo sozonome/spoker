@@ -19,6 +19,8 @@
     "up": "yarn upgrade-interactive",
     "up-latest": "yarn up --latest",
     "generate-rules": "ts-node tools/generateRules.ts",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -65,6 +67,7 @@
     "@types/react": "^18.0.20",
     "@types/sortablejs": "^1.13.0",
     "@types/umami": "^0.1.0",
+    "all-contributors-cli": "^6.20.4",
     "babel-loader": "^8.2.5",
     "commitizen": "^4.2.5",
     "commitlint": "^17.1.2",

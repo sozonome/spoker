@@ -1,0 +1,29 @@
+{
+  "projectName": "spoker",
+  "projectOwner": "sozonome",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 72,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "sozonome",
+      "name": "Agustinus Nathaniel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17046154?v=4",
+      "profile": "https://sznm.dev/",
+      "contributions": [
+        "code",
+        "bug",
+        "design",
+        "ideas",
+        "infra",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
