@@ -51,9 +51,9 @@ const CurrentVotesWrapper = ({
   } = router;
   const toast = useToast();
   const currentUser = useAuth((state) => state.currentUser);
-  const { roomData, showVote, users } = useRoomStore(
+  const { config, showVote, users } = useRoomStore(
     (state) => ({
-      roomData: state.roomData,
+      config: state.roomData?.config,
       showVote: state.showVote,
       users: state.users,
     }),
@@ -95,7 +95,7 @@ const CurrentVotesWrapper = ({
               >
                 <PointWrapper
                   showVote={showVote}
-                  roomSelectedHideLabel={roomData?.config.hideLabel ?? "monkey"}
+                  roomSelectedHideLabel={config?.hideLabel ?? "monkey"}
                   isCurrentUser={participant.uid === currentUser?.uid}
                   point={participant.point}
                 />
@@ -104,7 +104,7 @@ const CurrentVotesWrapper = ({
             {participantIndex !== participants.length - 1 && <Divider />}
           </React.Fragment>
         )),
-    [currentUser?.uid, roomData?.config.hideLabel, showVote, users]
+    [currentUser?.uid, config?.hideLabel, showVote, users]
   );
 
   const handleUpdateFreezeAfterVote = async (
@@ -155,7 +155,7 @@ const CurrentVotesWrapper = ({
 
       <Checkbox
         disabled={!isOwner}
-        isChecked={roomData?.config.isFreezeAfterVote}
+        isChecked={config?.isFreezeAfterVote}
         onChange={handleUpdateFreezeAfterVote}
         colorScheme="teal"
         marginY={4}
@@ -173,7 +173,7 @@ const CurrentVotesWrapper = ({
             onChange={(e) =>
               handleUpdateHideLabel(e.target.value as HideLabelOptionsType)
             }
-            value={roomData?.config.hideLabel ?? "monkey"}
+            value={config?.hideLabel ?? "monkey"}
           >
             {hideLabelOptions.map((hideLabelOption) => (
               <Text as="option" value={hideLabelOption} key={hideLabelOption}>

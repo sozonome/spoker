@@ -89,6 +89,7 @@ export const useRoom = () => {
   }, [currentUser?.uid, id]);
 
   const getRoomData = React.useCallback(async () => {
+    setInRoom(true);
     onValue(child(roomsData, id as string), (snap) => {
       if (snap.exists()) {
         setRoomData(snap.val());
@@ -103,7 +104,7 @@ export const useRoom = () => {
         });
       }
     });
-  }, [handleOnDisconnect, id, router, setRoomData, toast]);
+  }, [handleOnDisconnect, id, router, setInRoom, setRoomData, toast]);
 
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
@@ -130,7 +131,8 @@ export const useRoom = () => {
 
   const handleRejoin = React.useCallback(async () => {
     await rejoinRoom(id as string, userRole);
-  }, [id, userRole]);
+    setInRoom(true);
+  }, [id, setInRoom, userRole]);
 
   React.useEffect(() => {
     if (firstRenderRef.current) {
