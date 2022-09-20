@@ -13,17 +13,14 @@ import { BiLink, BiShareAlt } from "react-icons/bi";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { clearPoints } from "lib/services/firebase/room/update/point/clear";
-import type { RoomUser } from "lib/types/room";
+import { useRoomStore } from "lib/stores/room";
 
 type ControllerWrapperProps = {
-  users: Array<RoomUser>;
   isResetEnabled: boolean;
 };
 
-const ControllerWrapper = ({
-  users,
-  isResetEnabled,
-}: ControllerWrapperProps) => {
+const ControllerWrapper = ({ isResetEnabled }: ControllerWrapperProps) => {
+  const users = useRoomStore((state) => state.users);
   const router = useRouter();
   const {
     query: { id },
