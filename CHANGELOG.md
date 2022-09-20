@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.3](https://github.com/sozonome/spoker/compare/v1.11.2...v1.11.3) (2022-09-20)
+
+
+### Improvements
+
+* **room:** use store to replace state ([#126](https://github.com/sozonome/spoker/issues/126)) ([8d9f6de](https://github.com/sozonome/spoker/commit/8d9f6deab7300e5d06c9cdb8e4d6e11ea8e7dab7))
+
 ### [1.11.2](https://github.com/sozonome/spoker/compare/v1.11.1...v1.11.2) (2022-08-24)
 
 
