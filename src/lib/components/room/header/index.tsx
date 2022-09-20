@@ -10,12 +10,14 @@ import {
 import * as React from "react";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import { useRoomStore } from "lib/stores/room";
 
 import EditableFields from "./components/EditableFields";
 import { useRoomHeader } from "./hooks";
 import type { RoomHeaderProps } from "./types";
 
-const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
+const RoomHeader = ({ isOwner }: RoomHeaderProps) => {
+  const roomData = useRoomStore((state) => state.roomData);
   const wrapperBackgroundColor = useColorModeValue("teal.50", "teal.600");
   const { name, description, handleUpdateTask } = useRoomHeader({
     roomData,
@@ -23,7 +25,6 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
   });
 
   const content = React.useMemo(() => {
-    const task = roomData?.task;
     if (isOwner) {
       return (
         <EditableFields
@@ -32,6 +33,10 @@ const RoomHeader = ({ roomData, isOwner }: RoomHeaderProps) => {
           handleUpdateTask={handleUpdateTask}
         />
       );
+    }
+    const task = roomData?.task;
+    if (!task) {
+      return null;
     }
 
     return (

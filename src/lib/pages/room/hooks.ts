@@ -3,6 +3,7 @@ import { child, onDisconnect, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { useReward } from "react-rewards";
+import shallow from "zustand/shallow";
 
 import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
 import { roomsData } from "lib/services/firebase/room/common";
@@ -10,7 +11,8 @@ import { rejoinRoom } from "lib/services/firebase/room/rejoin";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
 import { submitVote } from "lib/services/firebase/room/update/submitVote";
 import { useAuth } from "lib/stores/auth";
-import type { PointEntry, RoomInstance } from "lib/types/RawDB";
+import { useRoomStore } from "lib/stores/room";
+import type { PointEntry } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
 import { RoleType } from "lib/types/user";
 
@@ -25,11 +27,27 @@ export const useRoom = () => {
   const router = useRouter();
   const toast = useToast();
   const currentUser = useAuth((state) => state.currentUser);
-  const [busy, setBusy] = React.useState<boolean>(true);
-  const [showVote, setShowVote] = React.useState<boolean>(false);
-  const [roomData, setRoomData] = React.useState<RoomInstance>();
-  const [users, setUsers] = React.useState<Array<RoomUser>>([]);
-  const [inRoom, setInRoom] = React.useState<boolean>(true);
+  const { roomData, showVote, users, inRoom } = useRoomStore(
+    (state) => ({
+      showVote: state.showVote,
+      roomData: state.roomData,
+      users: state.users,
+      inRoom: state.inRoom,
+    }),
+    shallow
+  );
+  const { setIsBusy, setShowVote, setRoomData, setUsers, setInRoom } =
+    useRoomStore(
+      (state) => ({
+        setIsBusy: state.setIsBusy,
+        setShowVote: state.setShowVote,
+        setRoomData: state.setRoomData,
+        setUsers: state.setUsers,
+        setInRoom: state.setInRoom,
+      }),
+      shallow
+    );
+
   const firstRenderRef = React.useRef(true);
   const { reward } = useReward(CURRENT_VOTE_WRAPPER_ID, "confetti");
 
@@ -71,6 +89,7 @@ export const useRoom = () => {
   }, [currentUser?.uid, id]);
 
   const getRoomData = React.useCallback(async () => {
+    setInRoom(true);
     onValue(child(roomsData, id as string), (snap) => {
       if (snap.exists()) {
         setRoomData(snap.val());
@@ -85,7 +104,7 @@ export const useRoom = () => {
         });
       }
     });
-  }, [handleOnDisconnect, id, router, toast]);
+  }, [handleOnDisconnect, id, router, setInRoom, setRoomData, toast]);
 
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
@@ -112,7 +131,8 @@ export const useRoom = () => {
 
   const handleRejoin = React.useCallback(async () => {
     await rejoinRoom(id as string, userRole);
-  }, [id, userRole]);
+    setInRoom(true);
+  }, [id, setInRoom, userRole]);
 
   React.useEffect(() => {
     if (firstRenderRef.current) {
@@ -135,7 +155,7 @@ export const useRoom = () => {
   React.useEffect(() => {
     if (roomData && currentUser && inRoom) {
       if (roomData.users?.[currentUser.uid]) {
-        setBusy(false);
+        setIsBusy(false);
         const updatedUsers: Array<RoomUser> = connectedUsers(roomData.users);
         const isAllParticipantVoted = checkAllParticipantVoted(updatedUsers);
         setShowVote(isAllParticipantVoted);
@@ -154,7 +174,17 @@ export const useRoom = () => {
         isClosable: true,
       });
     }
-  }, [roomData, inRoom, currentUser, router, id, toast]);
+  }, [
+    roomData,
+    inRoom,
+    currentUser,
+    router,
+    id,
+    toast,
+    setIsBusy,
+    setShowVote,
+    setUsers,
+  ]);
 
   React.useEffect(() => {
     if (showVote) {
@@ -184,11 +214,6 @@ export const useRoom = () => {
   });
 
   return {
-    currentUser,
-    busy,
-    showVote,
-    roomData,
-    users,
     averagePoint,
     highestPoint,
     isParticipant,

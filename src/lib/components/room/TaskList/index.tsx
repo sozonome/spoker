@@ -26,23 +26,24 @@ import { useForm } from "react-hook-form";
 import { GoPlus } from "react-icons/go";
 import { RiInformationLine } from "react-icons/ri";
 import { ReactSortable } from "react-sortablejs";
+import shallow from "zustand/shallow";
 
 import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import { emptyRoom } from "lib/constants/emptyRoom";
 import { editQueueItem } from "lib/services/firebase/room/update/queue/edit";
 import { removeQueueItem } from "lib/services/firebase/room/update/queue/remove";
 import { swapSelectedQueueWithCurrent } from "lib/services/firebase/room/update/queue/swap";
 import { rewriteQueue } from "lib/services/firebase/room/update/rewriteQueue";
-import type { RoomInstance, Task } from "lib/types/RawDB";
+import { useRoomStore } from "lib/stores/room";
+import type { Task } from "lib/types/RawDB";
 
 import { submitStoryFormValidationSchema } from "./constants";
 import TaskItem from "./TaskItem";
 import type { EditStoryForm, SortableTaskItem, SubmitStoryForm } from "./types";
 
 type TaskListProps = {
-  roomData: RoomInstance;
-  showVote: boolean;
   isOwner: boolean;
 };
 
@@ -58,11 +59,18 @@ const tabStyle: TabProps = {
   },
 };
 
-const TaskList = ({ roomData, showVote, isOwner }: TaskListProps) => {
+const TaskList = ({ isOwner }: TaskListProps) => {
   const router = useRouter();
   const {
     query: { id },
   } = router;
+  const { roomData, showVote } = useRoomStore(
+    (state) => ({
+      roomData: state.roomData ?? emptyRoom,
+      showVote: state.showVote,
+    }),
+    shallow
+  );
   const wrapperBackgroundColor = useColorModeValue("gray.50", "gray.900");
   const {
     isOpen: isOpenAddStory,

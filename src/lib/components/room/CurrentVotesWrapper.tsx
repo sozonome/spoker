@@ -11,17 +11,18 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import type { User } from "firebase/auth";
 import { useRouter } from "next/router";
 import * as React from "react";
+import shallow from "zustand/shallow";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import type { HideLabelOptionsType } from "lib/constants/hideLabel";
 import { hideLabelOptions } from "lib/constants/hideLabel";
 import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
 import { updateConfig } from "lib/services/firebase/room/update/roomConfig";
-import type { RoomConfig, RoomInstance } from "lib/types/RawDB";
-import type { RoomUser } from "lib/types/room";
+import { useAuth } from "lib/stores/auth";
+import { useRoomStore } from "lib/stores/room";
+import type { RoomConfig } from "lib/types/RawDB";
 import { pointOptions } from "lib/types/room";
 import { RoleType } from "lib/types/user";
 
@@ -31,24 +32,16 @@ import { pointTextColor, pointTextSize } from "./utils";
 type CurrentVotesWrapperProps = {
   isOwner: boolean;
   isObservant: boolean;
-  roomData: RoomInstance;
-  showVote: boolean;
   averagePoint: number;
   highestPoint: number;
-  users: Array<RoomUser>;
-  currentUser: User;
   onFinishVote: (estimate: number) => Promise<void>;
 };
 
 const CurrentVotesWrapper = ({
   isOwner,
   isObservant,
-  roomData,
-  showVote,
   averagePoint,
   highestPoint,
-  users,
-  currentUser,
   onFinishVote,
 }: CurrentVotesWrapperProps) => {
   const wrapperBackgroundColor = useColorModeValue("green.50", "gray.600");
@@ -57,6 +50,15 @@ const CurrentVotesWrapper = ({
     query: { id },
   } = router;
   const toast = useToast();
+  const currentUser = useAuth((state) => state.currentUser);
+  const { config, showVote, users } = useRoomStore(
+    (state) => ({
+      config: state.roomData?.config,
+      showVote: state.showVote,
+      users: state.users,
+    }),
+    shallow
+  );
   const [isLoadingSubmitVote, setIsLoadingSubmitVote] =
     React.useState<boolean>(false);
   const [estimate, setEstimate] = React.useState<number>(0);
@@ -93,7 +95,7 @@ const CurrentVotesWrapper = ({
               >
                 <PointWrapper
                   showVote={showVote}
-                  roomSelectedHideLabel={roomData?.config.hideLabel ?? "monkey"}
+                  roomSelectedHideLabel={config?.hideLabel ?? "monkey"}
                   isCurrentUser={participant.uid === currentUser?.uid}
                   point={participant.point}
                 />
@@ -102,7 +104,7 @@ const CurrentVotesWrapper = ({
             {participantIndex !== participants.length - 1 && <Divider />}
           </React.Fragment>
         )),
-    [currentUser?.uid, roomData?.config.hideLabel, showVote, users]
+    [currentUser?.uid, config?.hideLabel, showVote, users]
   );
 
   const handleUpdateFreezeAfterVote = async (
@@ -153,7 +155,7 @@ const CurrentVotesWrapper = ({
 
       <Checkbox
         disabled={!isOwner}
-        isChecked={roomData.config.isFreezeAfterVote}
+        isChecked={config?.isFreezeAfterVote}
         onChange={handleUpdateFreezeAfterVote}
         colorScheme="teal"
         marginY={4}
@@ -171,7 +173,7 @@ const CurrentVotesWrapper = ({
             onChange={(e) =>
               handleUpdateHideLabel(e.target.value as HideLabelOptionsType)
             }
-            value={roomData?.config.hideLabel ?? "monkey"}
+            value={config?.hideLabel ?? "monkey"}
           >
             {hideLabelOptions.map((hideLabelOption) => (
               <Text as="option" value={hideLabelOption} key={hideLabelOption}>
@@ -227,6 +229,7 @@ const CurrentVotesWrapper = ({
               colorScheme="teal"
               size="md"
               onClick={handleFinishVoting}
+              marginY={-1}
             >
               Finish Vote
             </Button>
