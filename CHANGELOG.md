@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.4](https://github.com/sozonome/spoker/compare/v1.11.3...v1.11.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* **room:** revise name and desc checking for room header ([8771bb9](https://github.com/sozonome/spoker/commit/8771bb9654010f0f826fedb3ecaad3e6df8d6dc2))
+
 ### [1.11.3](https://github.com/sozonome/spoker/compare/v1.11.2...v1.11.3) (2022-09-20)
 
 
