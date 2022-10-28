@@ -8,7 +8,9 @@ import type { Task } from "lib/types/RawDB";
 
 import type { RoomHeaderProps } from "./types";
 
-type UseRoomHeaderArgs = RoomHeaderProps;
+type UseRoomHeaderArgs = RoomHeaderProps & {
+  isOwner: boolean;
+};
 
 export const useRoomHeader = ({ roomData, isOwner }: UseRoomHeaderArgs) => {
   const [name, setName] = React.useState<string | undefined>(

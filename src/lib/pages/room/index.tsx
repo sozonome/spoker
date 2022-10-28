@@ -8,20 +8,11 @@ import RoomHeader from "lib/components/room/header";
 import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
+import { useRoomListener } from "lib/hooks/useRoomListener";
 import { useAuth } from "lib/stores/auth";
 import { useRoomStore } from "lib/stores/room";
 
-import { useRoom } from "./hooks";
-
 const RoomContainer = () => {
-  const {
-    averagePoint,
-    highestPoint,
-    isParticipant,
-    isObservant,
-    isOwner,
-    handleFinishVote,
-  } = useRoom();
   const currentUser = useAuth((state) => state.currentUser);
   const { isBusy, roomData } = useRoomStore(
     (state) => ({
@@ -30,6 +21,8 @@ const RoomContainer = () => {
     }),
     shallow
   );
+
+  useRoomListener();
 
   if (isBusy) {
     return <SpokerLoading />;
@@ -45,23 +38,17 @@ const RoomContainer = () => {
           alignItems="start"
         >
           <Grid gap={6}>
-            <RoomHeader isOwner={isOwner} />
-            {(isOwner || isParticipant) && <VoteWrapper />}
+            <RoomHeader />
+            <VoteWrapper />
           </Grid>
 
           <Grid gap={6}>
-            <CurrentVotesWrapper
-              isOwner={isOwner}
-              isObservant={isObservant}
-              averagePoint={averagePoint}
-              highestPoint={highestPoint}
-              onFinishVote={handleFinishVote}
-            />
-            <ControllerWrapper isResetEnabled={isOwner} />
+            <CurrentVotesWrapper />
+            <ControllerWrapper />
           </Grid>
         </Grid>
 
-        <TaskList isOwner={isOwner} />
+        <TaskList />
       </Grid>
     );
   }

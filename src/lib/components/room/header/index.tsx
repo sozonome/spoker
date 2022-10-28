@@ -10,14 +10,15 @@ import {
 import * as React from "react";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import { useUserRole } from "lib/hooks/useUserRole";
 import { useRoomStore } from "lib/stores/room";
 
 import EditableFields from "./components/EditableFields";
 import { useRoomHeader } from "./hooks";
-import type { RoomHeaderProps } from "./types";
 
-const RoomHeader = ({ isOwner }: RoomHeaderProps) => {
+const RoomHeader = () => {
   const roomData = useRoomStore((state) => state.roomData);
+  const { isOwner } = useUserRole();
   const wrapperBackgroundColor = useColorModeValue("teal.50", "teal.600");
   const { name, description, handleUpdateTask } = useRoomHeader({
     roomData,

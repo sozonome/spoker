@@ -10,6 +10,7 @@ import shallow from "zustand/shallow";
 
 import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import { useUserRole } from "lib/hooks/useUserRole";
 import { updatePoint } from "lib/services/firebase/room/update/point";
 import { useAuth } from "lib/stores/auth";
 import { useRoomStore } from "lib/stores/room";
@@ -24,6 +25,7 @@ const VoteWrapper = () => {
     }),
     shallow
   );
+  const { isOwner, isParticipant } = useUserRole();
   const wrapperBackgroundColor = useColorModeValue("orange.50", "gray.600");
   const router = useRouter();
   const {
@@ -46,6 +48,10 @@ const VoteWrapper = () => {
     },
   });
   const voteOptionGroup = getRootProps();
+
+  if (!isOwner && !isParticipant) {
+    return null;
+  }
 
   return (
     <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>

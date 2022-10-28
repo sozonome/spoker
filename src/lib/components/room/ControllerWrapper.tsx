@@ -12,15 +12,13 @@ import * as React from "react";
 import { BiLink, BiShareAlt } from "react-icons/bi";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import { useUserRole } from "lib/hooks/useUserRole";
 import { clearPoints } from "lib/services/firebase/room/update/point/clear";
 import { useRoomStore } from "lib/stores/room";
 
-type ControllerWrapperProps = {
-  isResetEnabled: boolean;
-};
-
-const ControllerWrapper = ({ isResetEnabled }: ControllerWrapperProps) => {
+const ControllerWrapper = () => {
   const users = useRoomStore((state) => state.users);
+  const { isOwner } = useUserRole();
   const router = useRouter();
   const {
     query: { id },
@@ -58,7 +56,7 @@ const ControllerWrapper = ({ isResetEnabled }: ControllerWrapperProps) => {
       <Heading size="md">Controller</Heading>
 
       <Flex gridGap={2} wrap="wrap">
-        {isResetEnabled && (
+        {isOwner && (
           <Button size="sm" colorScheme="red" onClick={handleClearPoints}>
             Reset
           </Button>

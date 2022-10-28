@@ -19,6 +19,9 @@ import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import type { HideLabelOptionsType } from "lib/constants/hideLabel";
 import { hideLabelOptions } from "lib/constants/hideLabel";
 import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
+import { useRoomPoint } from "lib/hooks/useRoomPoint";
+import { useUserRole } from "lib/hooks/useUserRole";
+import { useVote } from "lib/hooks/useVote";
 import { updateConfig } from "lib/services/firebase/room/update/roomConfig";
 import { useAuth } from "lib/stores/auth";
 import { useRoomStore } from "lib/stores/room";
@@ -29,21 +32,7 @@ import { RoleType } from "lib/types/user";
 import PointWrapper from "./PointWrapper";
 import { pointTextColor, pointTextSize } from "./utils";
 
-type CurrentVotesWrapperProps = {
-  isOwner: boolean;
-  isObservant: boolean;
-  averagePoint: number;
-  highestPoint: number;
-  onFinishVote: (estimate: number) => Promise<void>;
-};
-
-const CurrentVotesWrapper = ({
-  isOwner,
-  isObservant,
-  averagePoint,
-  highestPoint,
-  onFinishVote,
-}: CurrentVotesWrapperProps) => {
+const CurrentVotesWrapper = () => {
   const wrapperBackgroundColor = useColorModeValue("green.50", "gray.600");
   const router = useRouter();
   const {
@@ -59,6 +48,9 @@ const CurrentVotesWrapper = ({
     }),
     shallow
   );
+  const { isOwner, isObservant } = useUserRole();
+  const { averagePoint, highestPoint } = useRoomPoint();
+  const { handleFinishVote } = useVote();
   const [isLoadingSubmitVote, setIsLoadingSubmitVote] =
     React.useState<boolean>(false);
   const [estimate, setEstimate] = React.useState<number>(0);
@@ -140,7 +132,7 @@ const CurrentVotesWrapper = ({
 
   const handleFinishVoting = async () => {
     setIsLoadingSubmitVote(true);
-    await onFinishVote(estimate);
+    await handleFinishVote(estimate);
     setIsLoadingSubmitVote(false);
   };
 
