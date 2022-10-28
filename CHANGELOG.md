@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.5](https://github.com/sozonome/spoker/compare/v1.11.4...v1.11.5) (2022-10-28)
+
+
+### Improvements
+
+* **room:** split room page hook into granular hooks ([#132](https://github.com/sozonome/spoker/issues/132)) ([4d44ae0](https://github.com/sozonome/spoker/commit/4d44ae040749d6e07d9df9ffad1ac7edb1ef5a06))
+
 ### [1.11.4](https://github.com/sozonome/spoker/compare/v1.11.3...v1.11.4) (2022-10-05)
 
 
