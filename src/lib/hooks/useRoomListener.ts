@@ -2,40 +2,31 @@ import { useToast } from "@chakra-ui/react";
 import { child, onDisconnect, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useReward } from "react-rewards";
 import shallow from "zustand/shallow";
 
-import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
 import { roomsData } from "lib/services/firebase/room/common";
 import { rejoinRoom } from "lib/services/firebase/room/rejoin";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
-import { submitVote } from "lib/services/firebase/room/update/submitVote";
 import { useAuth } from "lib/stores/auth";
 import { useRoomStore } from "lib/stores/room";
-import type { PointEntry } from "lib/types/RawDB";
 import type { RoomUser } from "lib/types/room";
-import { RoleType } from "lib/types/user";
+import { checkAllParticipantVoted, connectedUsers } from "lib/utils/roomUtils";
 
-import {
-  checkAllParticipantVoted,
-  connectedUsers,
-  countAveragePoint,
-  filterUserWithPoints,
-} from "./utils";
+import { useUserRole } from "./useUserRole";
 
-export const useRoom = () => {
+export const useRoomListener = () => {
   const router = useRouter();
   const toast = useToast();
+
   const currentUser = useAuth((state) => state.currentUser);
-  const { roomData, showVote, users, inRoom } = useRoomStore(
+  const { roomData, inRoom } = useRoomStore(
     (state) => ({
-      showVote: state.showVote,
       roomData: state.roomData,
-      users: state.users,
       inRoom: state.inRoom,
     }),
     shallow
   );
+  const { userRole } = useUserRole();
   const { setIsBusy, setShowVote, setRoomData, setUsers, setInRoom } =
     useRoomStore(
       (state) => ({
@@ -48,35 +39,10 @@ export const useRoom = () => {
       shallow
     );
 
-  const firstRenderRef = React.useRef(true);
-  const { reward } = useReward(CURRENT_VOTE_WRAPPER_ID, "confetti");
-
   const {
     query: { id },
   } = router;
-
-  const participantPoints = React.useMemo(() => {
-    if (!showVote) {
-      return [];
-    }
-    return filterUserWithPoints(users).map((user) => user.point ?? 0);
-  }, [showVote, users]);
-
-  const averagePoint = React.useMemo(() => {
-    const filledPoints = participantPoints.filter((point) => point);
-    return countAveragePoint(filledPoints);
-  }, [participantPoints]);
-  const highestPoint = React.useMemo(
-    () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
-    [participantPoints]
-  );
-  const userRole = React.useMemo(
-    () => currentUser && roomData?.users?.[currentUser.uid]?.role,
-    [currentUser, roomData?.users]
-  );
-  const isParticipant = userRole === RoleType.participant;
-  const isObservant = userRole === RoleType.observant;
-  const isOwner = userRole === RoleType.owner;
+  const firstRenderRef = React.useRef(true);
 
   const handleOnDisconnect = React.useCallback(() => {
     if (currentUser?.uid) {
@@ -113,22 +79,6 @@ export const useRoom = () => {
     }
   };
 
-  const handleFinishVote = async (estimate: number) => {
-    if (roomData && currentUser && isOwner) {
-      const pointEntries: Array<PointEntry> = users.map(
-        (user) => ({ name: user.name, point: user.point ?? 0 } as PointEntry)
-      );
-      await submitVote({
-        roomId: id as string,
-        task: roomData.task,
-        entries: pointEntries,
-        estimate,
-        queue: roomData.queue,
-        completed: roomData.completed,
-      });
-    }
-  };
-
   const handleRejoin = React.useCallback(async () => {
     await rejoinRoom(id as string, userRole);
     setInRoom(true);
@@ -141,16 +91,6 @@ export const useRoom = () => {
       getRoomData();
     }
   }, [getRoomData, toast]);
-
-  React.useEffect(() => {
-    if (roomData?.task.lastVoted?.name) {
-      toast({
-        description: `${roomData.task.lastVoted.name} just voted`,
-        status: "info",
-        position: "bottom-right",
-      });
-    }
-  }, [roomData?.task.lastVoted?.name, roomData?.task.lastVoted?.time, toast]);
 
   React.useEffect(() => {
     if (roomData && currentUser && inRoom) {
@@ -187,12 +127,6 @@ export const useRoom = () => {
   ]);
 
   React.useEffect(() => {
-    if (showVote) {
-      reward();
-    }
-  }, [showVote, reward]);
-
-  React.useEffect(() => {
     const inRoomDisconnected =
       roomData &&
       currentUser &&
@@ -212,13 +146,4 @@ export const useRoom = () => {
       router.events.off("routeChangeStart", removeUserFromRoom);
     };
   });
-
-  return {
-    averagePoint,
-    highestPoint,
-    isParticipant,
-    isObservant,
-    isOwner,
-    handleFinishVote,
-  };
 };

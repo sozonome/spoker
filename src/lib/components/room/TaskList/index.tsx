@@ -32,6 +32,7 @@ import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
 import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { emptyRoom } from "lib/constants/emptyRoom";
+import { useUserRole } from "lib/hooks/useUserRole";
 import { editQueueItem } from "lib/services/firebase/room/update/queue/edit";
 import { removeQueueItem } from "lib/services/firebase/room/update/queue/remove";
 import { swapSelectedQueueWithCurrent } from "lib/services/firebase/room/update/queue/swap";
@@ -42,10 +43,6 @@ import type { Task } from "lib/types/RawDB";
 import { submitStoryFormValidationSchema } from "./constants";
 import TaskItem from "./TaskItem";
 import type { EditStoryForm, SortableTaskItem, SubmitStoryForm } from "./types";
-
-type TaskListProps = {
-  isOwner: boolean;
-};
 
 const initialFormValue: SubmitStoryForm = {
   name: "",
@@ -59,7 +56,7 @@ const tabStyle: TabProps = {
   },
 };
 
-const TaskList = ({ isOwner }: TaskListProps) => {
+const TaskList = () => {
   const router = useRouter();
   const {
     query: { id },
@@ -71,6 +68,7 @@ const TaskList = ({ isOwner }: TaskListProps) => {
     }),
     shallow
   );
+  const { isOwner } = useUserRole();
   const wrapperBackgroundColor = useColorModeValue("gray.50", "gray.900");
   const {
     isOpen: isOpenAddStory,
