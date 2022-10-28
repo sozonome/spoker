@@ -9,6 +9,7 @@ import TaskList from "lib/components/room/TaskList";
 import VoteWrapper from "lib/components/room/VoteWrapper";
 import SpokerLoading from "lib/components/shared/SpokerLoading";
 import { useRoomListener } from "lib/hooks/useRoomListener";
+import { useVoteListener } from "lib/hooks/useVoteListener";
 import { useAuth } from "lib/stores/auth";
 import { useRoomStore } from "lib/stores/room";
 
@@ -23,6 +24,7 @@ const RoomContainer = () => {
   );
 
   useRoomListener();
+  useVoteListener();
 
   if (isBusy) {
     return <SpokerLoading />;
