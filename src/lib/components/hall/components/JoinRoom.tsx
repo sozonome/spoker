@@ -1,9 +1,9 @@
 import { Button, Grid, Heading } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import type { ChangeEventHandler } from "react";
 import * as React from "react";
 
-import LinkWrap from "lib/components/shared/LinkWrap";
 import SpokerInput from "lib/components/shared/SpokerInput";
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 
@@ -38,17 +38,16 @@ const JoinRoom = () => {
         />
       </Grid>
 
-      <LinkWrap isDisabled={isDisabled} href={`/join/${roomId}`} passHref>
-        <Button
-          as="a"
-          isDisabled={isDisabled}
-          alignSelf="flex-end"
-          backgroundColor="black"
-          _hover={{ backgroundColor: "orange.400" }}
-        >
-          Let Me in!
-        </Button>
-      </LinkWrap>
+      <Button
+        as={Link}
+        href={`/join/${roomId}`}
+        isDisabled={isDisabled}
+        alignSelf="flex-end"
+        backgroundColor="black"
+        _hover={{ backgroundColor: "orange.400" }}
+      >
+        Let Me in!
+      </Button>
     </SpokerWrapperGrid>
   );
 };
