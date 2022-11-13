@@ -1,4 +1,5 @@
 import debounce from "lodash-es/debounce";
+import isNil from "lodash-es/isNil";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -7,7 +8,9 @@ import type { Task } from "lib/types/RawDB";
 
 import type { RoomHeaderProps } from "./types";
 
-type UseRoomHeaderArgs = RoomHeaderProps;
+type UseRoomHeaderArgs = RoomHeaderProps & {
+  isOwner: boolean;
+};
 
 export const useRoomHeader = ({ roomData, isOwner }: UseRoomHeaderArgs) => {
   const [name, setName] = React.useState<string | undefined>(
@@ -22,14 +25,14 @@ export const useRoomHeader = ({ roomData, isOwner }: UseRoomHeaderArgs) => {
   } = router;
 
   React.useEffect(() => {
-    if (roomData?.task.name) {
-      setName(roomData.task.name);
+    if (!isNil(roomData?.task.name)) {
+      setName(roomData?.task.name);
     }
   }, [roomData?.task.name]);
 
   React.useEffect(() => {
-    if (roomData?.task.description) {
-      setDescription(roomData.task.description);
+    if (!isNil(roomData?.task.description)) {
+      setDescription(roomData?.task.description);
     }
   }, [roomData?.task.description]);
 

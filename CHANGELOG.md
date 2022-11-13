@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.5](https://github.com/sozonome/spoker/compare/v1.11.4...v1.11.5) (2022-10-28)
+
+
+### Improvements
+
+* **room:** split room page hook into granular hooks ([#132](https://github.com/sozonome/spoker/issues/132)) ([4d44ae0](https://github.com/sozonome/spoker/commit/4d44ae040749d6e07d9df9ffad1ac7edb1ef5a06))
+
+### [1.11.4](https://github.com/sozonome/spoker/compare/v1.11.3...v1.11.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* **room:** revise name and desc checking for room header ([8771bb9](https://github.com/sozonome/spoker/commit/8771bb9654010f0f826fedb3ecaad3e6df8d6dc2))
+
+### [1.11.3](https://github.com/sozonome/spoker/compare/v1.11.2...v1.11.3) (2022-09-20)
+
+
+### Improvements
+
+* **room:** use store to replace state ([#126](https://github.com/sozonome/spoker/issues/126)) ([8d9f6de](https://github.com/sozonome/spoker/commit/8d9f6deab7300e5d06c9cdb8e4d6e11ea8e7dab7))
+
+### [1.11.2](https://github.com/sozonome/spoker/compare/v1.11.1...v1.11.2) (2022-08-24)
+
+
+### Bug Fixes
+
+* revise checking point wrapper ([15c12cb](https://github.com/sozonome/spoker/commit/15c12cb3f367e5f0b213a96a927d6c1fe217c268))
+
+### [1.11.1](https://github.com/sozonome/spoker/compare/v1.11.0...v1.11.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* fix show filled point hide label ([6b94acd](https://github.com/sozonome/spoker/commit/6b94acd224a06bd2ff3a8f94a52cb43cafe3296b))
+
+## [1.11.0](https://github.com/sozonome/spoker/compare/v1.10.2...v1.11.0) (2022-08-16)
+
+
+### Features
+
+* **layout:** add support CTA ([#120](https://github.com/sozonome/spoker/issues/120)) ([e13b4cf](https://github.com/sozonome/spoker/commit/e13b4cf515d1b588b9b3689c62ef92d21abb10d0))
+
+### [1.10.2](https://github.com/sozonome/spoker/compare/v1.10.1...v1.10.2) (2022-08-14)
+
+
+### Improvements
+
+* **analytics:** adjust with umami trackEvent update ([cd43986](https://github.com/sozonome/spoker/commit/cd43986047fad02ff2bbb1a4dc319746d5a561a2))
+
 ### [1.10.1](https://github.com/sozonome/spoker/compare/v1.10.0...v1.10.1) (2022-08-02)
 
 

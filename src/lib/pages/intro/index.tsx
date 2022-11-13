@@ -3,6 +3,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import { EVENT_TYPE_NAVIGATE } from "lib/constants/tracking";
 import { trackEvent } from "lib/utils/trackEvent";
 
 const Intro = () => {
@@ -10,8 +11,8 @@ const Intro = () => {
 
   const handleClickStart = () => {
     trackEvent({
-      eventValue: "Open app from Intro page",
-      eventType: "navigate",
+      eventName: "Open app from Intro page",
+      eventData: { type: EVENT_TYPE_NAVIGATE },
     });
     router.push("/");
   };

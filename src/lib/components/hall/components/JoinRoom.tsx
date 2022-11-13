@@ -38,7 +38,7 @@ const JoinRoom = () => {
         />
       </Grid>
 
-      <LinkWrap isDisabled={isDisabled} href={`/join/${roomId}`} passHref>
+      <LinkWrap href={`/join/${roomId}`} isDisabled={isDisabled} passHref>
         <Button
           as="a"
           isDisabled={isDisabled}

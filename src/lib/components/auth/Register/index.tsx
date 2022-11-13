@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import SignInProviders from "lib/components/auth/SignInProviders";
 import { contraBoxStyle } from "lib/components/auth/style";
 import SpokerInput from "lib/components/shared/SpokerInput";
+import { EVENT_TYPE_REGISTRATION } from "lib/constants/tracking";
 import { registerUserWithEmailAndPassword } from "lib/services/firebase/auth/register";
 import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
 import { trackEvent } from "lib/utils/trackEvent";
@@ -46,8 +47,8 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
       .then((user) => {
         setIsLoading(false);
         trackEvent({
-          eventValue: "New User Register",
-          eventType: "registration",
+          eventName: "New User Register",
+          eventData: { type: EVENT_TYPE_REGISTRATION },
         });
         toast({
           title: "Registration Successful",

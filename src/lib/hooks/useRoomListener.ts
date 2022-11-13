@@ -2,63 +2,47 @@ import { useToast } from "@chakra-ui/react";
 import { child, onDisconnect, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useReward } from "react-rewards";
+import shallow from "zustand/shallow";
 
-import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
 import { roomsData } from "lib/services/firebase/room/common";
 import { rejoinRoom } from "lib/services/firebase/room/rejoin";
 import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
-import { submitVote } from "lib/services/firebase/room/update/submitVote";
 import { useAuth } from "lib/stores/auth";
-import type { PointEntry, RoomInstance } from "lib/types/RawDB";
+import { useRoomStore } from "lib/stores/room";
 import type { RoomUser } from "lib/types/room";
-import { RoleType } from "lib/types/user";
+import { checkAllParticipantVoted, connectedUsers } from "lib/utils/roomUtils";
 
-import {
-  checkAllParticipantVoted,
-  connectedUsers,
-  countAveragePoint,
-  filterUserWithPoints,
-} from "./utils";
+import { useUserRole } from "./useUserRole";
 
-export const useRoom = () => {
+export const useRoomListener = () => {
   const router = useRouter();
   const toast = useToast();
+
   const currentUser = useAuth((state) => state.currentUser);
-  const [busy, setBusy] = React.useState<boolean>(true);
-  const [showVote, setShowVote] = React.useState<boolean>(false);
-  const [roomData, setRoomData] = React.useState<RoomInstance>();
-  const [users, setUsers] = React.useState<Array<RoomUser>>([]);
-  const [inRoom, setInRoom] = React.useState<boolean>(true);
-  const firstRenderRef = React.useRef(true);
-  const { reward } = useReward(CURRENT_VOTE_WRAPPER_ID, "confetti");
+  const { roomData, inRoom } = useRoomStore(
+    (state) => ({
+      roomData: state.roomData,
+      inRoom: state.inRoom,
+    }),
+    shallow
+  );
+  const { userRole } = useUserRole();
+  const { setIsBusy, setShowVote, setRoomData, setUsers, setInRoom } =
+    useRoomStore(
+      (state) => ({
+        setIsBusy: state.setIsBusy,
+        setShowVote: state.setShowVote,
+        setRoomData: state.setRoomData,
+        setUsers: state.setUsers,
+        setInRoom: state.setInRoom,
+      }),
+      shallow
+    );
 
   const {
     query: { id },
   } = router;
-
-  const participantPoints = React.useMemo(() => {
-    if (!showVote) {
-      return [];
-    }
-    return filterUserWithPoints(users).map((user) => user.point ?? 0);
-  }, [showVote, users]);
-
-  const averagePoint = React.useMemo(() => {
-    const filledPoints = participantPoints.filter((point) => point);
-    return countAveragePoint(filledPoints);
-  }, [participantPoints]);
-  const highestPoint = React.useMemo(
-    () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
-    [participantPoints]
-  );
-  const userRole = React.useMemo(
-    () => currentUser && roomData?.users?.[currentUser.uid]?.role,
-    [currentUser, roomData?.users]
-  );
-  const isParticipant = userRole === RoleType.participant;
-  const isObservant = userRole === RoleType.observant;
-  const isOwner = userRole === RoleType.owner;
+  const firstRenderRef = React.useRef(true);
 
   const handleOnDisconnect = React.useCallback(() => {
     if (currentUser?.uid) {
@@ -71,6 +55,7 @@ export const useRoom = () => {
   }, [currentUser?.uid, id]);
 
   const getRoomData = React.useCallback(async () => {
+    setInRoom(true);
     onValue(child(roomsData, id as string), (snap) => {
       if (snap.exists()) {
         setRoomData(snap.val());
@@ -85,7 +70,7 @@ export const useRoom = () => {
         });
       }
     });
-  }, [handleOnDisconnect, id, router, toast]);
+  }, [handleOnDisconnect, id, router, setInRoom, setRoomData, toast]);
 
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
@@ -94,25 +79,10 @@ export const useRoom = () => {
     }
   };
 
-  const handleFinishVote = async (estimate: number) => {
-    if (roomData && currentUser && isOwner) {
-      const pointEntries: Array<PointEntry> = users.map(
-        (user) => ({ name: user.name, point: user.point ?? 0 } as PointEntry)
-      );
-      await submitVote({
-        roomId: id as string,
-        task: roomData.task,
-        entries: pointEntries,
-        estimate,
-        queue: roomData.queue,
-        completed: roomData.completed,
-      });
-    }
-  };
-
   const handleRejoin = React.useCallback(async () => {
     await rejoinRoom(id as string, userRole);
-  }, [id, userRole]);
+    setInRoom(true);
+  }, [id, setInRoom, userRole]);
 
   React.useEffect(() => {
     if (firstRenderRef.current) {
@@ -123,19 +93,9 @@ export const useRoom = () => {
   }, [getRoomData, toast]);
 
   React.useEffect(() => {
-    if (roomData?.task.lastVoted?.name) {
-      toast({
-        description: `${roomData.task.lastVoted.name} just voted`,
-        status: "info",
-        position: "bottom-right",
-      });
-    }
-  }, [roomData?.task.lastVoted?.name, roomData?.task.lastVoted?.time, toast]);
-
-  React.useEffect(() => {
     if (roomData && currentUser && inRoom) {
       if (roomData.users?.[currentUser.uid]) {
-        setBusy(false);
+        setIsBusy(false);
         const updatedUsers: Array<RoomUser> = connectedUsers(roomData.users);
         const isAllParticipantVoted = checkAllParticipantVoted(updatedUsers);
         setShowVote(isAllParticipantVoted);
@@ -154,13 +114,17 @@ export const useRoom = () => {
         isClosable: true,
       });
     }
-  }, [roomData, inRoom, currentUser, router, id, toast]);
-
-  React.useEffect(() => {
-    if (showVote) {
-      reward();
-    }
-  }, [showVote, reward]);
+  }, [
+    roomData,
+    inRoom,
+    currentUser,
+    router,
+    id,
+    toast,
+    setIsBusy,
+    setShowVote,
+    setUsers,
+  ]);
 
   React.useEffect(() => {
     const inRoomDisconnected =
@@ -182,18 +146,4 @@ export const useRoom = () => {
       router.events.off("routeChangeStart", removeUserFromRoom);
     };
   });
-
-  return {
-    currentUser,
-    busy,
-    showVote,
-    roomData,
-    users,
-    averagePoint,
-    highestPoint,
-    isParticipant,
-    isObservant,
-    isOwner,
-    handleFinishVote,
-  };
 };

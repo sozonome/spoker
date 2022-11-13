@@ -1,21 +1,31 @@
-import { Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { RiGithubFill } from "react-icons/ri";
 
+import SupportCTA from "lib/components/support/SupportCTA";
 import { packageInfo } from "lib/constants/packageInfo";
+import { EVENT_TYPE_LINK } from "lib/constants/tracking";
 import { trackEvent } from "lib/utils/trackEvent";
 
 const Footer = () => {
-  const handleClick = (eventValue: string) => () => {
+  const handleClick = (eventName: string) => () => {
     trackEvent({
-      eventValue,
-      eventType: "link",
+      eventName,
+      eventData: { type: EVENT_TYPE_LINK },
     });
   };
 
   return (
-    <Flex as="footer" width="full" align="center" paddingY={8}>
+    <Box
+      display={{ base: "grid", md: "flex" }}
+      as="footer"
+      width="full"
+      alignItems="center"
+      justifyContent="center"
+      paddingY={8}
+      gap={{ base: 0, md: 4 }}
+    >
       <Text>
-        2021 |{" "}
+        2021 -{" "}
         <Link
           href="https://sznm.dev"
           isExternal
@@ -25,7 +35,16 @@ const Footer = () => {
         </Link>
       </Text>
 
-      <Flex marginLeft="auto" alignItems="center" gridGap={2}>
+      <Flex alignItems="center">
+        <SupportCTA />
+      </Flex>
+
+      <Flex
+        marginLeft={{ md: "auto" }}
+        justifyContent="center"
+        alignItems="center"
+        gridGap={2}
+      >
         <Link
           href={`${packageInfo.repository.url}/blob/main/CHANGELOG.md`}
           isExternal
@@ -41,7 +60,7 @@ const Footer = () => {
           <RiGithubFill fontSize="2rem" />
         </Link>
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 

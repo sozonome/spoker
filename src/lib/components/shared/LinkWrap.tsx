@@ -10,7 +10,7 @@ const LinkWrap = ({ isDisabled, ...linkProps }: LinkWrapProps) => {
     return linkProps.children as React.ReactElement;
   }
 
-  return <Link {...linkProps} />;
+  return <Link {...linkProps} legacyBehavior />;
 };
 
 export default LinkWrap;

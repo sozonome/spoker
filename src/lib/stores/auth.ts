@@ -1,6 +1,12 @@
+import type { User } from "firebase/auth";
 import create from "zustand";
 
-import type { AuthStore } from "./types";
+type AuthStore = {
+  currentUser?: User | null;
+  displayName: string;
+  setCurrentUser: (user?: User | null) => void;
+  setDisplayName: (displayName: string) => void;
+};
 
 export const useAuth = create<AuthStore>((set) => ({
   displayName: "",
