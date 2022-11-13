@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "vivaxy.vscode-conventional-commits"
-  ]
+  "recommendations": ["dbaeumer.vscode-eslint"]
 }
