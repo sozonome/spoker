@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/sozonome/spoker/compare/v1.11.5...v1.12.0) (2022-11-13)
+
+
+### Features
+
+* **auth:** add forgot password feature ([#117](https://github.com/sozonome/spoker/issues/117)) ([76524be](https://github.com/sozonome/spoker/commit/76524bee376b00817f8b3ccf97ec4d573ef937d6))
+
 ### [1.11.5](https://github.com/sozonome/spoker/compare/v1.11.4...v1.11.5) (2022-10-28)
 
 

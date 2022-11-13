@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 
 import { PUBLIC_ROUTES } from "lib/constants/routes/public";
+import { RESTRICTED_ROUTES } from "lib/constants/routes/restricted";
 import { useAuth } from "lib/stores/auth";
 
 import FullScreenLoading from "./FullScreenLoading";
@@ -26,17 +27,28 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
     () => PUBLIC_ROUTES.includes(pathname),
     [pathname]
   );
+  const isRestrictedRoute = React.useMemo(
+    () => RESTRICTED_ROUTES.includes(pathname),
+    [pathname]
+  );
 
   const isNotVerified = React.useMemo(
     () =>
       currentUser &&
       !currentUser.emailVerified &&
       pathname !== "/" &&
-      !isPublicRoute,
-    [currentUser, isPublicRoute, pathname]
+      !isPublicRoute &&
+      !isRestrictedRoute,
+    [currentUser, isPublicRoute, isRestrictedRoute, pathname]
   );
 
   const routeCheck = React.useCallback(() => {
+    if (currentUser && isRestrictedRoute) {
+      // setBusy(true);
+      router.replace("/").then(() => setBusy(false));
+      return;
+    }
+
     if (isNotVerified) {
       setBusy(true);
 
@@ -56,7 +68,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
     }
 
     setBusy(false);
-  }, [currentUser, isNotVerified, router, toast]);
+  }, [currentUser, isNotVerified, isRestrictedRoute, router, toast]);
 
   React.useEffect(() => {
     routeCheck();
