@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import * as React from "react";
 
 import { PUBLIC_ROUTES } from "lib/constants/routes/public";
+import { RESTRICTED_ROUTES } from "lib/constants/routes/restricted";
 import { useAuth } from "lib/stores/auth";
 
 import Login from "./Login";
@@ -21,8 +22,10 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const router = useRouter();
   const { pathname } = router;
   const isPublicRoute = PUBLIC_ROUTES.indexOf(pathname) >= 0;
+  const isRestrictedRoute = RESTRICTED_ROUTES.includes(pathname);
 
-  const isUnauthorized = currentUser === null && !isPublicRoute;
+  const isUnauthorized =
+    currentUser === null && !isPublicRoute && !isRestrictedRoute;
 
   React.useEffect(() => {
     if (isUnauthorized) {

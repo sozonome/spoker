@@ -4,6 +4,7 @@ import * as React from "react";
 import shallow from "zustand/shallow";
 
 import { PUBLIC_ROUTES } from "lib/constants/routes/public";
+import { RESTRICTED_ROUTES } from "lib/constants/routes/restricted";
 import { auth } from "lib/services/firebase/auth/common";
 import { useAuth } from "lib/stores/auth";
 
@@ -18,7 +19,11 @@ export const useAuthObserver = () => {
     () => PUBLIC_ROUTES.includes(pathname),
     [pathname]
   );
-  const isLoadingAuth = busy && !isPublicRoute;
+  const isRestrictedRoute = React.useMemo(
+    () => RESTRICTED_ROUTES.includes(pathname),
+    [pathname]
+  );
+  const isLoadingAuth = busy && (!isPublicRoute || isRestrictedRoute);
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
