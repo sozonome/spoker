@@ -15,8 +15,12 @@ const ForgotPasswordButton = () => {
   return (
     <Button
       as={Link}
-      href="/forgot-password"
+      href="/reset-password"
       onClick={handleClickForgotPassword}
+      variant="ghost"
+      border="none"
+      boxShadow="none"
+      size="sm"
     >
       Forgot Password
     </Button>

@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import ForgotPasswordButton from "lib/components/auth/ForgotPasswordButton";
 import SignInProviders from "lib/components/auth/SignInProviders";
 import { contraBoxStyle } from "lib/components/auth/style";
 import SpokerInput from "lib/components/shared/SpokerInput";
@@ -90,6 +91,8 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
 
       <ModalBody>
         <Grid gap={4}>
+          <SignInProviders />
+
           <SpokerInput
             label="name"
             {...register("name")}
@@ -113,7 +116,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
             type="password"
           />
 
-          <SignInProviders />
+          <ForgotPasswordButton />
         </Grid>
       </ModalBody>
 
