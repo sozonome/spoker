@@ -99,14 +99,11 @@ const AuthPopover = () => {
 
   const clearUserSessionData = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
-      router.push("/").then(async () => {
-        await disconnectUser(id as string, currentUser.uid);
-        processLogout();
-      });
-      return;
+      await disconnectUser(id as string, currentUser.uid);
+      router.push("/");
     }
 
-    processLogout();
+    await processLogout();
   };
 
   const handleLogout = async () => {
