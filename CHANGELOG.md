@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://github.com/sozonome/spoker/compare/v1.12.0...v1.12.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* **auth:** fix logout through popover issue ([#137](https://github.com/sozonome/spoker/issues/137)) ([50cc23b](https://github.com/sozonome/spoker/commit/50cc23bafc472f911b39229896bac5d722a59dbb))
+
+
+### Improvements
+
+* adjust UI ([#138](https://github.com/sozonome/spoker/issues/138)) ([70b7b78](https://github.com/sozonome/spoker/commit/70b7b78be2c9418ceb0cece6017c9a2780c8b12b))
+
 ## [1.12.0](https://github.com/sozonome/spoker/compare/v1.11.5...v1.12.0) (2022-11-13)
 
 
