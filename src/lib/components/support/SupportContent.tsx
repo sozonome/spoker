@@ -17,6 +17,7 @@ const SupportContent = () => {
             leftIcon={sponsorLink.icon}
             fontSize={{ base: "sm", md: "md" }}
             flexDirection="column"
+            key={sponsorLink.label}
           >
             <Text>{sponsorLink.label}</Text>
             {sponsorLink.description && (
