@@ -5,7 +5,6 @@ import {
   Heading,
   IconButton,
   Popover,
-  PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
@@ -133,7 +132,6 @@ const AuthPopover = () => {
         </PopoverTrigger>
 
         <PopoverContent>
-          <PopoverArrow />
           <PopoverCloseButton />
           <PopoverHeader>
             <Flex gridGap={2} alignItems="center">
@@ -156,10 +154,17 @@ const AuthPopover = () => {
                 onClick={handleEditClick}
               />
             </Flex>
-            <Text>{currentUser.email}</Text>
+            <Text color="gray" fontSize="sm">
+              {currentUser.email}
+            </Text>
           </PopoverHeader>
           <PopoverBody>
-            <Button width="full" colorScheme="red" onClick={handleLogout}>
+            <Button
+              size="md"
+              width="full"
+              colorScheme="red"
+              onClick={handleLogout}
+            >
               Sign Out
             </Button>
           </PopoverBody>
