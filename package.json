@@ -29,6 +29,7 @@
     "@emotion/styled": "^11.10.5",
     "@fontsource/outfit": "^4.5.10",
     "@hookform/resolvers": "^2.9.10",
+    "@sentry/nextjs": "^7.21.1",
     "firebase": "^9.14.0",
     "framer-motion": "^7.6.6",
     "lodash-es": "^4.17.21",

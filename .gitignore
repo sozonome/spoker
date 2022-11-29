@@ -48,3 +48,6 @@ sitemap*.xml
 
 # storybook
 storybook-static/
+
+# Sentry
+.sentryclirc
