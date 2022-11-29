@@ -15,11 +15,12 @@ export const config: FirebaseConfigType = {
 };
 
 export const fbase = getApps().length ? getApp() : initializeApp(config);
-if (global?.document) {
+
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+
+if (global?.document && recaptchaSiteKey) {
   initializeAppCheck(fbase, {
-    provider: new ReCaptchaV3Provider(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""
-    ),
+    provider: new ReCaptchaV3Provider(recaptchaSiteKey),
     isTokenAutoRefreshEnabled: true,
   });
 }

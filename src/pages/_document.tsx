@@ -44,13 +44,15 @@ class MyDocument extends Document {
 
           {/* umami self-hosted analytics */}
 
-          <script
-            async
-            defer
-            data-website-id={UMAMI_WEBSITE_ID}
-            src={UMAMI_SRC}
-            data-domains={UMAMI_DATA_DOMAIN}
-          />
+          {UMAMI_SRC && UMAMI_WEBSITE_ID && (
+            <script
+              async
+              defer
+              data-website-id={UMAMI_WEBSITE_ID}
+              src={UMAMI_SRC}
+              data-domains={UMAMI_DATA_DOMAIN}
+            />
+          )}
         </Head>
         <body>
           <ColorModeScript
