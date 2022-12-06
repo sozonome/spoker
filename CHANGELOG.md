@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.3](https://github.com/sozonome/spoker/compare/v1.12.2...v1.12.3) (2022-12-06)
+
+
+### Improvements
+
+* **layout:** enable transition on change theme ([#146](https://github.com/sozonome/spoker/issues/146)) ([27369c1](https://github.com/sozonome/spoker/commit/27369c1bc169391eba420320dba2a8df67167c55))
+
 ### [1.12.2](https://github.com/sozonome/spoker/compare/v1.12.1...v1.12.2) (2022-11-18)
 
 ### [1.12.1](https://github.com/sozonome/spoker/compare/v1.12.0...v1.12.1) (2022-11-14)
