@@ -40,26 +40,21 @@ const CurrentVotesWrapper = () => {
   } = router;
   const toast = useToast();
   const currentUser = useAuth((state) => state.currentUser);
-  const { config, showVote, users } = useRoomStore(
+  const { config, showVote, users, estimatePoint } = useRoomStore(
     (state) => ({
       config: state.roomData?.config,
       showVote: state.showVote,
       users: state.users,
+      estimatePoint: state.estimatePoint,
     }),
     shallow
   );
+  const setEstimatePoint = useRoomStore((action) => action.setEstimatePoint);
   const { isOwner, isObservant } = useUserRole();
-  const { averagePoint, highestPoint } = useRoomPoint();
+  const { averagePoint } = useRoomPoint();
   const { handleFinishVote } = useVote();
   const [isLoadingSubmitVote, setIsLoadingSubmitVote] =
     React.useState<boolean>(false);
-  const [estimate, setEstimate] = React.useState<number>(0);
-
-  React.useEffect(() => {
-    if (showVote) {
-      setEstimate(highestPoint);
-    }
-  }, [highestPoint, showVote]);
 
   const showAveragePoint = React.useMemo(
     () => showVote && !Number.isNaN(averagePoint),
@@ -127,12 +122,12 @@ const CurrentVotesWrapper = () => {
   };
 
   const handleSetEstimate = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setEstimate(Number(e.target.value));
+    setEstimatePoint(Number(e.target.value));
   };
 
   const handleFinishVoting = async () => {
     setIsLoadingSubmitVote(true);
-    await handleFinishVote(estimate);
+    await handleFinishVote(estimatePoint);
     setIsLoadingSubmitVote(false);
   };
 
@@ -205,7 +200,7 @@ const CurrentVotesWrapper = () => {
               borderRadius={12}
               borderWidth={2}
               borderColor="gray.500"
-              value={estimate}
+              value={estimatePoint}
               onChange={handleSetEstimate}
               fontWeight="bold"
             >

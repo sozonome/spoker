@@ -24,8 +24,10 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const isPublicRoute = PUBLIC_ROUTES.indexOf(pathname) >= 0;
   const isRestrictedRoute = RESTRICTED_ROUTES.includes(pathname);
 
-  const isUnauthorized =
-    currentUser === null && !isPublicRoute && !isRestrictedRoute;
+  const isUnauthorized = React.useMemo(
+    () => currentUser === null && !isPublicRoute && !isRestrictedRoute,
+    [currentUser, isPublicRoute, isRestrictedRoute]
+  );
 
   React.useEffect(() => {
     if (isUnauthorized) {
@@ -35,12 +37,6 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, pathname]);
-
-  React.useEffect(() => {
-    if (!isUnauthorized) {
-      setIsRegistered(true);
-    }
-  }, [isUnauthorized]);
 
   const handleSwitchToRegister = () => setIsRegistered(false);
   const handleSwitchToLogin = () => setIsRegistered(true);

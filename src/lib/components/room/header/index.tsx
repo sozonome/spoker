@@ -17,20 +17,21 @@ import EditableFields from "./components/EditableFields";
 import { useRoomHeader } from "./hooks";
 
 const RoomHeader = () => {
-  const roomData = useRoomStore((state) => state.roomData);
+  const { roomData, taskName, taskDescription } = useRoomStore((state) => ({
+    roomData: state.roomData,
+    taskName: state.taskName,
+    taskDescription: state.taskDescription,
+  }));
   const { isOwner } = useUserRole();
   const wrapperBackgroundColor = useColorModeValue("teal.50", "teal.600");
-  const { name, description, handleUpdateTask } = useRoomHeader({
-    roomData,
-    isOwner,
-  });
+  const { handleUpdateTask } = useRoomHeader();
 
   const content = React.useMemo(() => {
     if (isOwner) {
       return (
         <EditableFields
-          name={name}
-          description={description}
+          name={taskName}
+          description={taskDescription}
           handleUpdateTask={handleUpdateTask}
         />
       );
@@ -46,7 +47,7 @@ const RoomHeader = () => {
         {task.description && <Text>{task.description}</Text>}
       </>
     );
-  }, [description, handleUpdateTask, isOwner, name, roomData?.task]);
+  }, [handleUpdateTask, isOwner, roomData?.task, taskDescription, taskName]);
 
   return (
     <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>

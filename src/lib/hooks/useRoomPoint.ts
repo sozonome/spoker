@@ -22,15 +22,10 @@ export const useRoomPoint = () => {
 
   const averagePoint = React.useMemo(() => {
     const filledPoints = participantPoints.filter((point) => point);
-    return countAveragePoint(filledPoints);
+    return countAveragePoint(filledPoints).toPrecision(2);
   }, [participantPoints]);
-  const highestPoint = React.useMemo(
-    () => participantPoints.sort((a, b) => b - a)[0] ?? 0,
-    [participantPoints]
-  );
 
   return {
     averagePoint,
-    highestPoint,
   };
 };

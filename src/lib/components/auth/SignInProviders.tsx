@@ -15,8 +15,7 @@ const SignInProviders = () => {
     return () => {
       toast.closeAll();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [toast]);
 
   return (
     <Grid gap={2} textAlign="center">

@@ -19,9 +19,14 @@ export const connectedUsers = (users: RoomMappedUser) =>
     }))
     .filter((user) => user.isConnected);
 
-export const checkAllParticipantVoted = (users: Array<RoomUser>) =>
-  users
-    .filter((user) => user.role === RoleType.participant)
-    .every((user) => (user.point ?? -1) >= 0) &&
-  users.length > 1 &&
-  !users.every((user) => user.role === RoleType.owner);
+export const checkAllParticipantVoted = (users: Array<RoomUser>) => {
+  if (users.every((user) => user.role === RoleType.owner)) {
+    return users.every((user) => (user.point ?? -1) >= 0);
+  }
+
+  return (
+    users
+      .filter((user) => user.role === RoleType.participant)
+      .every((user) => (user.point ?? -1) >= 0) && users.length > 1
+  );
+};
