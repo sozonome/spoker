@@ -28,7 +28,8 @@
       ]
     },
     "lint": {
-      "outputs": []
+      "outputs": [],
+      "inputs": [".eslintrc.*", "src/**"]
     },
     "type-check": {
       "outputs": ["*.tsbuildinfo"]
