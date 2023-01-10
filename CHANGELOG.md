@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.6](https://github.com/sozonome/spoker/compare/v1.12.5...v1.12.6) (2023-01-10)
+
+
+### Improvements
+
+* use jsdelivr as twemoji base ([#157](https://github.com/sozonome/spoker/issues/157)) ([5fb6b87](https://github.com/sozonome/spoker/commit/5fb6b878387f9fb54bcb886cb55a660d757e687d))
+
 ### [1.12.5](https://github.com/sozonome/spoker/compare/v1.12.4...v1.12.5) (2023-01-10)
 
 
