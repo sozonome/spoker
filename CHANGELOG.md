@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.7](https://github.com/sozonome/spoker/compare/v1.12.6...v1.12.7) (2023-01-11)
+
+
+### Improvements
+
+* **layout:** add current year to footer ([5203e30](https://github.com/sozonome/spoker/commit/5203e30559e442a12e4217575a897c1f7bd0277a))
+
 ### [1.12.6](https://github.com/sozonome/spoker/compare/v1.12.5...v1.12.6) (2023-01-10)
 
 
