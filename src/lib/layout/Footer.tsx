@@ -24,7 +24,7 @@ const Footer = () => {
       paddingY={8}
       gap={{ base: 0, md: 4 }}
     >
-      <Text>
+      <Text fontSize="sm">
         2021 - {new Date().getFullYear()}
         {" | "}
         <Link
@@ -36,7 +36,7 @@ const Footer = () => {
         </Link>
       </Text>
 
-      <Flex alignItems="center">
+      <Flex alignItems="center" justifyContent="center">
         <SupportCTA />
       </Flex>
 
