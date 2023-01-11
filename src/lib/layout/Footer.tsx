@@ -25,7 +25,8 @@ const Footer = () => {
       gap={{ base: 0, md: 4 }}
     >
       <Text>
-        2021 -{" "}
+        2021 - {new Date().getFullYear()}
+        {" | "}
         <Link
           href="https://sznm.dev"
           isExternal
