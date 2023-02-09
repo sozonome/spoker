@@ -13,23 +13,23 @@ import {
   Text,
   useBreakpointValue,
   useToast,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import * as React from "react";
-import { BsPencil } from "react-icons/bs";
-import { ImCheckmark } from "react-icons/im";
-import { IoMdPerson } from "react-icons/io";
-import shallow from "zustand/shallow";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import { BsPencil } from 'react-icons/bs';
+import { ImCheckmark } from 'react-icons/im';
+import { IoMdPerson } from 'react-icons/io';
+import shallow from 'zustand/shallow';
 
-import SpokerInput from "lib/components/shared/SpokerInput";
-import { PRIVATE_ROUTES } from "lib/constants/routes/private";
-import { EVENT_TYPE_AUTH } from "lib/constants/tracking";
-import { logoutUser } from "lib/services/firebase/auth/logout";
-import { updateDisplayName } from "lib/services/firebase/auth/updateDisplayName";
-import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
-import { useAuth } from "lib/stores/auth";
-import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
-import { trackEvent } from "lib/utils/trackEvent";
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import { PRIVATE_ROUTES } from '~/lib/constants/routes/private';
+import { EVENT_TYPE_AUTH } from '~/lib/constants/tracking';
+import { logoutUser } from '~/lib/services/firebase/auth/logout';
+import { updateDisplayName } from '~/lib/services/firebase/auth/updateDisplayName';
+import { disconnectUser } from '~/lib/services/firebase/room/update/disconnectUser';
+import { useAuth } from '~/lib/stores/auth';
+import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
+import { trackEvent } from '~/lib/utils/trackEvent';
 
 const AuthPopover = () => {
   const [currentUser, displayName, setDisplayName] = useAuth(
@@ -38,12 +38,12 @@ const AuthPopover = () => {
   );
   const [isEditingDisplayName, setIsEditingDisplayName] =
     React.useState<boolean>(false);
-  const [displayNameInput, setDisplayNameInput] = React.useState<string>("");
+  const [displayNameInput, setDisplayNameInput] = React.useState<string>('');
   const toast = useToast();
   const router = useRouter();
   const buttonSize = useBreakpointValue({
-    base: "md",
-    sm: "lg",
+    base: 'md',
+    sm: 'lg',
   });
 
   const {
@@ -57,9 +57,9 @@ const AuthPopover = () => {
         updateDisplayName(displayNameInput)
           .then(async () => {
             toast({
-              title: "Update name successful",
-              status: "success",
-              position: "top",
+              title: 'Update name successful',
+              status: 'success',
+              position: 'top',
               isClosable: true,
             });
             setDisplayName(displayNameInput);
@@ -67,8 +67,8 @@ const AuthPopover = () => {
           .catch(async (e) => {
             toast({
               description: removeFirebasePrefix(e.message),
-              status: "error",
-              position: "top",
+              status: 'error',
+              position: 'top',
               isClosable: true,
             });
           })
@@ -89,9 +89,9 @@ const AuthPopover = () => {
   const processLogout = async () => {
     await logoutUser().then(() => {
       toast({
-        description: "Successfully logged out",
-        status: "info",
-        position: "top",
+        description: 'Successfully logged out',
+        status: 'info',
+        position: 'top',
       });
     });
   };
@@ -99,7 +99,7 @@ const AuthPopover = () => {
   const clearUserSessionData = async () => {
     if (id && PRIVATE_ROUTES.includes(pathname) && currentUser) {
       await disconnectUser(id as string, currentUser.uid);
-      router.push("/");
+      router.push('/');
     }
 
     await processLogout();
@@ -108,7 +108,7 @@ const AuthPopover = () => {
   const handleLogout = async () => {
     await clearUserSessionData();
     trackEvent({
-      eventName: "sign out",
+      eventName: 'sign out',
       eventData: { type: EVENT_TYPE_AUTH },
     });
   };

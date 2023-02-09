@@ -1,3 +1,3 @@
-import JoinRoomPage from "lib/pages/join";
+import JoinRoomPage from '~/lib/pages/join';
 
 export default JoinRoomPage;

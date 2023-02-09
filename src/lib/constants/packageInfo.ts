@@ -1,3 +1,3 @@
-import packageInfo from "../../../package.json";
+import packageInfo from '../../../package.json';
 
 export { packageInfo };

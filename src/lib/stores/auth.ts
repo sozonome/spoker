@@ -1,5 +1,5 @@
-import type { User } from "firebase/auth";
-import create from "zustand";
+import type { User } from 'firebase/auth';
+import create from 'zustand';
 
 type AuthStore = {
   currentUser?: User | null;
@@ -9,7 +9,7 @@ type AuthStore = {
 };
 
 export const useAuth = create<AuthStore>((set) => ({
-  displayName: "",
+  displayName: '',
   setCurrentUser: (user) => set({ currentUser: user }),
   setDisplayName: (displayName) => set({ displayName }),
 }));

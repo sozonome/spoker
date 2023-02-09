@@ -1,13 +1,13 @@
-import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import * as React from "react";
+import { useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import * as React from 'react';
 
-import { PUBLIC_ROUTES } from "lib/constants/routes/public";
-import { RESTRICTED_ROUTES } from "lib/constants/routes/restricted";
-import { useAuth } from "lib/stores/auth";
+import { PUBLIC_ROUTES } from '~/lib/constants/routes/public';
+import { RESTRICTED_ROUTES } from '~/lib/constants/routes/restricted';
+import { useAuth } from '~/lib/stores/auth';
 
-import FullScreenLoading from "./FullScreenLoading";
-import { useAuthObserver } from "./useAuthObserver";
+import FullScreenLoading from './FullScreenLoading';
+import { useAuthObserver } from './useAuthObserver';
 
 type RouteWrapperProps = {
   children: React.ReactNode;
@@ -36,7 +36,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
     () =>
       currentUser &&
       !currentUser.emailVerified &&
-      pathname !== "/" &&
+      pathname !== '/' &&
       !isPublicRoute &&
       !isRestrictedRoute,
     [currentUser, isPublicRoute, isRestrictedRoute, pathname]
@@ -45,7 +45,7 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
   const routeCheck = React.useCallback(() => {
     if (currentUser && isRestrictedRoute) {
       // setBusy(true);
-      router.replace("/").then(() => setBusy(false));
+      router.replace('/').then(() => setBusy(false));
       return;
     }
 
@@ -54,12 +54,12 @@ const RouteWrapper = ({ children }: RouteWrapperProps) => {
 
       currentUser?.reload().then(() => {
         if (!currentUser.emailVerified) {
-          router.push("/").then(() => {
+          router.push('/').then(() => {
             toast({
-              title: "Your email is not verified yet.",
+              title: 'Your email is not verified yet.',
               description: `Check your email (${currentUser.email}) for verification link.`,
-              position: "top",
-              status: "warning",
+              position: 'top',
+              status: 'warning',
               isClosable: true,
             });
           });

@@ -1,4 +1,4 @@
-import type { ModalContentProps } from "@chakra-ui/react";
+import type { ModalContentProps } from '@chakra-ui/react';
 
 export const contraBoxStyle = (
   borderColor: string

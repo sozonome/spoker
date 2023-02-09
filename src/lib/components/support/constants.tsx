@@ -1,4 +1,4 @@
-import { FaGithub } from "react-icons/fa";
+import { FaGithub } from 'react-icons/fa';
 
 type SponsorLink = {
   label: string;
@@ -10,24 +10,24 @@ type SponsorLink = {
 
 export const sponsorLinks: Array<SponsorLink> = [
   {
-    label: "Github Sponsor",
-    url: "https://github.com/sponsors/sozonome",
+    label: 'Github Sponsor',
+    url: 'https://github.com/sponsors/sozonome',
     icon: <FaGithub />,
   },
   {
-    label: "🇮🇩 saweria",
-    description: "(QRIS, GoPay, etc)",
-    url: "https://saweria.co/sozonome",
-    colorScheme: "orange",
+    label: '🇮🇩 saweria',
+    description: '(QRIS, GoPay, etc)',
+    url: 'https://saweria.co/sozonome',
+    colorScheme: 'orange',
   },
   {
-    label: "Ko-fi",
-    url: "https://ko-fi.com/sozonome",
-    colorScheme: "blue",
+    label: 'Ko-fi',
+    url: 'https://ko-fi.com/sozonome',
+    colorScheme: 'blue',
   },
   {
-    label: "Buy Me a Coffee",
-    url: "https://www.buymeacoffee.com/sozonome",
-    colorScheme: "yellow",
+    label: 'Buy Me a Coffee',
+    url: 'https://www.buymeacoffee.com/sozonome',
+    colorScheme: 'yellow',
   },
 ];

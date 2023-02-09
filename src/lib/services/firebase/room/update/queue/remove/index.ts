@@ -1,6 +1,6 @@
-import { rewriteQueue } from "lib/services/firebase/room/update/rewriteQueue";
+import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
 
-import type { RemoveQueueItemArgs } from "./types";
+import type { RemoveQueueItemArgs } from './types';
 
 export const removeQueueItem = async ({
   roomId,

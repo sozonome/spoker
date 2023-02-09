@@ -1,6 +1,6 @@
-import type { HideLabelOptionsType } from "lib/constants/hideLabel";
+import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';
 
-import type { User } from "./user";
+import type { User } from './user';
 
 export interface DBSample {
   rooms: Rooms;
@@ -37,7 +37,7 @@ export interface RoomConfig {
   hideLabel?: HideLabelOptionsType;
 }
 
-export type PointEntry = Pick<User, "name" | "point">;
+export type PointEntry = Pick<User, 'name' | 'point'>;
 
 export type LastVoted = {
   name: string;

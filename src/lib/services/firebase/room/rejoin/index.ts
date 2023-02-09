@@ -1,8 +1,8 @@
-import { child, get, set, update } from "firebase/database";
+import { child, get, set, update } from 'firebase/database';
 
-import { getCurrentUser } from "lib/services/firebase/auth/getCurrentUser";
-import { roomsData } from "lib/services/firebase/room/common";
-import type { RoleType } from "lib/types/user";
+import { getCurrentUser } from '~/lib/services/firebase/auth/getCurrentUser';
+import { roomsData } from '~/lib/services/firebase/room/common';
+import type { RoleType } from '~/lib/types/user';
 
 export const rejoinRoom = async (roomId: string, role?: RoleType | null) => {
   const currentUser = getCurrentUser();

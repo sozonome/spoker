@@ -1,8 +1,8 @@
-import { Button, Grid, Text, useToast } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { FcGoogle } from "react-icons/fc";
+import { Button, Grid, Text, useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 
-import { loginWithGoogle } from "lib/services/firebase/auth/login/google";
+import { loginWithGoogle } from '~/lib/services/firebase/auth/login/google';
 
 const SignInProviders = () => {
   const toast = useToast();
@@ -25,7 +25,7 @@ const SignInProviders = () => {
       <Button
         leftIcon={<FcGoogle />}
         onClick={handleLoginWithGoogle}
-        _hover={{ bgGradient: "linear(to-r, blue.100, cyan.100)" }}
+        _hover={{ bgGradient: 'linear(to-r, blue.100, cyan.100)' }}
       >
         Google
       </Button>

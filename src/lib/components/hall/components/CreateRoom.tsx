@@ -1,19 +1,19 @@
-import { Button, Grid, Heading, useToast } from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Button, Grid, Heading, useToast } from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import {
   createRoomFormSchema,
   initialValues,
-} from "lib/components/hall/constants";
-import type { CreateRoomFormType } from "lib/components/hall/types";
-import SpokerInput from "lib/components/shared/SpokerInput";
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { createRoom } from "lib/services/firebase/room/create";
-import { formatId } from "lib/utils/formatId";
-import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
+} from '~/lib/components/hall/constants';
+import type { CreateRoomFormType } from '~/lib/components/hall/types';
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { createRoom } from '~/lib/services/firebase/room/create';
+import { formatId } from '~/lib/utils/formatId';
+import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
 
 const CreateRoom = () => {
   const toast = useToast();
@@ -27,7 +27,7 @@ const CreateRoom = () => {
     formState: { isDirty, isValid, errors },
   } = useForm<CreateRoomFormType>({
     defaultValues: initialValues,
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(createRoomFormSchema),
   });
 
@@ -41,10 +41,10 @@ const CreateRoom = () => {
       })
       .catch((err: Error) => {
         toast({
-          position: "top-right",
-          title: "Create Room Fail",
+          position: 'top-right',
+          title: 'Create Room Fail',
           description: removeFirebasePrefix(err.message),
-          status: "error",
+          status: 'error',
           isClosable: true,
         });
       })
@@ -62,14 +62,14 @@ const CreateRoom = () => {
       <Grid gap={4}>
         <SpokerInput
           label="Room Name"
-          {...register("name")}
+          {...register('name')}
           isInvalid={!!errors.name?.message}
           errorText={errors.name?.message}
           placeholder="The Quick Brown Fox"
         />
         <SpokerInput
           label="Room ID"
-          {...register("id")}
+          {...register('id')}
           isInvalid={!!errors.id?.message}
           errorText={errors.id?.message}
           placeholder="define your own room slug"

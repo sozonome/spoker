@@ -27,35 +27,35 @@ type HideLabelType = Record<
 
 export const hideLabel: HideLabelType = {
   monkey: {
-    empty: "🙊",
-    selected: "🙉",
+    empty: '🙊',
+    selected: '🙉',
   },
   chicken: {
-    empty: "🥚",
-    selected: "🐣",
+    empty: '🥚',
+    selected: '🐣',
   },
   cow: {
-    empty: "🐄",
-    selected: "🥛",
+    empty: '🐄',
+    selected: '🥛',
   },
   fish: {
-    empty: "🐟",
-    selected: "🎣",
+    empty: '🐟',
+    selected: '🎣',
   },
   money: {
-    empty: "💸",
-    selected: "💰",
+    empty: '💸',
+    selected: '💰',
   },
   cloud: {
-    empty: "☁️",
-    selected: "⛅",
+    empty: '☁️',
+    selected: '⛅',
   },
   shrimp: {
-    empty: "🦐",
-    selected: "🍤",
+    empty: '🦐',
+    selected: '🍤',
   },
   think: {
-    empty: "🤔",
-    selected: "👌",
+    empty: '🤔',
+    selected: '👌',
   },
 };
