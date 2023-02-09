@@ -1,6 +1,6 @@
 import { Box, Button, Container, Heading, Text } from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
 import { EVENT_TYPE_NAVIGATE } from "lib/constants/tracking";

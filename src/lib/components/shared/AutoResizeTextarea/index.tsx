@@ -1,7 +1,7 @@
 import type {
   FormControlProps,
   FormErrorMessageProps,
-  HelpTextProps,
+  FormHelperTextProps,
   TextareaProps,
 } from "@chakra-ui/react";
 import {
@@ -16,7 +16,7 @@ import ResizeTextarea from "react-textarea-autosize";
 
 type AutoResizeTextareaProps = {
   errorText?: FormErrorMessageProps["children"];
-  helperText?: HelpTextProps["children"];
+  helperText?: FormHelperTextProps["children"];
 } & TextareaProps &
   Pick<FormControlProps, "label" | "isInvalid">;
 
