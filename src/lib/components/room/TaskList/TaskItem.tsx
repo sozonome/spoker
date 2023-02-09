@@ -5,10 +5,10 @@ import {
   Heading,
   Text,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import { HiPencil, HiSwitchVertical, HiTrash } from "react-icons/hi";
+} from '@chakra-ui/react';
+import { HiPencil, HiSwitchVertical, HiTrash } from 'react-icons/hi';
 
-import type { Task } from "lib/types/RawDB";
+import type { Task } from '~/lib/types/RawDB';
 
 type TaskItemProps = {
   task: Task;
@@ -24,12 +24,12 @@ type TaskItemProps = {
 const TaskItem = ({ task, queueProps }: TaskItemProps) => {
   const swapButtonContent = useBreakpointValue({
     base: null,
-    md: "Swap with Current",
+    md: 'Swap with Current',
   });
 
   const removeButtonContent = useBreakpointValue({
     base: null,
-    md: "Remove",
+    md: 'Remove',
   });
 
   const handleClickSwap = () => {
@@ -59,8 +59,8 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
       marginBottom={2}
       justifyContent="space-between"
       alignItems="center"
-      _hover={{ cursor: queueProps?.isQueue ? "move" : undefined }}
-      _active={{ cursor: queueProps?.isQueue ? "grab" : undefined }}
+      _hover={{ cursor: queueProps?.isQueue ? 'move' : undefined }}
+      _active={{ cursor: queueProps?.isQueue ? 'grab' : undefined }}
     >
       <Box>
         <Heading fontSize="xl">{task.name}</Heading>

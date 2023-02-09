@@ -1,11 +1,11 @@
-import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import * as React from "react";
+import { useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import * as React from 'react';
 
-import FullScreenLoading from "lib/layout/FullScreenLoading";
-import { handleVerifyEmail } from "lib/services/firebase/auth/verifyEmail";
-import { useAuth } from "lib/stores/auth";
-import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
+import FullScreenLoading from '~/lib/layout/FullScreenLoading';
+import { handleVerifyEmail } from '~/lib/services/firebase/auth/verifyEmail';
+import { useAuth } from '~/lib/stores/auth';
+import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
 
 const Auth = () => {
   const router = useRouter();
@@ -17,39 +17,39 @@ const Auth = () => {
 
   const handleInvalidLink = React.useCallback(() => {
     setIsProcessed(true);
-    router.push("/").then(() => {
+    router.push('/').then(() => {
       toast({
-        description: "Invalid Link",
-        status: "warning",
-        position: "top",
+        description: 'Invalid Link',
+        status: 'warning',
+        position: 'top',
         isClosable: true,
       });
     });
   }, [router, toast]);
 
   const handleAuthCallback = React.useCallback(() => {
-    if (mode === "verifyEmail") {
+    if (mode === 'verifyEmail') {
       setIsProcessed(true);
       handleVerifyEmail(oobCode as string)
         .then(() => {
           toast({
-            title: "Email Verification Success",
-            status: "success",
-            position: "top",
+            title: 'Email Verification Success',
+            status: 'success',
+            position: 'top',
             isClosable: true,
           });
           if (currentUser) {
-            currentUser.reload().then(() => router.push("/"));
+            currentUser.reload().then(() => router.push('/'));
           } else {
-            router.push("/");
+            router.push('/');
           }
         })
         .catch((err: Error) => {
-          router.push("/").then(() => {
+          router.push('/').then(() => {
             toast({
               description: removeFirebasePrefix(err.message),
-              status: "error",
-              position: "top",
+              status: 'error',
+              position: 'top',
               isClosable: true,
             });
           });

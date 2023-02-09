@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { useAuth } from "lib/stores/auth";
-import { useRoomStore } from "lib/stores/room";
-import { RoleType } from "lib/types/user";
+import { useAuth } from '~/lib/stores/auth';
+import { useRoomStore } from '~/lib/stores/room';
+import { RoleType } from '~/lib/types/user';
 
 export const useUserRole = () => {
   const currentUser = useAuth((state) => state.currentUser);

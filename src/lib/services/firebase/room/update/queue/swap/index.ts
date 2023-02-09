@@ -1,8 +1,8 @@
-import { clearPoints } from "lib/services/firebase/room/update/point/clear";
-import { rewriteQueue } from "lib/services/firebase/room/update/rewriteQueue";
-import { updateRoomTask } from "lib/services/firebase/room/update/roomTask";
+import { clearPoints } from '~/lib/services/firebase/room/update/point/clear';
+import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
+import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
 
-import type { SwapSelectedQueueWithCurrentArgs } from "./types";
+import type { SwapSelectedQueueWithCurrentArgs } from './types';
 
 export const swapSelectedQueueWithCurrent = async ({
   roomId,

@@ -1,15 +1,15 @@
-import type { LayoutProps } from "@chakra-ui/react";
-import { Grid } from "@chakra-ui/react";
+import type { LayoutProps } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 
-import SpokerLoading from "lib/components/shared/SpokerLoading";
+import SpokerLoading from '~/lib/components/shared/SpokerLoading';
 
 type FullScreenLoadingProps = {
-  height?: LayoutProps["height"];
+  height?: LayoutProps['height'];
 };
 
 const FullScreenLoading = ({ height }: FullScreenLoadingProps) => {
   return (
-    <Grid height={height ?? "100vh"}>
+    <Grid height={height ?? '100vh'}>
       <SpokerLoading />
     </Grid>
   );

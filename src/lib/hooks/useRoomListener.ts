@@ -1,18 +1,21 @@
-import { useToast } from "@chakra-ui/react";
-import { child, onDisconnect, onValue } from "firebase/database";
-import { useRouter } from "next/router";
-import * as React from "react";
-import shallow from "zustand/shallow";
+import { useToast } from '@chakra-ui/react';
+import { child, onDisconnect, onValue } from 'firebase/database';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import shallow from 'zustand/shallow';
 
-import { roomsData } from "lib/services/firebase/room/common";
-import { rejoinRoom } from "lib/services/firebase/room/rejoin";
-import { disconnectUser } from "lib/services/firebase/room/update/disconnectUser";
-import { useAuth } from "lib/stores/auth";
-import { useRoomStore } from "lib/stores/room";
-import type { RoomUser } from "lib/types/room";
-import { checkAllParticipantVoted, connectedUsers } from "lib/utils/roomUtils";
+import { roomsData } from '~/lib/services/firebase/room/common';
+import { rejoinRoom } from '~/lib/services/firebase/room/rejoin';
+import { disconnectUser } from '~/lib/services/firebase/room/update/disconnectUser';
+import { useAuth } from '~/lib/stores/auth';
+import { useRoomStore } from '~/lib/stores/room';
+import type { RoomUser } from '~/lib/types/room';
+import {
+  checkAllParticipantVoted,
+  connectedUsers,
+} from '~/lib/utils/roomUtils';
 
-import { useUserRole } from "./useUserRole";
+import { useUserRole } from './useUserRole';
 
 export const useRoomListener = () => {
   const router = useRouter();
@@ -61,11 +64,11 @@ export const useRoomListener = () => {
         setRoomData(snap.val());
         handleOnDisconnect();
       } else {
-        router.push("/");
+        router.push('/');
         toast({
           title: "This room doesn't exist",
-          status: "error",
-          position: "top-right",
+          status: 'error',
+          position: 'top-right',
           isClosable: true,
         });
       }
@@ -105,11 +108,11 @@ export const useRoomListener = () => {
 
       router.push(`/join/${id}`);
       toast({
-        status: "warning",
+        status: 'warning',
         title: "You haven't pick any role yet",
         description:
           "Either you haven't join the room before or rejoin or disconnected / refreshed the page",
-        position: "top-right",
+        position: 'top-right',
         duration: 15000,
         isClosable: true,
       });
@@ -141,9 +144,9 @@ export const useRoomListener = () => {
   }, [currentUser, handleRejoin, inRoom, roomData, roomData?.users]);
 
   React.useEffect(() => {
-    router.events.on("routeChangeStart", removeUserFromRoom);
+    router.events.on('routeChangeStart', removeUserFromRoom);
     return () => {
-      router.events.off("routeChangeStart", removeUserFromRoom);
+      router.events.off('routeChangeStart', removeUserFromRoom);
     };
   });
 };

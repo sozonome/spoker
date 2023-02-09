@@ -1,9 +1,9 @@
-import { Button, HStack, Text, useDisclosure } from "@chakra-ui/react";
-import { BiDonateHeart } from "react-icons/bi";
+import { Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import { BiDonateHeart } from 'react-icons/bi';
 
-import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
+import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';
 
-import SupportContent from "./SupportContent";
+import SupportContent from './SupportContent';
 
 type SupportCTAProps = {
   isCompact?: boolean;

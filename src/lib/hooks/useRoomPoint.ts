@@ -1,8 +1,8 @@
-import * as React from "react";
-import shallow from "zustand/shallow";
+import * as React from 'react';
+import shallow from 'zustand/shallow';
 
-import { useRoomStore } from "lib/stores/room";
-import { countAveragePoint, filterUserWithPoints } from "lib/utils/roomUtils";
+import { useRoomStore } from '~/lib/stores/room';
+import { countAveragePoint, filterUserWithPoints } from '~/lib/utils/roomUtils';
 
 export const useRoomPoint = () => {
   const { showVote, users } = useRoomStore(

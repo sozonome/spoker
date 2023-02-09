@@ -1,14 +1,14 @@
-import { child, get, set } from "firebase/database";
-import { nanoid } from "nanoid";
+import { child, get, set } from 'firebase/database';
+import { nanoid } from 'nanoid';
 
-import type { CreateRoomFormType } from "lib/components/hall/types";
-import { roomsData } from "lib/services/firebase/room/common";
-import type { RoomInstance } from "lib/types/RawDB";
+import type { CreateRoomFormType } from '~/lib/components/hall/types';
+import { roomsData } from '~/lib/services/firebase/room/common';
+import type { RoomInstance } from '~/lib/types/RawDB';
 
 export const createRoom = async (roomInstance: CreateRoomFormType) => {
   await get(roomsData).then((snap) => {
     if (snap.hasChild(roomInstance.id)) {
-      throw Error("room already exists, try another id.");
+      throw Error('room already exists, try another id.');
     }
   });
 
@@ -18,19 +18,19 @@ export const createRoom = async (roomInstance: CreateRoomFormType) => {
     room: {
       name: roomInstance.name,
       isPrivate: roomInstance.isPrivate,
-      password: roomInstance.isPrivate ? roomInstance.password : "",
+      password: roomInstance.isPrivate ? roomInstance.password : '',
     },
     task: {
       id: randomId,
-      name: "#1 Task",
-      description: "Edit Me",
+      name: '#1 Task',
+      description: 'Edit Me',
     },
     queue: [],
     completed: [],
     selectedTaskIndex: -1,
     config: {
       isFreezeAfterVote: true,
-      hideLabel: "monkey",
+      hideLabel: 'monkey',
     },
   };
 

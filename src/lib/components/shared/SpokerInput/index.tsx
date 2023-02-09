@@ -1,9 +1,9 @@
 import type {
   FormControlProps,
   FormErrorMessageProps,
-  HelpTextProps,
+  FormHelperTextProps,
   InputProps,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   FormErrorMessage,
   FormControl,
@@ -11,20 +11,20 @@ import {
   FormLabel,
   forwardRef,
   Input,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 type SpokerInputProps = {
-  errorText?: FormErrorMessageProps["children"];
-  helperText?: HelpTextProps["children"];
-  formControlWidth?: FormControlProps["width"];
-} & Pick<FormControlProps, "label" | "isInvalid"> &
+  errorText?: FormErrorMessageProps['children'];
+  helperText?: FormHelperTextProps['children'];
+  formControlWidth?: FormControlProps['width'];
+} & Pick<FormControlProps, 'label' | 'isInvalid'> &
   InputProps;
 
 export const contraInputStyle: Partial<InputProps> = {
-  borderColor: "black",
+  borderColor: 'black',
   borderRadius: 12,
   borderWidth: 2,
-  size: "lg",
+  size: 'lg',
 };
 
 const SpokerInput = forwardRef(

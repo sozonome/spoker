@@ -7,14 +7,14 @@ import {
   Button,
   Grid,
   useToast,
-} from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
-import * as React from "react";
+} from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
+import * as React from 'react';
 
-import HallWrapper from "lib/components/hall";
-import SpokerLoading from "lib/components/shared/SpokerLoading";
-import { requestVerificationMail } from "lib/services/firebase/auth/requestVerificationMail";
-import { useAuth } from "lib/stores/auth";
+import HallWrapper from '~/lib/components/hall';
+import SpokerLoading from '~/lib/components/shared/SpokerLoading';
+import { requestVerificationMail } from '~/lib/services/firebase/auth/requestVerificationMail';
+import { useAuth } from '~/lib/stores/auth';
 
 const Home = () => {
   const currentUser = useAuth((state) => state.currentUser);
@@ -28,8 +28,8 @@ const Home = () => {
         setIsEmailVerified(currentUser.emailVerified);
         toast({
           description: `Your email is already verified.`,
-          status: "info",
-          position: "top",
+          status: 'info',
+          position: 'top',
           isClosable: true,
         });
       } else {
@@ -67,7 +67,7 @@ const Home = () => {
             </AlertTitle>
 
             <AlertDescription>
-              Haven&apos;t received any verification email?{" "}
+              Haven&apos;t received any verification email?{' '}
               <Button
                 colorScheme="orange"
                 size="sm"

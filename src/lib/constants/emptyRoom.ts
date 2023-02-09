@@ -1,13 +1,13 @@
-import type { RoomInstance } from "lib/types/RawDB";
+import type { RoomInstance } from '~/lib/types/RawDB';
 
 export const emptyRoom: RoomInstance = {
   room: {
-    name: "",
+    name: '',
     isPrivate: false,
   },
   task: {
-    name: "",
-    id: "",
+    name: '',
+    id: '',
   },
   selectedTaskIndex: 0,
   config: {

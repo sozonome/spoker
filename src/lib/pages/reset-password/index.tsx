@@ -1,16 +1,16 @@
-import { Button, Container, Grid, Heading, Text } from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
-import * as React from "react";
-import { useForm } from "react-hook-form";
+import { Button, Container, Grid, Heading, Text } from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
 
-import SpokerInput from "lib/components/shared/SpokerInput";
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { requestPasswordReset } from "lib/services/firebase/auth/requestPasswordReset";
-import { showSuccessToast } from "lib/services/firebase/utils";
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswordReset';
+import { showSuccessToast } from '~/lib/services/firebase/utils';
 
-import { initialValues, resetPasswordFormValidationSchema } from "./constants";
-import type { ResetPasswordForm } from "./types";
+import { initialValues, resetPasswordFormValidationSchema } from './constants';
+import type { ResetPasswordForm } from './types';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const ResetPasswordPage = () => {
     formState: { isDirty, isValid, errors },
   } = useForm<ResetPasswordForm>({
     defaultValues: initialValues,
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(resetPasswordFormValidationSchema),
   });
 
@@ -35,9 +35,9 @@ const ResetPasswordPage = () => {
     setIsLoading(true);
     const { email } = getValues();
     await requestPasswordReset(email, () => {
-      router.push("/").then(() => {
+      router.push('/').then(() => {
         showSuccessToast({
-          title: "Password Reset Requested",
+          title: 'Password Reset Requested',
           description: `Check your email (${email}) for the password reset link. If there's none, please check your spam folder.`,
           duration: 15000,
         });
@@ -51,7 +51,7 @@ const ResetPasswordPage = () => {
       paddingX={0}
       display="grid"
       gridGap={8}
-      minHeight={{ base: "50vh", md: "60vh" }}
+      minHeight={{ base: '50vh', md: '60vh' }}
       alignItems="center"
     >
       <SpokerWrapperGrid
@@ -68,7 +68,7 @@ const ResetPasswordPage = () => {
         </Grid>
 
         <SpokerInput
-          {...register("email")}
+          {...register('email')}
           placeholder="e-mail address"
           type="email"
           isInvalid={!!errors.email?.message}
