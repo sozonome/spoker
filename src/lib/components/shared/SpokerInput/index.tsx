@@ -1,7 +1,7 @@
 import type {
   FormControlProps,
   FormErrorMessageProps,
-  HelpTextProps,
+  FormHelperTextProps,
   InputProps,
 } from "@chakra-ui/react";
 import {
@@ -15,7 +15,7 @@ import {
 
 type SpokerInputProps = {
   errorText?: FormErrorMessageProps["children"];
-  helperText?: HelpTextProps["children"];
+  helperText?: FormHelperTextProps["children"];
   formControlWidth?: FormControlProps["width"];
 } & Pick<FormControlProps, "label" | "isInvalid"> &
   InputProps;
