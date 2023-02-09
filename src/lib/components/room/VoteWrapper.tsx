@@ -4,17 +4,17 @@ import {
   Spacer,
   useColorModeValue,
   useRadioGroup,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import shallow from "zustand/shallow";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import shallow from 'zustand/shallow';
 
-import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { useUserRole } from "lib/hooks/useUserRole";
-import { updatePoint } from "lib/services/firebase/room/update/point";
-import { useAuth } from "lib/stores/auth";
-import { useRoomStore } from "lib/stores/room";
-import { pointOptions } from "lib/types/room";
+import SpokerRadioBox from '~/lib/components/shared/SpokerRadioBox';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { useUserRole } from '~/lib/hooks/useUserRole';
+import { updatePoint } from '~/lib/services/firebase/room/update/point';
+import { useAuth } from '~/lib/stores/auth';
+import { useRoomStore } from '~/lib/stores/room';
+import { pointOptions } from '~/lib/types/room';
 
 const VoteWrapper = () => {
   const currentUser = useAuth((state) => state.currentUser);
@@ -26,7 +26,7 @@ const VoteWrapper = () => {
     shallow
   );
   const { isOwner, isParticipant } = useUserRole();
-  const wrapperBackgroundColor = useColorModeValue("orange.50", "gray.600");
+  const wrapperBackgroundColor = useColorModeValue('orange.50', 'gray.600');
   const router = useRouter();
   const {
     query: { id },
@@ -39,7 +39,7 @@ const VoteWrapper = () => {
   };
 
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "vote",
+    name: 'vote',
     value: currentUser
       ? String(roomData?.users?.[currentUser.uid]?.point)
       : undefined,

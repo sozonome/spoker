@@ -1,6 +1,6 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 
-import type { LoginFormType } from "./types";
+import type { LoginFormType } from './types';
 
 export const loginFormValidationSchema: yup.Schema<LoginFormType> = yup.object({
   email: yup.string().email().required().defined(),
@@ -8,6 +8,6 @@ export const loginFormValidationSchema: yup.Schema<LoginFormType> = yup.object({
 });
 
 export const initialValues: LoginFormType = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };

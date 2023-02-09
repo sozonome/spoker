@@ -1,1 +1,1 @@
-export const PRIVATE_ROUTES = ["/room/[id]", "/join/[id]", "/"];
+export const PRIVATE_ROUTES = ['/room/[id]', '/join/[id]', '/'];

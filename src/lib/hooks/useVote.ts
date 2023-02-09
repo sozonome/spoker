@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import shallow from "zustand/shallow";
+import { useRouter } from 'next/router';
+import shallow from 'zustand/shallow';
 
-import { useUserRole } from "lib/hooks/useUserRole";
-import { submitVote } from "lib/services/firebase/room/update/submitVote";
-import { useAuth } from "lib/stores/auth";
-import { useRoomStore } from "lib/stores/room";
-import type { PointEntry } from "lib/types/RawDB";
+import { useUserRole } from '~/lib/hooks/useUserRole';
+import { submitVote } from '~/lib/services/firebase/room/update/submitVote';
+import { useAuth } from '~/lib/stores/auth';
+import { useRoomStore } from '~/lib/stores/room';
+import type { PointEntry } from '~/lib/types/RawDB';
 
 export const useVote = () => {
   const router = useRouter();

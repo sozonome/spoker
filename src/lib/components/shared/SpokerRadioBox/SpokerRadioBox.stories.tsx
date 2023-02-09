@@ -1,9 +1,9 @@
-import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import SpokerRadioBox from "./index";
+import SpokerRadioBox from './index';
 
 export default {
-  title: "shared/RadioBox",
+  title: 'shared/RadioBox',
   component: SpokerRadioBox,
 } as ComponentMeta<typeof SpokerRadioBox>;
 

@@ -1,5 +1,5 @@
-import type { RadioProps } from "@chakra-ui/react";
-import { Box, useRadio } from "@chakra-ui/react";
+import type { RadioProps } from '@chakra-ui/react';
+import { Box, useRadio } from '@chakra-ui/react';
 
 type SpokerRadioBoxProps = RadioProps;
 
@@ -19,15 +19,15 @@ const SpokerRadioBox = ({ children, ...props }: SpokerRadioBoxProps) => {
         borderRadius="xl"
         boxShadow="md"
         _checked={{
-          bg: "teal.500",
-          color: "white",
-          borderColor: "black",
+          bg: 'teal.500',
+          color: 'white',
+          borderColor: 'black',
           borderWidth: 2,
-          fontWeight: "bold",
-          boxShadow: "none",
+          fontWeight: 'bold',
+          boxShadow: 'none',
         }}
         _focus={{
-          boxShadow: "outline",
+          boxShadow: 'outline',
         }}
         px={5}
         py={3}

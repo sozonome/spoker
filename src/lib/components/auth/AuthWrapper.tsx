@@ -1,14 +1,14 @@
-import { Modal, ModalOverlay, useDisclosure } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import type { ReactNode } from "react";
-import * as React from "react";
+import { Modal, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
+import * as React from 'react';
 
-import { PUBLIC_ROUTES } from "lib/constants/routes/public";
-import { RESTRICTED_ROUTES } from "lib/constants/routes/restricted";
-import { useAuth } from "lib/stores/auth";
+import { PUBLIC_ROUTES } from '~/lib/constants/routes/public';
+import { RESTRICTED_ROUTES } from '~/lib/constants/routes/restricted';
+import { useAuth } from '~/lib/stores/auth';
 
-import Login from "./Login";
-import Register from "./Register";
+import Login from './Login';
+import Register from './Register';
 
 type AuthWrapperProps = {
   children: ReactNode;
@@ -55,7 +55,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
       onClose={() => 0}
       motionPreset="slideInBottom"
       isCentered
-      size={{ base: "full", sm: "md" }}
+      size={{ base: 'full', sm: 'md' }}
     >
       <ModalOverlay />
 

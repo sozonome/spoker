@@ -1,8 +1,8 @@
-import mean from "lodash-es/mean";
+import mean from 'lodash-es/mean';
 
-import type { RoomMappedUser } from "lib/types/RawDB";
-import type { RoomUser } from "lib/types/room";
-import { RoleType } from "lib/types/user";
+import type { RoomMappedUser } from '~/lib/types/RawDB';
+import type { RoomUser } from '~/lib/types/room';
+import { RoleType } from '~/lib/types/user';
 
 export const filterUserWithPoints = (unfilteredUsers: Array<RoomUser>) =>
   [...unfilteredUsers].filter((unfilteredUser) =>

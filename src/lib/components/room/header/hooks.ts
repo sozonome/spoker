@@ -1,12 +1,12 @@
-import debounce from "lodash-es/debounce";
-import isNil from "lodash-es/isNil";
-import { useRouter } from "next/router";
-import * as React from "react";
+import debounce from 'lodash-es/debounce';
+import isNil from 'lodash-es/isNil';
+import { useRouter } from 'next/router';
+import * as React from 'react';
 
-import { updateRoomTask } from "lib/services/firebase/room/update/roomTask";
-import type { Task } from "lib/types/RawDB";
+import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
+import type { Task } from '~/lib/types/RawDB';
 
-import type { RoomHeaderProps } from "./types";
+import type { RoomHeaderProps } from './types';
 
 type UseRoomHeaderArgs = RoomHeaderProps & {
   isOwner: boolean;
@@ -52,10 +52,10 @@ export const useRoomHeader = ({ roomData, isOwner }: UseRoomHeaderArgs) => {
 
   const handleUpdateTask = React.useCallback(
     (field: keyof Task) => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (field === "name") {
+      if (field === 'name') {
         setName(event.target.value);
       }
-      if (field === "description") {
+      if (field === 'description') {
         setDescription(event.target.value);
       }
       handleUpdateRemoteTask(field)(event);

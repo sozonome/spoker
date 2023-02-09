@@ -1,6 +1,6 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 
-import type { ResetPasswordForm } from "./types";
+import type { ResetPasswordForm } from './types';
 
 export const resetPasswordFormValidationSchema: yup.Schema<ResetPasswordForm> =
   yup.object({
@@ -8,5 +8,5 @@ export const resetPasswordFormValidationSchema: yup.Schema<ResetPasswordForm> =
   });
 
 export const initialValues: ResetPasswordForm = {
-  email: "",
+  email: '',
 };

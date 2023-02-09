@@ -10,30 +10,30 @@ import {
   Text,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import * as React from "react";
-import shallow from "zustand/shallow";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import shallow from 'zustand/shallow';
 
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import type { HideLabelOptionsType } from "lib/constants/hideLabel";
-import { hideLabelOptions } from "lib/constants/hideLabel";
-import { CURRENT_VOTE_WRAPPER_ID } from "lib/constants/wrapperkeys";
-import { useRoomPoint } from "lib/hooks/useRoomPoint";
-import { useUserRole } from "lib/hooks/useUserRole";
-import { useVote } from "lib/hooks/useVote";
-import { updateConfig } from "lib/services/firebase/room/update/roomConfig";
-import { useAuth } from "lib/stores/auth";
-import { useRoomStore } from "lib/stores/room";
-import type { RoomConfig } from "lib/types/RawDB";
-import { pointOptions } from "lib/types/room";
-import { RoleType } from "lib/types/user";
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';
+import { hideLabelOptions } from '~/lib/constants/hideLabel';
+import { CURRENT_VOTE_WRAPPER_ID } from '~/lib/constants/wrapperkeys';
+import { useRoomPoint } from '~/lib/hooks/useRoomPoint';
+import { useUserRole } from '~/lib/hooks/useUserRole';
+import { useVote } from '~/lib/hooks/useVote';
+import { updateConfig } from '~/lib/services/firebase/room/update/roomConfig';
+import { useAuth } from '~/lib/stores/auth';
+import { useRoomStore } from '~/lib/stores/room';
+import type { RoomConfig } from '~/lib/types/RawDB';
+import { pointOptions } from '~/lib/types/room';
+import { RoleType } from '~/lib/types/user';
 
-import PointWrapper from "./PointWrapper";
-import { pointTextColor, pointTextSize } from "./utils";
+import PointWrapper from './PointWrapper';
+import { pointTextColor, pointTextSize } from './utils';
 
 const CurrentVotesWrapper = () => {
-  const wrapperBackgroundColor = useColorModeValue("green.50", "gray.600");
+  const wrapperBackgroundColor = useColorModeValue('green.50', 'gray.600');
   const router = useRouter();
   const {
     query: { id },
@@ -87,7 +87,7 @@ const CurrentVotesWrapper = () => {
               >
                 <PointWrapper
                   showVote={showVote}
-                  roomSelectedHideLabel={config?.hideLabel ?? "monkey"}
+                  roomSelectedHideLabel={config?.hideLabel ?? 'monkey'}
                   isCurrentUser={participant.uid === currentUser?.uid}
                   point={participant.point}
                 />
@@ -109,10 +109,10 @@ const CurrentVotesWrapper = () => {
       await updateConfig(id as string, updatedConfig);
     } else {
       toast({
-        title: "Participant/observant cannot change configurations",
-        status: "warning",
+        title: 'Participant/observant cannot change configurations',
+        status: 'warning',
         isClosable: true,
-        position: "top-right",
+        position: 'top-right',
       });
     }
   };
@@ -165,7 +165,7 @@ const CurrentVotesWrapper = () => {
             onChange={(e) =>
               handleUpdateHideLabel(e.target.value as HideLabelOptionsType)
             }
-            value={config?.hideLabel ?? "monkey"}
+            value={config?.hideLabel ?? 'monkey'}
           >
             {hideLabelOptions.map((hideLabelOption) => (
               <Text as="option" value={hideLabelOption} key={hideLabelOption}>

@@ -1,6 +1,6 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 
-import type { EditStoryForm, SubmitStoryForm } from "./types";
+import type { EditStoryForm, SubmitStoryForm } from './types';
 
 export const submitStoryFormValidationSchema: yup.Schema<SubmitStoryForm> =
   yup.object({

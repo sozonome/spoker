@@ -3,7 +3,7 @@ import type {
   FormErrorMessageProps,
   FormHelperTextProps,
   TextareaProps,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   FormErrorMessage,
   FormHelperText,
@@ -11,20 +11,20 @@ import {
   forwardRef,
   FormControl,
   Textarea,
-} from "@chakra-ui/react";
-import ResizeTextarea from "react-textarea-autosize";
+} from '@chakra-ui/react';
+import ResizeTextarea from 'react-textarea-autosize';
 
 type AutoResizeTextareaProps = {
-  errorText?: FormErrorMessageProps["children"];
-  helperText?: FormHelperTextProps["children"];
+  errorText?: FormErrorMessageProps['children'];
+  helperText?: FormHelperTextProps['children'];
 } & TextareaProps &
-  Pick<FormControlProps, "label" | "isInvalid">;
+  Pick<FormControlProps, 'label' | 'isInvalid'>;
 
 export const contraStyle: Partial<TextareaProps> = {
-  borderColor: "black",
+  borderColor: 'black',
   borderRadius: 12,
   borderWidth: 2,
-  size: "lg",
+  size: 'lg',
 };
 
 const AutoResizeTextarea = forwardRef(

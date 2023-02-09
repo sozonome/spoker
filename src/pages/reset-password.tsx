@@ -1,3 +1,3 @@
-import ForgotPasswordPage from "lib/pages/reset-password";
+import ForgotPasswordPage from '~/lib/pages/reset-password';
 
 export default ForgotPasswordPage;

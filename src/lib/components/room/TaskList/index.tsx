@@ -1,4 +1,4 @@
-import type { TabProps } from "@chakra-ui/react";
+import type { TabProps } from '@chakra-ui/react';
 import {
   Box,
   Button,
@@ -16,43 +16,43 @@ import {
   useColorModeValue,
   useDisclosure,
   useToast,
-} from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { nanoid } from "nanoid";
-import { useRouter } from "next/router";
-import * as React from "react";
-import isEqual from "react-fast-compare";
-import { useForm } from "react-hook-form";
-import { GoPlus } from "react-icons/go";
-import { RiInformationLine } from "react-icons/ri";
-import { ReactSortable } from "react-sortablejs";
-import shallow from "zustand/shallow";
+} from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { nanoid } from 'nanoid';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import isEqual from 'react-fast-compare';
+import { useForm } from 'react-hook-form';
+import { GoPlus } from 'react-icons/go';
+import { RiInformationLine } from 'react-icons/ri';
+import { ReactSortable } from 'react-sortablejs';
+import shallow from 'zustand/shallow';
 
-import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
-import SpokerModalWrapper from "lib/components/shared/SpokerModalWrapper";
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { emptyRoom } from "lib/constants/emptyRoom";
-import { useUserRole } from "lib/hooks/useUserRole";
-import { editQueueItem } from "lib/services/firebase/room/update/queue/edit";
-import { removeQueueItem } from "lib/services/firebase/room/update/queue/remove";
-import { swapSelectedQueueWithCurrent } from "lib/services/firebase/room/update/queue/swap";
-import { rewriteQueue } from "lib/services/firebase/room/update/rewriteQueue";
-import { useRoomStore } from "lib/stores/room";
-import type { Task } from "lib/types/RawDB";
+import AutoResizeTextarea from '~/lib/components/shared/AutoResizeTextarea';
+import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { emptyRoom } from '~/lib/constants/emptyRoom';
+import { useUserRole } from '~/lib/hooks/useUserRole';
+import { editQueueItem } from '~/lib/services/firebase/room/update/queue/edit';
+import { removeQueueItem } from '~/lib/services/firebase/room/update/queue/remove';
+import { swapSelectedQueueWithCurrent } from '~/lib/services/firebase/room/update/queue/swap';
+import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
+import { useRoomStore } from '~/lib/stores/room';
+import type { Task } from '~/lib/types/RawDB';
 
-import { submitStoryFormValidationSchema } from "./constants";
-import TaskItem from "./TaskItem";
-import type { EditStoryForm, SortableTaskItem, SubmitStoryForm } from "./types";
+import { submitStoryFormValidationSchema } from './constants';
+import TaskItem from './TaskItem';
+import type { EditStoryForm, SortableTaskItem, SubmitStoryForm } from './types';
 
 const initialFormValue: SubmitStoryForm = {
-  name: "",
-  description: "",
+  name: '',
+  description: '',
 };
 
 const tabStyle: TabProps = {
   fontSize: {
-    base: "xs",
-    md: "md",
+    base: 'xs',
+    md: 'md',
   },
 };
 
@@ -69,7 +69,7 @@ const TaskList = () => {
     shallow
   );
   const { isOwner } = useUserRole();
-  const wrapperBackgroundColor = useColorModeValue("gray.50", "gray.900");
+  const wrapperBackgroundColor = useColorModeValue('gray.50', 'gray.900');
   const {
     isOpen: isOpenAddStory,
     onOpen: onOpenAddStory,
@@ -88,7 +88,7 @@ const TaskList = () => {
   const toast = useToast();
   const buttonContent = useBreakpointValue({
     base: <GoPlus />,
-    md: "Add Story",
+    md: 'Add Story',
   });
   const [selectedTabIndex, setSelectedTabIndex] = React.useState<number>(0);
   const [isBusy, setIsBusy] = React.useState<boolean>();
@@ -107,11 +107,11 @@ const TaskList = () => {
 
   const activeStoriesLengthText = queue?.length
     ? ` (${queue.length + 1})`
-    : " (1)";
+    : ' (1)';
   const activeStoriesTabText = `Active${activeStoriesLengthText}`;
-  const queueLengthText = queue?.length ? ` (${queue.length})` : "";
+  const queueLengthText = queue?.length ? ` (${queue.length})` : '';
   const queueTabText = `Queue${queueLengthText}`;
-  const completedLengthText = completed?.length ? ` (${completed.length})` : "";
+  const completedLengthText = completed?.length ? ` (${completed.length})` : '';
   const completedTabText = `Completed${completedLengthText}`;
   const allLengthText = ` (${all.length})`;
   const allTabText = `All${allLengthText}`;
@@ -125,7 +125,7 @@ const TaskList = () => {
   } = useForm<SubmitStoryForm>({
     defaultValues: initialFormValue,
     resolver: yupResolver(submitStoryFormValidationSchema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const {
@@ -140,7 +140,7 @@ const TaskList = () => {
     },
   } = useForm<EditStoryForm>({
     resolver: yupResolver(submitStoryFormValidationSchema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const handleAddStory = async () => {
@@ -234,9 +234,9 @@ const TaskList = () => {
       if (showVote) {
         toast({
           description:
-            "Cannot swap now as current story is already voted by all participants. Either finish or reset vote of current story to be able to swap.",
-          status: "warning",
-          position: "top",
+            'Cannot swap now as current story is already voted by all participants. Either finish or reset vote of current story to be able to swap.',
+          status: 'warning',
+          position: 'top',
         });
         return;
       }
@@ -285,7 +285,7 @@ const TaskList = () => {
                   <Tooltip label="Queue can be re-arranged using drag and drop, the first item will be the next story to be voted.">
                     <Text
                       as="span"
-                      _hover={{ cursor: "help" }}
+                      _hover={{ cursor: 'help' }}
                       textDecoration="underline"
                       fontWeight="semibold"
                       alignItems="center"
@@ -334,21 +334,21 @@ const TaskList = () => {
         onClose={onCloseAddStory}
         header="Add Story"
         contentWrapperProps={{
-          as: "form",
+          as: 'form',
           onSubmit: handleSubmit(handleAddStory),
         }}
         body={
           <Grid gap={4}>
             <Text>Add story to queue</Text>
             <AutoResizeTextarea
-              {...register("name")}
+              {...register('name')}
               isRequired
               label="Name"
               isInvalid={!!errors.name?.message}
               errorText={errors.name?.message}
             />
             <AutoResizeTextarea
-              {...register("description")}
+              {...register('description')}
               label="Description"
             />
           </Grid>
@@ -375,20 +375,20 @@ const TaskList = () => {
         onClose={closeEditStory}
         header="Edit Story"
         contentWrapperProps={{
-          as: "form",
+          as: 'form',
           onSubmit: handleSubmitEditStory(processEditStory),
         }}
         body={
           <Grid gap={4}>
             <AutoResizeTextarea
-              {...registerEditStoryField("name")}
+              {...registerEditStoryField('name')}
               isRequired
               label="Name"
               isInvalid={!!editStoryErrors.name?.message}
               errorText={editStoryErrors.name?.message}
             />
             <AutoResizeTextarea
-              {...registerEditStoryField("description")}
+              {...registerEditStoryField('description')}
               label="Description"
             />
           </Grid>
@@ -417,8 +417,8 @@ const TaskList = () => {
         body={
           <Box>
             <Text>
-              Are you sure you want to remove{" "}
-              {queue?.[selectedEditStoryIndex ?? 0]?.name ?? ""}?
+              Are you sure you want to remove{' '}
+              {queue?.[selectedEditStoryIndex ?? 0]?.name ?? ''}?
             </Text>
           </Box>
         }

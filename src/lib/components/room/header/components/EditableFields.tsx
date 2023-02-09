@@ -1,7 +1,7 @@
-import type React from "react";
+import type React from 'react';
 
-import AutoResizeTextarea from "lib/components/shared/AutoResizeTextarea";
-import type { Task } from "lib/types/RawDB";
+import AutoResizeTextarea from '~/lib/components/shared/AutoResizeTextarea';
+import type { Task } from '~/lib/types/RawDB';
 
 type EditableFieldsProps = {
   name?: string;
@@ -21,13 +21,13 @@ const EditableFields = ({
       <AutoResizeTextarea
         label="Name"
         value={name}
-        onChange={handleUpdateTask("name")}
+        onChange={handleUpdateTask('name')}
         placeholder="Going to Mars"
       />
       <AutoResizeTextarea
         label="Description"
         value={description}
-        onChange={handleUpdateTask("description")}
+        onChange={handleUpdateTask('description')}
         placeholder="Land to Moon first"
       />
     </>

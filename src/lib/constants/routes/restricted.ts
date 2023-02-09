@@ -1,1 +1,1 @@
-export const RESTRICTED_ROUTES = ["/reset-password"];
+export const RESTRICTED_ROUTES = ['/reset-password'];
