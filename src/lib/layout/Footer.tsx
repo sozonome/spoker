@@ -1,10 +1,10 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
-import { RiGithubFill } from "react-icons/ri";
+import { Box, Flex, Link, Text } from '@chakra-ui/react';
+import { RiGithubFill } from 'react-icons/ri';
 
-import SupportCTA from "lib/components/support/SupportCTA";
-import { packageInfo } from "lib/constants/packageInfo";
-import { EVENT_TYPE_LINK } from "lib/constants/tracking";
-import { trackEvent } from "lib/utils/trackEvent";
+import SupportCTA from '~/lib/components/support/SupportCTA';
+import { packageInfo } from '~/lib/constants/packageInfo';
+import { EVENT_TYPE_LINK } from '~/lib/constants/tracking';
+import { trackEvent } from '~/lib/utils/trackEvent';
 
 const Footer = () => {
   const handleClick = (eventName: string) => () => {
@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <Box
-      display={{ base: "grid", md: "flex" }}
+      display={{ base: 'grid', md: 'flex' }}
       as="footer"
       width="full"
       alignItems="center"
@@ -24,23 +24,24 @@ const Footer = () => {
       paddingY={8}
       gap={{ base: 0, md: 4 }}
     >
-      <Text>
-        2021 -{" "}
+      <Text fontSize="sm">
+        2021 - {new Date().getFullYear()}
+        {' | '}
         <Link
           href="https://sznm.dev"
           isExternal
-          onClick={handleClick("open sznm.dev")}
+          onClick={handleClick('open sznm.dev')}
         >
           sznm.dev
         </Link>
       </Text>
 
-      <Flex alignItems="center">
+      <Flex alignItems="center" justifyContent="center">
         <SupportCTA />
       </Flex>
 
       <Flex
-        marginLeft={{ md: "auto" }}
+        marginLeft={{ md: 'auto' }}
         justifyContent="center"
         alignItems="center"
         gridGap={2}
@@ -48,13 +49,13 @@ const Footer = () => {
         <Link
           href={`${packageInfo.repository.url}/blob/main/CHANGELOG.md`}
           isExternal
-          onClick={handleClick("open repo changelog")}
+          onClick={handleClick('open repo changelog')}
         >
           v{packageInfo.version}
         </Link>
         <Link
           href={packageInfo.repository.url}
-          onClick={handleClick("open repository")}
+          onClick={handleClick('open repository')}
           isExternal
         >
           <RiGithubFill fontSize="2rem" />

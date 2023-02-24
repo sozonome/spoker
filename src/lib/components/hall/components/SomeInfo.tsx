@@ -5,9 +5,9 @@ import {
   ListItem,
   Text,
   UnorderedList,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 
 const SomeInfo = () => {
   return (
@@ -29,11 +29,11 @@ const SomeInfo = () => {
         </UnorderedList>
 
         <Text fontSize="sm">
-          Icons made by{" "}
+          Icons made by{' '}
           <Link href="https://www.freepik.com" title="Freepik" isExternal>
             Freepik
-          </Link>{" "}
-          from{" "}
+          </Link>{' '}
+          from{' '}
           <Link href="https://www.flaticon.com/" title="Flaticon" isExternal>
             www.flaticon.com
           </Link>

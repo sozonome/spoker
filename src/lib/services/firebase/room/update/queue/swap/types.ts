@@ -1,4 +1,4 @@
-import type { Task } from "lib/types/RawDB";
+import type { Task } from '~/lib/types/RawDB';
 
 export type SwapSelectedQueueWithCurrentArgs = {
   roomId: string;

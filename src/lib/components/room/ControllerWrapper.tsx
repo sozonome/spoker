@@ -6,15 +6,15 @@ import {
   ListItem,
   OrderedList,
   useToast,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import * as React from "react";
-import { BiLink, BiShareAlt } from "react-icons/bi";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import { BiLink, BiShareAlt } from 'react-icons/bi';
 
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { useUserRole } from "lib/hooks/useUserRole";
-import { clearPoints } from "lib/services/firebase/room/update/point/clear";
-import { useRoomStore } from "lib/stores/room";
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { useUserRole } from '~/lib/hooks/useUserRole';
+import { clearPoints } from '~/lib/services/firebase/room/update/point/clear';
+import { useRoomStore } from '~/lib/stores/room';
 
 const ControllerWrapper = () => {
   const users = useRoomStore((state) => state.users);
@@ -35,9 +35,9 @@ const ControllerWrapper = () => {
 
     toast({
       title: `Room Link Copied!\n${roomLink}`,
-      status: "success",
+      status: 'success',
       isClosable: true,
-      position: "top",
+      position: 'top',
     });
   };
 

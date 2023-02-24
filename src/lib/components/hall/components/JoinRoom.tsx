@@ -1,22 +1,22 @@
-import { Button, Grid, Heading } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import type { ChangeEventHandler } from "react";
-import * as React from "react";
+import { Button, Grid, Heading } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import type { ChangeEventHandler } from 'react';
+import * as React from 'react';
 
-import LinkWrap from "lib/components/shared/LinkWrap";
-import SpokerInput from "lib/components/shared/SpokerInput";
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import LinkWrap from '~/lib/components/shared/LinkWrap';
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 
 const JoinRoom = () => {
   const router = useRouter();
-  const [roomId, setRoomId] = React.useState<string>("");
+  const [roomId, setRoomId] = React.useState<string>('');
   const isDisabled = React.useMemo(() => roomId.length === 0, [roomId.length]);
 
   const handleChangeInput: ChangeEventHandler<HTMLInputElement> = (e) =>
     setRoomId(e.target.value);
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === "Enter" && !isDisabled) {
+    if (e.key === 'Enter' && !isDisabled) {
       e.preventDefault();
       e.stopPropagation();
       router.push(`/join/${roomId}`);
@@ -33,7 +33,7 @@ const JoinRoom = () => {
           value={roomId}
           onChange={handleChangeInput}
           placeholder="quick-brown-fox"
-          _placeholder={{ color: "orange.200" }}
+          _placeholder={{ color: 'orange.200' }}
           onKeyDown={handleKeyDown}
         />
       </Grid>
@@ -44,7 +44,7 @@ const JoinRoom = () => {
           isDisabled={isDisabled}
           alignSelf="flex-end"
           backgroundColor="black"
-          _hover={{ backgroundColor: "orange.400" }}
+          _hover={{ backgroundColor: 'orange.400' }}
         >
           Let Me in!
         </Button>

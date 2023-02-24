@@ -8,27 +8,27 @@ import {
   ModalHeader,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+} from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import ForgotPasswordButton from "lib/components/auth/ForgotPasswordButton";
-import SignInProviders from "lib/components/auth/SignInProviders";
-import { contraBoxStyle } from "lib/components/auth/style";
-import SpokerInput from "lib/components/shared/SpokerInput";
-import { EVENT_TYPE_REGISTRATION } from "lib/constants/tracking";
-import { registerUserWithEmailAndPassword } from "lib/services/firebase/auth/register";
-import { removeFirebasePrefix } from "lib/utils/removeFirebasePrefix";
-import { trackEvent } from "lib/utils/trackEvent";
+import ForgotPasswordButton from '~/lib/components/auth/ForgotPasswordButton';
+import SignInProviders from '~/lib/components/auth/SignInProviders';
+import { contraBoxStyle } from '~/lib/components/auth/style';
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import { EVENT_TYPE_REGISTRATION } from '~/lib/constants/tracking';
+import { registerUserWithEmailAndPassword } from '~/lib/services/firebase/auth/register';
+import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
+import { trackEvent } from '~/lib/utils/trackEvent';
 
-import { initialValues, registerFormValidationSchema } from "./constants";
-import type { RegisterFormType, RegisterProps } from "./types";
+import { initialValues, registerFormValidationSchema } from './constants';
+import type { RegisterFormType, RegisterProps } from './types';
 
 const Register = ({ handleSwitchToLogin }: RegisterProps) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const borderColor = useColorModeValue("#18191F", "#FFFFFF");
+  const borderColor = useColorModeValue('#18191F', '#FFFFFF');
 
   const {
     register,
@@ -37,7 +37,7 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
     formState: { isDirty, isValid, errors },
   } = useForm<RegisterFormType>({
     defaultValues: initialValues,
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(registerFormValidationSchema),
   });
 
@@ -48,21 +48,21 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
       .then((user) => {
         setIsLoading(false);
         trackEvent({
-          eventName: "New User Register",
+          eventName: 'New User Register',
           eventData: { type: EVENT_TYPE_REGISTRATION },
         });
         toast({
-          title: "Registration Successful",
-          position: "top",
-          status: "success",
+          title: 'Registration Successful',
+          position: 'top',
+          status: 'success',
           isClosable: true,
         });
         toast({
           title: `A verification email is sent to ${user?.email}`,
           description:
-            "Before you can use any features, please verify your email first.",
-          position: "top",
-          status: "warning",
+            'Before you can use any features, please verify your email first.',
+          position: 'top',
+          status: 'warning',
           isClosable: true,
         });
       })
@@ -70,8 +70,8 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
         setIsLoading(false);
         toast({
           description: removeFirebasePrefix(err.message),
-          position: "top",
-          status: "error",
+          position: 'top',
+          status: 'error',
           isClosable: true,
         });
       });
@@ -95,21 +95,21 @@ const Register = ({ handleSwitchToLogin }: RegisterProps) => {
 
           <SpokerInput
             label="name"
-            {...register("name")}
+            {...register('name')}
             isInvalid={!!errors.name?.message}
             errorText={errors.name?.message}
             placeholder="What's your name?"
           />
           <SpokerInput
             label="email"
-            {...register("email")}
+            {...register('email')}
             isInvalid={!!errors.email?.message}
             errorText={errors.email?.message}
             placeholder="Your favorite email"
           />
           <SpokerInput
             label="password"
-            {...register("password")}
+            {...register('password')}
             isInvalid={!!errors.password?.message}
             errorText={errors.password?.message}
             placeholder="Your secret phrase"

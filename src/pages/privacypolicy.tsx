@@ -1,6 +1,6 @@
-import { Heading, Link, List, ListItem, Text } from "@chakra-ui/react";
+import { Heading, Link, List, ListItem, Text } from '@chakra-ui/react';
 
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 
 const PrivacyPolicy = () => {
   return (
@@ -24,7 +24,7 @@ const PrivacyPolicy = () => {
         for visitors to our website with regards to the information that they
         shared and/or collect in spoker//sznm. This policy is not applicable to
         any information collected offline or via channels other than this
-        website. Our Privacy Policy was created with the help of the{" "}
+        website. Our Privacy Policy was created with the help of the{' '}
         <Link
           href="https://www.privacypolicyonline.com/privacy-policy-generator/"
           isExternal

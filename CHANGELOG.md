@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.11](https://github.com/sozonome/spoker/compare/v1.12.10...v1.12.11) (2023-02-09)
+
+### [1.12.10](https://github.com/sozonome/spoker/compare/v1.12.9...v1.12.10) (2023-01-18)
+
+### [1.12.9](https://github.com/sozonome/spoker/compare/v1.12.8...v1.12.9) (2023-01-11)
+
+### [1.12.8](https://github.com/sozonome/spoker/compare/v1.12.7...v1.12.8) (2023-01-11)
+
+
+### Improvements
+
+* adjust support button ([#162](https://github.com/sozonome/spoker/issues/162)) ([68009bb](https://github.com/sozonome/spoker/commit/68009bb491cab9c4d211847585f28f6f0e49dd4b))
+
+### [1.12.7](https://github.com/sozonome/spoker/compare/v1.12.6...v1.12.7) (2023-01-11)
+
+
+### Improvements
+
+* **layout:** add current year to footer ([5203e30](https://github.com/sozonome/spoker/commit/5203e30559e442a12e4217575a897c1f7bd0277a))
+
+### [1.12.6](https://github.com/sozonome/spoker/compare/v1.12.5...v1.12.6) (2023-01-10)
+
+
+### Improvements
+
+* use jsdelivr as twemoji base ([#157](https://github.com/sozonome/spoker/issues/157)) ([5fb6b87](https://github.com/sozonome/spoker/commit/5fb6b878387f9fb54bcb886cb55a660d757e687d))
+
+### [1.12.5](https://github.com/sozonome/spoker/compare/v1.12.4...v1.12.5) (2023-01-10)
+
+
+### Bug Fixes
+
+* temporarily disable twemoji ([3903a65](https://github.com/sozonome/spoker/commit/3903a656dbf63cf1f0d7f006e2b9440f7d82671d))
+
+### [1.12.4](https://github.com/sozonome/spoker/compare/v1.12.3...v1.12.4) (2022-12-20)
+
+### [1.12.3](https://github.com/sozonome/spoker/compare/v1.12.2...v1.12.3) (2022-12-06)
+
+
+### Improvements
+
+* **layout:** enable transition on change theme ([#146](https://github.com/sozonome/spoker/issues/146)) ([27369c1](https://github.com/sozonome/spoker/commit/27369c1bc169391eba420320dba2a8df67167c55))
+
 ### [1.12.2](https://github.com/sozonome/spoker/compare/v1.12.1...v1.12.2) (2022-11-18)
 
 ### [1.12.1](https://github.com/sozonome/spoker/compare/v1.12.0...v1.12.1) (2022-11-14)

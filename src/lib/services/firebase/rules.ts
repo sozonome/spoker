@@ -11,7 +11,7 @@ import {
   validate,
   read,
   write,
-} from "@jahed/firebase-rules";
+} from '@jahed/firebase-rules';
 
 const taskNode = node(
   props({
@@ -26,7 +26,7 @@ const taskNode = node(
     ),
     estimation: node(validate(newData.isNumber())),
     pointEntries: node(
-      param("$index", () =>
+      param('$index', () =>
         node(
           props({
             name: node(validate(newData.isString())),
@@ -40,7 +40,7 @@ const taskNode = node(
 );
 
 const taskArrayNode = node(
-  param("$index", () => taskNode),
+  param('$index', () => taskNode),
   write(allowAll)
 );
 
@@ -48,7 +48,7 @@ export const rules = {
   rules: node(
     props({
       rooms: node(
-        param("$roomID", () =>
+        param('$roomID', () =>
           node(
             props({
               config: node(
@@ -75,7 +75,7 @@ export const rules = {
               completed: taskArrayNode,
               selectedTaskIndex: node(validate(newData.isNumber())),
               users: node(
-                param("$userID", ($userID) =>
+                param('$userID', ($userID) =>
                   node(
                     props({
                       name: node(validate(newData.isString())),
@@ -88,7 +88,7 @@ export const rules = {
                       isConnected: node(validate(newData.isBoolean())),
                     }),
                     write(equal($userID, auth.uid)),
-                    validate(newData.hasChildren(["name", "role"]))
+                    validate(newData.hasChildren(['name', 'role']))
                   )
                 )
               ),

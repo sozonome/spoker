@@ -1,19 +1,19 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
-import type { ReactNode } from "react";
+import { Box, useColorModeValue } from '@chakra-ui/react';
+import type { ReactNode } from 'react';
 
-import AuthWrapper from "lib/components/auth/AuthWrapper";
+import AuthWrapper from '~/lib/components/auth/AuthWrapper';
 
-import Footer from "./Footer";
-import Header from "./Header";
-import Meta from "./Meta";
-import RouteWrapper from "./RouteWrapper";
+import Footer from './Footer';
+import Header from './Header';
+import Meta from './Meta';
+import RouteWrapper from './RouteWrapper';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const backgroundColor = useColorModeValue("gray.100", "gray.800");
+  const backgroundColor = useColorModeValue('gray.100', 'gray.800');
 
   return (
     <Box

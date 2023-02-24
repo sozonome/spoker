@@ -1,20 +1,20 @@
-import { Box, Button, Container, Heading, Text } from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { Box, Button, Container, Heading, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { EVENT_TYPE_NAVIGATE } from "lib/constants/tracking";
-import { trackEvent } from "lib/utils/trackEvent";
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { EVENT_TYPE_NAVIGATE } from '~/lib/constants/tracking';
+import { trackEvent } from '~/lib/utils/trackEvent';
 
 const Intro = () => {
   const router = useRouter();
 
   const handleClickStart = () => {
     trackEvent({
-      eventName: "Open app from Intro page",
+      eventName: 'Open app from Intro page',
       eventData: { type: EVENT_TYPE_NAVIGATE },
     });
-    router.push("/");
+    router.push('/');
   };
 
   return (

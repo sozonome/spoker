@@ -7,23 +7,23 @@ import {
   ModalFooter,
   ModalHeader,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+} from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import ForgotPasswordButton from "lib/components/auth/ForgotPasswordButton";
-import SignInProviders from "lib/components/auth/SignInProviders";
-import { contraBoxStyle } from "lib/components/auth/style";
-import SpokerInput from "lib/components/shared/SpokerInput";
-import { loginUserWithEmailAndPassword } from "lib/services/firebase/auth/login/emailAndPassword";
+import ForgotPasswordButton from '~/lib/components/auth/ForgotPasswordButton';
+import SignInProviders from '~/lib/components/auth/SignInProviders';
+import { contraBoxStyle } from '~/lib/components/auth/style';
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import { loginUserWithEmailAndPassword } from '~/lib/services/firebase/auth/login/emailAndPassword';
 
-import { initialValues, loginFormValidationSchema } from "./constants";
-import type { LoginFormType, LoginProps } from "./types";
+import { initialValues, loginFormValidationSchema } from './constants';
+import type { LoginFormType, LoginProps } from './types';
 
 const Login = ({ handleSwitchToRegister }: LoginProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const borderColor = useColorModeValue("#18191F", "#FFFFFF");
+  const borderColor = useColorModeValue('#18191F', '#FFFFFF');
 
   const {
     register,
@@ -32,7 +32,7 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
     formState: { isDirty, isValid, errors },
   } = useForm<LoginFormType>({
     defaultValues: initialValues,
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(loginFormValidationSchema),
   });
 
@@ -61,14 +61,14 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
           <SignInProviders />
 
           <SpokerInput
-            {...register("email")}
+            {...register('email')}
             label="email"
             isInvalid={!!errors.email?.message}
             errorText={errors.email?.message}
             placeholder="Your e-mail"
           />
           <SpokerInput
-            {...register("password")}
+            {...register('password')}
             type="password"
             label="password"
             isInvalid={!!errors.password?.message}

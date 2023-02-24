@@ -1,9 +1,9 @@
-import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import SpokerLoading from "./index";
+import SpokerLoading from './index';
 
 export default {
-  title: "shared/LoadingScreen",
+  title: 'shared/LoadingScreen',
   component: SpokerLoading,
 } as ComponentMeta<typeof SpokerLoading>;
 

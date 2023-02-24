@@ -1,5 +1,5 @@
-import type { LinkProps } from "next/link";
-import Link from "next/link";
+import type { LinkProps } from 'next/link';
+import Link from 'next/link';
 
 type LinkWrapProps = React.PropsWithChildren<LinkProps> & {
   isDisabled?: boolean;

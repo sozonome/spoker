@@ -1,17 +1,17 @@
-import { nanoid } from "nanoid";
-import * as yup from "yup";
+import { nanoid } from 'nanoid';
+import * as yup from 'yup';
 
-import { ALLOWED_CHAR_CHECK } from "lib/constants/allowedValues";
+import { ALLOWED_CHAR_CHECK } from '~/lib/constants/allowedValues';
 
-import type { CreateRoomFormType } from "./types";
+import type { CreateRoomFormType } from './types';
 
 const randomId = nanoid(21);
 
 export const initialValues: CreateRoomFormType = {
-  name: "",
+  name: '',
   id: randomId,
   isPrivate: false,
-  password: "",
+  password: '',
 };
 
 export const createRoomFormSchema = yup.object().shape({
@@ -19,7 +19,7 @@ export const createRoomFormSchema = yup.object().shape({
   id: yup
     .string()
     .matches(ALLOWED_CHAR_CHECK, {
-      message: "room id contain unallowed character",
+      message: 'room id contain unallowed character',
     })
     .required()
     .defined(),

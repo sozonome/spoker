@@ -5,16 +5,16 @@ import {
   Heading,
   useRadioGroup,
   useToast,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-import SpokerLoading from "lib/components/shared/SpokerLoading";
-import SpokerRadioBox from "lib/components/shared/SpokerRadioBox";
-import SpokerWrapperGrid from "lib/components/shared/SpokerWrapperGrid";
-import { getRoom } from "lib/services/firebase/room/get";
-import { joinRoom } from "lib/services/firebase/room/join";
-import { RoleType, roleOptions } from "lib/types/user";
+import SpokerLoading from '~/lib/components/shared/SpokerLoading';
+import SpokerRadioBox from '~/lib/components/shared/SpokerRadioBox';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { getRoom } from '~/lib/services/firebase/room/get';
+import { joinRoom } from '~/lib/services/firebase/room/join';
+import { RoleType, roleOptions } from '~/lib/types/user';
 
 const JoinRoomPage = () => {
   const router = useRouter();
@@ -25,9 +25,9 @@ const JoinRoomPage = () => {
   const [role, setRole] = useState<RoleType>(RoleType.participant);
   const [busy, setBusy] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [roomName, setRoomName] = useState<string>("");
+  const [roomName, setRoomName] = useState<string>('');
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "role",
+    name: 'role',
     defaultValue: role,
     onChange: (value) => setRole(value as RoleType),
   });
@@ -40,9 +40,9 @@ const JoinRoomPage = () => {
       setBusy(false);
     } else {
       toast({
-        title: "Room Not Exist",
-        status: "error",
-        position: "top",
+        title: 'Room Not Exist',
+        status: 'error',
+        position: 'top',
       });
       router.push(`/`);
     }
@@ -80,9 +80,9 @@ const JoinRoomPage = () => {
             {...group}
             gap={2}
             templateColumns={{
-              base: "1fr",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(3, 1fr)",
+              base: '1fr',
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
             }}
           >
             {roleOptions.map((roleOption) => {

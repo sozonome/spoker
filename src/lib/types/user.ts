@@ -1,7 +1,7 @@
 export enum RoleType {
-  owner = "owner",
-  participant = "participant",
-  observant = "observant",
+  owner = 'owner',
+  participant = 'participant',
+  observant = 'observant',
 }
 
 export const roleOptions: Array<RoleType> = Object.keys(RoleType)
