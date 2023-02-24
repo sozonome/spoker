@@ -1,5 +1,5 @@
 import type { User } from 'firebase/auth';
-import create from 'zustand';
+import { create } from 'zustand';
 
 type AuthStore = {
   currentUser?: User | null;

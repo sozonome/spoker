@@ -1,6 +1,6 @@
 import { Box, Grid } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import ControllerWrapper from '~/lib/components/room/ControllerWrapper';
 import CurrentVotesWrapper from '~/lib/components/room/CurrentVotesWrapper';

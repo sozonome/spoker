@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 import type { RoomInstance } from '~/lib/types/RawDB';
 import type { RoomUser } from '~/lib/types/room';
