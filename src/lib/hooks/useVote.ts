@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import { useUserRole } from '~/lib/hooks/useUserRole';
 import { submitVote } from '~/lib/services/firebase/room/update/submitVote';

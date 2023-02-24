@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import { PUBLIC_ROUTES } from '~/lib/constants/routes/public';
 import { RESTRICTED_ROUTES } from '~/lib/constants/routes/restricted';

@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { child, onDisconnect, onValue } from 'firebase/database';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import { roomsData } from '~/lib/services/firebase/room/common';
 import { rejoinRoom } from '~/lib/services/firebase/room/rejoin';

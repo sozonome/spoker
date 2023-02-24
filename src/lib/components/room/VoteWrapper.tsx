@@ -6,7 +6,7 @@ import {
   useRadioGroup,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import SpokerRadioBox from '~/lib/components/shared/SpokerRadioBox';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';

@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';

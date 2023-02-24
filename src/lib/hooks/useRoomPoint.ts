@@ -1,5 +1,5 @@
 import * as React from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import { useRoomStore } from '~/lib/stores/room';
 import { countAveragePoint, filterUserWithPoints } from '~/lib/utils/roomUtils';

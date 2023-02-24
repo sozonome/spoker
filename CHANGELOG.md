@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/sozonome/spoker/compare/v1.12.11...v1.13.0) (2023-02-24)
+
+
+### Features
+
+* add sentry integration ([#142](https://github.com/sozonome/spoker/issues/142)) ([180cdd7](https://github.com/sozonome/spoker/commit/180cdd7f6fdbd7d9d6bc1f8d919d93a3a52943fd))
+
+
+### Improvements
+
+* adjust zustand import ([#172](https://github.com/sozonome/spoker/issues/172)) ([9abd98e](https://github.com/sozonome/spoker/commit/9abd98e19686eecdac6f5040786da89ecd9cfca2))
+
 ### [1.12.11](https://github.com/sozonome/spoker/compare/v1.12.10...v1.12.11) (2023-02-09)
 
 ### [1.12.10](https://github.com/sozonome/spoker/compare/v1.12.9...v1.12.10) (2023-01-18)
