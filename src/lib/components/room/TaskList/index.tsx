@@ -26,7 +26,7 @@ import { useForm } from 'react-hook-form';
 import { GoPlus } from 'react-icons/go';
 import { RiInformationLine } from 'react-icons/ri';
 import { ReactSortable } from 'react-sortablejs';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import AutoResizeTextarea from '~/lib/components/shared/AutoResizeTextarea';
 import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';

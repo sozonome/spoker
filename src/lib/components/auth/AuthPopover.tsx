@@ -19,7 +19,7 @@ import * as React from 'react';
 import { BsPencil } from 'react-icons/bs';
 import { ImCheckmark } from 'react-icons/im';
 import { IoMdPerson } from 'react-icons/io';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import { PRIVATE_ROUTES } from '~/lib/constants/routes/private';
