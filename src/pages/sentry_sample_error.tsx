@@ -1,9 +1,9 @@
-import Head from "next/head";
+import Head from 'next/head';
 
 const boxStyles = {
-  padding: "12px",
-  border: "1px solid #eaeaea",
-  borderRadius: "10px",
+  padding: '12px',
+  border: '1px solid #eaeaea',
+  borderRadius: '10px',
 };
 export default function Home() {
   return (
@@ -15,17 +15,17 @@ export default function Home() {
 
       <main
         style={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <h1 style={{ fontSize: "4rem" }}>
+        <h1 style={{ fontSize: '4rem' }}>
           <svg
             style={{
-              height: "1em",
+              height: '1em',
             }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 200 44"
@@ -42,19 +42,19 @@ export default function Home() {
           type="button"
           style={{
             ...boxStyles,
-            backgroundColor: "#c73852",
-            borderRadius: "12px",
-            border: "none",
+            backgroundColor: '#c73852',
+            borderRadius: '12px',
+            border: 'none',
           }}
           onClick={() => {
-            throw new Error("Sentry Frontend Error");
+            throw new Error('Sentry Frontend Error');
           }}
         >
           Throw error
         </button>
 
         <p>
-          For more information, see{" "}
+          For more information, see{' '}
           <a href="https://docs.sentry.io/platforms/javascript/guides/nextjs/">
             https://docs.sentry.io/platforms/javascript/guides/nextjs/
           </a>
