@@ -47,7 +47,7 @@ export default function Home() {
             border: 'none',
           }}
           onClick={() => {
-            throw new Error('Sentry Frontend Error');
+            throw new Error('Hi! Sentry Frontend Error');
           }}
         >
           Throw error

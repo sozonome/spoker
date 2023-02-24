@@ -11,8 +11,6 @@ Sentry.init({
   dsn: SENTRY_DSN,
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1.0,
-  maxBreadcrumbs: 50,
-  debug: true,
   environment: APP_ENV,
   // ...
   // Note: if you want to override the automatic release value, do not set a
