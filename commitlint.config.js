@@ -14,6 +14,7 @@ const CommitLintConfiguration = {
         "pages",
         "room",
         "seo",
+        "sentry",
         "services",
         "storybook",
         "types",
