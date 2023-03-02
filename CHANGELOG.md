@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.3](https://github.com/sozonome/spoker/compare/v1.13.2...v1.13.3) (2023-03-02)
+
+
+### Bug Fixes
+
+* **theme:** adjust colors ([136343b](https://github.com/sozonome/spoker/commit/136343b7d3f42df84d6a316c1c30f712f34988cf))
+
 ### [1.13.2](https://github.com/sozonome/spoker/compare/v1.13.1...v1.13.2) (2023-03-02)
 
 
