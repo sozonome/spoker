@@ -69,7 +69,8 @@ const TaskList = () => {
     shallow
   );
   const { isOwner } = useUserRole();
-  const wrapperBackgroundColor = useColorModeValue('gray.50', 'gray.900');
+  const wrapperBackgroundColor = useColorModeValue('gray.50', 'gray.700');
+  const tabTextColor = useColorModeValue('', 'gray.300');
   const {
     isOpen: isOpenAddStory,
     onOpen: onOpenAddStory,
@@ -260,9 +261,17 @@ const TaskList = () => {
           variant="soft-rounded"
         >
           <TabList alignItems="center">
-            {isOwner && <Tab {...tabStyle}>{activeStoriesTabText}</Tab>}
-            <Tab {...tabStyle}>{completedTabText}</Tab>
-            <Tab {...tabStyle}>{allTabText}</Tab>
+            {isOwner && (
+              <Tab {...tabStyle} color={tabTextColor}>
+                {activeStoriesTabText}
+              </Tab>
+            )}
+            <Tab {...tabStyle} color={tabTextColor}>
+              {completedTabText}
+            </Tab>
+            <Tab {...tabStyle} color={tabTextColor}>
+              {allTabText}
+            </Tab>
             {isOwner && (
               <Button
                 marginLeft="auto"
