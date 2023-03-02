@@ -1,4 +1,4 @@
-import { Button, Grid, Heading } from '@chakra-ui/react';
+import { Button, Grid, Heading, useColorModeValue } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import type { ChangeEventHandler } from 'react';
 import * as React from 'react';
@@ -10,6 +10,8 @@ import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 const JoinRoom = () => {
   const router = useRouter();
   const [roomId, setRoomId] = React.useState<string>('');
+  const backgroundColor = useColorModeValue('orange.500', 'orange.700');
+  const placeholderColor = useColorModeValue('orange.200', 'orange.400');
   const isDisabled = React.useMemo(() => roomId.length === 0, [roomId.length]);
 
   const handleChangeInput: ChangeEventHandler<HTMLInputElement> = (e) =>
@@ -24,7 +26,7 @@ const JoinRoom = () => {
   };
 
   return (
-    <SpokerWrapperGrid gap={8} backgroundColor="orange.500" color="white">
+    <SpokerWrapperGrid gap={8} backgroundColor={backgroundColor} color="white">
       <Heading size="lg">or Join the Party!</Heading>
 
       <Grid gap={4}>
@@ -33,7 +35,7 @@ const JoinRoom = () => {
           value={roomId}
           onChange={handleChangeInput}
           placeholder="quick-brown-fox"
-          _placeholder={{ color: 'orange.200' }}
+          _placeholder={{ color: placeholderColor }}
           onKeyDown={handleKeyDown}
         />
       </Grid>
