@@ -17,6 +17,7 @@ const CommitLintConfiguration = {
         "sentry",
         "services",
         "storybook",
+        "theme",
         "types",
         "ui",
         "utils",
