@@ -9,5 +9,5 @@
   "timezone": "Asia/Jakarta",
   "schedule": ["* 0 * * 1"],
   "platform": "github",
-  "branchName": "dev"
+  "baseBranches": ["dev"]
 }
