@@ -1,3 +1,3 @@
-import Home from '~/lib/pages/home';
+import Hall from '~/lib/pages/hall';
 
-export default Home;
+export default Hall;
