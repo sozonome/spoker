@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/sozonome/spoker/compare/v1.13.4...v1.14.0) (2023-03-31)
+
+
+### Features
+
+* adjust home page content ([14dfc69](https://github.com/sozonome/spoker/commit/14dfc6916fc6e40ef144bd04c82982dcb49852c4))
+* **auth:** remove register with email and password ([8ef04e4](https://github.com/sozonome/spoker/commit/8ef04e4e9be588c34c60e92df4a695ecbd9f73cc))
+
 ### [1.13.4](https://github.com/sozonome/spoker/compare/v1.13.3...v1.13.4) (2023-03-14)
 
 ### [1.13.3](https://github.com/sozonome/spoker/compare/v1.13.2...v1.13.3) (2023-03-02)

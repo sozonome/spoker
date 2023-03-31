@@ -1,88 +1,69 @@
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  Box,
-  Button,
-  Grid,
-  useToast,
-} from '@chakra-ui/react';
+import { Button, Container, Flex, Heading, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import * as React from 'react';
 
-import HallWrapper from '~/lib/components/hall';
-import SpokerLoading from '~/lib/components/shared/SpokerLoading';
-import { requestVerificationMail } from '~/lib/services/firebase/auth/requestVerificationMail';
-import { useAuth } from '~/lib/stores/auth';
+import { EVENT_TYPE_NAVIGATE } from '~/lib/constants/tracking';
+import { trackEvent } from '~/lib/utils/trackEvent';
 
 const Home = () => {
-  const currentUser = useAuth((state) => state.currentUser);
-  const [busy, setBusy] = React.useState<boolean>(true);
-  const [isEmailVerified, setIsEmailVerified] = React.useState<boolean>(false);
-  const toast = useToast();
+  const router = useRouter();
 
-  const requestEmailVerification = () => {
-    currentUser?.reload().then(async () => {
-      if (currentUser.emailVerified) {
-        setIsEmailVerified(currentUser.emailVerified);
-        toast({
-          description: `Your email is already verified.`,
-          status: 'info',
-          position: 'top',
-          isClosable: true,
-        });
-      } else {
-        await requestVerificationMail();
-      }
+  const handleClickStart = () => {
+    trackEvent({
+      eventName: 'Open app from Home page',
+      eventData: { type: EVENT_TYPE_NAVIGATE },
     });
+    router.push('/');
   };
 
-  React.useEffect(() => {
-    setBusy(true);
-    if (currentUser) {
-      currentUser.reload().then(() => {
-        setIsEmailVerified(currentUser.emailVerified);
-        setBusy(false);
-      });
-    } else {
-      setBusy(false);
-    }
-  }, [currentUser]);
-
-  if (busy) {
-    return <SpokerLoading />;
-  }
-
   return (
-    <Box mb={8} w="full">
-      <NextSeo title="Home" />
-      {currentUser && !isEmailVerified ? (
-        <Alert borderRadius={24} status="warning">
-          <AlertIcon />
-          <Grid>
-            <AlertTitle>
-              Your email is not verified yet. Please check your email for
-              verification instructions.
-            </AlertTitle>
+    <Container
+      paddingX={0}
+      display="grid"
+      gridGap={16}
+      alignItems="center"
+      minHeight={{ base: '50vh', sm: '60vh' }}
+    >
+      <NextSeo title="Estimate with your Team" />
+      <Flex
+        direction="column"
+        gap={6}
+        textAlign="center"
+        alignItems="center"
+        marginY={12}
+      >
+        <Flex direction="column" gap={4}>
+          <Heading size="3xl" fontWeight="extrabold">
+            <Text
+              as="span"
+              bgGradient="linear(to-br, purple.300, purple.800)"
+              bgClip="text"
+            >
+              Estimate
+            </Text>{' '}
+            with
+            <br />
+            your{' '}
+            <Text
+              as="span"
+              bgGradient="linear(to-br, teal.400, teal.800)"
+              bgClip="text"
+            >
+              team
+            </Text>
+          </Heading>
 
-            <AlertDescription>
-              Haven&apos;t received any verification email?{' '}
-              <Button
-                colorScheme="orange"
-                size="sm"
-                fontWeight="semibold"
-                onClick={requestEmailVerification}
-              >
-                Request Verification Link
-              </Button>
-            </AlertDescription>
-          </Grid>
-        </Alert>
-      ) : (
-        <HallWrapper />
-      )}
-    </Box>
+          <Text color="gray">
+            Welcome to sozonome&apos;s take on scrum poker web app. Just click
+            start below.
+          </Text>
+        </Flex>
+
+        <Button colorScheme="orange" onClick={handleClickStart}>
+          Start
+        </Button>
+      </Flex>
+    </Container>
   );
 };
 

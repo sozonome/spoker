@@ -9,6 +9,13 @@ const moduleExports = {
   sentry: {
     hideSourceMaps: true,
   },
+  redirects: async () => [
+    {
+      source: '/intro',
+      destination: '/home',
+      permanent: true,
+    },
+  ],
 };
 
 const sentryWebpackPluginOptions = {
