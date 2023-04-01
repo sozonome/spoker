@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/sozonome/spoker/compare/v1.14.0...v1.15.0) (2023-04-01)
+
+
+### Features
+
+* **auth:** add close to home capability to auth wrapper modal ([e8f406e](https://github.com/sozonome/spoker/commit/e8f406e1bf226ebfdd2ad39f62699c896230c8f6))
+* **auth:** adjust auth wrapper modal appearance ([#188](https://github.com/sozonome/spoker/issues/188)) ([72bc80b](https://github.com/sozonome/spoker/commit/72bc80b70337e4b8de6489dd7e79f5c0ce9182d4))
+* **layout:** revamp footer ([#187](https://github.com/sozonome/spoker/issues/187)) ([509b479](https://github.com/sozonome/spoker/commit/509b479851127ae43da3a9e90052c9381f7b7ca8))
+
 ## [1.14.0](https://github.com/sozonome/spoker/compare/v1.13.4...v1.14.0) (2023-03-31)
 
 

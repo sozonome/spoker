@@ -5,7 +5,9 @@ import * as React from 'react';
 
 import { PUBLIC_ROUTES } from '~/lib/constants/routes/public';
 import { RESTRICTED_ROUTES } from '~/lib/constants/routes/restricted';
+import { EVENT_TYPE_AUTH } from '~/lib/constants/tracking';
 import { useAuth } from '~/lib/stores/auth';
+import { trackEvent } from '~/lib/utils/trackEvent';
 
 import Login from './Login';
 import Register from './Register';
@@ -45,6 +47,14 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const handleSwitchToRegister = () => setIsRegistered(false);
   const handleSwitchToLogin = () => setIsRegistered(true);
 
+  const handleCloseAuthModal = () => {
+    router.push({ pathname: '/home' });
+    trackEvent({
+      eventName: 'close_auth-back_to_home',
+      eventData: { type: EVENT_TYPE_AUTH },
+    });
+  };
+
   if (!isUnauthorized) {
     return children as React.ReactElement;
   }
@@ -52,10 +62,10 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
   return (
     <Modal
       isOpen={isOpen}
-      onClose={() => 0}
+      onClose={handleCloseAuthModal}
       motionPreset="slideInBottom"
       isCentered
-      size={{ base: 'full', sm: 'md' }}
+      size="md"
     >
       <ModalOverlay />
 

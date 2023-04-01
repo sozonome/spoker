@@ -5,7 +5,7 @@ export const contraBoxStyle = (
 ): Partial<ModalContentProps> => ({
   paddingY: 2,
   borderRadius: 16,
-  border: { sm: `2px solid ${borderColor}` },
-  boxShadow: { sm: `0px 6px 0px ${borderColor}` },
-  marginX: { sm: 8 },
+  border: `2px solid ${borderColor}`,
+  boxShadow: `0px 6px 0px ${borderColor}`,
+  marginX: { base: 2, sm: 8 },
 });

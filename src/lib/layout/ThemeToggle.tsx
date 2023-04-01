@@ -6,10 +6,12 @@ import { trackEvent } from '~/lib/utils/trackEvent';
 
 const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+
   const buttonSize = useBreakpointValue({
     base: 'md',
     sm: 'lg',
   });
+
   const handleClickToggle = () => {
     trackEvent({
       eventName: `toggle theme to ${colorMode === 'light' ? 'dark' : 'light'}`,

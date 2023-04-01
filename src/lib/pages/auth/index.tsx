@@ -69,7 +69,7 @@ const Auth = () => {
     }
   }, [handleAuthCallback, isProcessed, router.isReady]);
 
-  return <FullScreenLoading height="75vh" />;
+  return <FullScreenLoading />;
 };
 
 export default Auth;

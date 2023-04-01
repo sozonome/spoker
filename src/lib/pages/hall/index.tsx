@@ -12,7 +12,7 @@ import { NextSeo } from 'next-seo';
 import * as React from 'react';
 
 import HallWrapper from '~/lib/components/hall';
-import SpokerLoading from '~/lib/components/shared/SpokerLoading';
+import FullScreenLoading from '~/lib/layout/FullScreenLoading';
 import { requestVerificationMail } from '~/lib/services/firebase/auth/requestVerificationMail';
 import { useAuth } from '~/lib/stores/auth';
 
@@ -51,7 +51,7 @@ const Home = () => {
   }, [currentUser]);
 
   if (busy) {
-    return <SpokerLoading />;
+    return <FullScreenLoading />;
   }
 
   return (
