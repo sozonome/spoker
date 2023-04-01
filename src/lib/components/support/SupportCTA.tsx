@@ -1,4 +1,10 @@
-import { Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import {
+  Button,
+  HStack,
+  Text,
+  useBreakpointValue,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { BiDonateHeart } from 'react-icons/bi';
 
 import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';
@@ -12,15 +18,17 @@ type SupportCTAProps = {
 const SupportCTA = ({ isCompact = false }: SupportCTAProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const buttonSize = useBreakpointValue({
+    base: 'md',
+    sm: 'lg',
+  });
+
   return (
     <>
       <Button
         paddingX={2}
         onClick={onOpen}
-        size={{
-          base: 'md',
-          sm: 'lg',
-        }}
+        size={buttonSize}
         colorScheme="gray"
       >
         <HStack fontSize="2xl" spacing={2}>
