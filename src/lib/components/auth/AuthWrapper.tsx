@@ -55,7 +55,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
       onClose={() => 0}
       motionPreset="slideInBottom"
       isCentered
-      size={{ base: 'full', sm: 'md' }}
+      size="md"
     >
       <ModalOverlay />
 

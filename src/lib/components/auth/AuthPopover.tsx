@@ -11,6 +11,7 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Text,
+  useBreakpointValue,
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -40,6 +41,10 @@ const AuthPopover = () => {
   const [displayNameInput, setDisplayNameInput] = React.useState<string>('');
   const toast = useToast();
   const router = useRouter();
+  const buttonSize = useBreakpointValue({
+    base: 'md',
+    sm: 'lg',
+  });
 
   const {
     query: { id },
@@ -120,10 +125,7 @@ const AuthPopover = () => {
       >
         <PopoverTrigger>
           <IconButton
-            size={{
-              base: 'md',
-              sm: 'lg',
-            }}
+            size={buttonSize}
             aria-label="account"
             icon={<IoMdPerson />}
           />
