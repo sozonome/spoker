@@ -54,8 +54,7 @@ const Home = () => {
           </Heading>
 
           <Text color="gray">
-            Welcome to sozonome&apos;s take on scrum poker web app. Just click
-            start below.
+            spoker: real-time multiplayer scrum poker app.
           </Text>
         </Flex>
 

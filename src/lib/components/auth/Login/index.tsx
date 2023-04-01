@@ -3,6 +3,7 @@ import {
   Grid,
   Heading,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -54,6 +55,8 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
         <Heading bgGradient="linear(to-br, teal.200, blue.600)" bgClip="text">
           Login
         </Heading>
+
+        <ModalCloseButton />
       </ModalHeader>
 
       <ModalBody>
