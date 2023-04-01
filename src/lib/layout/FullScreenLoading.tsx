@@ -9,7 +9,7 @@ type FullScreenLoadingProps = {
 
 const FullScreenLoading = ({ height }: FullScreenLoadingProps) => {
   return (
-    <Grid height={height ?? '100vh'}>
+    <Grid height={height ?? '75vh'}>
       <SpokerLoading />
     </Grid>
   );

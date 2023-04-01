@@ -14,7 +14,15 @@ const SupportCTA = ({ isCompact = false }: SupportCTAProps) => {
 
   return (
     <>
-      <Button boxShadow="none" border="none" paddingX={2} onClick={onOpen}>
+      <Button
+        paddingX={2}
+        onClick={onOpen}
+        size={{
+          base: 'md',
+          sm: 'lg',
+        }}
+        colorScheme="gray"
+      >
         <HStack fontSize="2xl" spacing={2}>
           <BiDonateHeart />
           {!isCompact && <Text fontSize="sm">Support</Text>}
