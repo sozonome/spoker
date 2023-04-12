@@ -1,14 +1,14 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SpokerRadioBox from './index';
 
-export default {
+const meta: Meta<typeof SpokerRadioBox> = {
   title: 'shared/RadioBox',
   component: SpokerRadioBox,
-} as ComponentMeta<typeof SpokerRadioBox>;
+};
 
-const Template: ComponentStory<typeof SpokerRadioBox> = (props) => (
-  <SpokerRadioBox {...props} />
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof SpokerRadioBox>;
+
+export const Default: Story = { args: {} };

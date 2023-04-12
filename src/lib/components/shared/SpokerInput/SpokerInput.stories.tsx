@@ -1,18 +1,18 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SpokerInput from './index';
 
-export default {
+const meta: Meta<typeof SpokerInput> = {
   title: 'shared/Input',
   component: SpokerInput,
-} as ComponentMeta<typeof SpokerInput>;
+};
 
-const Template: ComponentStory<typeof SpokerInput> = (props) => (
-  <SpokerInput {...props} />
-);
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  label: 'Label',
-  variant: 'filled',
+type Story = StoryObj<typeof SpokerInput>;
+
+export const Default: Story = {};
+
+export const FilledWithLabel: Story = {
+  args: { label: 'Label', variant: 'filled' },
 };
