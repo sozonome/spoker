@@ -1,12 +1,14 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SpokerLoading from './index';
 
-export default {
+const meta: Meta<typeof SpokerLoading> = {
   title: 'shared/LoadingScreen',
   component: SpokerLoading,
-} as ComponentMeta<typeof SpokerLoading>;
+};
 
-const Template: ComponentStory<typeof SpokerLoading> = () => <SpokerLoading />;
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof SpokerLoading>;
+
+export const Default: Story = { args: {} };
