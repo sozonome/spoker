@@ -11,6 +11,10 @@ my take on scrum poker, built using Next.js, Chakra-UI, and TypeScript.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+## Preview
+
+https://user-images.githubusercontent.com/17046154/234649351-d48fba33-9a95-4256-ae0a-85f6d220abbc.mp4
+
 ## Getting Started
 
 First, run the development server:
