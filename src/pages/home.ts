@@ -1,3 +1,3 @@
-import Intro from '~/lib/pages/home';
+import HomePage from '~/lib/pages/home';
 
-export default Intro;
+export default HomePage;

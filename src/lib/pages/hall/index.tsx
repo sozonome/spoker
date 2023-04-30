@@ -56,7 +56,7 @@ const Home = () => {
 
   return (
     <Box mb={8} w="full">
-      <NextSeo title="Home" />
+      <NextSeo title="Hall" />
       {currentUser && !isEmailVerified ? (
         <Alert borderRadius={24} status="warning">
           <AlertIcon />
