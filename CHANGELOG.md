@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.1](https://github.com/sozonome/spoker/compare/v1.16.0...v1.16.1) (2023-04-30)
+
+
+### Bug Fixes
+
+* **sentry:** add missing replay integrations config ([456f26a](https://github.com/sozonome/spoker/commit/456f26a47b62b95b1ef11254521de01c56b52862))
+
 ## [1.16.0](https://github.com/sozonome/spoker/compare/v1.15.1...v1.16.0) (2023-04-26)
 
 
