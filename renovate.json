@@ -7,7 +7,7 @@
   "updatePinnedDependencies": false,
   "stabilityDays": 2,
   "timezone": "Asia/Jakarta",
-  "schedule": ["* 0 * * 1"],
+  "schedule": ["before 1am on Monday"],
   "platform": "github",
   "baseBranches": ["dev"]
 }

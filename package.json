@@ -1,6 +1,6 @@
 {
   "name": "spoker",
-  "version": "1.16.1",
+  "version": "1.16.2",
   "private": true,
   "author": "sozonome",
   "scripts": {
@@ -33,7 +33,7 @@
     "@emotion/styled": "^11.10.6",
     "@fontsource/outfit": "^4.5.11",
     "@hookform/resolvers": "^2.9.11",
-    "@sentry/nextjs": "^7.43.0",
+    "@sentry/nextjs": "^7.50.0",
     "firebase": "^9.17.2",
     "framer-motion": "^9.1.7",
     "lodash-es": "^4.17.21",
