@@ -32,22 +32,16 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
     md: 'Remove',
   });
 
-  const handleClickSwap = () => {
-    if (queueProps) {
-      queueProps.onClickSwap(queueProps.taskIndex);
-    }
+  const handleClickSwap = async () => {
+    await queueProps?.onClickSwap(queueProps.taskIndex);
   };
 
   const handleClickEdit = () => {
-    if (queueProps) {
-      queueProps.onClickEdit(queueProps.taskIndex);
-    }
+    queueProps?.onClickEdit(queueProps.taskIndex);
   };
 
   const handleClickRemove = () => {
-    if (queueProps) {
-      queueProps.onClickRemove(queueProps.taskIndex);
-    }
+    queueProps?.onClickRemove(queueProps.taskIndex);
   };
 
   return (

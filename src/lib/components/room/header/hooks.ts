@@ -38,13 +38,13 @@ export const useRoomHeader = ({ roomData, isOwner }: UseRoomHeaderArgs) => {
 
   const handleUpdateRemoteTask = React.useCallback(
     (field: keyof Task) =>
-      debounce((event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      debounce(async (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (roomData && isOwner) {
           const updatedTask: Task = {
             ...roomData.task,
             [field]: event.target.value,
           };
-          updateRoomTask(id as string, updatedTask);
+          await updateRoomTask(id as string, updatedTask);
         }
       }, 500),
     [id, isOwner, roomData]

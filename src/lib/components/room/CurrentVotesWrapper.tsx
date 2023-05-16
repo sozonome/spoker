@@ -117,12 +117,14 @@ const CurrentVotesWrapper = () => {
     }
   };
 
-  const handleUpdateHideLabel = (selectedHideLabel: HideLabelOptionsType) => {
+  const handleUpdateHideLabel = async (
+    selectedHideLabel: HideLabelOptionsType
+  ) => {
     if (isOwner || isObservant) {
       const updatedConfig: Partial<RoomConfig> = {
         hideLabel: selectedHideLabel,
       };
-      updateConfig(id as string, updatedConfig);
+      await updateConfig(id as string, updatedConfig);
     }
   };
 

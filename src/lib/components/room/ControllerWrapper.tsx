@@ -25,13 +25,13 @@ const ControllerWrapper = () => {
   } = router;
   const toast = useToast();
 
-  const handleClearPoints = () => {
-    clearPoints(id as string);
+  const handleClearPoints = async () => {
+    await clearPoints(id as string);
   };
 
-  const handleCopyRoomLink = () => {
+  const handleCopyRoomLink = async () => {
     const roomLink = `${window.location.protocol}//${window.location.host}/join/${id}`;
-    navigator.clipboard.writeText(roomLink);
+    await navigator.clipboard.writeText(roomLink);
 
     toast({
       title: `Room Link Copied!\n${roomLink}`,
