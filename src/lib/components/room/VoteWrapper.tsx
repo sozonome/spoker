@@ -43,8 +43,8 @@ const VoteWrapper = () => {
     value: currentUser
       ? String(roomData?.users?.[currentUser.uid]?.point)
       : undefined,
-    onChange: (value) => {
-      handleUpdatePoint(Number(value));
+    onChange: async (value) => {
+      await handleUpdatePoint(Number(value));
     },
   });
   const voteOptionGroup = getRootProps();

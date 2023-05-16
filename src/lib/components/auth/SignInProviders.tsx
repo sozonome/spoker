@@ -7,8 +7,8 @@ import { loginWithGoogle } from '~/lib/services/firebase/auth/login/google';
 const SignInProviders = () => {
   const toast = useToast();
 
-  const handleLoginWithGoogle = () => {
-    loginWithGoogle();
+  const handleLoginWithGoogle = async () => {
+    await loginWithGoogle();
   };
 
   useEffect(() => {

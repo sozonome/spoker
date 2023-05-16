@@ -78,7 +78,7 @@ export const useRoomListener = () => {
   const removeUserFromRoom = async () => {
     if (roomData && currentUser && roomData.users?.[currentUser.uid]) {
       setInRoom(false);
-      disconnectUser(id as string, currentUser.uid);
+      await disconnectUser(id as string, currentUser.uid);
     }
   };
 

@@ -7,7 +7,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SpokerLoading from '~/lib/components/shared/SpokerLoading';
 import SpokerRadioBox from '~/lib/components/shared/SpokerRadioBox';
@@ -33,7 +33,10 @@ const JoinRoomPage = () => {
   });
   const group = getRootProps();
 
-  const getRoomData = async () => {
+  const getRoomData = React.useCallback(async () => {
+    if (!id) {
+      return;
+    }
     const roomData = await getRoom(id as string);
     if (roomData) {
       setRoomName(roomData.room.name);
@@ -46,7 +49,7 @@ const JoinRoomPage = () => {
       });
       router.push(`/`);
     }
-  };
+  }, [id, router, toast]);
 
   const handleJoin = async () => {
     setIsLoading(true);
@@ -56,11 +59,8 @@ const JoinRoomPage = () => {
   };
 
   useEffect(() => {
-    if (id) {
-      getRoomData();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    getRoomData();
+  }, [getRoomData]);
 
   if (busy) {
     return <SpokerLoading />;

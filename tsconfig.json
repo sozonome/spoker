@@ -19,7 +19,14 @@
     },
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src", "tools"],
+  "include": [
+    "next-env.d.ts",
+    "additional.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src",
+    "tools"
+  ],
   "exclude": ["node_modules"],
   "ts-node": {
     "moduleTypes": {

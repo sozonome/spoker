@@ -1,6 +1,6 @@
 {
   "name": "spoker",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "private": true,
   "author": "sozonome",
   "scripts": {
@@ -71,7 +71,6 @@
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.28",
     "@types/sortablejs": "^1.15.0",
-    "@types/umami": "^0.1.0",
     "all-contributors-cli": "^6.24.0",
     "babel-loader": "^9.1.2",
     "commitizen": "^4.3.0",
