@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.3](https://github.com/sozonome/spoker/compare/v1.16.2...v1.16.3) (2023-05-16)
+
+
+### Improvements
+
+* **analytics:** adjust trackers ([36fe863](https://github.com/sozonome/spoker/commit/36fe8632592d41e6532fa9ed9e184a44255bc195))
+* use async await ([189780a](https://github.com/sozonome/spoker/commit/189780abaadca6e3b71efea922acbeb859f7fa0f))
+
 ### [1.16.2](https://github.com/sozonome/spoker/compare/v1.16.1...v1.16.2) (2023-05-04)
 
 ### [1.16.1](https://github.com/sozonome/spoker/compare/v1.16.0...v1.16.1) (2023-04-30)
