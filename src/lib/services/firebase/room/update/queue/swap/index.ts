@@ -13,7 +13,8 @@ export const swapSelectedQueueWithCurrent = async ({
   if (queue) {
     const currentTask = queue[selectedQueueIndex];
     const updatedQueue = [...queue];
-    updatedQueue[selectedQueueIndex] = { ...task, lastVoted: null };
+    updatedQueue.splice(selectedQueueIndex, 1);
+    updatedQueue.unshift({ ...task, lastVoted: null });
 
     await clearPoints(roomId);
     await updateRoomTask(roomId, currentTask);
