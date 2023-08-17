@@ -1,6 +1,5 @@
 import { Box, Grid } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
-import { shallow } from 'zustand/shallow';
 
 import ControllerWrapper from '~/lib/components/room/ControllerWrapper';
 import CurrentVotesWrapper from '~/lib/components/room/CurrentVotesWrapper';
@@ -15,13 +14,10 @@ import { useRoomStore } from '~/lib/stores/room';
 
 const RoomContainer = () => {
   const currentUser = useAuth((state) => state.currentUser);
-  const { isBusy, roomData } = useRoomStore(
-    (state) => ({
-      isBusy: state.isBusy,
-      roomData: state.roomData,
-    }),
-    shallow
-  );
+  const { isBusy, roomData } = useRoomStore((state) => ({
+    isBusy: state.isBusy,
+    roomData: state.roomData,
+  }));
 
   useRoomListener();
   useVoteListener();

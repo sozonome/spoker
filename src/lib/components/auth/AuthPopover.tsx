@@ -19,7 +19,6 @@ import * as React from 'react';
 import { BsPencil } from 'react-icons/bs';
 import { ImCheckmark } from 'react-icons/im';
 import { IoMdPerson } from 'react-icons/io';
-import { shallow } from 'zustand/shallow';
 
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import { PRIVATE_ROUTES } from '~/lib/constants/routes/private';
@@ -32,10 +31,11 @@ import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
 import { trackEvent } from '~/lib/utils/trackEvent';
 
 const AuthPopover = () => {
-  const [currentUser, displayName, setDisplayName] = useAuth(
-    (state) => [state.currentUser, state.displayName, state.setDisplayName],
-    shallow
-  );
+  const [currentUser, displayName, setDisplayName] = useAuth((state) => [
+    state.currentUser,
+    state.displayName,
+    state.setDisplayName,
+  ]);
   const [isEditingDisplayName, setIsEditingDisplayName] =
     React.useState<boolean>(false);
   const [displayNameInput, setDisplayNameInput] = React.useState<string>('');

@@ -14,15 +14,17 @@ export const initialValues: CreateRoomFormType = {
   password: '',
 };
 
-export const createRoomFormSchema = yup.object().shape({
-  name: yup.string().required().defined(),
-  id: yup
-    .string()
-    .matches(ALLOWED_CHAR_CHECK, {
-      message: 'room id contain unallowed character',
-    })
-    .required()
-    .defined(),
-  isPrivate: yup.boolean().defined(),
-  password: yup.string(),
-});
+export const createRoomFormSchema: yup.ObjectSchema<CreateRoomFormType> = yup
+  .object()
+  .shape({
+    name: yup.string().required().defined(),
+    id: yup
+      .string()
+      .matches(ALLOWED_CHAR_CHECK, {
+        message: 'room id contain unallowed character',
+      })
+      .required()
+      .defined(),
+    isPrivate: yup.boolean().defined(),
+    password: yup.string(),
+  });

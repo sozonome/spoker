@@ -2,7 +2,6 @@ import { useToast } from '@chakra-ui/react';
 import { child, onDisconnect, onValue } from 'firebase/database';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { shallow } from 'zustand/shallow';
 
 import { roomsData } from '~/lib/services/firebase/room/common';
 import { rejoinRoom } from '~/lib/services/firebase/room/rejoin';
@@ -22,25 +21,19 @@ export const useRoomListener = () => {
   const toast = useToast();
 
   const currentUser = useAuth((state) => state.currentUser);
-  const { roomData, inRoom } = useRoomStore(
-    (state) => ({
-      roomData: state.roomData,
-      inRoom: state.inRoom,
-    }),
-    shallow
-  );
+  const { roomData, inRoom } = useRoomStore((state) => ({
+    roomData: state.roomData,
+    inRoom: state.inRoom,
+  }));
   const { userRole } = useUserRole();
   const { setIsBusy, setShowVote, setRoomData, setUsers, setInRoom } =
-    useRoomStore(
-      (state) => ({
-        setIsBusy: state.setIsBusy,
-        setShowVote: state.setShowVote,
-        setRoomData: state.setRoomData,
-        setUsers: state.setUsers,
-        setInRoom: state.setInRoom,
-      }),
-      shallow
-    );
+    useRoomStore((state) => ({
+      setIsBusy: state.setIsBusy,
+      setShowVote: state.setShowVote,
+      setRoomData: state.setRoomData,
+      setUsers: state.setUsers,
+      setInRoom: state.setInRoom,
+    }));
 
   const {
     query: { id },

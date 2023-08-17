@@ -2,13 +2,13 @@ import * as yup from 'yup';
 
 import type { EditStoryForm, SubmitStoryForm } from './types';
 
-export const submitStoryFormValidationSchema: yup.Schema<SubmitStoryForm> =
+export const submitStoryFormValidationSchema: yup.ObjectSchema<SubmitStoryForm> =
   yup.object({
     name: yup.string().required().defined(),
     description: yup.string(),
   });
 
-export const editStoryFormValidationSchema: yup.Schema<EditStoryForm> =
+export const editStoryFormValidationSchema: yup.ObjectSchema<EditStoryForm> =
   yup.object({
     id: yup.string().defined(),
     name: yup.string().required().defined(),
