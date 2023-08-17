@@ -26,7 +26,6 @@ import { useForm } from 'react-hook-form';
 import { GoPlus } from 'react-icons/go';
 import { RiInformationLine } from 'react-icons/ri';
 import { ReactSortable } from 'react-sortablejs';
-import { shallow } from 'zustand/shallow';
 
 import AutoResizeTextarea from '~/lib/components/shared/AutoResizeTextarea';
 import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';
@@ -42,7 +41,7 @@ import type { Task } from '~/lib/types/RawDB';
 
 import { submitStoryFormValidationSchema } from './constants';
 import TaskItem from './TaskItem';
-import type { EditStoryForm, SortableTaskItem, SubmitStoryForm } from './types';
+import type { SortableTaskItem, SubmitStoryForm } from './types';
 
 const initialFormValue: SubmitStoryForm = {
   name: '',
@@ -61,13 +60,10 @@ const TaskList = () => {
   const {
     query: { id },
   } = router;
-  const { roomData, showVote } = useRoomStore(
-    (state) => ({
-      roomData: state.roomData ?? emptyRoom,
-      showVote: state.showVote,
-    }),
-    shallow
-  );
+  const { roomData, showVote } = useRoomStore((state) => ({
+    roomData: state.roomData ?? emptyRoom,
+    showVote: state.showVote,
+  }));
   const { isOwner } = useUserRole();
   const wrapperBackgroundColor = useColorModeValue('gray.50', 'gray.700');
   const tabTextColor = useColorModeValue('', 'gray.300');
@@ -123,7 +119,7 @@ const TaskList = () => {
     reset,
     getValues,
     formState: { errors, isValid },
-  } = useForm<SubmitStoryForm>({
+  } = useForm({
     defaultValues: initialFormValue,
     resolver: yupResolver(submitStoryFormValidationSchema),
     mode: 'onChange',
@@ -139,7 +135,7 @@ const TaskList = () => {
       isValid: isEditStoryValid,
       isDirty: isEditStoryDirty,
     },
-  } = useForm<EditStoryForm>({
+  } = useForm({
     resolver: yupResolver(submitStoryFormValidationSchema),
     mode: 'onChange',
   });
@@ -164,7 +160,6 @@ const TaskList = () => {
     setSelectedEditStoryIndex(selectedIndex);
     const selectedQueueItem = queue?.[selectedIndex];
     resetEditStoryForm({
-      id: selectedQueueItem?.id,
       name: selectedQueueItem?.name,
       description: selectedQueueItem?.description,
     });

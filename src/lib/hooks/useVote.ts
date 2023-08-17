@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { shallow } from 'zustand/shallow';
 
 import { useUserRole } from '~/lib/hooks/useUserRole';
 import { submitVote } from '~/lib/services/firebase/room/update/submitVote';
@@ -10,13 +9,10 @@ import type { PointEntry } from '~/lib/types/RawDB';
 export const useVote = () => {
   const router = useRouter();
   const currentUser = useAuth((state) => state.currentUser);
-  const { roomData, users } = useRoomStore(
-    (state) => ({
-      roomData: state.roomData,
-      users: state.users,
-    }),
-    shallow
-  );
+  const { roomData, users } = useRoomStore((state) => ({
+    roomData: state.roomData,
+    users: state.users,
+  }));
   const { isOwner } = useUserRole();
 
   const {
@@ -26,7 +22,7 @@ export const useVote = () => {
   const handleFinishVote = async (estimate: number) => {
     if (roomData && currentUser && isOwner) {
       const pointEntries: Array<PointEntry> = users.map(
-        (user) => ({ name: user.name, point: user.point ?? 0 } as PointEntry)
+        (user) => ({ name: user.name, point: user.point ?? 0 }) as PointEntry
       );
       await submitVote({
         roomId: id as string,

@@ -6,7 +6,6 @@ import {
   useRadioGroup,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { shallow } from 'zustand/shallow';
 
 import SpokerRadioBox from '~/lib/components/shared/SpokerRadioBox';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
@@ -18,13 +17,10 @@ import { pointOptions } from '~/lib/types/room';
 
 const VoteWrapper = () => {
   const currentUser = useAuth((state) => state.currentUser);
-  const { roomData, showVote } = useRoomStore(
-    (state) => ({
-      roomData: state.roomData,
-      showVote: state.showVote,
-    }),
-    shallow
-  );
+  const { roomData, showVote } = useRoomStore((state) => ({
+    roomData: state.roomData,
+    showVote: state.showVote,
+  }));
   const { isOwner, isParticipant } = useUserRole();
   const wrapperBackgroundColor = useColorModeValue('orange.50', 'gray.600');
   const router = useRouter();

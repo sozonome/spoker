@@ -8,7 +8,6 @@ import {
   createRoomFormSchema,
   initialValues,
 } from '~/lib/components/hall/constants';
-import type { CreateRoomFormType } from '~/lib/components/hall/types';
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import { createRoom } from '~/lib/services/firebase/room/create';
@@ -25,7 +24,7 @@ const CreateRoom = () => {
     getValues,
     handleSubmit,
     formState: { isDirty, isValid, errors },
-  } = useForm<CreateRoomFormType>({
+  } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
     resolver: yupResolver(createRoomFormSchema),

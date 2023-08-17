@@ -1,5 +1,6 @@
 import type { User } from 'firebase/auth';
-import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 type AuthStore = {
   currentUser?: User | null;
@@ -8,8 +9,11 @@ type AuthStore = {
   setDisplayName: (displayName: string) => void;
 };
 
-export const useAuth = create<AuthStore>((set) => ({
-  displayName: '',
-  setCurrentUser: (user) => set({ currentUser: user }),
-  setDisplayName: (displayName) => set({ displayName }),
-}));
+export const useAuth = createWithEqualityFn<AuthStore>(
+  (set) => ({
+    displayName: '',
+    setCurrentUser: (user) => set({ currentUser: user }),
+    setDisplayName: (displayName) => set({ displayName }),
+  }),
+  shallow
+);

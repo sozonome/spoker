@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { shallow } from 'zustand/shallow';
 
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';
@@ -40,14 +39,11 @@ const CurrentVotesWrapper = () => {
   } = router;
   const toast = useToast();
   const currentUser = useAuth((state) => state.currentUser);
-  const { config, showVote, users } = useRoomStore(
-    (state) => ({
-      config: state.roomData?.config,
-      showVote: state.showVote,
-      users: state.users,
-    }),
-    shallow
-  );
+  const { config, showVote, users } = useRoomStore((state) => ({
+    config: state.roomData?.config,
+    showVote: state.showVote,
+    users: state.users,
+  }));
   const { isOwner, isObservant } = useUserRole();
   const { averagePoint, highestPoint } = useRoomPoint();
   const { handleFinishVote } = useVote();

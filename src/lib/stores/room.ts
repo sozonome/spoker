@@ -1,4 +1,5 @@
-import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 import type { RoomInstance } from '~/lib/types/RawDB';
 import type { RoomUser } from '~/lib/types/room';
@@ -21,14 +22,17 @@ type RoomSetStateAction = {
 
 type RoomStore = RoomState & RoomSetStateAction;
 
-export const useRoomStore = create<RoomStore>((set) => ({
-  isBusy: true,
-  showVote: false,
-  users: [],
-  inRoom: true,
-  setIsBusy: (isBusy) => set({ isBusy }),
-  setShowVote: (showVote) => set({ showVote }),
-  setRoomData: (roomData) => set({ roomData }),
-  setUsers: (users) => set({ users }),
-  setInRoom: (inRoom) => set({ inRoom }),
-}));
+export const useRoomStore = createWithEqualityFn<RoomStore>(
+  (set) => ({
+    isBusy: true,
+    showVote: false,
+    users: [],
+    inRoom: true,
+    setIsBusy: (isBusy) => set({ isBusy }),
+    setShowVote: (showVote) => set({ showVote }),
+    setRoomData: (roomData) => set({ roomData }),
+    setUsers: (users) => set({ users }),
+    setInRoom: (inRoom) => set({ inRoom }),
+  }),
+  shallow
+);
