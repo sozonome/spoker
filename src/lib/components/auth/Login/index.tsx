@@ -20,7 +20,7 @@ import SpokerInput from '~/lib/components/shared/SpokerInput';
 import { loginUserWithEmailAndPassword } from '~/lib/services/firebase/auth/login/emailAndPassword';
 
 import { initialValues, loginFormValidationSchema } from './constants';
-import type { LoginFormType, LoginProps } from './types';
+import type { LoginProps } from './types';
 
 const Login = ({ handleSwitchToRegister }: LoginProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,7 +31,7 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
     getValues,
     handleSubmit,
     formState: { isDirty, isValid, errors },
-  } = useForm<LoginFormType>({
+  } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
     resolver: yupResolver(loginFormValidationSchema),

@@ -10,7 +10,6 @@ import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswo
 import { showSuccessToast } from '~/lib/services/firebase/utils';
 
 import { initialValues, resetPasswordFormValidationSchema } from './constants';
-import type { ResetPasswordForm } from './types';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
@@ -21,7 +20,7 @@ const ResetPasswordPage = () => {
     getValues,
     handleSubmit,
     formState: { isDirty, isValid, errors },
-  } = useForm<ResetPasswordForm>({
+  } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
     resolver: yupResolver(resetPasswordFormValidationSchema),
