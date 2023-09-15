@@ -17,7 +17,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { valibotResolver } from '@hookform/resolvers/valibot';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -27,6 +27,7 @@ import { GoPlus } from 'react-icons/go';
 import { RiInformationLine } from 'react-icons/ri';
 import { ReactSortable } from 'react-sortablejs';
 
+import { submitStoryFormValidationSchema } from '../../../models/taskList';
 import AutoResizeTextarea from '~/lib/components/shared/AutoResizeTextarea';
 import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
@@ -39,11 +40,10 @@ import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
 import { useRoomStore } from '~/lib/stores/room';
 import type { Task } from '~/lib/types/RawDB';
 
-import { submitStoryFormValidationSchema } from './constants';
 import TaskItem from './TaskItem';
-import type { SortableTaskItem, SubmitStoryForm } from './types';
+import type { SortableTaskItem, UpsertStoryForm } from './types';
 
-const initialFormValue: SubmitStoryForm = {
+const initialFormValue: UpsertStoryForm = {
   name: '',
   description: '',
 };
@@ -121,7 +121,7 @@ const TaskList = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: initialFormValue,
-    resolver: yupResolver(submitStoryFormValidationSchema),
+    resolver: valibotResolver(submitStoryFormValidationSchema),
     mode: 'onChange',
   });
 
@@ -135,8 +135,8 @@ const TaskList = () => {
       isValid: isEditStoryValid,
       isDirty: isEditStoryDirty,
     },
-  } = useForm({
-    resolver: yupResolver(submitStoryFormValidationSchema),
+  } = useForm<UpsertStoryForm>({
+    resolver: valibotResolver(submitStoryFormValidationSchema),
     mode: 'onChange',
   });
 

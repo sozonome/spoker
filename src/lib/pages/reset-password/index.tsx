@@ -1,15 +1,17 @@
 import { Button, Container, Grid, Heading, Text } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
+import {
+  initialValues,
+  resetPasswordFormValidationSchema,
+} from '../../models/resetPassword';
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswordReset';
 import { showSuccessToast } from '~/lib/services/firebase/utils';
-
-import { initialValues, resetPasswordFormValidationSchema } from './constants';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
@@ -23,7 +25,7 @@ const ResetPasswordPage = () => {
   } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
-    resolver: yupResolver(resetPasswordFormValidationSchema),
+    resolver: valibotResolver(resetPasswordFormValidationSchema),
   });
 
   const handleRequestResetPassword = async () => {

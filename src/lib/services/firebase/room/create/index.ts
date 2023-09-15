@@ -1,7 +1,7 @@
 import { child, get, set } from 'firebase/database';
 import { nanoid } from 'nanoid';
 
-import type { CreateRoomFormType } from '~/lib/components/hall/types';
+import type { CreateRoomFormType } from '~/lib/models/hall';
 import { roomsData } from '~/lib/services/firebase/room/common';
 import type { RoomInstance } from '~/lib/types/RawDB';
 

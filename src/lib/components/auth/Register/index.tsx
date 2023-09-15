@@ -9,9 +9,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-import type { RegisterProps } from '~/lib/components/auth/Register/types';
 import SignInProviders from '~/lib/components/auth/SignInProviders';
 import { contraBoxStyle } from '~/lib/components/auth/style';
+
+type RegisterProps = {
+  handleSwitchToLogin: () => void;
+};
 
 const Register = ({ handleSwitchToLogin }: RegisterProps) => {
   const borderColor = useColorModeValue('#18191F', '#FFFFFF');
