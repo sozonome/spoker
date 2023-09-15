@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.5](https://github.com/sozonome/spoker/compare/v1.16.4...v1.16.5) (2023-09-15)
+
+
+### Improvements
+
+* replace yup with valibot ([#203](https://github.com/sozonome/spoker/issues/203)) ([1003ba5](https://github.com/sozonome/spoker/commit/1003ba5861e0b94eb41b44faa3ba8d2fd3c8c2ca))
+
 ### [1.16.4](https://github.com/sozonome/spoker/compare/v1.16.3...v1.16.4) (2023-08-17)
 
 ### [1.16.3](https://github.com/sozonome/spoker/compare/v1.16.2...v1.16.3) (2023-05-16)
