@@ -1,5 +1,5 @@
 import { Button, Grid, Heading, useToast } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import {
   createRoomFormSchema,
   initialValues,
-} from '~/lib/components/hall/constants';
+} from '~/lib/components/hall/schema';
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import { createRoom } from '~/lib/services/firebase/room/create';
@@ -27,7 +27,7 @@ const CreateRoom = () => {
   } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
-    resolver: yupResolver(createRoomFormSchema),
+    resolver: valibotResolver(createRoomFormSchema),
   });
 
   const processCreateRoom = async () => {
