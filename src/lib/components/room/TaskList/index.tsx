@@ -27,6 +27,7 @@ import { GoPlus } from 'react-icons/go';
 import { RiInformationLine } from 'react-icons/ri';
 import { ReactSortable } from 'react-sortablejs';
 
+import { submitStoryFormValidationSchema } from '../../../models/taskList';
 import AutoResizeTextarea from '~/lib/components/shared/AutoResizeTextarea';
 import SpokerModalWrapper from '~/lib/components/shared/SpokerModalWrapper';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
@@ -39,7 +40,6 @@ import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
 import { useRoomStore } from '~/lib/stores/room';
 import type { Task } from '~/lib/types/RawDB';
 
-import { submitStoryFormValidationSchema } from './schema';
 import TaskItem from './TaskItem';
 import type { SortableTaskItem, UpsertStoryForm } from './types';
 

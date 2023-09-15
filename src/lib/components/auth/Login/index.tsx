@@ -13,13 +13,15 @@ import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import {
+  initialValues,
+  loginFormValidationSchema,
+} from '../../../models/login';
 import ForgotPasswordButton from '~/lib/components/auth/ForgotPasswordButton';
 import SignInProviders from '~/lib/components/auth/SignInProviders';
 import { contraBoxStyle } from '~/lib/components/auth/style';
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import { loginUserWithEmailAndPassword } from '~/lib/services/firebase/auth/login/emailAndPassword';
-
-import { initialValues, loginFormValidationSchema } from './schema';
 
 type LoginProps = {
   handleSwitchToRegister: () => void;

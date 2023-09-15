@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
+import {
+  initialValues,
+  resetPasswordFormValidationSchema,
+} from '../../models/resetPassword';
 import SpokerInput from '~/lib/components/shared/SpokerInput';
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswordReset';
 import { showSuccessToast } from '~/lib/services/firebase/utils';
-
-import { initialValues, resetPasswordFormValidationSchema } from './schema';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
