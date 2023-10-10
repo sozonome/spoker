@@ -8,7 +8,6 @@ import {
   Heading,
   Select,
   Text,
-  useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -32,7 +31,6 @@ import PointWrapper from './PointWrapper';
 import { pointTextColor, pointTextSize } from './utils';
 
 const CurrentVotesWrapper = () => {
-  const wrapperBackgroundColor = useColorModeValue('green.50', 'gray.600');
   const router = useRouter();
   const {
     query: { id },
@@ -138,7 +136,6 @@ const CurrentVotesWrapper = () => {
     <SpokerWrapperGrid
       display="inline-block"
       gap={4}
-      backgroundColor={wrapperBackgroundColor}
       id={CURRENT_VOTE_WRAPPER_ID}
     >
       <Heading size="lg">Current Votes</Heading>
@@ -184,7 +181,7 @@ const CurrentVotesWrapper = () => {
           marginTop={6}
           gap={4}
           padding={2}
-          borderColor="orange.400"
+          borderColor="orange"
           borderWidth={2}
           borderRadius={16}
         >
@@ -192,7 +189,7 @@ const CurrentVotesWrapper = () => {
             <Heading fontSize="md" fontStyle="italic">
               Final Estimate
             </Heading>
-            <Text textColor="gray.500" fontSize="xs">
+            <Text fontSize="xs">
               Select final estimate point and click finish vote to proceed to
               next story in queue.
             </Text>
@@ -202,7 +199,6 @@ const CurrentVotesWrapper = () => {
             <Select
               borderRadius={12}
               borderWidth={2}
-              borderColor="gray.500"
               value={estimate}
               onChange={handleSetEstimate}
               fontWeight="bold"

@@ -7,6 +7,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { HiPencil, HiSwitchVertical, HiTrash } from 'react-icons/hi';
+import { RiDraggable } from 'react-icons/ri';
 
 import type { Task } from '~/lib/types/RawDB';
 
@@ -51,11 +52,12 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
       borderColor="gray.400"
       padding={4}
       marginBottom={2}
-      justifyContent="space-between"
       alignItems="center"
+      gap={4}
       _hover={{ cursor: queueProps?.isQueue ? 'move' : undefined }}
       _active={{ cursor: queueProps?.isQueue ? 'grab' : undefined }}
     >
+      {queueProps?.isQueue ? <RiDraggable /> : null}
       <Box>
         <Heading fontSize="xl">{task.name}</Heading>
         {task.description && <Text>{task.description}</Text>}
@@ -93,7 +95,7 @@ const TaskItem = ({ task, queueProps }: TaskItemProps) => {
       </Box>
 
       {task.estimation && task.estimation >= 0 && (
-        <Text fontSize="lg" fontWeight="bold">
+        <Text fontSize="lg" fontWeight="bold" marginLeft="auto">
           {task.estimation}
         </Text>
       )}

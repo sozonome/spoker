@@ -1,10 +1,4 @@
-import {
-  Flex,
-  Heading,
-  Spacer,
-  useColorModeValue,
-  useRadioGroup,
-} from '@chakra-ui/react';
+import { Flex, Heading, Spacer, useRadioGroup } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import SpokerRadioBox from '~/lib/components/shared/SpokerRadioBox';
@@ -22,7 +16,6 @@ const VoteWrapper = () => {
     showVote: state.showVote,
   }));
   const { isOwner, isParticipant } = useUserRole();
-  const wrapperBackgroundColor = useColorModeValue('orange.50', 'gray.600');
   const router = useRouter();
   const {
     query: { id },
@@ -50,7 +43,7 @@ const VoteWrapper = () => {
   }
 
   return (
-    <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>
+    <SpokerWrapperGrid gap={4}>
       <Heading size="lg">Vote!</Heading>
 
       <Flex wrap="wrap" gridGap={2} {...voteOptionGroup}>
