@@ -1,5 +1,6 @@
 import { Parameters, Preview } from '@storybook/react';
-import '@fontsource/outfit/latin.css';
+import '@fontsource/gabarito/latin.css';
+import '@fontsource/gantari/latin.css';
 
 import customTheme from '../src/lib/styles/theme';
 
