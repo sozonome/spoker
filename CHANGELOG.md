@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.7](https://github.com/sozonome/spoker/compare/v1.16.6...v1.16.7) (2023-10-10)
+
+### [1.16.6](https://github.com/sozonome/spoker/compare/v1.16.5...v1.16.6) (2023-10-10)
+
+
+### Bug Fixes
+
+* **hall:** adjust join room button color ([5bc0844](https://github.com/sozonome/spoker/commit/5bc08447e5dde65502f2e8ee09ee3914aa0f91ff))
+
+
+### Improvements
+
+* **theme:** adjust colors, dark mode, and fonts ([2dc79e7](https://github.com/sozonome/spoker/commit/2dc79e7798600587030cf93c61b18c2d656e7ac1))
+
 ### [1.16.5](https://github.com/sozonome/spoker/compare/v1.16.4...v1.16.5) (2023-09-15)
 
 

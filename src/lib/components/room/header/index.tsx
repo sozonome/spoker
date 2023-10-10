@@ -1,12 +1,4 @@
-import {
-  Box,
-  Divider,
-  Flex,
-  Grid,
-  Heading,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Divider, Flex, Grid, Heading, Text } from '@chakra-ui/react';
 import * as React from 'react';
 
 import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
@@ -19,7 +11,6 @@ import { useRoomHeader } from './hooks';
 const RoomHeader = () => {
   const roomData = useRoomStore((state) => state.roomData);
   const { isOwner } = useUserRole();
-  const wrapperBackgroundColor = useColorModeValue('teal.50', 'teal.600');
   const { name, description, handleUpdateTask } = useRoomHeader({
     roomData,
     isOwner,
@@ -49,7 +40,7 @@ const RoomHeader = () => {
   }, [description, handleUpdateTask, isOwner, name, roomData?.task]);
 
   return (
-    <SpokerWrapperGrid gap={4} backgroundColor={wrapperBackgroundColor}>
+    <SpokerWrapperGrid gap={4}>
       <Box>
         <Heading size="lg">{roomData?.room.name}</Heading>
         <Divider borderColor="black" marginTop={2} />

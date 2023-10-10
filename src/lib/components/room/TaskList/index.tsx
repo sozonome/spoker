@@ -65,7 +65,6 @@ const TaskList = () => {
     showVote: state.showVote,
   }));
   const { isOwner } = useUserRole();
-  const wrapperBackgroundColor = useColorModeValue('gray.50', 'gray.700');
   const tabTextColor = useColorModeValue('', 'gray.300');
   const {
     isOpen: isOpenAddStory,
@@ -249,11 +248,12 @@ const TaskList = () => {
 
   return (
     <>
-      <SpokerWrapperGrid backgroundColor={wrapperBackgroundColor}>
+      <SpokerWrapperGrid>
         <Tabs
           index={selectedTabIndex}
           onChange={handleChangeTab}
           variant="soft-rounded"
+          colorScheme="gray"
         >
           <TabList alignItems="center">
             {isOwner && (

@@ -16,7 +16,7 @@ import FullScreenLoading from '~/lib/layout/FullScreenLoading';
 import { requestVerificationMail } from '~/lib/services/firebase/auth/requestVerificationMail';
 import { useAuth } from '~/lib/stores/auth';
 
-const Home = () => {
+const HallPage = () => {
   const currentUser = useAuth((state) => state.currentUser);
   const [busy, setBusy] = React.useState<boolean>(true);
   const [isEmailVerified, setIsEmailVerified] = React.useState<boolean>(false);
@@ -86,4 +86,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HallPage;

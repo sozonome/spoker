@@ -5,16 +5,13 @@ import {
   Image,
   Link as ChakraLink,
   Text,
-  useColorMode,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
 const Page404 = () => {
-  const { colorMode } = useColorMode();
-
   return (
     <>
-      <Box width={['100%', '70%', '60%', '60%']} margin="0 auto">
+      <Box width={{ base: '100%', sm: '70%', md: '50%' }} margin="0 auto">
         <Image src="/404 Error-pana.svg" alt="error-404" />
       </Box>
       <Text textAlign="center" fontSize="xs">
@@ -29,11 +26,7 @@ const Page404 = () => {
         <Box textAlign="center" marginTop={4}>
           <Text>It&apos;s Okay!</Text>
 
-          <Button
-            as={Link}
-            href="/"
-            backgroundColor={colorMode === 'light' ? 'gray.300' : 'teal.500'}
-          >
+          <Button as={Link} href="/">
             Let&apos;s Head Back
           </Button>
         </Box>
