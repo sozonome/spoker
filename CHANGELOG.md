@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.8](https://github.com/sozonome/spoker/compare/v1.16.7...v1.16.8) (2023-10-26)
+
+
+### Improvements
+
+* **layout:** adjust support link ([e2fee5d](https://github.com/sozonome/spoker/commit/e2fee5d2511baac91bb8beacd05ac51c7f826c11))
+
 ### [1.16.7](https://github.com/sozonome/spoker/compare/v1.16.6...v1.16.7) (2023-10-10)
 
 ### [1.16.6](https://github.com/sozonome/spoker/compare/v1.16.5...v1.16.6) (2023-10-10)
