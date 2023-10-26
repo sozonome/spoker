@@ -15,9 +15,9 @@ export const sponsorLinks: Array<SponsorLink> = [
     icon: <FaGithub />,
   },
   {
-    label: '🇮🇩 saweria',
+    label: '🇮🇩 NBJ (Nih buat jajan)',
     description: '(QRIS, GoPay, etc)',
-    url: 'https://saweria.co/sozonome',
+    url: 'https://www.nihbuatjajan.com/sozonome',
     colorScheme: 'orange',
   },
   {

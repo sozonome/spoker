@@ -41,7 +41,7 @@ const SupportCTA = ({ isCompact = false }: SupportCTAProps) => {
         isOpen={isOpen}
         onClose={onClose}
         closeOnOverlayClick
-        header="Support Spoker"
+        header="Support spoker"
         size="lg"
         body={<SupportContent />}
       />
