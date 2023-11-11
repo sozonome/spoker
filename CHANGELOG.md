@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.10](https://github.com/sozonome/spoker/compare/v1.16.9...v1.16.10) (2023-11-11)
+
+
+### Improvements
+
+* remove storybook ([#211](https://github.com/sozonome/spoker/issues/211)) ([9ce9529](https://github.com/sozonome/spoker/commit/9ce952942a9eed284fbb2ccdf827761ef3ded11a))
+
 ### [1.16.9](https://github.com/sozonome/spoker/compare/v1.16.8...v1.16.9) (2023-11-11)
 
 ### [1.16.8](https://github.com/sozonome/spoker/compare/v1.16.7...v1.16.8) (2023-10-26)
