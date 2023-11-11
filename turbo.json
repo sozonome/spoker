@@ -19,14 +19,6 @@
         "SENTRY_DSN"
       ]
     },
-    "build-storybook": {
-      "outputs": ["storybook-static/**"],
-      "inputs": [
-        ".storybook/**",
-        "src/lib/components/**/*.{js,ts,jsx,tsx,mdx}",
-        "src/lib/stories/**/*.{js,ts,jsx,tsx,mdx}"
-      ]
-    },
     "lint": {
       "outputs": [],
       "inputs": [".eslintrc.*", "src/**"]

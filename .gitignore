@@ -47,9 +47,6 @@ sitemap*.xml
 
 *rules.json
 
-# storybook
-storybook-static/
-
 # Sentry
 .sentryclirc
 # turborepo
