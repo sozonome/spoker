@@ -20,7 +20,7 @@ type SpokerInputProps = {
 } & Pick<FormControlProps, 'label' | 'isInvalid'> &
   InputProps;
 
-export const contraInputStyle: Partial<InputProps> = {
+const contraInputStyle: Partial<InputProps> = {
   borderColor: 'black',
   borderRadius: 12,
   borderWidth: 2,

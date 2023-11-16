@@ -26,7 +26,7 @@ export interface RoomInstance {
   config: RoomConfig;
 }
 
-export interface RoomInfo {
+interface RoomInfo {
   name: string;
   isPrivate: boolean;
   password?: string;
@@ -39,7 +39,7 @@ export interface RoomConfig {
 
 export type PointEntry = Pick<User, 'name' | 'point'>;
 
-export type LastVoted = {
+type LastVoted = {
   name: string;
   time: string;
 };

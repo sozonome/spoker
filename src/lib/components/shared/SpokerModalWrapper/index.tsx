@@ -12,7 +12,7 @@ import type * as React from 'react';
 
 import { contraGridStyle } from '~/lib/components/shared/style';
 
-export type SpokerModalWrapperProps = Pick<
+type SpokerModalWrapperProps = Pick<
   ModalProps,
   'isOpen' | 'onClose' | 'size' | 'closeOnOverlayClick'
 > & {
