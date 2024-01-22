@@ -75,8 +75,8 @@ dependencies:
     specifier: 14.0.2
     version: 14.0.2
   valibot:
-    specifier: ^0.21.0
-    version: 0.21.0
+    specifier: ^0.26.0
+    version: 0.26.0
   zustand:
     specifier: ^4.4.6
     version: 4.4.6(@types/react@18.2.37)(react@18.2.0)
@@ -9280,8 +9280,8 @@ packages:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
     dev: true
 
-  /valibot@0.21.0:
-    resolution: {integrity: sha512-XnzpX93b1vQL7CB3fHlhpLg7OutYpc3ke8SKOvp7IXgicRfTdP/w8+bf0DjhVsySq6YdF4Opld05mj6bTobo9g==}
+  /valibot@0.26.0:
+    resolution: {integrity: sha512-cM8VM9jsJGx9P4qarZUBXd0I88OVI4ddtyZ1sAMiofC3Usj7Jxm2c8Xx5accdTrKc3CblO8yyytRaJ6lrsuA+Q==}
     dev: false
 
   /validate-npm-package-license@3.0.4:
