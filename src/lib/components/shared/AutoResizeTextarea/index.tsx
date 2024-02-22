@@ -20,7 +20,7 @@ type AutoResizeTextareaProps = {
 } & TextareaProps &
   Pick<FormControlProps, 'label' | 'isInvalid'>;
 
-export const contraStyle: Partial<TextareaProps> = {
+const contraStyle: Partial<TextareaProps> = {
   borderColor: 'black',
   borderRadius: 12,
   borderWidth: 2,

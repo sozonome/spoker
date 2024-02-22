@@ -1,6 +1,6 @@
 {
   "name": "spoker",
-  "version": "1.16.10",
+  "version": "1.16.11",
   "private": true,
   "author": "sozonome",
   "scripts": {
@@ -14,6 +14,7 @@
     "lint:fix": "eslint src --fix && pnpm format",
     "type-check": "tsc --noEmit",
     "check:turbo": "npx turbo lint type-check",
+    "check:unused": "knip",
     "format": "prettier --write src",
     "release": "cross-env HUSKY=0 standard-version",
     "push-release": "git push --follow-tags origin dev",
@@ -48,7 +49,7 @@
     "react-textarea-autosize": "^8.5.3",
     "sortablejs": "^1.15.0",
     "twemoji": "14.0.2",
-    "valibot": "^0.20.1",
+    "valibot": "^0.27.0",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
@@ -68,6 +69,7 @@
     "eslint-config-next": "^14.0.2",
     "eslint-config-sznm": "^2.0.2",
     "husky": "^8.0.3",
+    "knip": "^2.41.2",
     "lint-staged": "^15.0.2",
     "next-sitemap": "^4.2.3",
     "prettier": "^3.0.3",

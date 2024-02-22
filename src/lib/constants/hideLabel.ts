@@ -1,4 +1,4 @@
-export enum HideLabelOptions {
+enum HideLabelOptions {
   monkey,
   chicken,
   cow,
