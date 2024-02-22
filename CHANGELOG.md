@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.11](https://github.com/sozonome/spoker/compare/v1.16.10...v1.16.11) (2024-02-22)
+
+
+### Improvements
+
+* **hall:** adjust custom randomId generator for create room ([e1fa650](https://github.com/sozonome/spoker/commit/e1fa650dfdefc8322b5317054082791f2efcb018))
+
 ### [1.16.10](https://github.com/sozonome/spoker/compare/v1.16.9...v1.16.10) (2023-11-11)
 
 
