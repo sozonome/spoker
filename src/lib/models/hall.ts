@@ -1,11 +1,15 @@
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 import type { Input } from 'valibot';
 import { boolean, minLength, object, optional, regex, string } from 'valibot';
 
 import { ALLOWED_CHAR_CHECK } from '~/lib/constants/allowedValues';
 import { requiredString } from '~/lib/models/primitives';
 
-const randomId = nanoid(21);
+const allowedChars =
+  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-';
+
+const nanoid = customAlphabet(allowedChars);
+const randomId = nanoid();
 
 export const initialValues: CreateRoomFormType = {
   name: '',

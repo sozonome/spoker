@@ -33,8 +33,12 @@ const RoomHeader = () => {
 
     return (
       <>
-        <Heading fontSize="2xl">{task.name}</Heading>
-        {task.description && <Text>{task.description}</Text>}
+        <Heading fontSize="2xl" wordBreak="break-word">
+          {task.name}
+        </Heading>
+        {task.description && (
+          <Text wordBreak="break-word">{task.description}</Text>
+        )}
       </>
     );
   }, [description, handleUpdateTask, isOwner, name, roomData?.task]);
