@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.12](https://github.com/sozonome/spoker/compare/v1.16.11...v1.16.12) (2024-05-13)
+
 ### [1.16.11](https://github.com/sozonome/spoker/compare/v1.16.10...v1.16.11) (2024-02-22)
 
 
