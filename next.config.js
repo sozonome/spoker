@@ -6,9 +6,6 @@ const moduleExports = {
   eslint: {
     dirs: ['src'],
   },
-  sentry: {
-    hideSourceMaps: true,
-  },
   redirects: async () => [
     {
       source: '/intro',
