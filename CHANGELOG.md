@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.13](https://github.com/sozonome/spoker/compare/v1.16.12...v1.16.13) (2024-06-19)
+
+
+### Improvements
+
+* replace valibot with zod, update packages to latest ([ea52b22](https://github.com/sozonome/spoker/commit/ea52b22c4387e97dd19b0566348f0598391d9601))
+
 ### [1.16.12](https://github.com/sozonome/spoker/compare/v1.16.11...v1.16.12) (2024-05-13)
 
 ### [1.16.11](https://github.com/sozonome/spoker/compare/v1.16.10...v1.16.11) (2024-02-22)
