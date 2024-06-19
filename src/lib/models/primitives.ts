@@ -1,4 +1,4 @@
-import { minLength, string } from 'valibot';
+import { z } from 'zod';
 
 export const requiredString = (errorMsg?: string) =>
-  string([minLength(1, errorMsg)]);
+  z.string().min(1, errorMsg);

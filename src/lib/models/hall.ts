@@ -1,6 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import type { Input } from 'valibot';
-import { boolean, minLength, object, optional, regex, string } from 'valibot';
+import { z } from 'zod';
 
 import { ALLOWED_CHAR_CHECK } from '~/lib/constants/allowedValues';
 import { requiredString } from '~/lib/models/primitives';
@@ -18,14 +17,14 @@ export const initialValues: CreateRoomFormType = {
   password: '',
 };
 
-export const createRoomFormSchema = object({
+export const createRoomFormSchema = z.object({
   name: requiredString('Name must be filled'),
-  id: string([
-    minLength(1, 'id must be filled'),
-    regex(ALLOWED_CHAR_CHECK, 'room id contain unallowed character'),
-  ]),
-  isPrivate: boolean(),
-  password: optional(string()),
+  id: requiredString('room id is required').regex(
+    ALLOWED_CHAR_CHECK,
+    'room id contain unallowed character'
+  ),
+  isPrivate: z.boolean(),
+  password: z.string().optional(),
 });
 
-export type CreateRoomFormType = Input<typeof createRoomFormSchema>;
+export type CreateRoomFormType = z.infer<typeof createRoomFormSchema>;

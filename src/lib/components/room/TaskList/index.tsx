@@ -17,7 +17,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { valibotResolver } from '@hookform/resolvers/valibot';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -120,7 +120,7 @@ const TaskList = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: initialFormValue,
-    resolver: valibotResolver(submitStoryFormValidationSchema),
+    resolver: zodResolver(submitStoryFormValidationSchema),
     mode: 'onChange',
   });
 
@@ -135,7 +135,7 @@ const TaskList = () => {
       isDirty: isEditStoryDirty,
     },
   } = useForm<UpsertStoryForm>({
-    resolver: valibotResolver(submitStoryFormValidationSchema),
+    resolver: zodResolver(submitStoryFormValidationSchema),
     mode: 'onChange',
   });
 

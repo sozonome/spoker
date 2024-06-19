@@ -1,8 +1,8 @@
-import { object, string } from 'valibot';
+import { z } from 'zod';
 
 import { requiredString } from '~/lib/models/primitives';
 
-export const submitStoryFormValidationSchema = object({
+export const submitStoryFormValidationSchema = z.object({
   name: requiredString('Name must be filled'),
-  description: string(),
+  description: z.string(),
 });
