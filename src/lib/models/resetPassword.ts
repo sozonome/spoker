@@ -1,11 +1,12 @@
-import type { Input } from 'valibot';
-import { email, object, string } from 'valibot';
+import { z } from 'zod';
 
-export const resetPasswordFormValidationSchema = object({
-  email: string([email()]),
+import { requiredString } from './primitives';
+
+export const resetPasswordFormValidationSchema = z.object({
+  email: requiredString('email must be filled').email(),
 });
 
-type ResetPasswordForm = Input<typeof resetPasswordFormValidationSchema>;
+type ResetPasswordForm = z.infer<typeof resetPasswordFormValidationSchema>;
 
 export const initialValues: ResetPasswordForm = {
   email: '',

@@ -1,15 +1,15 @@
 import { Button, Container, Grid, Heading, Text } from '@chakra-ui/react';
-import { valibotResolver } from '@hookform/resolvers/valibot';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
+import SpokerInput from '~/lib/components/shared/SpokerInput';
+import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import {
   initialValues,
   resetPasswordFormValidationSchema,
-} from '../../models/resetPassword';
-import SpokerInput from '~/lib/components/shared/SpokerInput';
-import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+} from '~/lib/models/resetPassword';
 import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswordReset';
 import { showSuccessToast } from '~/lib/services/firebase/utils';
 
@@ -25,7 +25,7 @@ const ResetPasswordPage = () => {
   } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
-    resolver: valibotResolver(resetPasswordFormValidationSchema),
+    resolver: zodResolver(resetPasswordFormValidationSchema),
   });
 
   const handleRequestResetPassword = async () => {

@@ -9,18 +9,15 @@ import {
   ModalHeader,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { valibotResolver } from '@hookform/resolvers/valibot';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import {
-  initialValues,
-  loginFormValidationSchema,
-} from '../../../models/login';
 import ForgotPasswordButton from '~/lib/components/auth/ForgotPasswordButton';
 import SignInProviders from '~/lib/components/auth/SignInProviders';
 import { contraBoxStyle } from '~/lib/components/auth/style';
 import SpokerInput from '~/lib/components/shared/SpokerInput';
+import { initialValues, loginFormValidationSchema } from '~/lib/models/login';
 import { loginUserWithEmailAndPassword } from '~/lib/services/firebase/auth/login/emailAndPassword';
 
 type LoginProps = {
@@ -39,7 +36,7 @@ const Login = ({ handleSwitchToRegister }: LoginProps) => {
   } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
-    resolver: valibotResolver(loginFormValidationSchema),
+    resolver: zodResolver(loginFormValidationSchema),
   });
 
   const processLogin = async () => {

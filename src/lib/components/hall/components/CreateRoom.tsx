@@ -1,5 +1,5 @@
 import { Button, Grid, Heading, useToast } from '@chakra-ui/react';
-import { valibotResolver } from '@hookform/resolvers/valibot';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -24,7 +24,7 @@ const CreateRoom = () => {
   } = useForm({
     defaultValues: initialValues,
     mode: 'onChange',
-    resolver: valibotResolver(createRoomFormSchema),
+    resolver: zodResolver(createRoomFormSchema),
   });
 
   const processCreateRoom = async () => {

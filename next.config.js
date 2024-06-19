@@ -18,11 +18,9 @@ const moduleExports = {
   ],
 };
 
-/** @type {import('@sentry/nextjs').SentryWebpackPluginOptions} */
-const sentryWebpackPluginOptions = {
+module.exports = withSentryConfig(moduleExports, {
   silent: true,
+  hideSourceMaps: true,
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options.
-};
-
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
+});
