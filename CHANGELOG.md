@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.14](https://github.com/sozonome/spoker/compare/v1.16.13...v1.16.14) (2024-07-03)
+
+
+### Improvements
+
+* disable sentry in local ([7a938c3](https://github.com/sozonome/spoker/commit/7a938c3d40ee5c1bb66d044b724e765508038c03))
+* **pages:** home - add users section ([91be92d](https://github.com/sozonome/spoker/commit/91be92d2e847e877de95b5e96217ade07f31d7f6))
+
 ### [1.16.13](https://github.com/sozonome/spoker/compare/v1.16.12...v1.16.13) (2024-06-19)
 
 
