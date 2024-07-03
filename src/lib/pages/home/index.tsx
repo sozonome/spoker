@@ -6,6 +6,8 @@ import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
 import { EVENT_TYPE_NAVIGATE } from '~/lib/constants/tracking';
 import { trackEvent } from '~/lib/utils/trackEvent';
 
+import { UsersSection } from './components/UsersSection';
+
 const Home = () => {
   const router = useRouter();
 
@@ -22,7 +24,7 @@ const Home = () => {
       <NextSeo title="Estimate with your Team | spoker - real-time multiplayer scrum poker app" />
       <Flex
         direction="column"
-        gap={6}
+        gap={12}
         textAlign="center"
         alignItems="center"
         marginY={12}
@@ -50,7 +52,7 @@ const Home = () => {
             </Text>
           </Heading>
 
-          <Text color="gray">
+          <Text color="gray" fontSize="large">
             spoker: real-time multiplayer scrum poker app.
           </Text>
         </Flex>
@@ -58,6 +60,8 @@ const Home = () => {
         <Button colorScheme="orange" onClick={handleClickStart}>
           Start
         </Button>
+
+        <UsersSection />
       </Flex>
 
       <Grid
