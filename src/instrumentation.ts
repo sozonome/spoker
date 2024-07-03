@@ -6,6 +6,10 @@ const APP_ENV = process.env.APP_ENV;
 
 // eslint-disable-next-line import/prefer-default-export
 export function register() {
+  if (process.env.NODE_ENV === 'development') {
+    return;
+  }
+
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     Sentry.init({
       dsn: SENTRY_DSN,
