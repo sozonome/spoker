@@ -29,7 +29,7 @@
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/styled": "^11.13.0",
     "@fontsource/gabarito": "^5.0.4",
     "@fontsource/gantari": "^5.0.13",
     "@hookform/resolvers": "^3.6.0",
