@@ -9,5 +9,7 @@
   "timezone": "Asia/Jakarta",
   "schedule": ["before 1am on Monday"],
   "platform": "github",
-  "baseBranches": ["dev"]
+  "baseBranches": ["dev"],
+  "rangeStrategy": "bump",
+  "ignoreDeps": ["node", "pnpm"]
 }
