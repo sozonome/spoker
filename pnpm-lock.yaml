@@ -90,6 +90,9 @@ importers:
       '@commitlint/cz-commitlint':
         specifier: ^19.2.0
         version: 19.2.0(@types/node@20.14.13)(commitizen@4.3.0(@types/node@20.14.13)(typescript@5.5.4))(inquirer@9.2.23)(typescript@5.5.4)
+      '@commitlint/types':
+        specifier: ^19.0.3
+        version: 19.0.3
       '@jahed/firebase-rules':
         specifier: ^1.1.0
         version: 1.1.0
