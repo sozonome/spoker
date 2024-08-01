@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.15](https://github.com/sozonome/spoker/compare/v1.16.14...v1.16.15) (2024-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([#222](https://github.com/sozonome/spoker/issues/222)) ([85cde9d](https://github.com/sozonome/spoker/commit/85cde9df73d83bd8fc73b3a1efb239d5458b0b2d))
+* **deps:** update all dependencies ([#229](https://github.com/sozonome/spoker/issues/229)) ([3985523](https://github.com/sozonome/spoker/commit/39855236d5fbe797afa1db85562e20a86977b8f7))
+
 ### [1.16.14](https://github.com/sozonome/spoker/compare/v1.16.13...v1.16.14) (2024-07-03)
 
 
