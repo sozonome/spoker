@@ -28,6 +28,11 @@ const users: Array<UserMeta> = [
     url: 'https://rumahsiapkerja.com',
   },
   {
+    name: 'IHC',
+    imagePath: '/users/ihc.png',
+    url: 'https://pertamedika.co.id/',
+  },
+  {
     name: 'Universitas Indonesia',
     imagePath: '/users/universitas-indonesia.svg',
     url: 'https://ui.ac.id',
