@@ -15,6 +15,14 @@ my take on scrum poker, built using Next.js, Chakra-UI, and TypeScript.
 
 https://user-images.githubusercontent.com/17046154/234649351-d48fba33-9a95-4256-ae0a-85f6d220abbc.mp4
 
+## Pre-Requisites
+
+- Node v20+ (recommended to install through `nvm`)
+- This project uses pnpm as package manager (not yarn or npm). To install packages, run `pnpm i`
+  - It's recommended to install / use pnpm via [corepack](https://pnpm.io/installation#using-corepack)
+- Make sure `.env.local` file is added (see / copy from `.env.example`)
+- Firebase project
+
 ## Getting Started
 
 First, run the development server:
