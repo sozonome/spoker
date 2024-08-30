@@ -2,12 +2,12 @@ import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import FullScreenLoading from '~/lib/layout/FullScreenLoading';
-import { handleVerifyEmail } from '~/lib/services/firebase/auth/verifyEmail';
+import { FullScreenLoading } from '~/lib/components/full-screen-loading';
+import { handleVerifyEmail } from '~/lib/services/firebase/auth/verify-email';
 import { useAuth } from '~/lib/stores/auth';
 import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
 
-const Auth = () => {
+export const Auth = () => {
   const router = useRouter();
   const { mode, oobCode } = router.query;
 
@@ -71,5 +71,3 @@ const Auth = () => {
 
   return <FullScreenLoading />;
 };
-
-export default Auth;

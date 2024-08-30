@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 
 import type { CreateRoomFormType } from '~/lib/models/hall';
 import { roomsData } from '~/lib/services/firebase/room/common';
-import type { RoomInstance } from '~/lib/types/RawDB';
+import type { RoomInstance } from '~/lib/types/raw-db';
 
 export const createRoom = async (roomInstance: CreateRoomFormType) => {
   await get(roomsData).then((snap) => {
