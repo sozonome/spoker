@@ -4,16 +4,16 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
-import SpokerInput from '~/lib/components/shared/SpokerInput';
-import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { SpokerInput } from '~/lib/components/spoker-input';
+import { SpokerWrapperGrid } from '~/lib/components/spoker-wrapper-grid';
 import {
   initialValues,
   resetPasswordFormValidationSchema,
-} from '~/lib/models/resetPassword';
+} from '~/lib/models/reset-password';
 import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswordReset';
 import { showSuccessToast } from '~/lib/services/firebase/utils';
 
-const ResetPasswordPage = () => {
+export const ResetPasswordPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -87,5 +87,3 @@ const ResetPasswordPage = () => {
     </Container>
   );
 };
-
-export default ResetPasswordPage;

@@ -2,13 +2,13 @@ import { Button, Flex, Grid, Heading, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
-import SpokerWrapperGrid from '~/lib/components/shared/SpokerWrapperGrid';
+import { SpokerWrapperGrid } from '~/lib/components/spoker-wrapper-grid';
 import { EVENT_TYPE_NAVIGATE } from '~/lib/constants/tracking';
 import { trackEvent } from '~/lib/utils/trackEvent';
 
 import { UsersSection } from './components/UsersSection';
 
-const Home = () => {
+export const Home = () => {
   const router = useRouter();
 
   const handleClickStart = () => {
@@ -138,5 +138,3 @@ const Home = () => {
     </Grid>
   );
 };
-
-export default Home;

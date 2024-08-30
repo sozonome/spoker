@@ -1,7 +1,7 @@
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 
-import type { RoomInstance } from '~/lib/types/RawDB';
+import type { RoomInstance } from '~/lib/types/raw-db';
 import type { RoomUser } from '~/lib/types/room';
 
 type RoomState = {

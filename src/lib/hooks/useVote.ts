@@ -4,7 +4,7 @@ import { useUserRole } from '~/lib/hooks/useUserRole';
 import { submitVote } from '~/lib/services/firebase/room/update/submitVote';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';
-import type { PointEntry } from '~/lib/types/RawDB';
+import type { PointEntry } from '~/lib/types/raw-db';
 
 export const useVote = () => {
   const router = useRouter();

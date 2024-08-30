@@ -1,4 +1,4 @@
-import type { PointEntry, Task } from '~/lib/types/RawDB';
+import type { PointEntry, Task } from '~/lib/types/raw-db';
 
 export type SubmitVoteArgs = {
   roomId: string;

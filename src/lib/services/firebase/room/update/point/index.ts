@@ -4,7 +4,7 @@ import { getCurrentUser } from '~/lib/services/firebase/auth/getCurrentUser';
 import { roomsData } from '~/lib/services/firebase/room/common';
 import { getRoom } from '~/lib/services/firebase/room/get';
 import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
-import type { Task } from '~/lib/types/RawDB';
+import type { Task } from '~/lib/types/raw-db';
 
 import type { UpdatePointParams } from './types';
 

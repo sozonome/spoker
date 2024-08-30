@@ -11,12 +11,13 @@ import {
 import { NextSeo } from 'next-seo';
 import * as React from 'react';
 
-import HallWrapper from '~/lib/components/hall';
-import FullScreenLoading from '~/lib/layout/FullScreenLoading';
+import { FullScreenLoading } from '~/lib/components/full-screen-loading';
 import { requestVerificationMail } from '~/lib/services/firebase/auth/requestVerificationMail';
 import { useAuth } from '~/lib/stores/auth';
 
-const HallPage = () => {
+import { HallWrapper } from './components/hall-wrapper';
+
+export const HallPage = () => {
   const currentUser = useAuth((state) => state.currentUser);
   const [busy, setBusy] = React.useState<boolean>(true);
   const [isEmailVerified, setIsEmailVerified] = React.useState<boolean>(false);
@@ -85,5 +86,3 @@ const HallPage = () => {
     </Box>
   );
 };
-
-export default HallPage;

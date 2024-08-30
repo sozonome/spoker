@@ -1,4 +1,4 @@
-import type { RoomInstance } from '~/lib/types/RawDB';
+import type { RoomInstance } from '~/lib/types/raw-db';
 
 export const emptyRoom: RoomInstance = {
   room: {

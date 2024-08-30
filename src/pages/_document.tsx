@@ -7,7 +7,7 @@ import {
   UMAMI_SRC,
   UMAMI_WEBSITE_ID,
 } from '~/lib/constants/umami';
-import customTheme from '~/lib/styles/theme';
+import { customTheme } from '~/lib/styles/theme';
 
 const APP_NAME = 'spoker';
 const APP_DESCRIPTION = 'Scrum Poker';

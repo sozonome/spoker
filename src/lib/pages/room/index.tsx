@@ -1,18 +1,19 @@
 import { Box, Grid } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
 
-import ControllerWrapper from '~/lib/components/room/ControllerWrapper';
-import CurrentVotesWrapper from '~/lib/components/room/CurrentVotesWrapper';
-import RoomHeader from '~/lib/components/room/header';
-import TaskList from '~/lib/components/room/TaskList';
-import VoteWrapper from '~/lib/components/room/VoteWrapper';
-import SpokerLoading from '~/lib/components/shared/SpokerLoading';
+import { SpokerLoading } from '~/lib/components/spoker-loading';
 import { useRoomListener } from '~/lib/hooks/useRoomListener';
 import { useVoteListener } from '~/lib/hooks/useVoteListener';
+import { CurrentVotesWrapper } from '~/lib/pages/room/components/current-votes-wrapper';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';
 
-const RoomContainer = () => {
+import { ControllerWrapper } from './components/controller-wrapper';
+import { RoomHeader } from './components/header';
+import { TaskList } from './components/task-list';
+import { VoteWrapper } from './components/vote-wrapper';
+
+export const RoomPage = () => {
   const currentUser = useAuth((state) => state.currentUser);
   const { isBusy, roomData } = useRoomStore((state) => ({
     isBusy: state.isBusy,
@@ -53,5 +54,3 @@ const RoomContainer = () => {
 
   return <Box>Error</Box>;
 };
-
-export default RoomContainer;
