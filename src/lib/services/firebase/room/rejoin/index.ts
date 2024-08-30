@@ -1,6 +1,6 @@
 import { child, get, set, update } from 'firebase/database';
 
-import { getCurrentUser } from '~/lib/services/firebase/auth/getCurrentUser';
+import { getCurrentUser } from '~/lib/services/firebase/auth/get-current-user';
 import { roomsData } from '~/lib/services/firebase/room/common';
 import type { RoleType } from '~/lib/types/user';
 

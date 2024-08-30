@@ -1,7 +1,7 @@
 import { child, get } from 'firebase/database';
 
 import { roomsData } from '~/lib/services/firebase/room/common';
-import type { RoomInstance } from '~/lib/types/RawDB';
+import type { RoomInstance } from '~/lib/types/raw-db';
 
 export const getRoom = async (roomId: string) => {
   let roomData: RoomInstance | undefined;

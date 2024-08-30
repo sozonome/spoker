@@ -1,6 +1,6 @@
 import mean from 'lodash-es/mean';
 
-import type { RoomMappedUser } from '~/lib/types/RawDB';
+import type { RoomMappedUser } from '~/lib/types/raw-db';
 import type { RoomUser } from '~/lib/types/room';
 import { RoleType } from '~/lib/types/user';
 

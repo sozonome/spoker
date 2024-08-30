@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
-const Page404 = () => {
+export const Page404 = () => {
   return (
     <>
       <Box width={{ base: '100%', sm: '70%', md: '50%' }} margin="0 auto">
@@ -34,5 +34,3 @@ const Page404 = () => {
     </>
   );
 };
-
-export default Page404;

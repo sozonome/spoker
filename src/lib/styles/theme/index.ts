@@ -6,12 +6,10 @@ import { config } from './config';
 import { fonts } from './fonts';
 import { styles } from './styles';
 
-const customTheme = extendTheme({
+export const customTheme = extendTheme({
   fonts,
   components,
   config,
   colors,
   styles,
 });
-
-export default customTheme;

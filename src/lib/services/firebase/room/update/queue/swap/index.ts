@@ -1,6 +1,6 @@
 import { clearPoints } from '~/lib/services/firebase/room/update/point/clear';
-import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
-import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
+import { rewriteQueue } from '~/lib/services/firebase/room/update/rewrite-queue';
+import { updateRoomTask } from '~/lib/services/firebase/room/update/room-task';
 
 import type { SwapSelectedQueueWithCurrentArgs } from './types';
 

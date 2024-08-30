@@ -1,4 +1,4 @@
-import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
+import { rewriteQueue } from '~/lib/services/firebase/room/update/rewrite-queue';
 
 import type { RemoveQueueItemArgs } from './types';
 

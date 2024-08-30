@@ -1,6 +1,6 @@
 {
   "name": "spoker",
-  "version": "1.16.16",
+  "version": "1.16.17",
   "private": true,
   "author": "sozonome",
   "scripts": {
@@ -21,7 +21,7 @@
     "push-release": "git push --follow-tags origin dev",
     "up-interactive": "pnpm up -i",
     "up-latest": "pnpm up-interactive -L",
-    "generate-rules": "ts-node tools/generateRules.ts",
+    "generate-rules": "ts-node tools/generate-rules.ts",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "prepare": "husky install"
