@@ -2,7 +2,7 @@ import { Box, Flex, Link, Text } from '@chakra-ui/react';
 import { RiGithubFill } from 'react-icons/ri';
 
 import { SpokerLogo } from '~/lib/components/spoker-logo';
-import { packageInfo } from '~/lib/constants/packageInfo';
+import { packageInfo } from '~/lib/constants/package-info';
 import { EVENT_TYPE_LINK } from '~/lib/constants/tracking';
 import { trackEvent } from '~/lib/utils/trackEvent';
 

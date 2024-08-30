@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { SpokerRadioBox } from '~/lib/components/spoker-radio-box';
 import { SpokerWrapperGrid } from '~/lib/components/spoker-wrapper-grid';
-import { useUserRole } from '~/lib/hooks/useUserRole';
+import { useUserRole } from '~/lib/hooks/use-user-role';
 import { updatePoint } from '~/lib/services/firebase/room/update/point';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';

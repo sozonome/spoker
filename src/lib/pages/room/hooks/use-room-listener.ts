@@ -3,9 +3,10 @@ import { child, onDisconnect, onValue } from 'firebase/database';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { useUserRole } from '~/lib/hooks/use-user-role';
 import { roomsData } from '~/lib/services/firebase/room/common';
 import { rejoinRoom } from '~/lib/services/firebase/room/rejoin';
-import { disconnectUser } from '~/lib/services/firebase/room/update/disconnectUser';
+import { disconnectUser } from '~/lib/services/firebase/room/update/disconnect-user';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';
 import type { RoomUser } from '~/lib/types/room';
@@ -13,8 +14,6 @@ import {
   checkAllParticipantVoted,
   connectedUsers,
 } from '~/lib/utils/roomUtils';
-
-import { useUserRole } from './useUserRole';
 
 export const useRoomListener = () => {
   const router = useRouter();

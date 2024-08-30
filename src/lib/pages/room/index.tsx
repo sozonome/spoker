@@ -2,16 +2,16 @@ import { Box, Grid } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
 
 import { SpokerLoading } from '~/lib/components/spoker-loading';
-import { useRoomListener } from '~/lib/hooks/useRoomListener';
-import { useVoteListener } from '~/lib/hooks/useVoteListener';
-import { CurrentVotesWrapper } from '~/lib/pages/room/components/current-votes-wrapper';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';
 
 import { ControllerWrapper } from './components/controller-wrapper';
+import { CurrentVotesWrapper } from './components/current-votes-wrapper';
 import { RoomHeader } from './components/header';
 import { TaskList } from './components/task-list';
 import { VoteWrapper } from './components/vote-wrapper';
+import { useRoomListener } from './hooks/use-room-listener';
+import { useVoteListener } from './hooks/use-vote-listener';
 
 export const RoomPage = () => {
   const currentUser = useAuth((state) => state.currentUser);

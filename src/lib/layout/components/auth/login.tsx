@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 import { SpokerInput } from '~/lib/components/spoker-input';
 import { initialValues, loginFormValidationSchema } from '~/lib/models/login';
-import { loginUserWithEmailAndPassword } from '~/lib/services/firebase/auth/login/emailAndPassword';
+import { loginUserWithEmailAndPassword } from '~/lib/services/firebase/auth/login/email-and-password';
 
 import { ForgotPasswordButton } from './forgot-password-button';
 import { SignInProviders } from './sign-in-providers';

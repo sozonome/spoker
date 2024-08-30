@@ -10,7 +10,7 @@ import {
   initialValues,
   resetPasswordFormValidationSchema,
 } from '~/lib/models/reset-password';
-import { requestPasswordReset } from '~/lib/services/firebase/auth/requestPasswordReset';
+import { requestPasswordReset } from '~/lib/services/firebase/auth/request-password-reset';
 import { showSuccessToast } from '~/lib/services/firebase/utils';
 
 export const ResetPasswordPage = () => {

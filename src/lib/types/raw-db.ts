@@ -1,4 +1,4 @@
-import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';
+import type { HideLabelOptionsType } from '~/lib/constants/hide-label';
 
 import type { User } from './user';
 

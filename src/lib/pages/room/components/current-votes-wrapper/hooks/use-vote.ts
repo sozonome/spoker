@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { useUserRole } from '~/lib/hooks/useUserRole';
-import { submitVote } from '~/lib/services/firebase/room/update/submitVote';
+import { useUserRole } from '~/lib/hooks/use-user-role';
+import { submitVote } from '~/lib/services/firebase/room/update/submit-vote';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';
 import type { PointEntry } from '~/lib/types/raw-db';

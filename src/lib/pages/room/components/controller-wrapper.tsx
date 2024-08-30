@@ -12,7 +12,7 @@ import * as React from 'react';
 import { BiLink, BiShareAlt } from 'react-icons/bi';
 
 import { SpokerWrapperGrid } from '~/lib/components/spoker-wrapper-grid';
-import { useUserRole } from '~/lib/hooks/useUserRole';
+import { useUserRole } from '~/lib/hooks/use-user-role';
 import { clearPoints } from '~/lib/services/firebase/room/update/point/clear';
 import { useRoomStore } from '~/lib/stores/room';
 

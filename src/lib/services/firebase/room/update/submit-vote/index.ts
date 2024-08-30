@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 
 import { clearPoints } from '~/lib/services/firebase/room/update/point/clear';
-import { rewriteCompleted } from '~/lib/services/firebase/room/update/rewriteCompleted';
-import { rewriteQueue } from '~/lib/services/firebase/room/update/rewriteQueue';
-import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
+import { rewriteCompleted } from '~/lib/services/firebase/room/update/rewrite-completed';
+import { rewriteQueue } from '~/lib/services/firebase/room/update/rewrite-queue';
+import { updateRoomTask } from '~/lib/services/firebase/room/update/room-task';
 import type { Task } from '~/lib/types/raw-db';
 
 import type { SubmitVoteArgs } from './types';

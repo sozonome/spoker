@@ -1,8 +1,8 @@
 import { Text } from '@chakra-ui/react';
 
 import { Twemoji } from '~/lib/components/twemoji';
-import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';
-import { hideLabel } from '~/lib/constants/hideLabel';
+import type { HideLabelOptionsType } from '~/lib/constants/hide-label';
+import { hideLabel } from '~/lib/constants/hide-label';
 
 type PointWrapperProps = {
   showVote: boolean;

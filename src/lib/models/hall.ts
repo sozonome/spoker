@@ -1,7 +1,7 @@
 import { customAlphabet } from 'nanoid';
 import { z } from 'zod';
 
-import { ALLOWED_CHAR_CHECK } from '~/lib/constants/allowedValues';
+import { ALLOWED_CHAR_CHECK } from '~/lib/constants/allowed-values';
 import { requiredString } from '~/lib/models/primitives';
 
 const allowedChars =

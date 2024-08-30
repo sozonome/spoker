@@ -2,7 +2,7 @@ import { Box, Divider, Flex, Grid, Heading, Text } from '@chakra-ui/react';
 import * as React from 'react';
 
 import { SpokerWrapperGrid } from '~/lib/components/spoker-wrapper-grid';
-import { useUserRole } from '~/lib/hooks/useUserRole';
+import { useUserRole } from '~/lib/hooks/use-user-role';
 import { useRoomStore } from '~/lib/stores/room';
 
 import { EditableFields } from './components/editable-fields';

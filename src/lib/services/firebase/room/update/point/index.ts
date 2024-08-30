@@ -1,9 +1,9 @@
 import { child, update } from 'firebase/database';
 
-import { getCurrentUser } from '~/lib/services/firebase/auth/getCurrentUser';
+import { getCurrentUser } from '~/lib/services/firebase/auth/get-current-user';
 import { roomsData } from '~/lib/services/firebase/room/common';
 import { getRoom } from '~/lib/services/firebase/room/get';
-import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
+import { updateRoomTask } from '~/lib/services/firebase/room/update/room-task';
 import type { Task } from '~/lib/types/raw-db';
 
 import type { UpdatePointParams } from './types';

@@ -13,22 +13,22 @@ import {
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { PointWrapper } from '../point-wrapper';
+import { pointTextColor, pointTextSize } from '../utils';
 import { SpokerWrapperGrid } from '~/lib/components/spoker-wrapper-grid';
-import type { HideLabelOptionsType } from '~/lib/constants/hideLabel';
-import { hideLabelOptions } from '~/lib/constants/hideLabel';
+import type { HideLabelOptionsType } from '~/lib/constants/hide-label';
+import { hideLabelOptions } from '~/lib/constants/hide-label';
 import { CURRENT_VOTE_WRAPPER_ID } from '~/lib/constants/wrapperkeys';
-import { useRoomPoint } from '~/lib/hooks/useRoomPoint';
-import { useUserRole } from '~/lib/hooks/useUserRole';
-import { useVote } from '~/lib/hooks/useVote';
-import { updateConfig } from '~/lib/services/firebase/room/update/roomConfig';
+import { useUserRole } from '~/lib/hooks/use-user-role';
+import { updateConfig } from '~/lib/services/firebase/room/update/room-config';
 import { useAuth } from '~/lib/stores/auth';
 import { useRoomStore } from '~/lib/stores/room';
 import type { RoomConfig } from '~/lib/types/raw-db';
 import { pointOptions } from '~/lib/types/room';
 import { RoleType } from '~/lib/types/user';
 
-import { PointWrapper } from './point-wrapper';
-import { pointTextColor, pointTextSize } from './utils';
+import { useRoomPoint } from './hooks/use-room-point';
+import { useVote } from './hooks/use-vote';
 
 export const CurrentVotesWrapper = () => {
   const router = useRouter();

@@ -12,7 +12,7 @@ import { NextSeo } from 'next-seo';
 import * as React from 'react';
 
 import { FullScreenLoading } from '~/lib/components/full-screen-loading';
-import { requestVerificationMail } from '~/lib/services/firebase/auth/requestVerificationMail';
+import { requestVerificationMail } from '~/lib/services/firebase/auth/request-verification-mail';
 import { useAuth } from '~/lib/stores/auth';
 
 import { HallWrapper } from './components/hall-wrapper';

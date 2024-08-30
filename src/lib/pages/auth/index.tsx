@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { FullScreenLoading } from '~/lib/components/full-screen-loading';
-import { handleVerifyEmail } from '~/lib/services/firebase/auth/verifyEmail';
+import { handleVerifyEmail } from '~/lib/services/firebase/auth/verify-email';
 import { useAuth } from '~/lib/stores/auth';
 import { removeFirebasePrefix } from '~/lib/utils/removeFirebasePrefix';
 

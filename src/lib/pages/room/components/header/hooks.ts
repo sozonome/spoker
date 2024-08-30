@@ -3,7 +3,7 @@ import isNil from 'lodash-es/isNil';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { updateRoomTask } from '~/lib/services/firebase/room/update/roomTask';
+import { updateRoomTask } from '~/lib/services/firebase/room/update/room-task';
 import type { Task } from '~/lib/types/raw-db';
 
 import type { RoomHeaderProps } from './types';
