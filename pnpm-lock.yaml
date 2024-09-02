@@ -25,7 +25,7 @@ importers:
         version: 5.0.14
       '@hookform/resolvers':
         specifier: ^3.9.0
-        version: 3.9.0(react-hook-form@7.52.1(react@18.3.1))
+        version: 3.9.0(react-hook-form@7.53.0(react@18.3.1))
       '@sentry/nextjs':
         specifier: ^8.22.0
         version: 8.22.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@1.25.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.25.1(@opentelemetry/api@1.9.0))(next@14.2.5(@babel/core@7.24.7)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.92.0)
@@ -57,8 +57,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
       react-hook-form:
-        specifier: ^7.52.1
-        version: 7.52.1(react@18.3.1)
+        specifier: ^7.53.0
+        version: 7.53.0(react@18.3.1)
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.3.1)
@@ -4125,9 +4125,9 @@ packages:
       '@types/react':
         optional: true
 
-  react-hook-form@7.52.1:
-    resolution: {integrity: sha512-uNKIhaoICJ5KQALYZ4TOaOLElyM+xipord+Ha3crEFhTntdLvWZqVY49Wqd/0GiVCA/f9NjemLeiNPjG7Hpurg==}
-    engines: {node: '>=12.22.0'}
+  react-hook-form@7.53.0:
+    resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
 
@@ -6480,9 +6480,9 @@ snapshots:
       protobufjs: 7.3.2
       yargs: 17.7.2
 
-  '@hookform/resolvers@3.9.0(react-hook-form@7.52.1(react@18.3.1))':
+  '@hookform/resolvers@3.9.0(react-hook-form@7.53.0(react@18.3.1))':
     dependencies:
-      react-hook-form: 7.52.1(react@18.3.1)
+      react-hook-form: 7.53.0(react@18.3.1)
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -10040,7 +10040,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-  react-hook-form@7.52.1(react@18.3.1):
+  react-hook-form@7.53.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
