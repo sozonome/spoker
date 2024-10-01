@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.18](https://github.com/sozonome/spoker/compare/v1.16.17...v1.16.18) (2024-10-01)
+
+
+### Improvements
+
+* **pages:** home - add user ([f029b9c](https://github.com/sozonome/spoker/commit/f029b9c185e3d7a1e87280c6fdbbbc9b5eae7733))
+
 ### [1.16.17](https://github.com/sozonome/spoker/compare/v1.16.16...v1.16.17) (2024-08-30)
 
 
